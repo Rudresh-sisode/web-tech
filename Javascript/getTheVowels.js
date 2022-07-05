@@ -38,3 +38,32 @@ function getVowels(str){
 
 let abc = getVowels("agrtertyfikfmroyrntbvsukldkfa");
 console.log("ykour abc ",abc);
+
+
+/**
+ * 
+ * function getTheVowels(word) {
+  let st = "aeiou", i = 0, n = 0
+  for(let x of word){
+    if(x != st[i]) continue
+    else{
+      i = (i + 1) % st.length
+      n++
+    }
+  }
+  return n
+}
+ */
+
+/**
+ * 
+ * function getTheVowels(word) {
+  const vowels = 'aeiou'.split('');
+  let count = 0;
+  for (let i = 0, pos = 0;
+       (pos = word.indexOf(vowels[i], pos)) >= 0;
+       i = ++i % vowels.length, ++count)
+    ;
+  return count;
+}
+ */
