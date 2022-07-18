@@ -7,3 +7,13 @@ function facto(n){
 }
 
 console.log(facto(9))
+
+/**
+ * function fact(n){
+ * if(n == 1){
+ * return n
+ * }
+ * let sum = n * fact(n-1);
+ * return sum;
+ * }
+ */
