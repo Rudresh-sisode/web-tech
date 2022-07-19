@@ -4,3 +4,9 @@ console.log(
   console.log(
     [].reduce((a, b) => a + b, 0)
   )
+
+  /**
+function digital_root(n) {
+  return (n - 1) % 9 + 1;
+}
+   */
