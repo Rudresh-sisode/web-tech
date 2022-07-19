@@ -1,0 +1,5 @@
+# Q
+What is the use of rs.slaveOk()
+# A
+You would use rs.slaveOk() when your Mongodb is set up as a replicaset, and you wish to query one of the secondary nodes, rather than the primary.
+slaveOk is instructing the shell that its ok to return results from a secondary (rather than a primary) even though the results may not be entirely consistent with the primary.
