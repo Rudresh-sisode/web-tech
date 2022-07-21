@@ -13,3 +13,18 @@ const abc2 = {
 }
 
 console.log(person.fullname.call(abc))
+
+
+//call with arguments
+
+const arguments = {
+    detail:function(village,city){
+        return this.firstName+" "+this.lastName+" "+village+" "+city
+    }
+}
+
+const info={
+    firstName:"Rudresh",
+    lastName:"Sisodiya"
+}
+console.log(arguments.detail.call(info,"Pimpalgaon Golait","Jalgaon"))
