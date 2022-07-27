@@ -25,3 +25,4 @@ it('summer all value',()=>{
     const expResult = number.reduce((pr,cur)=> pr + cur,0);
     expect(result).toBe(expResult);
 })
+
