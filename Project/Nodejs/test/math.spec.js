@@ -9,8 +9,8 @@ it('should sumerized all number',()=>{
 it('yield if NaN',()=>{
     const input = ['in',1];
     const result = add(input)
-
-    expect(result).toBeNaN();
+    console.log(result)
+    expect(result).toBeTypeOf('string');
 })
 
 //AAA Pattern

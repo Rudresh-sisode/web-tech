@@ -11,7 +11,7 @@ it('testing http',()=>{
     tranformToNumber(request,response,next);
     const {content,message} = JSON.parse(response._getData());
     console.log('content ',content,' message', message)
-    expect(message).toBe("success.")
+    expect(message).toBe("success")
 })
 
 // it('thow an error',()=>{
