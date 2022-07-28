@@ -11,16 +11,15 @@ it('yield if NaN',()=>{
     const result = add(input)
     console.log(result)
     expect(result).toBeTypeOf('string');
+    //error fix here
 })
 
 //AAA Pattern
 it('summer all value',()=>{
     //Arrange
     const number = [2,3,4];
-
     //Act
     const result = add(number);
-
     //Assert
     const expResult = number.reduce((pr,cur)=> pr + cur,0);
     expect(result).toBe(expResult);
