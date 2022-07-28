@@ -17,5 +17,6 @@ it('should generate a token value',(done)=>{
 })
 
 it('should generate promise token',()=>{
-    expect(generateTokenPromise('text@text.com')).resolves.toBeDefined();
+    const userEmail = "text@gmail.com"
+    expect(generateTokenPromise(userEmail)).resolves.toBeDefined();
 })
