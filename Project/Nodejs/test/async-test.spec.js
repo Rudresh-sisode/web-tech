@@ -20,3 +20,9 @@ it('should generate promise token',()=>{
     const userEmail = "text@gmail.com"
     expect(generateTokenPromise(userEmail)).resolves.toBeDefined();
 })
+
+it('async await key checking', async ()=>{
+    const testUserEmail = 'testabc@gmail.com';
+    const token = await generateTokenPromise(testUserEmail);
+    expect(token).toBeDefined();
+})
