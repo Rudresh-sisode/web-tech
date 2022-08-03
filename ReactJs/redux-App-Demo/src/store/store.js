@@ -1,26 +1,61 @@
-import { createStore } from "redux";
+// import { createStore } from "redux";
+import { createSlice,configureStore } from "@reduxjs/toolkit";
 
-const counterReducer=(state ={counter:0} ,action)=>{
+const initialState = {counter : 0, showCounter:true};
 
-    if(action.type === 'increment'){
-        return {
-            counter:state.counter +1
+const counterSlice = createSlice({
+    name:'counter',
+    initialState,
+    reducers:{
+        increment(state){
+            state.counter++;
+        },
+        decrement(state){
+            state.counter--;
+        },
+        increase(state,action){
+            state.counter = state.counter + action.payload;
+        },
+        toggleCounter(state){
+            state.showCounter =  !state.showCounter
         }
     }
-    if(action.type === 'increse'){
-        return {
-            counter: state.counter + action.amount
-        }
-    }
-    if(action.type === 'decrement'){
-        return {
-            counter:state.counter - 1
-        }
-    }
+})
 
-    return state;
+// const counterReducer=(state =initialState ,action)=>{
 
-}
-const store = createStore(counterReducer);
+//     if(action.type === 'increment'){
+//         return {
+//             counter:state.counter +1,
+//             showCounter:state.showCounter
+//         }
+//     }
+//     if(action.type === 'increse'){
+//         return {
+//             counter: state.counter + action.amount,
+//             showCounter:state.showCounter
+//         }
+//     }
+//     if(action.type === 'decrement'){
+//         return {
+//             counter:state.counter - 1,
+//             showCounter:state.showCounter
+//         }
+//     }
+//     if(action.type ==='toggle'){
+//         return {
+//             showCounter:!state.showCounter,
+//             counter:state.counter
+//         }
+//     }
+//     return state;
 
+// }
+
+const store = configureStore({
+    // reducer: {counter:counterSlice.reducer}
+    reducer:counterSlice.reducer
+});
+
+export const counterActions = counterSlice.actions;
 export default store;
