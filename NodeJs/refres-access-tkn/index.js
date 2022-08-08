@@ -22,6 +22,33 @@ function auth(req,res,next){
 
     //
 }
+
+app.post("/renewAccessToken", (req,res,next)=>{
+    const refreshToken = req.body.token;
+    if(!refreshToken){
+        return res.status(401).json({
+            message:"User not"
+        })
+    }
+    jwt.verify(refreshToken,"rEfResH",(err,user)=>{
+        if(!err){
+            const accessToken = jwt.sign(user,"aCceSs",{expiresIn:'2m'})
+            return res.status(201).json({
+                accessToken
+            })
+        }
+        else{
+            return res.status(403).json({
+                message:'user not authenticated!'
+            })
+        }
+    })
+})
+
+app.post('/renewAccessToken',(req,res,next)=>{
+    const {token:refreshToken} = req.body;
+})
+
 app.post('/protected',auth, (req,res,next)=>{
     res.send("inside protected route")
 })
