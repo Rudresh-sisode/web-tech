@@ -45,9 +45,9 @@ app.post("/renewAccessToken", (req,res,next)=>{
     })
 })
 
-app.post('/renewAccessToken',(req,res,next)=>{
-    const {token:refreshToken} = req.body;
-})
+// app.post('/renewAccessToken',(req,res,next)=>{
+//     const {token:refreshToken} = req.body;
+// })
 
 app.post('/protected',auth, (req,res,next)=>{
     res.send("inside protected route")
