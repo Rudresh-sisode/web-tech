@@ -1,5 +1,5 @@
 module.exports = {
-    hello(){
+    hello:()=>{
         return {
             text:'~Hello word~',
             views:123

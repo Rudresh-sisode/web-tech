@@ -1,6 +1,6 @@
-const { build, buildSchema } = require('graphql');
+const { buildSchema } = require('graphql');
 
-module.export = buildSchema(`
+module.exports = buildSchema(`
     type TestData{
         text:String!
         views:Int!
