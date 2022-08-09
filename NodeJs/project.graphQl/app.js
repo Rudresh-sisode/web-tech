@@ -1,4 +1,6 @@
 const path = require('path');
+const {color,log} = require('console-log-colors');
+const {red,green,cyan} = color;
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -6,8 +8,10 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 require('dotenv').config();
 
-const feedRoutes = require('./routes/feed');
-const authRoutes = require('./routes/auth');
+const {graphqlHTTP} = require('express-graphql');
+const graphqlSchema = require('./graphql/schema');
+const graphqlResolver = require('./graphql/resolvers');
+
 
 const app = express();
 
@@ -49,6 +53,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/graphql',graphqlHTTP({
+  schema:graphqlSchema,
+  rootValue:graphqlResolver
+}))
 
 app.use((error, req, res, next) => {
   console.log(error);
@@ -61,19 +69,11 @@ app.use((error, req, res, next) => {
 mongoose.connect(`${process.env.URL_PATH}/${process.env.DATABASE}`)
 .then(succ=>{
     console.log(cyan("~Database Connected Successfully~"))
-    const server = app.listen(8080);
+
+    app.listen(8080);
+    console.log(cyan("on portal 8080"))
 })
 .catch(err=>{
     console.log(red("~Database Connection Failed~"+err))
 })
 
-
-mongoose
-  .connect(
-    
-  )
-  .then(result => {
-   
-    
-  })
-  .catch(err => console.log(err));
