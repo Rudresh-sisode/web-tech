@@ -65,7 +65,8 @@ module.exports = {
         if(validator.isEmpty(postInput.title) || !validator.isLength(postInput.title,{min:5})){
             errors.push({message:'title is invalid'});
         }
-        if(validator.isEmpty(postInput.content) || !validator.isLength(postInput.content),{min:5}){
+        // let bca = !validator.isLength(postInput.content),{min:5}
+        if(validator.isEmpty(postInput.content) || !validator.isLength(postInput.content,{min:5})){
             errors.push({message:'content is invalid'});
         }
 
