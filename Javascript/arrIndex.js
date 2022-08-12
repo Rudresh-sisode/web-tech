@@ -15,3 +15,8 @@ function arrAdder(arr) {
     ['s','v','f','n'],
     ['t','e','e','']
     ]))
+
+
+    // approch 2nd 
+
+    const arrAdder = arr =>  arr[0].map((_,i)=>  arr.map((_,j)=> arr[j][i]).join('')).join(' ');
