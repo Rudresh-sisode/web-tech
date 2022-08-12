@@ -61,6 +61,12 @@ module.exports = {
     },
 
     createPost: async function({postInput},req){
+        //
+        if(!req.isAuth){
+            const error = new Error("Not authenticated!");
+            error.code = 401;
+            throw error;
+        }
         const errors = []
         if(validator.isEmpty(postInput.title) || !validator.isLength(postInput.title,{min:5})){
             errors.push({message:'title is invalid'});
@@ -76,14 +82,29 @@ module.exports = {
             error.code = 422;
             throw error;
         }
+        //
+        const user = await User.findById(req.userId)
+        if(!user){
+            const error = new Error("Invalid Error");
+            error.data = errors;
+            error.code = 401;
+            throw error;
+        }
         const post = new Post({
             title:postInput.title,
             content: postInput.content,
-            imageUrl:postInput.imageUrl
+            imageUrl:postInput.imageUrl,
+            creator : user
         });
         const createdPost = await post.save();
+        user.posts.push(createdPost);
+        await user.save();
         //add post to user's posts
-        return {...createdPost._doc,_id:createdPost._id.toString(),createdAt:createdPost.createdAt.toISOString(),updatedAt:createdPost.updatedAt.toISOString()}
+        return {...createdPost._doc,
+            _id:createdPost._id.toString(),
+            createdAt:createdPost.createdAt.toISOString(),
+            updatedAt:createdPost.updatedAt.toISOString()
+        }
     }
 }
 
