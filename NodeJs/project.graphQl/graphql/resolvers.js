@@ -7,6 +7,7 @@ const Post = require('../models/post');
 
 module.exports = {
     createUser:async function({userInput},req){
+        console.log(typeof req);
         const errors = [];
         if(!validator.isEmail(userInput.email)){
             errors.push({message:"Email is invalid"});

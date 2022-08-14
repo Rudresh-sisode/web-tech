@@ -73,7 +73,12 @@ app.use('/graphql',graphqlHTTP({
     const message = err.message;
     const status = "error"
     const code = err.originalError.status || 500
-    return { message: message, status:code, data:data, resStatus:status}
+    return { 
+      message:message,
+      status:code,
+      data:data,
+      resStatus:status
+    }
   }
 }))
 
