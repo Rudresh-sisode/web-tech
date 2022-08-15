@@ -1,0 +1,37 @@
+//date 15 august 2022
+(
+    login:async function({email,password}){
+        const user = await User.findOne({email:email}).lean();
+        if(!user){
+            const error = new Error("User not found");
+            error.code = 401;
+            throw error;
+        }
+        const isequal = await bcrypt.compare(password,user.password);
+        if(!isequal){
+            const error = new Error("Password is incorrenct");
+            error.code = 401
+            throw error;
+        }
+
+        const token = jwt.sign({
+            userId: user._id.toString(),
+            email: user.email
+        },'somesupersecrete',{expiresIn:'3m'})
+
+        return { token: token, userId : user._id.toString()}
+    }
+)
+
+
+_____________________________________________________________________________________________
+next code push below this line with date and paranthesis
+
+
+
+
+
+
+
+
+
