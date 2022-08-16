@@ -8,7 +8,7 @@ function arrAdder(arr) {
     }
     return sentence.trim();
   }
-
+ 
   console.log(arrAdder([
     ['J','L','L','M'],
     ['u','i','i','a'],
