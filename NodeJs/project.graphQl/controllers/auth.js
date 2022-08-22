@@ -16,7 +16,7 @@ exports.loginUser = async ({email,password})=>{
     const isequal = await bcrypt.compare(password,user.password);
     if(!isequal){
         const error = new Error("Password is incorrenct");
-        error.code = 401
+        error.code = 401;
         throw error;
     }
 
