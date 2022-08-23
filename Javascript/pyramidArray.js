@@ -20,3 +20,6 @@ function pyramid(n) {
     }
     return res;
   }
+
+
+  const pyramid = n => Array(n).fill(1).map((x, i) => Array(i + 1).fill(1))
