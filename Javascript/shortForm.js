@@ -1,0 +1,1 @@
+data.map(x=> x.trim().split(" ").join("_").toLowerCase())
