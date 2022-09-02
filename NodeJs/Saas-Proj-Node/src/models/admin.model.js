@@ -1,0 +1,70 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const AdminLoginSchema = new Schema({
+    name:{
+        type:String,
+        required:true
+    },
+    email:{
+        type:String,
+        required:true
+    },
+    password:{
+        type:String
+    },
+    role_value:{
+        type:String,
+        required:true
+    },
+    role_name:{
+        type:String,
+        required:true
+    },
+    department:{
+        type:String,
+        required:true
+    },
+    designation:{
+        type:String,
+        required:true
+    },
+    password_life:{
+        type:String
+    },
+    is_active:{
+        type:Boolean,
+        default:true
+    },
+    refreshToken:{
+        type:String
+    },
+    cmp_id:{
+        type:String,
+        required:true
+    },
+    is_deleted:{
+        type:Boolean,
+        default:false
+    },
+    is_system_entry:{
+        type:Boolean
+    },
+    createdAt:{
+        type:Date,
+    },
+    createdBy:{
+        type:String
+    },
+    updatedAt:{
+        type:String
+    },
+    updatedBy:{
+        type:String
+    },
+    deletedAt:{
+        type:String
+    }
+});
+
+module.exports = mongoose.model('admin_login',AdminLoginSchema)

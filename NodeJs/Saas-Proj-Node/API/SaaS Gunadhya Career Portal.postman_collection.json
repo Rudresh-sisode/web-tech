@@ -1,0 +1,210 @@
+{
+	"info": {
+		"_postman_id": "0f682a7e-7fb1-40c5-a866-178e99b59de9",
+		"name": "SaaS Gunadhya Career Portal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19928255"
+	},
+	"item": [
+		{
+			"name": "hello",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\r\n  hello {\r\n   text\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AdminSignIn",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\r\n  AdminSignIn(adminSignInInput:{\r\n    email:\"rudresh.sisodiya@gunadhyasoft.com\",\r\n    otp:\"469808\"\r\n  }){\r\n    accToken\r\n    refToken\r\n    data{\r\n        resourceData { action }\r\n        userData { emailId}\r\n    }\r\n    status\r\n  }\r\n  \r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AdminOtpGenerate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\r\n  AdminOtpGenerate(adminInput: {\r\n    streamName:\"rudresh.sisodiya@gunadhyasoft.com\"\r\n  }) {\r\n    message\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "companyRegistration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation{\r\n  RegisterCompany(companyInput:{\r\n    \r\n    companyName:\"ABC PVT. LTD\"\r\n    companyEmail:\"abc@gmail.com\"\r\n    companyAddress:\"kaha kaha\"\r\n    city:\"Mumbai\"\r\n    zipcode:\"888888\"\r\n    stateKey:\"630613c2f27fc8873784765c\"\r\n    officeNumber:\"0 2333 333222\"\r\n    userName:\"Sohame Rajput\"\r\n    userEmail:\"sohamerajput@gmail.com\"\r\n   \r\n  }) {\r\n    message\r\n    cmpEmail\r\n    userEmail\r\n    \r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{gunadhyagraph}}",
+					"host": [
+						"{{gunadhyagraph}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user login otp generate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\r\n  UserOtpGenerate(userInput: {\r\n    streamName:\"sohamerajput@gmail.com\"\r\n  }) {\r\n    message\r\n  }\r\n}\r\n",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{gunadhyagraph}}",
+					"host": [
+						"{{gunadhyagraph}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inactive Company Log",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}} {{refreshToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Roles",
+						"value": "{\"resource\":\"Role\",\"action\":\"Write\"}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\r\n  InactiveCompanyLog{\r\n    status\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{gunadhyagraph}}",
+					"host": [
+						"{{gunadhyagraph}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserSignIn",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\r\n  UserSignIn(userSignInInput:{\r\n    email:\"sohamerajput@gmail.com\",\r\n    otp:\"106663\"\r\n  }){\r\n    accToken\r\n    data {\r\n      userData {\r\n        emailId\r\n        role\r\n        companyId\r\n        \r\n      }\r\n      resourceData{\r\n        resource\r\n        action\r\n      }\r\n    }\r\n  }\r\n  \r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{gunadhyagraph}}",
+					"host": [
+						"{{gunadhyagraph}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Department",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}} {{refreshToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation{\r\n  AddDepartment(departmentInput:{depValue:\"Cloud\"}){\r\n    message\r\n  }\r\n}\r\n",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{gunadhyagraph}}",
+					"host": [
+						"{{gunadhyagraph}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
