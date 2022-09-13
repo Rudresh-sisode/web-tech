@@ -1,5 +1,12 @@
-import {it,expect} from 'vitest'
+import {it,expect, beforeAll, beforeEach, afterAll, afterEach} from 'vitest'
 import { User } from './hooks'
+
+beforeAll(()=>{
+    console.log("Before all");
+})
+beforeEach(()=>{
+    console.log("Before each");
+})
 
 it('update an email',()=>{
     const testEmail = 'test@test.com';
