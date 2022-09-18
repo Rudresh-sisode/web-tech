@@ -7,9 +7,9 @@ beforeAll(()=>{
 beforeEach(()=>{
     console.log("Before each");
 })
-// PQOW@qwerpoil@123@
+// 
 it('update an email',()=>{
-    const testEmail = 'test@test.com';
+    const testEmail = 'tPQOW@qwerpoil@123@t@test.com';
     const newTestEmail = 'test1@test.com';
 
     const user = new User(testEmail);
