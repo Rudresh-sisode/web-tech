@@ -11,6 +11,7 @@ beforeEach(()=>{
 it('update an email',()=>{
     const testEmail = 'tPQOW@qwerpoil@123@t@test.com';
     const newTestEmail = 'test1@test.com';
+    const tkn = "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"
 
     const user = new User(testEmail);
     user.updateEmail(newTestEmail);
