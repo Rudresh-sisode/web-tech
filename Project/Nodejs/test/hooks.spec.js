@@ -7,6 +7,13 @@ beforeAll(()=>{
 beforeEach(()=>{
     console.log("Before each");
 })
+afterEach(()=>{
+    console.log("After each");
+
+})
+afterAll(()=>{
+    console.log("after all");
+})
 // 
 it('update an email',()=>{
     const testEmail = 'tPQOW@qwerpoil@123@t@test.com';
