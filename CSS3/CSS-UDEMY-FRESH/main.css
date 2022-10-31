@@ -1,4 +1,19 @@
-section{
+/* section{
     background: #ff1b68;
     border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+} */
+
+#product-overview{
+    background: #ff1b68;
+    border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+ 
+h1{
+    padding-left: 2%;
+    font-family: 'Anton', sans-serif;
+    color: white;
+}
+
+.section-title{
+    color:#2ddf5c
 }
