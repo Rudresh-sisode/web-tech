@@ -9,6 +9,7 @@ export class ServersComponent implements OnInit {
 
   allowNewServer = false;
   serverCreationStatus = "no server was created!"
+  serverName = 'testServer';
   constructor() { }
 
   ngOnInit(): void {
@@ -23,6 +24,7 @@ export class ServersComponent implements OnInit {
 
   onUpdateServerName(value:any){
     console.log(typeof value, (<HTMLInputElement>value.target).value)
+    this.serverName = (<HTMLInputElement>value.target).value;
   }
 }
 
