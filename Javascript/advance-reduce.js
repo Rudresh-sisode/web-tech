@@ -16,6 +16,7 @@ let result = abcObj.reduce(function (r, a) {
     console.log('in reducre 2',r[a.groupId].length,a.groupId,r)
         return r;
     }, Object.create(null));
+    //you can use {} only here instead
 console.log('your result ',Object.values(result).flat(Infinity));
 
 // console.log(Array.from(bca.entries()))
