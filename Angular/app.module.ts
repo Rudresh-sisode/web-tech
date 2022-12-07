@@ -4,5 +4,6 @@ const appRoutes:Routes = [
     {path:'users/:id/:name',component:ServerComponent,children:[
         {path:':id',component:ServerComponent},
         {path:'id/edit',component:EditServerComponent}
-    ]}
+    ]},
+    {path:'**',redirectTo:'/not-found'}
 ]
