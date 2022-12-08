@@ -1,4 +1,4 @@
-import { AppRoutingModule } from "./app-routing.module"
+import {NgModule} form '@angular/core';
 
 const appRoutes:Routes = [
     {path:'',component:HomeComponent},
@@ -10,6 +10,16 @@ const appRoutes:Routes = [
     {path:'**',redirectTo:'/not-found'}
 ]
 
-import :[
-    AppRoutingModule
-]
+@NgModule({
+
+    imports:[
+        RouterModule.forRoot(appRoutes);
+    ],
+    export:[
+        RouterModule
+
+    ]
+})
+export class AppRoutingModule{
+
+}
