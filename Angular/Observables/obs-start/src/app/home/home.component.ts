@@ -15,6 +15,9 @@ export class HomeComponent implements OnInit {
 
       setInterval(()=>{
         observable.next(count)
+        if(count > 4){
+          observable.error(new Error('Count is Greater 3!'));
+        }
         count++;
       },1000)
     })
