@@ -6,7 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor() {}
+  private activatedSub:Subscription;
+  constructor(private  userService:UserService) {}
 
   ngOnInit() {}
+
+  this.activatedSub = this.userService.activatedEmmitSubject.subscribe(didActive=>{
+    this.userActive = didActive
+  })
+
+  ngOnDestroy(){
+    
+  }
 }
