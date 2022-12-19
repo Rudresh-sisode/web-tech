@@ -23,7 +23,11 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  customeIntervalObserable.subscribe(data=>{
+  customeIntervalObserable.pipe(filter(data=>{
+    return data > 0
+  }), map(data=>{
+    return 'round '+(data + 1)
+  })).subscribe(data=>{
     console.log('your data ',data);
   })
 
