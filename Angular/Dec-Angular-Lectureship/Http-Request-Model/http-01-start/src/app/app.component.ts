@@ -10,7 +10,7 @@ import {Post} from './post.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  loadedPosts = [];
+  loadedPosts:Post[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -56,8 +56,9 @@ export class AppComponent implements OnInit {
     }))
     .subscribe(
       {
-        next:(response)=>{
-          console.log('get response ',response);
+        next:(posts)=>{
+          console.log('get response ',posts);
+          this.loadedPosts = posts
         },
         error:(error)=>{
 
