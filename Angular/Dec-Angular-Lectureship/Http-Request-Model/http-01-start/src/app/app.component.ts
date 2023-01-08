@@ -1,41 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {map} from 'rxjs/operators';
 
 import {Post} from './post.model';
+import { PostService } from './posts.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   loadedPosts:Post[] = [];
   isFetching = false;
-
-  constructor(private http: HttpClient) { }
+  error = null;
+  private errorSub : Subscription;
+  constructor(private http: HttpClient,private postService:PostService) { }
 
   ngOnInit() {
+
+    this.errorSub = this.postService.error.subscribe(errorMessage=>{
+      this.error = errorMessage
+    })
+
     this.fetchPosts();
    }
 
   onCreatePost(postData: { title: string; content: string }) {
     // Send Http request
     console.log(postData);
-    this.http.post('https://myfirst-242709-default-rtdb.firebaseio.com/posts.json', postData)
-    .subscribe(
-      {
-        next: (response) =>{
-          console.log("response from backend ",response);
-        },
-        error: (error)=>{
-          console.log("your error occured here ",error);
-        },
-        complete: ()=>{
-          //pass done.
-        }
-      }
-    )
+    this.postService.createAndStorePost(postData.title,postData.content);
+    
   }
 
   onFetchPosts() {
@@ -44,18 +40,11 @@ export class AppComponent implements OnInit {
 
   }
 
+ 
+
   private fetchPosts(){
     this.isFetching = true;
-    this.http.get<{[key:string]:Post}>('https://myfirst-242709-default-rtdb.firebaseio.com/posts.json')
-    .pipe(map((responseData : {[key:string]:Post}) =>{
-      const postArray:Post[] = [];
-      for(const key in responseData){
-        if(responseData.hasOwnProperty(key)){
-          postArray.push({...responseData[key], id:key});
-        }
-      }
-      return postArray;
-    }))
+    this.postService.fetchPosts()
     .subscribe(
       {
         next:(posts)=>{
@@ -74,6 +63,19 @@ export class AppComponent implements OnInit {
   }
 
   onClearPosts() {
-    // Send Http request
+    this.postService.onClearPosts()
+    .subscribe({
+      next:()=> { console.log("post deleted");
+     
+      this.loadedPosts = [];
+      this.isFetching = true;
+    },
+      error:()=>{},
+      complete:()=>{}
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.errorSub.unsubscribe();
   }
 }
