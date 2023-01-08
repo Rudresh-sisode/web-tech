@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpHeaders, HttpParams } from '@angular/common/http';
 import {Injectable } from '@angular/core';
-import {map,catchError} from 'rxjs/operators';
+import {map,catchError, tap} from 'rxjs/operators';
 import {Subject,throwError} from 'rxjs';
 
 import {Post} from './post.model';
@@ -17,7 +17,9 @@ export class PostService{
 
     createAndStorePost( title:string,content:string){
         let postData = {title:title,content:content};
-        this.http.post('https://myfirst-242709-default-rtdb.firebaseio.com/posts.json', postData)
+        this.http.post('https://myfirst-242709-default-rtdb.firebaseio.com/posts.json', postData,{
+            observe:'response'
+        })
         .subscribe(
             {
                 next: (response) =>{
@@ -35,7 +37,15 @@ export class PostService{
     }
 
     fetchPosts(){
-        return this.http.get<{[key:string]:Post}>('https://myfirst-242709-default-rtdb.firebaseio.com/posts.json')
+        let searchParams = new HttpParams();
+        searchParams = searchParams.append('print','pretty');
+        searchParams = searchParams.append('custom','key');
+        return this.http.get<{[key:string]:Post}>('https://myfirst-242709-default-rtdb.firebaseio.com/posts.json',
+        {
+            headers:new HttpHeaders({'custom-Header':'Hola'}),
+            params:new HttpParams().set('print','prity')
+        },
+        )
         .pipe(map((responseData : {[key:string]:Post}) =>{
           const postArray:Post[] = [];
           for(const key in responseData){
@@ -50,6 +60,16 @@ export class PostService{
     }
 
     onClearPosts(){
-        return this.http.delete('https://myfirst-242709-default-rtdb.firebaseio.com/posts.json');
+        return this.http.delete('https://myfirst-242709-default-rtdb.firebaseio.com/posts.json')
+        .pipe(
+            tap((event:any) =>{
+                if(event.type === HttpEventType.Sent){
+
+                }
+                if(event.type === HttpEventType.Response){
+                    
+                }
+            })
+        );
     }
 }
