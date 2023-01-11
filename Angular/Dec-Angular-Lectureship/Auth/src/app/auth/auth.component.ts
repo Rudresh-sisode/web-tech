@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from './auth.service';
+import { Observable } from 'rxjs';
+import { AuthResponseData, AuthService } from './auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -28,24 +29,41 @@ export class AuthComponent {
    
     const email = form.value.email;
     const password = form.value.password;
+    
+    let authObs: Observable<AuthResponseData>;
+
     if(this.isLoginMode){
       console.log("you are login already")
+      authObs = this.authService.login(email,password);
     }
     else{
-      this.authService.signup(email,password)
-      .subscribe({
-        next:(response)=>{
-          console.log(" auth response ",response);
-        },
-        error:(error)=>{
-          console.log(" auth error response ",error);
-        },
-        complete:()=>{
-          console.log(" auth completed response ");
-        }
-      })
+      this.authService.signup(email,password);
+      // .subscribe({
+      //   next:(response)=>{
+      //     console.log(" auth response ",response);
+      //   },
+      //   error:(error)=>{
+      //     console.log(" auth error response ",error);
+      //   },
+      //   complete:()=>{
+      //     console.log(" auth completed response ");
+      //   }
+      // })
 
     }
+
+    authObs.subscribe({
+      next:(response)=>{
+        console.log(" auth response ",response);
+      },
+      error:(error)=>{
+        console.log(" auth error response ",error);
+      },
+      complete:()=>{
+        console.log(" auth completed response ");
+      }
+    })
+
      form.reset();
 
   }

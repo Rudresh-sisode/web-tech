@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 
-interface AuthResponseData{
+export interface AuthResponseData{
     kind:string,
     idToken:string,
     email:string,
