@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthResponseData, AuthService } from './auth.service';
 
@@ -8,9 +9,9 @@ import { AuthResponseData, AuthService } from './auth.service';
   templateUrl: './auth.component.html'
 })
 export class AuthComponent {
-  isLoginMode = true;
+  isLoginMode = false;
 
-  constructor(private authService:AuthService){
+  constructor(private authService:AuthService,private router:Router){
 
   }
 
@@ -20,6 +21,7 @@ export class AuthComponent {
 
   onSubmit(form:NgForm){
 
+    debugger;
     console.log(form.value);
     if(!form.valid){
       console.log("Your form is not valid, please make it valid!");
@@ -37,7 +39,7 @@ export class AuthComponent {
       authObs = this.authService.login(email,password);
     }
     else{
-      this.authService.signup(email,password);
+      authObs = this.authService.signup(email,password);
       // .subscribe({
       //   next:(response)=>{
       //     console.log(" auth response ",response);
@@ -52,17 +54,15 @@ export class AuthComponent {
 
     }
 
-    authObs.subscribe({
-      next:(response)=>{
+    authObs.subscribe(
+     (response)=>{
         console.log(" auth response ",response);
-      },
-      error:(error)=>{
-        console.log(" auth error response ",error);
-      },
-      complete:()=>{
-        console.log(" auth completed response ");
+        this.router.navigate(['/recipes']);
+        debugger;
       }
-    })
+
+      
+    )
 
      form.reset();
 

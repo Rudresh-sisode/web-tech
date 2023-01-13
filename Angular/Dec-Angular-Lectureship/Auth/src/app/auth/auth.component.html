@@ -12,7 +12,7 @@
       </div>
       <div>
         <button class="btn btn-primary" type="submit" [disabled]="!authForm.valid">{{ isLoginMode ? 'Login':'SignUp'}} </button> 
-        <button class="btn btn-primary" (click)="onSwitchMode()"> Switch to {{isLoginMode ? 'Sign Up' :
+        <button class="btn btn-primary" type="button" (click)="onSwitchMode()"> Switch to {{isLoginMode ? 'Sign Up' :
           'Login'}}
         </button>
       </div>
