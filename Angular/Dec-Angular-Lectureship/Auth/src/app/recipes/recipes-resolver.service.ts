@@ -16,7 +16,7 @@ export class RecipesResolverService implements Resolve<Recipe[]> {
     private recipesService: RecipeService
   ) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):any {
     const recipes = this.recipesService.getRecipes();
 
     if (recipes.length === 0) {

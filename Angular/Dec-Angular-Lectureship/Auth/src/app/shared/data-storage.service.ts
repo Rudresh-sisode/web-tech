@@ -10,11 +10,13 @@ import { AuthService } from '../auth/auth.service';
 export class DataStorageService {
   constructor(private http: HttpClient, private recipeService: RecipeService, private authService:AuthService) {}
 
+  //https://proj-angular-735df-default-rtdb.firebaseio.com/
+
   storeRecipes() {
     const recipes = this.recipeService.getRecipes();
     this.http
       .put(
-        'https://myfirst-242709-default-rtdb.firebaseio.com/recipes.json',
+        'https://proj-angular-735df-default-rtdb.firebaseio.com/',
         recipes
       )
       .subscribe(response => {
@@ -22,11 +24,11 @@ export class DataStorageService {
       });
   }
 
-  fetchRecipes() {
-    this.authService.user.pipe(take(1), exhaustMap(user=>{
+  fetchRecipes():any {
+    return this.authService.user.pipe(take(1), exhaustMap(user=>{
       return this.http
       .get<Recipe[]>(
-        'https://myfirst-242709-default-rtdb.firebaseio.com//recipes.json',{
+        'https://proj-angular-735df-default-rtdb.firebaseio.com/',{
           params:new HttpParams().set('auth',user.token)
         }
       )
