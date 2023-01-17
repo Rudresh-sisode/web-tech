@@ -6,12 +6,12 @@ import { catchError, tap } from "rxjs/operators";
 import { User } from "./user.model";
 
 export interface AuthResponseData{
-    kind:string,
-    idToken:string,
-    email:string,
-    refreshToken:string,
-    expiresIn:string,
-    localId:string,
+    kind:string;
+    idToken:string;
+    email:string;
+    refreshToken:string;
+    expiresIn:string;
+    localId:string;
     registered?:boolean;
 }
 

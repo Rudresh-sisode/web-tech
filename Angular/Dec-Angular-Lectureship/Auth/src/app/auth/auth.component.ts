@@ -21,7 +21,6 @@ export class AuthComponent {
 
   onSubmit(form:NgForm){
 
-    debugger;
     console.log(form.value);
     if(!form.valid){
       console.log("Your form is not valid, please make it valid!");
@@ -58,7 +57,7 @@ export class AuthComponent {
      (response)=>{
         console.log(" auth response ",response);
         this.router.navigate(['/recipes']);
-        debugger;
+       
       }
 
       
