@@ -5,6 +5,6 @@ import { Component } from "@angular/core";
     templateUrl:'./alert.component.html'
 })
 
-export class AlertComponent{
+export class AlertComponent {
     
 }
