@@ -10,6 +10,7 @@ import { AuthResponseData, AuthService } from './auth.service';
 })
 export class AuthComponent {
   isLoginMode = false;
+  error = null;
 
   constructor(private authService:AuthService,private router:Router){
 
@@ -53,6 +54,8 @@ export class AuthComponent {
 
     }
 
+    
+
     authObs.subscribe(
      (response)=>{
         console.log(" auth response ",response);
@@ -66,5 +69,9 @@ export class AuthComponent {
      form.reset();
 
   }
+  
+  onHandleError(){
+      this.error = null;
+    }
 
 }
