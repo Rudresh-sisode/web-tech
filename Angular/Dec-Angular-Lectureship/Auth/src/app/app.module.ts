@@ -37,7 +37,7 @@ import { AlertComponent } from './shared/alert/alert.component';
     RecipeEditComponent,
     AuthComponent,
     LoadingSpinnerComponent,
-    AlertComponent
+    AlertComponent 
   ],
   imports: [
     BrowserModule,
@@ -47,6 +47,9 @@ import { AlertComponent } from './shared/alert/alert.component';
     AppRoutingModule
   ],
   providers: [ShoppingListService, RecipeService,{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptorService,multi:true}],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[
+    AlertComponent
+  ]
 })
 export class AppModule {}
