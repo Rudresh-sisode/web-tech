@@ -1,12 +1,8 @@
-import { Directive,ViewContainerRef } from "@angular/core";
+import { Directive, ViewContainerRef } from '@angular/core';
 
 @Directive({
-    selector:'[appPlaceholder]'
+  selector: '[appPlaceholder]'
 })
-
-export class PlaceholderDirective{
-    // viewContainerRef: any;
-    constructor(public viewContainerRef:ViewContainerRef){
-
-    }
+export class PlaceholderDirective {
+  constructor(public viewContainerRef: ViewContainerRef) {}
 }
