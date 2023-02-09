@@ -274,7 +274,8 @@ def getCompanyReviewData():
         driver = webdriver.Chrome(ChromeDriverManager().install())
         driver.get('https://www.glassdoor.co.in/Reviews/Gilead-Sciences-Reviews-E2016.htm')
         time.sleep(3)
-        divButton = driver.find_element_by_class_name("v2__EIReviewsRatingsStylesV2__ratingInfo")
+        # divButton = driver.find_element_by_class_name("v2__EIReviewsRatingsStylesV2__ratingInfo")
+        divButton = driver.find_element("v2__EIReviewsRatingsStylesV2__ratingInfo")
         divButton.click()
         time.sleep(2)
         # div class="modal_content"
@@ -345,7 +346,7 @@ def getCompanyReviewData():
 
             driver.get(companyReviewLinkURL)
             time.sleep(10)
-            div_button = driver.find_elements_by_class_name("v2__EIReviewDetailsV2__continueReading")
+            div_button = driver.find_element("v2__EIReviewDetailsV2__continueReading")
             print("how many buttons ",len(div_button))
             for x in range(0,len(div_button)):
                 
@@ -354,7 +355,7 @@ def getCompanyReviewData():
                 div_button[x].click()
                 try:
                     time.sleep(3)
-                    span_close = driver.find_element_by_class_name("modal_closeIcon")
+                    span_close = driver.find_element("modal_closeIcon")
                     span_close.click()
                 except Exception as e:
                     print("Error occured while clicking the close button\n ",e)
