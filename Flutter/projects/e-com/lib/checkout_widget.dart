@@ -867,6 +867,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                               child: TextButton(
                                 onPressed: () {
                                   // Add new address action
+                                  Navigator.pushNamed(context, Shipping.routeName);
                                 },
                                 child: Container(
                                   height: 30,

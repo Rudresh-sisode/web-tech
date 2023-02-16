@@ -24,12 +24,33 @@ class DeliveryAddress with ChangeNotifier {
 
   //initial address type value;
   AddressType addressType = AddressType.ADD;
-  
+
+//   Future<void> updateCustomerProfile(String userName,userMobile) async{
+  addressTypeToggle(AddressType passValue ){
+    if(passValue == AddressType.ADD){
+      //add operation
+
+
+    }
+    else if(passValue == AddressType.EDIT){
+      //edit / update operation
+
+    }
+  }
 
 
   String _token = "null";
 
-  
+   Future<void> addingShippingAddress() async{
+    final url = Uri.parse(APIURLS.addShippingAddress);
+    try{
+
+    }
+    catch(error){
+
+    }
+    
+   }
 
   Future<void> requestingAllDeliveryAvailableAddress() async{
     final url = Uri.parse(APIURLS.getAllAddressDataAPIUrl);

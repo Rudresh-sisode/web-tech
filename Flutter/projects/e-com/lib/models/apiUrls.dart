@@ -11,8 +11,18 @@ class APIURLS {
   static String _user_profile_data = "update-profile";
   static String _users_all_availble_address = "address";
   static String _order_place_with_token = "place-order";
+  static String _add_shipping_address = "address";
+  static String _edit_shipping_address = "address";
 
   //with getter you are free to access private properties.
+  static String get editShippingAddress{
+    return Url_Key + _edit_shipping_address;
+  }
+
+  static String get addShippingAddress{
+    return Url_Key + _add_shipping_address;
+  }
+
   static String get orderPlaceWithToken{
     return Url_Key + _order_place_with_token;
   }
