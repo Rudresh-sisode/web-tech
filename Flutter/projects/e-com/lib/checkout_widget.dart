@@ -25,7 +25,6 @@ import 'models/delivery-address.dart';
 
 class CheckoutWidget extends StatefulWidget {
   static var routeName = "cart";
-  
 
   const CheckoutWidget({Key? key}) : super(key: key);
 
@@ -41,8 +40,6 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
   Map<String, dynamic> checkoutDetails = {};
   List<CustomerDeliveryAddress> allAddressData = [];
   int? countControllerValue;
-
-  
 
   //here need to implement address provider's logic
 
@@ -61,25 +58,21 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
     });
 
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      try{
-        Provider.of<DeliveryAddress>(context, listen: false).requestingAllDeliveryAvailableAddress();
-      }
-      catch(error){
+      try {
+        Provider.of<DeliveryAddress>(context, listen: false)
+            .requestingAllDeliveryAvailableAddress();
+      } catch (error) {
         Map<String, dynamic> errorRes = json.decode(error.toString());
         GlobalSnackBar.show(context, errorRes["message"]);
-        
       }
     });
   }
 
-  void cartItemUpdated(){
+  void cartItemUpdated() {
     setState(() {
-      cartItems = Provider.of<Cart>(context,listen:false).items;
+      cartItems = Provider.of<Cart>(context, listen: false).items;
     });
-    
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -171,7 +164,9 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: Card(
-                                        child: Row(crossAxisAlignment: CrossAxisAlignment.center,
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
                                           children: <Widget>[
                                             Card(
                                               child: Container(
@@ -202,7 +197,6 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
-
                                                 color: Colors.white,
                                               ),
                                               height: MediaQuery.of(context)
@@ -235,12 +229,12 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                   //   mainAxisSize: MainAxisSize.max,
                                                   //   crossAxisAlignment: CrossAxisAlignment.end,
                                                   //   children: [
-                                                      
+
                                                   //     Container(
                                                   //       margin: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.05, 0, 0, 0),
-                                                  //       child: 
+                                                  //       child:
                                                   // Text(
-                                                      
+
                                                   //         // 'Quantity: ${cartItems[index].quantity}',
                                                   //         // 'Quantity: ${product.foundAndReturnProductsQuantity(int.parse(cartItems[index].id))}',
                                                   //         'Qty: ${cart.findCartItemQuantity(cartItems[index].id)}',
@@ -248,210 +242,246 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                   //           fontSize: 14,
                                                   //           color: Colors.grey,
                                                   //         ),
-                                                          
+
                                                   //       ),
                                                   //     ),
-                                                      
+
                                                   //   ],
                                                   // ),
-                                              
+
                                                   // SizedBox(height: 10),
                                                   Row(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                                    children: [
-                                                      Text.rich(
-                                                        TextSpan(
-                                                          children: [
-                                                            TextSpan(
-                                                              text: '₹ ${product.foundAndReturnProductsPrice(int.parse(cartItems[index].id))}',
-                                                              style: TextStyle(
-                                                                // fontSize: 18,
-                                                                // fontWeight: FontWeight.bold,
-                                                                decoration: TextDecoration.lineThrough
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text.rich(
+                                                          TextSpan(
+                                                            children: [
+                                                              TextSpan(
+                                                                text:
+                                                                    '₹ ${product.foundAndReturnProductsPrice(int.parse(cartItems[index].id))}',
+                                                                style: TextStyle(
+                                                                    // fontSize: 18,
+                                                                    // fontWeight: FontWeight.bold,
+                                                                    decoration: TextDecoration.lineThrough),
                                                               ),
-                                                            ),
-                                                             WidgetSpan(
-                                                                  child: SizedBox(
-                                                                width: MediaQuery.of(context).size.width * 0.05, // your of space
+                                                              WidgetSpan(
+                                                                child: SizedBox(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      0.05, // your of space
+                                                                ),
                                                               ),
+                                                              TextSpan(
+                                                                text:
+                                                                    '₹ ${product.foundAndReturnProductsOfferPrice(int.parse(cartItems[index].id))}',
+                                                                style: TextStyle(
+                                                                    // fontSize: 16,
+                                                                    // fontWeight: FontWeight.bold,
+                                                                    ),
                                                               ),
-                                                            TextSpan(
-                                                              text: '₹ ${product.foundAndReturnProductsOfferPrice(int.parse(cartItems[index].id))}',
-                                                              style: TextStyle(
-                                                                // fontSize: 16,
-                                                                // fontWeight: FontWeight.bold,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      )
-                                                      // Text(
-                                                      //   // '$${cartItems[index].price}',
-                                                      //   '₹ ${product.foundAndReturnProductsPrice(int.parse(cartItems[index].id))}',
-                                                      //   style: TextStyle(
-                                                      //     fontSize: 18,
-                                                      //     fontWeight: FontWeight.bold,
-                                                      //     decoration: TextDecoration.lineThrough
-                                                      //   ),
-                                                      // ),
-                                                      // SizedBox(height: 10),
-                                                      // Text("₹ ${product.foundAndReturnProductsOfferPrice(int.parse(cartItems[index].id))}",
-                                                      // style:TextStyle(
-                                                      //   fontSize: 16,
-                                                      //   fontWeight: FontWeight.bold,),
-                                                      //   ),
-                                                    ]
-                                                  ),
+                                                            ],
+                                                          ),
+                                                        )
+                                                        // Text(
+                                                        //   // '$${cartItems[index].price}',
+                                                        //   '₹ ${product.foundAndReturnProductsPrice(int.parse(cartItems[index].id))}',
+                                                        //   style: TextStyle(
+                                                        //     fontSize: 18,
+                                                        //     fontWeight: FontWeight.bold,
+                                                        //     decoration: TextDecoration.lineThrough
+                                                        //   ),
+                                                        // ),
+                                                        // SizedBox(height: 10),
+                                                        // Text("₹ ${product.foundAndReturnProductsOfferPrice(int.parse(cartItems[index].id))}",
+                                                        // style:TextStyle(
+                                                        //   fontSize: 16,
+                                                        //   fontWeight: FontWeight.bold,),
+                                                        //   ),
+                                                      ]),
                                                   // Spacer(),
                                                   SizedBox(height: 15),
                                                   // Container(
                                                   //     child:
-                                                       Row(
-                                                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                        children: [
-                                                          Text(
-                                                        
-                                                            // 'Quantity: ${cartItems[index].quantity}',
-                                                            // 'Quantity: ${product.foundAndReturnProductsQuantity(int.parse(cartItems[index].id))}',
-                                                            'Qty:',
-                                                            style: TextStyle(
-                                                              fontSize: 14,
-                                                              color: Colors.grey,
-                                                            ),
-                                                            
-                                                          ),
-                                                         
-
-                                                            //Remove button here
-                                                            Container(
-                                                            width: 25.0,
-                                                            height: 25,
-                                                            child: ElevatedButton(
-                                                              onPressed: () {
-                                                                setState(() {
-                                                                  cart.removeItem(cartItems[index].id, context, "1");
-                                                                });
-                                                                // your on pressed function here
-                                                              },
-                                                              style: ElevatedButton.styleFrom(
-                                                                backgroundColor: Colors.grey[500],
-                                                                shape: RoundedRectangleBorder(
-                                                                  borderRadius: BorderRadius.circular(40.0),
-                                                                ),
-                                                                padding: EdgeInsets.zero,
-                                                              ),
-                                                              child: Container(
-                                                                width: 20.0,
-                                                                height: 20,
-                                                                child: Center(
-                                                                  child: Icon(
-                                                                    Icons.remove,
-                                                                    color: Colors.white,
-                                                                    size: 15.0,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          
-                                                          Text(
-                                                      // "${countValue.toString()}",
-                                                          // 'Quantity: ${cartItems[index].quantity}',
-                                                          // 'Quantity: ${product.foundAndReturnProductsQuantity(int.parse(cartItems[index].id))}',
-                                                          '${cart.findCartItemQuantity(cartItems[index].id)}',
-                                                          style: TextStyle(
-                                                            fontSize: 14,
-                                                            color: Colors.grey,
-                                                          ),
-                                                          
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      Text(
+                                                        // 'Quantity: ${cartItems[index].quantity}',
+                                                        // 'Quantity: ${product.foundAndReturnProductsQuantity(int.parse(cartItems[index].id))}',
+                                                        'Qty:',
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.grey,
                                                         ),
-                                                          Container(
-                                                            width: 25.0,
-                                                            height: 25,
-                                                            child: ElevatedButton(
-                                                              onPressed: () {
-                                                                // your on pressed function here
-                                                                setState(() {
-                                                                  cart.addItem(cartItems[index].id, context, "1");
-                                                                });
-                                                              },
-                                                              style: ElevatedButton.styleFrom(
-                                                                backgroundColor: Colors.green[500],
-                                                                shape: RoundedRectangleBorder(
-                                                                  borderRadius: BorderRadius.circular(40.0),
-                                                                ),
-                                                                padding: EdgeInsets.zero,
-                                                              ),
-                                                              child: Container(
-                                                                width: 20.0,
-                                                                height: 20,
-                                                                child: Center(
-                                                                  child: Icon(
-                                                                    Icons.add,
-                                                                    color: Colors.white,
-                                                                    size: 15.0,
-                                                                  ),
-                                                                ),
+                                                      ),
+
+                                                      //Remove button here
+                                                      Container(
+                                                        width: 25.0,
+                                                        height: 25,
+                                                        child: ElevatedButton(
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              cart.removeItem(
+                                                                  cartItems[
+                                                                          index]
+                                                                      .id,
+                                                                  context,
+                                                                  "1");
+                                                            });
+                                                            // your on pressed function here
+                                                          },
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                            backgroundColor:
+                                                                Colors
+                                                                    .grey[500],
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          40.0),
+                                                            ),
+                                                            padding:
+                                                                EdgeInsets.zero,
+                                                          ),
+                                                          child: Container(
+                                                            width: 20.0,
+                                                            height: 20,
+                                                            child: Center(
+                                                              child: Icon(
+                                                                Icons.remove,
+                                                                color: Colors
+                                                                    .white,
+                                                                size: 15.0,
                                                               ),
                                                             ),
                                                           ),
-                                                          
-                                                        ],
+                                                        ),
                                                       ),
-                                                    // ),
+
+                                                      Text(
+                                                        // "${countValue.toString()}",
+                                                        // 'Quantity: ${cartItems[index].quantity}',
+                                                        // 'Quantity: ${product.foundAndReturnProductsQuantity(int.parse(cartItems[index].id))}',
+                                                        '${cart.findCartItemQuantity(cartItems[index].id)}',
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.grey,
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        width: 25.0,
+                                                        height: 25,
+                                                        child: ElevatedButton(
+                                                          onPressed: () {
+                                                            // your on pressed function here
+                                                            setState(() {
+                                                              cart.addItem(
+                                                                  cartItems[
+                                                                          index]
+                                                                      .id,
+                                                                  context,
+                                                                  "1");
+                                                            });
+                                                          },
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                            backgroundColor:
+                                                                Colors
+                                                                    .green[500],
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          40.0),
+                                                            ),
+                                                            padding:
+                                                                EdgeInsets.zero,
+                                                          ),
+                                                          child: Container(
+                                                            width: 20.0,
+                                                            height: 20,
+                                                            child: Center(
+                                                              child: Icon(
+                                                                Icons.add,
+                                                                color: Colors
+                                                                    .white,
+                                                                size: 15.0,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  // ),
                                                 ],
                                               ),
                                             ),
-                                           
-                                              Container(
-                                                width: 60.0,
-                                                              height: 60,
-                                                child: ElevatedButton(
-                                                  onPressed: () {
-                                                    // your on pressed function here
-                                                    cart.deleteItem(cartItems[index].id);
-                                                    cartItemUpdated();
-                                                  },
-                                                  style: ElevatedButton.styleFrom(
-                                                    primary: Colors.red,
-                                                    shape: RoundedRectangleBorder(
-                                                      borderRadius: BorderRadius.circular(30.0),
-                                                    ),
-                                                    padding: EdgeInsets.zero,
+
+                                            Container(
+                                              width: 60.0,
+                                              height: 60,
+                                              child: ElevatedButton(
+                                                onPressed: () {
+                                                  // your on pressed function here
+                                                  cart.deleteItem(
+                                                      cartItems[index].id);
+                                                  cartItemUpdated();
+                                                },
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: Colors.red,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30.0),
                                                   ),
-                                                  child: Container(
-                                                    // width: 20.0,
-                                                    // height: 20,
-                                                    child: Center(
-                                                      child: Icon(
-                                                        Icons.delete,
-                                                        color: Colors.white,
-                                                        size: 20.0,
-                                                      ),
+                                                  padding: EdgeInsets.zero,
+                                                ),
+                                                child: Container(
+                                                  // width: 20.0,
+                                                  // height: 20,
+                                                  child: Center(
+                                                    child: Icon(
+                                                      Icons.delete,
+                                                      color: Colors.white,
+                                                      size: 20.0,
                                                     ),
                                                   ),
                                                 ),
                                               ),
-                                              //  Column(
-                                              //    children: [
-                                              //      Container(
-                                              //         alignment: Alignment.topCenter,
-                                              //         height: MediaQuery.of(context).size.height * 0.10,
-                                              //         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                              //         // width: MediaQuery.of(context).size.width * 0.25,
-                                              //         child: IconButton(
-                                              //           icon: Icon(Icons.delete),
-                                              //           onPressed: () {
-                                              //             // your delete function here
-                                              //             cart.deleteItem(cartItems[index].id);
-                                              //             cartItemUpdated();
-                                              //           },
-                                              //         ),
-                                              //       ),
-                                                    
-                                              //    ],
-                                              //  ),
+                                            ),
+                                            //  Column(
+                                            //    children: [
+                                            //      Container(
+                                            //         alignment: Alignment.topCenter,
+                                            //         height: MediaQuery.of(context).size.height * 0.10,
+                                            //         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                            //         // width: MediaQuery.of(context).size.width * 0.25,
+                                            //         child: IconButton(
+                                            //           icon: Icon(Icons.delete),
+                                            //           onPressed: () {
+                                            //             // your delete function here
+                                            //             cart.deleteItem(cartItems[index].id);
+                                            //             cartItemUpdated();
+                                            //           },
+                                            //         ),
+                                            //       ),
+
+                                            //    ],
+                                            //  ),
                                             // ),
                                           ],
                                         ),
@@ -623,198 +653,208 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                 // );
                               });
                         }),
-                        cartItems.length != 0 ? Column(
-                          children:<Widget>[
-                            Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(24, 16, 24, 4),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                'Price Breakdown',
-                                style: AppTheme.of(context).bodyText2,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(24, 4, 24, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Base Price',
-                                style: AppTheme.of(context).subtitle2,
-                              ),
-                              Text(
-                                '₹${Provider.of<Cart>(context,listen:false).basePrice}',
-                                style: AppTheme.of(context).subtitle1,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(24, 4, 24, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Taxes',
-                                style: AppTheme.of(context).subtitle2,
-                              ),
-                              Text(
-                                '₹ 00.00',
-                                style: AppTheme.of(context).subtitle1,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(24, 4, 24, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Discount',
-                                style: AppTheme.of(context).subtitle2,
-                              ),
-                              
-                              Text(
-                                '₹ ${Provider.of<Cart>(context,listen:false).discountPrice}',
-                                style: AppTheme.of(context).subtitle1,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(24, 4, 24, 24),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Text(
-                                    'Total',
-                                    style: AppTheme.of(context).subtitle2,
-                                  ),
-                                  IconButton(
-                                    icon: Icon(
-                                      Icons.info_outlined,
-                                      color: Color(0xFF57636C),
-                                      size: 18,
+                        cartItems.length != 0
+                            ? Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        24, 16, 24, 4),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Text(
+                                          'Price Breakdown',
+                                          style: AppTheme.of(context).bodyText2,
+                                        ),
+                                      ],
                                     ),
-                                    onPressed: () {
-                                      print('IconButton pressed ...');
-                                    },
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        24, 4, 24, 0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Base Price',
+                                          style: AppTheme.of(context).subtitle2,
+                                        ),
+                                        Text(
+                                          '₹${Provider.of<Cart>(context, listen: false).basePrice}',
+                                          style: AppTheme.of(context).subtitle1,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        24, 4, 24, 0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Taxes',
+                                          style: AppTheme.of(context).subtitle2,
+                                        ),
+                                        Text(
+                                          '₹ 00.00',
+                                          style: AppTheme.of(context).subtitle1,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        24, 4, 24, 0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Discount',
+                                          style: AppTheme.of(context).subtitle2,
+                                        ),
+                                        Text(
+                                          '₹ ${Provider.of<Cart>(context, listen: false).discountPrice}',
+                                          style: AppTheme.of(context).subtitle1,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        24, 4, 24, 24),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Text(
+                                              'Total',
+                                              style: AppTheme.of(context)
+                                                  .subtitle2,
+                                            ),
+                                            IconButton(
+                                              icon: Icon(
+                                                Icons.info_outlined,
+                                                color: Color(0xFF57636C),
+                                                size: 18,
+                                              ),
+                                              onPressed: () {
+                                                print('IconButton pressed ...');
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                        Text(
+                                          '₹${Provider.of<Cart>(context, listen: false).totalPrice}',
+                                          style: AppTheme.of(context).title1,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
+                              )
+                            : Column(
+                                children: <Widget>[
+                                  Text("Your cart is empty!"),
+                                ],
                               ),
-                              Text(
-                                '₹${Provider.of<Cart>(context,listen:false).totalPrice}',
-                                style: AppTheme.of(context).title1,
-                              ),
-                            ],
-                          ),
-                        ),
-                      
-                          ] ,
-                        ) 
-                        : Column(
-                          children: <Widget>[
-                            Text("Your cart is empty!"),
-                          ],
-                        ),
-                        ],
+                      ],
                     ),
                   ),
                 ),
-                if(cartItems.length != 0) Container(
-                  width: double.infinity,
-                  height: 70,
-                  decoration: const BoxDecoration(
-                    color: kPrimaryColor,
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 4,
-                        color: Color(0x320E151B),
-                        offset: Offset(0, -2),
-                      )
-                    ],
-                    // borderRadius: BorderRadius.only(
-                    //   bottomLeft: Radius.circular(0),
-                    //   bottomRight: Radius.circular(0),
-                    //   topLeft: Radius.circular(16),
-                    //   topRight: Radius.circular(16),
+                if (cartItems.length != 0)
+                  Container(
+                    width: double.infinity,
+                    height: 70,
+                    decoration: const BoxDecoration(
+                      color: kPrimaryColor,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 4,
+                          color: Color(0x320E151B),
+                          offset: Offset(0, -2),
+                        )
+                      ],
+                      // borderRadius: BorderRadius.only(
+                      //   bottomLeft: Radius.circular(0),
+                      //   bottomRight: Radius.circular(0),
+                      //   topLeft: Radius.circular(16),
+                      //   topRight: Radius.circular(16),
+                      // ),
+                    ),
+                    alignment: AlignmentDirectional(0, -0.35),
+                    // child: Text(
+                    //   'Checkout (\$230.20)',
+                    //   style: AppTheme.of(context).title2.override(
+                    //         fontFamily: 'Poppins',
+                    //         color: AppTheme.of(context).primaryBtnText,
+                    //       ),
                     // ),
-                  ),
-                  alignment: AlignmentDirectional(0, -0.35),
-                  // child: Text(
-                  //   'Checkout (\$230.20)',
-                  //   style: AppTheme.of(context).title2.override(
-                  //         fontFamily: 'Poppins',
-                  //         color: AppTheme.of(context).primaryBtnText,
-                  //       ),
-                  // ),
 
-                  // child: RichText(
-                  //   text: TextSpan(
-                  //     children: <TextSpan>[
-                  //       TextSpan(
-                  //         text: ("Checkout  \u20B9"),
-                  //         style: AppTheme.of(context).title2.override(
-                  //               fontFamily: 'Poppins',
-                  //               color: AppTheme.of(context).primaryBtnText,
-                  //             ),
-                  //       ),
-                  //       TextSpan(
-                  //           text: " 123",
-                  //           style: AppTheme.of(context).title2.override(
-                  //               fontFamily: 'Poppins',
-                  //               color: AppTheme.of(context).primaryBtnText)),
-                  //     ],
-                  //   ),
-                  // ),
-                  child: TextButton(
-                    onPressed: () {
-                      // Navigator.pushNamed(context, Shipping.routeName);
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => AddressPageSelection(),
-                      //   ),
-                      // );
-                      setState(() {
-                        showSheet = !showSheet;
-                      });
-                      // Navigator.pushNamed(context, AddressPageSelection.routeName);
-                    },
-                    child: RichText(
-                      text: TextSpan(
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: ("Checkout ₹"),
-                            style: AppTheme.of(context).title2.override(
-                                  fontFamily: 'Poppins',
-                                  color: AppTheme.of(context).primaryBtnText,
-                                ),
-                          ),
-                          TextSpan(
-                              text: "${Provider.of<Cart>(context,listen:false).totalPrice}",
+                    // child: RichText(
+                    //   text: TextSpan(
+                    //     children: <TextSpan>[
+                    //       TextSpan(
+                    //         text: ("Checkout  \u20B9"),
+                    //         style: AppTheme.of(context).title2.override(
+                    //               fontFamily: 'Poppins',
+                    //               color: AppTheme.of(context).primaryBtnText,
+                    //             ),
+                    //       ),
+                    //       TextSpan(
+                    //           text: " 123",
+                    //           style: AppTheme.of(context).title2.override(
+                    //               fontFamily: 'Poppins',
+                    //               color: AppTheme.of(context).primaryBtnText)),
+                    //     ],
+                    //   ),
+                    // ),
+                    child: TextButton(
+                      onPressed: () {
+                        // Navigator.pushNamed(context, Shipping.routeName);
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => AddressPageSelection(),
+                        //   ),
+                        // );
+                        setState(() {
+                          showSheet = !showSheet;
+                        });
+                        // Navigator.pushNamed(context, AddressPageSelection.routeName);
+                      },
+                      child: RichText(
+                        text: TextSpan(
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: ("Checkout ₹"),
                               style: AppTheme.of(context).title2.override(
-                                  fontFamily: 'Poppins',
-                                  color: AppTheme.of(context).primaryBtnText)),
-                        ],
+                                    fontFamily: 'Poppins',
+                                    color: AppTheme.of(context).primaryBtnText,
+                                  ),
+                            ),
+                            TextSpan(
+                                text:
+                                    "${Provider.of<Cart>(context, listen: false).totalPrice}",
+                                style: AppTheme.of(context).title2.override(
+                                    fontFamily: 'Poppins',
+                                    color:
+                                        AppTheme.of(context).primaryBtnText)),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
               ],
             ),
           ),
@@ -867,7 +907,18 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                               child: TextButton(
                                 onPressed: () {
                                   // Add new address action
-                                  Navigator.pushNamed(context, Shipping.routeName);
+
+                                  setState(() {
+                                    showSheet = !showSheet;
+                                  });
+                                  Provider.of<DeliveryAddress>(context,
+                                          listen: false)
+                                      .addressType = AddressType.ADD;
+                                  /**
+                                   * AddressType.ADD
+                                   */
+                                  Navigator.pushNamed(
+                                      context, Shipping.routeName);
                                 },
                                 child: Container(
                                   height: 30,
@@ -885,132 +936,245 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                               List<CartItem> cartItem = cartState.items;
                               return Padding(
                              */
-                        Provider.of<DeliveryAddress>(context,listen:false).allAddressData.length == 0 ? Column(children: [
-                          Text("No address available!"),
-                        ],) :
-                        Consumer<DeliveryAddress>(
-                          builder: (_, addressData, ch) {
-                            return Container(
-                              height: MediaQuery.of(context).size.width * 01,
-                              child: ListView.builder(
-                                  itemCount: addressData.allAddressData.length,
-                                  itemBuilder: ((context, index) {
-                                    return Container(
-                                      width: MediaQuery.of(context).size.width * 02,
-                                      child: 
-                                        Card(
-
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                          ),
-                                          child: Container(
-                                            padding: EdgeInsets.all(10),
-                                            child: Column(
-                                              children: [
-                                                Column(
+                        Provider.of<DeliveryAddress>(context, listen: false)
+                                    .allAddressData
+                                    .length ==
+                                0
+                            ? Column(
+                                children: [
+                                  Text("No address available!"),
+                                ],
+                              )
+                            : Consumer<DeliveryAddress>(
+                                builder: (_, addressData, ch) {
+                                  return Container(
+                                    height:
+                                        MediaQuery.of(context).size.width * 01,
+                                    child: ListView.builder(
+                                        itemCount:
+                                            addressData.allAddressData.length,
+                                        itemBuilder: ((context, index) {
+                                          return Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                02,
+                                            child: Card(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                              ),
+                                              child: Container(
+                                                padding: EdgeInsets.all(10),
+                                                child: Column(
                                                   children: [
-                                                    Container(
-                                                      margin: EdgeInsets.only(
-                                                        left: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            0.05,
-                                                      ),
-                                                      child: Text(
-                                                        // checkoutDetails["name"],
-                                                        addressData.allAddressData[index].firstName+" "+addressData.allAddressData[index].lastName,
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 18,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      margin: EdgeInsets.only(
-                                                          left: MediaQuery.of(context).size.width * 0.05, top: 10),
-                                                      child: Text(
-                                                        // "Gunadhya Software, Month Vert Zenith, Baner Road",
-                                                        addressData.allAddressData[index].address,
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      margin: EdgeInsets.only(
-                                                          left: MediaQuery.of(context).size.width * 0.05, top: 10),
-                                                      child: Text(
-                                                        // "Baner Pashan Link Road, Pune, Maharashtra, 411045, India",
-                                                        addressData.allAddressData[index].city+", "+addressData.allAddressData[index].state+","+addressData.allAddressData[index].country+", "+addressData.allAddressData[index].pincode,
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      margin: EdgeInsets.only(
-                                                          left: 20, top: 10),
-                                                      child: Text(
-                                                        // "Baner Pashan Link Road, Pune, Maharashtra, 411045, India",
-                                                        addressData.allAddressData[index].phone,
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                        ),
-                                                      ),
-                                                    ),
                                                     Column(
-                                                      children: <Widget>[
-                                                        ElevatedButton(
-                                                          onPressed: () {
-                                                            Provider.of<Cart>(context,listen:false).preparedCheckout(addressData.allAddressData[index].id,addressData.allAddressData[index].firstName+addressData.allAddressData[index].lastName,addressData.allAddressData[index].phone,addressData.allAddressData[index].email);
-                                                            Navigator.pushNamed(
-                                                                context,
-                                                                Payment
-                                                                    .routeName);
-                                                          },
+                                                      children: [
+                                                        Container(
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                            left: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.05,
+                                                          ),
                                                           child: Text(
-                                                            "Deliver to this address",
-                                                            textAlign: TextAlign
-                                                                .center,
+                                                            // checkoutDetails["name"],
+                                                            addressData
+                                                                    .allAddressData[
+                                                                        index]
+                                                                    .firstName +
+                                                                " " +
+                                                                addressData
+                                                                    .allAddressData[
+                                                                        index]
+                                                                    .lastName,
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 18,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          margin: EdgeInsets.only(
+                                                              left: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.05,
+                                                              top: 10),
+                                                          child: Text(
+                                                            // "Gunadhya Software, Month Vert Zenith, Baner Road",
+                                                            addressData
+                                                                .allAddressData[
+                                                                    index]
+                                                                .address,
+                                                            style: TextStyle(
+                                                              fontSize: 14,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          margin: EdgeInsets.only(
+                                                              left: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.05,
+                                                              top: 10),
+                                                          child: Text(
+                                                            // "Baner Pashan Link Road, Pune, Maharashtra, 411045, India",
+                                                            addressData
+                                                                    .allAddressData[
+                                                                        index]
+                                                                    .city +
+                                                                ", " +
+                                                                addressData
+                                                                    .allAddressData[
+                                                                        index]
+                                                                    .state +
+                                                                "," +
+                                                                addressData
+                                                                    .allAddressData[
+                                                                        index]
+                                                                    .country +
+                                                                ", " +
+                                                                addressData
+                                                                    .allAddressData[
+                                                                        index]
+                                                                    .pincode,
+                                                            style: TextStyle(
+                                                              fontSize: 14,
+                                                            ),
                                                           ),
                                                         ),
                                                         Container(
                                                           margin:
                                                               EdgeInsets.only(
                                                                   left: 20,
-                                                                  right: 20,
-                                                                  top: 20),
-                                                          child: TextButton(
-                                                            onPressed: () {
-                                                              // Edit address action
-                                                            },
-                                                            child: Container(
-                                                              height: 30,
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .all(5),
-                                                              child: Text(
-                                                                  "Edit Address"),
+                                                                  top: 10),
+                                                          child: Text(
+                                                            // "Baner Pashan Link Road, Pune, Maharashtra, 411045, India",
+                                                            addressData
+                                                                .allAddressData[
+                                                                    index]
+                                                                .phone,
+                                                            style: TextStyle(
+                                                              fontSize: 14,
                                                             ),
                                                           ),
+                                                        ),
+                                                        Column(
+                                                          children: <Widget>[
+                                                            ElevatedButton(
+                                                              onPressed: () {
+                                                                Provider.of<Cart>(context, listen: false).preparedCheckout(
+                                                                    addressData
+                                                                        .allAddressData[
+                                                                            index]
+                                                                        .id,
+                                                                    addressData
+                                                                            .allAddressData[
+                                                                                index]
+                                                                            .firstName +
+                                                                        addressData
+                                                                            .allAddressData[
+                                                                                index]
+                                                                            .lastName,
+                                                                    addressData
+                                                                        .allAddressData[
+                                                                            index]
+                                                                        .phone,
+                                                                    addressData
+                                                                        .allAddressData[
+                                                                            index]
+                                                                        .email);
+                                                                setState(() {
+                                                                  showSheet =
+                                                                      !showSheet;
+                                                                });
+
+                                                                Navigator.pushNamed(
+                                                                    context,
+                                                                    Payment
+                                                                        .routeName);
+                                                              },
+                                                              child: Text(
+                                                                "Deliver to this address",
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              margin: EdgeInsets
+                                                                  .only(
+                                                                      left: 20,
+                                                                      right: 20,
+                                                                      top: 20),
+                                                              child: TextButton(
+                                                                onPressed: () {
+                                                                  // Edit address action
+                                                                  Provider.of<DeliveryAddress>(
+                                                                              context,
+                                                                              listen:
+                                                                                  false)
+                                                                          .addressType =
+                                                                      AddressType
+                                                                          .EDIT;
+                                                                  Provider.of<DeliveryAddress>(
+                                                                              context,
+                                                                              listen:
+                                                                                  false)
+                                                                          .editAddressId =
+                                                                      int.parse(addressData
+                                                                          .allAddressData[
+                                                                              index]
+                                                                          .id);
+                                                                  Provider.of<DeliveryAddress>(
+                                                                          context,
+                                                                          listen:
+                                                                              false)
+                                                                      .returnEditingAddressValues();
+
+                                                                  setState(() {
+                                                                    showSheet =
+                                                                        !showSheet;
+                                                                  });
+                                                                  // Navigator.pop(context);
+                                                                  Navigator.pushNamed(
+                                                                      context,
+                                                                      Shipping
+                                                                          .routeName);
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  height: 30,
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              5),
+                                                                  child: Text(
+                                                                      "Edit Address"),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ],
                                                     ),
                                                   ],
                                                 ),
-                                              ],
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                      
-                                    );
-                                  })),
-                            );
-                          },
-                        ),
+                                          );
+                                        })),
+                                  );
+                                },
+                              ),
                       ],
                     ),
                   );

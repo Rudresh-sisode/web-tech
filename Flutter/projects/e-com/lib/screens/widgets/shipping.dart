@@ -23,20 +23,20 @@ class Shipping extends StatelessWidget {
           width: double.infinity,
           child: Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: getProportionateScreenWidth(20)),
+                horizontal: 20),
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(height: SizeConfig.screenHeight * 0.04),
+                  SizedBox(height: 20/**SizeConfig.screenHeight * 0.04*/),
                   SizedBox(
                     child: Image(
                       image: AssetImage('assets/images/fedex-express.png'),
                     ),
                   ),
-                  SizedBox(height: SizeConfig.screenHeight * 0.08),
+                  SizedBox(height: 20 /**SizeConfig.screenHeight * 0.08*/),
                   ShippingForm(),
-                  SizedBox(height: SizeConfig.screenHeight * 0.08),
-                  SizedBox(height: getProportionateScreenHeight(20)),
+                  SizedBox(height: 20),
+                  SizedBox(height: 20),
                 ],
                 // Text('New User? Create Account'),
               ),
