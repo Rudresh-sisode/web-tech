@@ -27,7 +27,7 @@ class DeliveryAddress with ChangeNotifier {
   //initial address type value;
   AddressType addressType = AddressType.ADD;
   String _token = "null";
-
+  
 //   Future<void> updateCustomerProfile(String userName,userMobile) async{
   addressTypeToggle(AddressType passValue) {
     if (passValue == AddressType.ADD) {
@@ -38,14 +38,14 @@ class DeliveryAddress with ChangeNotifier {
   }
 
   Future<void> editingShippingAddress() async {
-    final url = Uri.parse(APIURLS.addShippingAddress + '$editAddressId');
+    final url = Uri.parse(APIURLS.addShippingAddress + '/$editAddressId');
 
     try {
       final prefs = await SharedPreferences.getInstance();
       final dynamic extractedUserData =
           json.decode(prefs.getString("userData").toString());
       _token = extractedUserData["token"];
-      final response = await http.post(
+      final response = await http.put(
         url,
         body: json.encode({
           "first_name": editingAddressData.firstName,

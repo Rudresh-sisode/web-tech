@@ -1,3 +1,4 @@
+import 'package:ecomm_app/checkout_widget.dart';
 import 'package:ecomm_app/components/default_button.dart';
 import 'package:ecomm_app/components/form_error.dart';
 import 'package:ecomm_app/components/global_snack_bar.dart';
@@ -169,12 +170,15 @@ class _ShippingFormState extends State<ShippingForm> {
       Provider.of<DeliveryAddress>(context, listen: false).editingAddressData = editAddressData;
 
       await Provider.of<DeliveryAddress>(context, listen: false).editingShippingAddress();
+      Navigator.pop(context);
+      Navigator.pushNamed(context, CheckoutWidget.routeName);
 
 
       // Navigator.pop(context);
       // ignore: use_build_context_synchronously
       // Navigator.pushNamed(context, ProfileScreen.routeName);
     } on FormatException catch (_, error) {
+      GlobalSnackBar.show(context, error.toString());
       // _showErrorDialog(error.toString());
     } catch (error) {
       Map<String, dynamic> errorRes = json.decode(error.toString());
@@ -261,7 +265,18 @@ class _ShippingFormState extends State<ShippingForm> {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
                   // if all are valid then go to success screen
-                  shippingAddress();
+                  if(Provider.of<DeliveryAddress>(context, listen: false)
+                          .addressType ==
+                      AddressType.ADD){
+                        shippingAddress();
+                      }
+                      else if(Provider.of<DeliveryAddress>(context, listen: false)
+                          .addressType ==
+                      AddressType.EDIT){
+                        editShippingAddress();
+                        
+                      }
+                  
                   // KeyboardUtil.hideKeyboard(context);
                   // Navigator.pushNamed(context, Payment.routeName);
                 }
@@ -414,13 +429,13 @@ class _ShippingFormState extends State<ShippingForm> {
       onSaved: (newValue) => country = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kStateNullError);
+          removeError(error: kCountyNullError);
         }
         return null;
       },
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kStateNullError);
+          addError(error: kCountyNullError);
           return "";
         }
         return null;

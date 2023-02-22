@@ -13,8 +13,13 @@ class APIURLS {
   static String _order_place_with_token = "place-order";
   static String _add_shipping_address = "address";
   static String _edit_shipping_address = "address";
+  static String _order_lisint = "order-listing";
 
   //with getter you are free to access private properties.
+  static String get orderListing{
+    return Url_Key + _order_lisint;
+  }
+  
   static String get editShippingAddress{
     return Url_Key + _edit_shipping_address;
   }

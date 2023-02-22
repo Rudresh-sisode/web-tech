@@ -35,6 +35,7 @@ const String kNamelNullError = "Please Enter your name";
 const String kPhoneNumberNullError = "Please Enter your phone number";
 const String kAddressNullError = "Please Enter your address";
 const String kPincodeNullError = "Please Enter pincode";
+const String kCountyNullError = "Please provide country name";
 const String kStateNullError = "Please Enter state";
 const String kCityNullError = "Please Enter city";
 const String kOtpStrick = "Please, Enter six digit OTP!";

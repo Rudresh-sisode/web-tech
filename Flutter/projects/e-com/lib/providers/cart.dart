@@ -129,6 +129,7 @@ class Cart with ChangeNotifier {
         } else if (responseData['status'] == true) {
           checkoutOrderStatus = true;
           recentCheckoutOrderId = responseData["data"]["order_id"];
+          //make the cart empty promptly
           // userProfileMessage = responseData["message"];
           notifyListeners();
         }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:ecomm_app/const_error_msg.dart';
 import 'package:ecomm_app/models/user.dart';
 import 'package:ecomm_app/provider/profile_service.dart';
@@ -9,6 +11,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
+import '../../../providers/orders.dart' as OrdersProvider;
 import '../../../components/global_snack_bar.dart';
 import '../../../providers/auth.dart';
 
@@ -51,6 +54,54 @@ class _ProfileState extends State<Body> {
         Provider.of<Auth>(context,listen: false).clearUserProfileNotificationMessage();
 
       });
+    }
+  }
+
+   Future<void> orderCheckout() async {
+
+    try {
+      await Provider.of<OrdersProvider.Orders>(context, listen: false).getAllOrderListings();
+      Navigator.pushNamed(context, Orders.routeName);
+
+    } on FormatException catch (_, error) {
+      // _showErrorDialog(error.toString());
+    } catch (error) {
+      Map<String, dynamic> errorRes = json.decode(error.toString());
+      Map<String, dynamic> errorMessage = {};
+      if (errorRes["message"] is String) {
+        // _showErrorDialog(errorRes["message"]);
+        if(errorRes["message"] == "Unauthenticated token"){
+          //your session expired message & log jump on auth screen
+        }
+        else{
+          // show the rest response message
+        }
+      } else if (errorRes["message"] is Map<String, dynamic>) {
+        errorMessage = errorRes["message"];
+        Map<String, String> newErrorMessage = {};
+        errorMessage.forEach((key, value) {
+          // for (int i = 0; i < value.length; i++) {
+          newErrorMessage[key] = value;
+          // }
+        });
+
+        String finalEmailErrorMessage = newErrorMessage.containsKey("error")
+            ? newErrorMessage["error"].toString()
+            : newErrorMessage.containsKey("email")
+                ? newErrorMessage["email"].toString()
+                : "";
+        String finalPasswordErrorMessage =
+            newErrorMessage.containsKey("c_password")
+                ? newErrorMessage["c_password"].toString()
+                : "";
+
+        String finalErrorMessage = finalEmailErrorMessage.isNotEmpty
+            ? finalEmailErrorMessage
+            : finalPasswordErrorMessage.isNotEmpty
+                ? finalPasswordErrorMessage
+                : errorRes["message_type"];
+
+      }
     }
   }
 
@@ -154,7 +205,8 @@ class _ProfileState extends State<Body> {
                 child: SvgPicture.asset("assets/icons/arrow_right.svg"),
               ),
               onTap: () {
-                Navigator.pushNamed(context, Orders.routeName);
+                orderCheckout();
+                
               },
             ),
             ListTile(

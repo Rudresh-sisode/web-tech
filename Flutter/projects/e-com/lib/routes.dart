@@ -7,6 +7,7 @@ import 'package:ecomm_app/screens/otp/otp_screen.dart';
 import 'package:ecomm_app/screens/profile/profile_screen.dart';
 import 'package:ecomm_app/screens/profile/update_profile_screen.dart';
 import 'package:ecomm_app/screens/register/components/register_screen.dart';
+import 'package:ecomm_app/screens/widgets/orderDetails.dart';
 import 'package:ecomm_app/screens/widgets/orders.dart';
 import 'package:ecomm_app/screens/widgets/payment.dart';
 import 'package:ecomm_app/screens/widgets/shipping.dart';
@@ -37,4 +38,5 @@ final Map<String, WidgetBuilder> routes = {
   CheckoutWidget.routeName: (context) => CheckoutWidget(),
   Orders.routeName: (context) => Orders(),
   SuccessMsg.routeName: (context) => SuccessMsg(),
+  OrderDetails.routeName:(context) => OrderDetails(),
 };

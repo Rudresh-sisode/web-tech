@@ -49,7 +49,8 @@ class MyApp extends StatelessWidget {
         
         ChangeNotifierProvider(create: (_) => Products()),
         ChangeNotifierProvider(create: (_) => Orders()),
-        ChangeNotifierProvider(create: (_) => DeliveryAddress())
+        ChangeNotifierProvider(create: (_) => DeliveryAddress()),
+        
       ],
       child: 
       Consumer<Auth>(
