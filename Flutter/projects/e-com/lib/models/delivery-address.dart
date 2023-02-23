@@ -25,5 +25,20 @@ class CustomerDeliveryAddress{
     required this.email
   });
 
+  factory CustomerDeliveryAddress.fromJson(Map<String, dynamic> json) {
+  return CustomerDeliveryAddress(
+    id: json['id'],
+    firstName: json['first_name'],
+    lastName: json['last_name'],
+    address: json['address'],
+    phone: json['phone'],
+    address2: json['address2'],
+    country: json['country'],
+    state: json['state'],
+    city: json['city'],
+    pincode: json['pincode'],
+    email: json['email'],
+  );
+}
 
 }

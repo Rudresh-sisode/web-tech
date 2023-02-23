@@ -38,63 +38,63 @@ class Products with ChangeNotifier {
             'https://ecom.gunadhyasoftware.com/public/uploads/product_files/167645770963ecb6ed2b1f5.jpg',
         price: 1300,
         quantity: 12),
-    Product(
-        id: 4,
-        name: 'Laptop Bag',
-        offerPrice: 82.0,
-        image:
-            'https://th.bing.com/th/id/OIP.9SDGaGX-SIQ2_oDY4lEmFgHaL_?pid=ImgDet&rs=1',
-        price: 87.5,
-        quantity: 2),
-    Product(
-        id: 5,
-        name: 'Laptop Bag',
-        offerPrice: 62.0,
-        image:
-            'https://th.bing.com/th/id/OIP.9SDGaGX-SIQ2_oDY4lEmFgHaL_?pid=ImgDet&rs=1',
-        price: 67.5,
-        quantity: 5),
-    Product(
-        id: 6,
-        name: 'Laptop Bag',
-        offerPrice: 85.0,
-        image:
-            'https://www.clueman.lk/wp-content/uploads/2019/12/SPG9962-scaled.jpg',
-        price: 87.5,
-        quantity: 7),
-    Product(
-        id: 7,
-        name: 'Monk',
-        offerPrice: 45.0,
-        image:
-            'https://static.vecteezy.com/system/resources/previews/006/779/203/original/water-bottle-icon-illustration-sport-water-container-flat-cartoon-style-suitable-for-web-landing-page-banner-flyer-sticker-wallpaper-background-free-vector.jpg',
-        price: 50.5
-        ,
-        quantity: 8),
-    Product(
-        id: 8,
-        name: 'T shirt',
-        offerPrice: 95.0,
-        image:
-            'https://images.unsplash.com/flagged/photo-1556637640-2c80d3201be8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-        price: 99.5,
-        quantity: 5),
-    Product(
-        id: 9,
-        name: 'T shirt',
-        offerPrice: 85.0,
-        image:
-            'https://th.bing.com/th/id/OIP.NXx98yatBhiTUaDzZdJzrQHaJC?pid=ImgDet&rs=1',
-        price: 87.5,
-        quantity: 10),
-    Product(
-        id: 10,
-        name: '',
-        offerPrice: 140.0,
-        image:
-            'https://source.unsplash.com/random/1920x1080/?wallpaper,landscape',
-        price: 144.5,
-        quantity: 12),
+    // Product(
+    //     id: 4,
+    //     name: 'Laptop Bag',
+    //     offerPrice: 82.0,
+    //     image:
+    //         'https://th.bing.com/th/id/OIP.9SDGaGX-SIQ2_oDY4lEmFgHaL_?pid=ImgDet&rs=1',
+    //     price: 87.5,
+    //     quantity: 2),
+    // Product(
+    //     id: 5,
+    //     name: 'Laptop Bag',
+    //     offerPrice: 62.0,
+    //     image:
+    //         'https://th.bing.com/th/id/OIP.9SDGaGX-SIQ2_oDY4lEmFgHaL_?pid=ImgDet&rs=1',
+    //     price: 67.5,
+    //     quantity: 5),
+    // Product(
+    //     id: 6,
+    //     name: 'Laptop Bag',
+    //     offerPrice: 85.0,
+    //     image:
+    //         'https://www.clueman.lk/wp-content/uploads/2019/12/SPG9962-scaled.jpg',
+    //     price: 87.5,
+    //     quantity: 7),
+    // Product(
+    //     id: 7,
+    //     name: 'Monk',
+    //     offerPrice: 45.0,
+    //     image:
+    //         'https://static.vecteezy.com/system/resources/previews/006/779/203/original/water-bottle-icon-illustration-sport-water-container-flat-cartoon-style-suitable-for-web-landing-page-banner-flyer-sticker-wallpaper-background-free-vector.jpg',
+    //     price: 50.5
+    //     ,
+    //     quantity: 8),
+    // Product(
+    //     id: 8,
+    //     name: 'T shirt',
+    //     offerPrice: 95.0,
+    //     image:
+    //         'https://images.unsplash.com/flagged/photo-1556637640-2c80d3201be8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    //     price: 99.5,
+    //     quantity: 5),
+    // Product(
+    //     id: 9,
+    //     name: 'T shirt',
+    //     offerPrice: 85.0,
+    //     image:
+    //         'https://th.bing.com/th/id/OIP.NXx98yatBhiTUaDzZdJzrQHaJC?pid=ImgDet&rs=1',
+    //     price: 87.5,
+    //     quantity: 10),
+    // Product(
+    //     id: 10,
+    //     name: '',
+    //     offerPrice: 140.0,
+    //     image:
+    //         'https://source.unsplash.com/random/1920x1080/?wallpaper,landscape',
+    //     price: 144.5,
+    //     quantity: 12),
   ];
 
   List<Product> get getProducts {
