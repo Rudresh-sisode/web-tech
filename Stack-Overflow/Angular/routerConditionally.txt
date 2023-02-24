@@ -1,0 +1,88 @@
+Check if currentRoute starts with some text(something/something/*...) in Angular
+
+
+
+I want to stop loader from loading from few screens and therefore I applied ngIf at routes where loader isn't needed. Here is the code for app.component.ts :
+
+<router-outlet>
+  <app-spinner></app-spinner>
+  <ngx-ui-loader *ngIf="!(currentRoute =='/dashboard' || currentRoute == '/vehicle/edit/')"></ngx-ui-loader>
+</router-outlet>
+
+app.component.html
+
+this.currentRoute = "";
+        this.router.events.subscribe((event: Event) => {
+            if (event instanceof NavigationEnd) {
+                this.currentRoute = event.url;
+            }
+    });
+
+I need to add * to vehicle/edit URL as there can be any vehicle ID while fetching the edit page like : /vehicle/edit/49042/1422, /vehicle/edit/49023/1421 and so on.
+
+How to allow currentRoute accept /vehicle/edit/* ?
+
+Answers:
+
+
+
+Ok, so to answer your question about route that accepts dynamic URLS/all URLS starting with /vehicle/edit/.
+
+The "dummy" approach if you know that your nesting got limit, is to declare multiple routes with params, more-less like this:
+
+const routes: Routes = [
+  { path: '/vehicle/edit/', component: VehicleListComponent },
+  { path: '/vehicle/edit/:id', component: VehicleEditComponent },
+  { path: '/vehicle/edit/:parent/:id', component: VehicleEditComponent },
+  { path: '/vehicle/edit/:grandparent/:parent/:id', component: VehicleEditComponent },
+];
+
+This will work, because Angular routing stops at very first matching path, so the order of your route declaration is important!
+
+However, if you're dealing with very long nesting capability, better approach is to use custom route matcher:
+
+import { UrlSegment } from '@angular/router';
+
+const nestedCategoryMatcher = (url: UrlSegment[]) => {
+  // Check if this regex actually match your requirements
+  const regexMatcher = /^(vehicle\/edit)([\/][0-9]+.+)/;
+
+  if (!url.join('/').match(regexMatcher)) return null;
+
+  return ({ consumed: url });
+}
+
+const routes: Routes = [
+  { path: '/vehicle/edit/', component: VehicleListComponent },
+  { matcher: nestedCategoryMatcher, component: VehicleEditComponent },
+];
+
+And remember, that by using matcher, you will have to retrieve your "params" manually in your components by splitting URL into segments.
+
+this.route.url
+  .subscribe(segments => {
+    const urlSegment: UrlSegment[] = (segments as UrlSegment[]);
+    console.log(urlSegment);
+  });
+
+
+Ansswer 2:
+
+
+
+I applied a hack to solve this :
+
+currentDynamicRouteVehicleClient: string;
+this.currentDynamicRouteVehicleClient = this.currentRoute.slice(0, 15);
+if(this.currentDynamicRouteVehicleClient == '/vehicles/edit/') {
+   this.dynamicRouteValue = true;
+}
+
+And then passing this dynamicRoute to app.component.html like this :
+
+<router-outlet>
+  <app-spinner></app-spinner>
+  <ngx-ui-loader *ngIf="!dynamicRouteValue"></ngx-ui-loader>
+</router-outlet>
+
+Henceforth, all the URLS starting with /vehicles/edit/ will by bypassed.
