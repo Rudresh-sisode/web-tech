@@ -96,18 +96,11 @@ class Orders with ChangeNotifier {
       } else if (responseData['status'] == true) {
         Map<String,dynamic> orderDetails = responseData["data"]["orders"];
         List<dynamic> orderProducts = responseData["data"]["order_product"];
-        List<OrdersProduct> ordersProduct = orderProducts.map((item) => OrdersProduct.fromJson(item)).toList();
-        Map<String,String> orderAddress = orderDetails["shipping_address"];
+        ordersProduct = orderProducts.map((item) => OrdersProduct.fromJson(item)).toList();
+        Map<String,dynamic> orderAddress = orderDetails["shipping_address"];
         addressDetails = CustomerDeliveryAddress.fromJson(orderAddress);
-        orderPricing.orderId = orderDetails["order_id"];
-        orderPricing.tokenOrderId = orderDetails["token_order_id"];
-        orderPricing.orderSubtotal = orderDetails["order_subtotal"];
-        orderPricing.orderDiscountAmount = orderDetails["order_discount_amount"];
-        orderPricing.orderTotal = orderDetails["order_total"];
-        orderPricing.totalProducts = orderDetails["total_products"];
-        orderPricing.orderDate = orderDetails["order_date"];
-        orderPricing.status = orderDetails["status"];
-
+        orderPricing = OrderPricing(orderDate:orderDetails["order_date"] ,orderDiscountAmount:orderDetails["order_discount_amount"] ,orderId: orderDetails["order_id"],orderSubtotal:orderDetails["order_subtotal"] ,orderTotal: orderDetails["order_total"], status: orderDetails["status"],tokenOrderId:orderDetails["token_order_id"] ,totalProducts:orderDetails["total_products"]);
+     
         // _orders = data.map((order) => OrderItems.fromJson(order)).toList();
 
         notifyListeners();

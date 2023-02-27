@@ -6,6 +6,7 @@ import 'package:ecomm_app/screens/widgets/orderDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../../providers/orders.dart' as OrdersProvider;
 import 'dart:convert';
 
@@ -18,15 +19,25 @@ class Orders extends StatefulWidget {
 
 class _OrdersState extends State<Orders> {
   bool showSheet = false;
+  bool isSpinnerOnLoad = false;
+  bool isLoadingOn = true;
   @override
   void initState() {
     super.initState();
+    orderCheckout();
+  }
+
+  Future<void> orderDetailsOperation() async {
+
   }
 
   Future<void> orderCheckout() async {
     try {
       await Provider.of<OrdersProvider.Orders>(context, listen: false)
           .getAllOrderListings();
+          setState(() {
+            isLoadingOn = false;
+          });
     } on FormatException catch (_, error) {
       // _showErrorDialog(error.toString());
     } catch (error) {
@@ -71,7 +82,19 @@ class _OrdersState extends State<Orders> {
         centerTitle: true,
         backgroundColor: kPrimaryColor,
       ),
-      body: Stack(children: <Widget>[
+      body: isLoadingOn ? 
+      Center(
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.2,
+              width: 60,
+              child: 
+              SpinKitCubeGrid(
+                color: kPrimaryColor,
+              )
+            ),
+          ) 
+      :
+       Stack(children: <Widget>[
         SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(4),
@@ -116,7 +139,19 @@ class _OrdersState extends State<Orders> {
                                       // your on pressed function here
                                       ordersCon.viewOrderId =
                                           ordersCon.orders[index].orderId;
+                                          //spinner true
+                                          await orderDetailsOperation();
+                                          setState(() {
+                                            isSpinnerOnLoad = true;
+                                          });
+                                          
                                          await ordersCon.getEachOrderDetails();
+                                         setState(() {
+                                           isSpinnerOnLoad = false;
+                                         });
+                                         
+                                         //spinner false
+
                                       setState(() {
                                         showSheet = !showSheet;
                                       });
@@ -159,9 +194,22 @@ class _OrdersState extends State<Orders> {
             ),
           ),
         ),
+        //add the Future widget and put Offstage inside of it.
+     
+        isSpinnerOnLoad == true ?
+        Center(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  width: 60,
+                  child: 
+                  SpinKitCubeGrid(
+                    color: kPrimaryColor,
+                  )
+                ),
+              ) :
         Offstage(
           offstage: !showSheet,
-          child: DraggableScrollableSheet(
+          child:  DraggableScrollableSheet(
               initialChildSize: 0.5,
               maxChildSize: 1.0,
               builder: (BuildContext context, ScrollController controller) {
@@ -237,26 +285,27 @@ class _OrdersState extends State<Orders> {
                                       children: [
                                         Text(
                                           'Product Details',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                          // style: TextStyle(
+                                          //   fontWeight: FontWeight.bold,
+                                          // ),
                                         ),
                                         Text(
-                                          'Total Products: 5',
+                                          'Total Products: ${addressData.ordersProduct.length}',
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                          // style: TextStyle(
+                                          //   fontWeight: FontWeight.bold,
+                                          // ),
                                         ),
                                       ],
                                     ),
                                     Container(
                                       //this container will hold all the products one by one
                                       height: //add bussiness logic here if one item in the list, then height will be for 0.4 or it will be 0.6
-                                          MediaQuery.of(context).size.width *
-                                              0.6,
+                                          addressData.ordersProduct.length >1 ? MediaQuery.of(context).size.width *
+                                              0.65 : MediaQuery.of(context).size.width *
+                                              0.33 ,
                                       child: ListView.builder(
-                                        itemCount: 2,
+                                        itemCount: addressData.ordersProduct.length,
                                         itemBuilder: ((context, index) {
                                           return Container(
                                             width: MediaQuery.of(context)
@@ -271,26 +320,35 @@ class _OrdersState extends State<Orders> {
                                               child: Row(
                                                 children: [
                                                   Expanded(
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          'Product Name',
-                                                          style: TextStyle(
-                                                              fontSize: 18,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                        SizedBox(height: 5),
-                                                        Text(
-                                                          'Product Price',
-                                                          style: TextStyle(
-                                                              fontSize: 16),
-                                                        ),
-                                                      ],
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.all(8.0),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            '${addressData.ordersProduct[index].name}',
+                                                            style: TextStyle(
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                          SizedBox(height: 5),
+                                                          Text(
+                                                            '₹ ${addressData.ordersProduct[index].totalPrice}',
+                                                            style: TextStyle(
+                                                                fontSize: 16),
+                                                          ),
+                                                          SizedBox(height: 5),
+                                                          Text(
+                                                            'Qty ${addressData.ordersProduct[index].productQuantity}',
+                                                            style: TextStyle(
+                                                                fontSize: 16),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                   SizedBox(
@@ -331,7 +389,7 @@ class _OrdersState extends State<Orders> {
                                         children: [
                                           SizedBox(height: 10),
                                           Text(
-                                            "rudresh sisodiya",
+                                            "${addressData.addressDetails.firstName}"+" "+"${addressData.addressDetails.lastName}",
                                             // "${shipping_address['first_name']} ${shipping_address['last_name']}",
                                             style: TextStyle(
                                               fontSize: 16,
@@ -342,7 +400,7 @@ class _OrdersState extends State<Orders> {
                                           Text(
                                             // shipping_address['email'],
 
-                                            "rudranrajput@gmail.com",
+                                            "${addressData.addressDetails.email}",
                                             style: TextStyle(
                                               fontSize: 16,
                                             ),
@@ -350,7 +408,7 @@ class _OrdersState extends State<Orders> {
                                           SizedBox(height: 5),
                                           Text(
                                             // shipping_address['phone'],
-                                            "9839485839",
+                                            "${addressData.addressDetails.phone}",
                                             style: TextStyle(
                                               fontSize: 16,
                                             ),
@@ -358,7 +416,7 @@ class _OrdersState extends State<Orders> {
                                           SizedBox(height: 10),
                                           Text(
                                             // shipping_address['address'],
-                                            "Pimpalgaon (Go), Jamner,",
+                                            "${addressData.addressDetails.address}",
                                             style: TextStyle(
                                               fontSize: 16,
                                             ),
@@ -366,7 +424,7 @@ class _OrdersState extends State<Orders> {
                                           SizedBox(height: 5),
                                           Text(
                                             // shipping_address['address2'],
-                                            "Jamner Pachora Highway, Jamner",
+                                            "${addressData.addressDetails.address2}",
                                             style: TextStyle(
                                               fontSize: 16,
                                             ),
@@ -374,7 +432,7 @@ class _OrdersState extends State<Orders> {
                                           SizedBox(height: 5),
                                           Text(
                                             // "${shipping_address['city']}, ${shipping_address['state']}, ${shipping_address['pincode']}",
-                                            "Jamner, Maharashtra, 424206",
+                                            "${addressData.addressDetails.city}, ${addressData.addressDetails.state}, ${addressData.addressDetails.pincode}",
                                             style: TextStyle(
                                               fontSize: 16,
                                             ),
@@ -382,7 +440,7 @@ class _OrdersState extends State<Orders> {
                                           SizedBox(height: 5),
                                           Text(
                                             // shipping_address['country'],
-                                            "India (Bharat)",
+                                            "${addressData.addressDetails.country}",
                                             style: TextStyle(
                                               fontSize: 16,
                                             ),
@@ -420,7 +478,7 @@ class _OrdersState extends State<Orders> {
                                                 style: TextStyle(fontSize: 16),
                                               ),
                                               Text(
-                                                '\₹37299.00',
+                                                '\₹${addressData.orderPricing.orderSubtotal}',
                                                 style: TextStyle(fontSize: 16),
                                               ),
                                             ],
@@ -435,7 +493,7 @@ class _OrdersState extends State<Orders> {
                                                 style: TextStyle(fontSize: 16),
                                               ),
                                               Text(
-                                                '\₹2350.00',
+                                                '- \₹${addressData.orderPricing.orderDiscountAmount}',
                                                 style: TextStyle(fontSize: 16),
                                               ),
                                             ],
@@ -446,11 +504,11 @@ class _OrdersState extends State<Orders> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                'Total Products',
+                                                'Product in No.',
                                                 style: TextStyle(fontSize: 16),
                                               ),
                                               Text(
-                                                '2',
+                                                '${addressData.orderPricing.totalProducts}',
                                                 style: TextStyle(fontSize: 16),
                                               ),
                                             ],
@@ -465,7 +523,7 @@ class _OrdersState extends State<Orders> {
                                                 style: TextStyle(fontSize: 16),
                                               ),
                                               Text(
-                                                '2023-02-22',
+                                                '${addressData.orderPricing.orderDate}',
                                                 style: TextStyle(fontSize: 16),
                                               ),
                                             ],
@@ -480,7 +538,7 @@ class _OrdersState extends State<Orders> {
                                                 style: TextStyle(fontSize: 16),
                                               ),
                                               Text(
-                                                'Ordered',
+                                                '${addressData.orderPricing.status}',
                                                 style: TextStyle(fontSize: 16),
                                               ),
                                             ],
@@ -505,8 +563,9 @@ class _OrdersState extends State<Orders> {
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
+
                                               Text(
-                                                '\$34949.00',
+                                                '\₹${addressData.orderPricing.orderTotal}',
                                                 style: TextStyle(
                                                     fontSize: 20,
                                                     fontWeight:

@@ -107,6 +107,9 @@ class _ShippingFormState extends State<ShippingForm> {
     try {
       await Provider.of<DeliveryAddress>(context, listen: false).addingShippingAddress();
 
+      Navigator.pop(context);
+      Navigator.pushReplacementNamed(context, CheckoutWidget.routeName);
+      
       // Navigator.pop(context);
       // ignore: use_build_context_synchronously
       // Navigator.pushNamed(context, ProfileScreen.routeName);
@@ -171,7 +174,8 @@ class _ShippingFormState extends State<ShippingForm> {
 
       await Provider.of<DeliveryAddress>(context, listen: false).editingShippingAddress();
       Navigator.pop(context);
-      Navigator.pushNamed(context, CheckoutWidget.routeName);
+       Navigator.pushReplacementNamed(context, CheckoutWidget.routeName);
+      // Navigator.pushNamed(context, CheckoutWidget.routeName);
 
 
       // Navigator.pop(context);

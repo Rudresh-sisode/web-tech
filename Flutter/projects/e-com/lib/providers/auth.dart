@@ -2,7 +2,6 @@ import 'dart:math';
 import '../models/apiUrls.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 import 'dart:convert';
 import 'dart:async';
 
@@ -11,19 +10,21 @@ import 'package:flutter/widgets.dart';
 
 import 'package:http/http.dart' as http;
 
+import '../models/user-profile.dart';
+
 class Auth with ChangeNotifier {
   String userRegMessage = "";
   String userProfileMessage = "";
+  bool userProfileHasLoaded = false;
   String _token = "null";
-  DateTime _expiryDate = DateTime.now();
+  // DateTime _expiryDate = DateTime.now();
   String _userId = "null";
-  Timer _authTimer = null as Timer;
+  // Timer _authTimer = null as Timer;
   // Timer _authTimer = Timer(Duration(seconds: DateTime.now().second ),(){});
   int count = 0;
   String userEmailAddress = "";
 
-
-  Map<String,String> customerProfileData = {"name":"No Name","email":"No email","mobile":"0"};
+  UserProfile customerProfileData = UserProfile(name: "Pending..", email: "Pending..", mobile: "Pending..");
 
   // dynamic _authTimer = Timer(Duration(seconds: 5 ),null)
 
@@ -32,9 +33,11 @@ class Auth with ChangeNotifier {
   }
 
   String get token {
-    if (!_expiryDate.isAtSameMomentAs(DateTime.now()) &&
+    if (_token != "null") {
+      /**
+       * !_expiryDate.isAtSameMomentAs(DateTime.now()) &&
         _expiryDate.isAfter(DateTime.now()) &&
-        _token != "null") {
+       */
       print("object1 " + _token);
       return _token;
     }
@@ -43,7 +46,8 @@ class Auth with ChangeNotifier {
     return "null";
   }
 
-  Future<void> _authenticate(String email, String password, String urlSegment) async {
+  Future<void> _authenticate(
+      String email, String password, String urlSegment) async {
     // final url = Uri.parse('http://10.0.2.2:8000/api/login');
 
     final url = Uri.parse(APIURLS.userLoginAPIUrl);
@@ -66,7 +70,7 @@ class Auth with ChangeNotifier {
       if (responseData['status'] == false) {
         _token = "null";
         _userId = "null";
-        _expiryDate = DateTime.now();
+        // _expiryDate = DateTime.now();
         throw HttpException(response.body);
       }
 
@@ -74,20 +78,20 @@ class Auth with ChangeNotifier {
       print("your token value " + _token);
       _userId = responseData["data"]["name"];
       print("your local id valeu " + _userId);
-      _expiryDate = DateTime.now().add(Duration(seconds: 7600));
+      // _expiryDate = DateTime.now().add(Duration(seconds: 7600));
       // .add(Duration(seconds: int.parse(responseData["expiresIn"])));
-      print("your expiry date " + _expiryDate.toString());
-      _autoLogout();
+      // print("your expiry date " + _expiryDate.toString());
+      // _autoLogout();
       notifyListeners();
       final prefs = await SharedPreferences.getInstance();
       final userData = json.encode({
         'token': _token,
         'userId': _userId,
-        'expiryDate': _expiryDate.toIso8601String()
+        // 'expiryDate': _expiryDate.toIso8601String()
       });
 
       final dynamic extractedUserData =
-        json.decode(jsonEncode(prefs.getString("userData")));
+          json.decode(jsonEncode(prefs.getString("userData")));
 
       print("user data ");
       if (userData is Object) {
@@ -99,7 +103,6 @@ class Auth with ChangeNotifier {
     } catch (error) {
       throw error;
     }
-
   }
 
   Future<void> signup(String email, String password) async {
@@ -110,11 +113,9 @@ class Auth with ChangeNotifier {
     //this firebase url is accountable of Rudresh's firebase account.
     // https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API_KEY]
     return _authenticate(email, password, "signInWithPassword");
-
   }
 
   Future<bool> tryAutoLogin() async {
-    
     print("auto login method called");
 
     final prefs = await SharedPreferences.getInstance();
@@ -126,17 +127,17 @@ class Auth with ChangeNotifier {
         json.decode(prefs.getString("userData").toString());
     print("your extracted data value ");
     print(extractedUserData);
-    final expiryDate = DateTime.parse(extractedUserData["expiryDate"]);
+    // final expiryDate = DateTime.parse(extractedUserData["expiryDate"]);
 
-    if (expiryDate.isBefore(DateTime.now())) {
-      print("time date has issue " + expiryDate.toIso8601String());
-      return false;
-    }
+    // if (expiryDate.isBefore(DateTime.now())) {
+    //   // print("time date has issue " + expiryDate.toIso8601String());
+    //   return false;
+    // }
 
     _token = extractedUserData["token"];
     _userId = extractedUserData["userId"];
-    _expiryDate = expiryDate;
-    _autoLogout();
+    // _expiryDate = expiryDate;
+    // _autoLogout();
     notifyListeners();
 
     return true;
@@ -144,91 +145,96 @@ class Auth with ChangeNotifier {
 
   void logout() async {
     _token = "null";
-    _expiryDate = DateTime.now();
+    // _expiryDate = DateTime.now();
     _userId = "null";
 
-    if (_authTimer != null ) /** || DateTime.now().second.compareTo(_authTimer.tick) >= 0 */{
-      _authTimer.cancel();
-      _authTimer = null as Timer;
-      //_authTimer = Timer(Duration(seconds: DateTime.now().second ),(){});
-    }
+    // if (_authTimer != null ) /** || DateTime.now().second.compareTo(_authTimer.tick) >= 0 */{
+    //   _authTimer.cancel();
+    //   _authTimer = null as Timer;
+    //   //_authTimer = Timer(Duration(seconds: DateTime.now().second ),(){});
+    // }
 
     final prefs = await SharedPreferences.getInstance();
     prefs.clear();
     notifyListeners();
-
   }
 
   void _autoLogout() {
     count++;
     print("Auth Timer " + count.toString());
 
-    print(_authTimer);
-    if (_authTimer != null /** || DateTime.now().second.compareTo(_authTimer.tick) >= 0 */) {
-      _authTimer.cancel();
-      //_authTimer = Timer(Duration(seconds: DateTime.now().second ),(){});
-    }
-    final timeToExpiry = _expiryDate.difference(DateTime.now()).inSeconds;
-    _authTimer = Timer(Duration(seconds: 3600),logout);
+    // print(_authTimer);
+    // if (_authTimer != null /** || DateTime.now().second.compareTo(_authTimer.tick) >= 0 */) {
+    //   _authTimer.cancel();
+    //   //_authTimer = Timer(Duration(seconds: DateTime.now().second ),(){});
+    // }
+    // final timeToExpiry = _expiryDate.difference(DateTime.now()).inSeconds;
+    // _authTimer = Timer(Duration(seconds: 3600),logout);
   }
 
-  Future<void> updateCustomerProfile(String userName,userMobile) async{
+  Future<void> updateCustomerProfile(String userName, userMobile) async {
     final url = Uri.parse(APIURLS.updateUserProfileAPIUrl);
 
-    try{
-        final prefs = await SharedPreferences.getInstance();
-        final dynamic extractedUserData = json.decode(prefs.getString("userData").toString());
-        _token = extractedUserData["token"];
-        final response = await http.post(url,body:json.encode({
-              'name': userName,
-              "mobile": userMobile
-            }) ,headers:{'Content-Type': 'application/json','Authorization':'Bearer ${_token}'} );
-
-        Map<String, dynamic> responseData = json.decode(response.body);
-        if (responseData['status'] == false) {
-          userProfileMessage = responseData["message_type"];
-          notifyListeners();
-          //throwing error message, this will handle in profile widgets
-          throw HttpException(response.body);
-        } else if (responseData['status'] == true) {
-          userProfileMessage = responseData["message"];
-          notifyListeners();
-        }
-
-    }
-    catch(error){
-      throw error;
-    }
-  }
-
-  Future<void> getCustomerProfile() async{
-
-    final url = Uri.parse(APIURLS.getUserProfileAPIUrl);
-    try{
-
-      //getting token first
+    try {
       final prefs = await SharedPreferences.getInstance();
-      final dynamic extractedUserData = json.decode(prefs.getString("userData").toString());
+      final dynamic extractedUserData =
+          json.decode(prefs.getString("userData").toString());
       _token = extractedUserData["token"];
-      final response = await http.get(url,headers:{'Content-Type': 'application/json',
-      'Authorization':'Bearer ${_token}'} );
+      final response = await http.post(url,
+          body: json.encode({'name': userName, "mobile": userMobile}),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${_token}'
+          });
 
       Map<String, dynamic> responseData = json.decode(response.body);
       if (responseData['status'] == false) {
-        customerProfileData  = {};
+        userProfileMessage = responseData["message_type"];
         notifyListeners();
         //throwing error message, this will handle in profile widgets
         throw HttpException(response.body);
       } else if (responseData['status'] == true) {
-        
-        customerProfileData['name'] = responseData["data"]["name"];
-        customerProfileData['email'] = responseData["data"]["email"];
-        customerProfileData['mobile'] = responseData["data"]["mobile"];
+        userProfileMessage = responseData["message"];
         notifyListeners();
- 
       }
+    } catch (error) {
+      throw error;
     }
-    catch(error){
+  }
+
+  Future<void> getCustomerProfile() async {
+    final url = Uri.parse(APIURLS.getUserProfileAPIUrl);
+    try {
+      //getting token first
+      final prefs = await SharedPreferences.getInstance();
+      final dynamic extractedUserData =
+          json.decode(prefs.getString("userData").toString());
+      _token = extractedUserData["token"];
+      final response = await http.get(url, headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${_token}'
+      });
+
+      Map<String, dynamic> responseData = json.decode(response.body);
+      if (responseData['status'] == false) {
+        customerProfileData = UserProfile(
+            name: "Pending..", email: "Pending..", mobile: "Pending..");
+            userProfileHasLoaded = false;
+        notifyListeners();
+
+        //throwing error message, this will handle in profile widgets
+        throw HttpException(response.body);
+      } else if (responseData['status'] == true) {
+        
+        customerProfileData = UserProfile(
+          name: responseData["data"]["name"],
+          email: responseData["data"]["email"],
+          mobile: responseData["data"]["mobile"],
+        );
+        userProfileHasLoaded = true;
+        notifyListeners();
+      }
+    } catch (error) {
       throw error;
     }
   }
@@ -269,11 +275,11 @@ class Auth with ChangeNotifier {
     }
   }
 
-  void clearUserProfileNotificationMessage(){
+  void clearUserProfileNotificationMessage() {
     userProfileMessage = "";
   }
 
-  void clearLoginNotificationMessage(){
+  void clearLoginNotificationMessage() {
     userRegMessage = "";
   }
 
@@ -338,7 +344,7 @@ class Auth with ChangeNotifier {
       if (responseData['status'] == false) {
         _token = "null";
         _userId = "null";
-        _expiryDate = DateTime.now();
+        // _expiryDate = DateTime.now();
         //throwing error message, this will handle in sign-up screen widgets
         throw HttpException(response.body);
       } else if (responseData['status'] == true) {
@@ -347,25 +353,25 @@ class Auth with ChangeNotifier {
         print("your token value " + _token);
         _userId = responseData["data"]["name"];
         print("your local id valeu " + _userId);
-        _expiryDate = DateTime.now().add(Duration(seconds: 30));
+        // _expiryDate = DateTime.now().add(Duration(seconds: 30));
 
         //storing data to local storage
         final prefs = await SharedPreferences.getInstance();
         final userData = json.encode({
           'token': _token,
           'userId': _userId,
-          'expiryDate': _expiryDate.toIso8601String()
+          // 'expiryDate': _expiryDate.toIso8601String()
         });
         userRegMessage = responseData['message'];
         prefs.setString("userData", userData);
 
         //telling widget that need to refresh/re-render/re-built, where this function been used.
         notifyListeners();
-        _autoLogout();
+        // _autoLogout();
       } else {
         _token = "null";
         _userId = "null";
-        _expiryDate = DateTime.now();
+        // _expiryDate = DateTime.now();
 
         //Generating Unhandle Exception error message
         Map<String, dynamic> errorMessage = {

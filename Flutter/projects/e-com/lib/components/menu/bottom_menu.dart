@@ -6,6 +6,9 @@ import 'package:ecomm_app/product_listing_widget.dart';
 import 'package:ecomm_app/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/auth.dart';
 
 class BottomMenu extends StatelessWidget {
   const BottomMenu({
@@ -47,7 +50,7 @@ class BottomMenu extends StatelessWidget {
                       : inActiveIconColor,
                 ),
                 onPressed: () { 
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
                   Navigator.pushNamed(
                     context, ProductListingWidget.routeName);
                     },
@@ -59,7 +62,7 @@ class BottomMenu extends StatelessWidget {
               IconButton(
                 icon: SvgPicture.asset("assets/icons/Cart.svg"),
                 onPressed: ()  {
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
                   Navigator.pushNamed(context, CheckoutWidget.routeName);
                 },
               ),
@@ -70,8 +73,9 @@ class BottomMenu extends StatelessWidget {
                       ? kPrimaryColor
                       : inActiveIconColor,
                 ),
-                onPressed: (){
+                onPressed: () {
                     // Navigator.pop(context);
+                    // await Provider.of<Auth>(context,listen: false).getCustomerProfile();
                     Navigator.pushNamed(context, ProfileScreen.routeName);
                     }
               ),

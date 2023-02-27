@@ -33,14 +33,11 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
 
     print("body init printed");
     email = Provider.of<Auth>(context, listen: false)
-        .customerProfileData["email"]
-        .toString();
+        .customerProfileData.email;
     userName = Provider.of<Auth>(context, listen: false)
-        .customerProfileData["name"]
-        .toString();
+        .customerProfileData.name;
     mobile = Provider.of<Auth>(context, listen: false)
-        .customerProfileData["mobile"]
-        .toString();
+        .customerProfileData.mobile;
 
     // Provider.of<Auth>(context,listen: false).getCustomerProfile();
   }
@@ -83,7 +80,8 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
           .updateCustomerProfile(userName, mobile);
       Navigator.pop(context);
       // ignore: use_build_context_synchronously
-      Navigator.pushNamed(context, ProfileScreen.routeName);
+      // Navigator.pushNamed(context, ProfileScreen.routeName);
+      Navigator.pushReplacementNamed(context, ProfileScreen.routeName);
       
     } on FormatException catch (_, error) {
       _showErrorDialog(error.toString());

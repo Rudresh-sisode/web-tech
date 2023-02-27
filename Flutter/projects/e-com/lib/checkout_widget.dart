@@ -15,6 +15,7 @@ import 'package:ecomm_app/screens/widgets/shipping.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'components/global_snack_bar.dart';
 import 'models/cart.dart';
@@ -39,6 +40,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
   late List<CartItem> cartItems;
   Map<String, dynamic> checkoutDetails = {};
   List<CustomerDeliveryAddress> allAddressData = [];
+  bool isLoadingSpinner = false;
   int? countControllerValue;
 
   //here need to implement address provider's logic
@@ -57,15 +59,20 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
       cartItems = Provider.of<Cart>(context, listen: false).items;
     });
 
+
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      try {
-        Provider.of<DeliveryAddress>(context, listen: false)
+      
+    });
+  }
+
+  Future<void> getAllAvailableData() async{
+    try {
+        await Provider.of<DeliveryAddress>(context, listen: false)
             .requestingAllDeliveryAvailableAddress();
       } catch (error) {
         Map<String, dynamic> errorRes = json.decode(error.toString());
         GlobalSnackBar.show(context, errorRes["message"]);
       }
-    });
   }
 
   void cartItemUpdated() {
@@ -820,7 +827,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                     //   ),
                     // ),
                     child: TextButton(
-                      onPressed: () {
+                      onPressed: () async {
                         // Navigator.pushNamed(context, Shipping.routeName);
                         // Navigator.push(
                         //   context,
@@ -829,6 +836,13 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                         //   ),
                         // );
                         setState(() {
+                          isLoadingSpinner = true;
+                        });
+
+                        await getAllAvailableData();
+
+                        setState(() {
+                          isLoadingSpinner = false;
                           showSheet = !showSheet;
                         });
                         // Navigator.pushNamed(context, AddressPageSelection.routeName);
@@ -858,6 +872,27 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
               ],
             ),
           ),
+          // Center(
+          //       child: Container(
+          //         height: MediaQuery.of(context).size.height * 0.2,
+          //         width: 60,
+          //         child: 
+          //         SpinKitCubeGrid(
+          //           color: kPrimaryColor,
+          //         )
+          //       ),
+          //     ) ,
+          isLoadingSpinner ? 
+          Center(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  width: 60,
+                  child: 
+                  SpinKitCubeGrid(
+                    color: kPrimaryColor,
+                  )
+                ),
+              ) :
           Offstage(
             offstage: !showSheet,
             child: DraggableScrollableSheet(

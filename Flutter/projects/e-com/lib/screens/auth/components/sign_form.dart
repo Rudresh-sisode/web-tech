@@ -67,6 +67,14 @@ class _SignFormState extends State<SignForm> {
     try {
       await Provider.of<Auth>(context, listen: false)
           .login(emailController.text, passwordController.text);
+          if(Provider.of<Auth>(context,listen: false).isAuth){
+              Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => ProductListingWidget()),
+              (route) => false,
+            );
+          }
+
     }
     on FormatException catch (_, error){
        _showErrorDialog(error.toString());

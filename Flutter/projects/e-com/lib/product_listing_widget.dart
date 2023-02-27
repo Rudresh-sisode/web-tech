@@ -37,9 +37,12 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
 
     textController = TextEditingController();
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final otpMessage =
+       String otpMessage =
           Provider.of<Auth>(context, listen: false).userRegMessage;
-      GlobalSnackBar.show(context, otpMessage);
+          if(otpMessage.isNotEmpty){
+            GlobalSnackBar.show(context, otpMessage);
+
+          }
     });
   }
 
