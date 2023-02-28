@@ -65,6 +65,18 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
     });
   }
 
+  Future<void> deleteShippingAddres(String id) async{
+    try{
+       await Provider.of<DeliveryAddress>(context, listen: false).deleteDeliveryAddressById(id);
+       GlobalSnackBar.show(context, Provider.of<DeliveryAddress>(context, listen: false).responseSuccessMessage);
+       Provider.of<DeliveryAddress>(context, listen: false).responseSuccessMessage = "";
+    }
+    catch(error){
+      Map<String, dynamic> errorRes = json.decode(error.toString());
+      GlobalSnackBar.show(context, errorRes["message"]);
+    }
+  }
+
   Future<void> getAllAvailableData() async{
     try {
         await Provider.of<DeliveryAddress>(context, listen: false)
@@ -1144,46 +1156,90 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                         .center,
                                                               ),
                                                             ),
-                                                            Container(
+                                                            Row(
+                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                              children: [
+                                                                Container(
+                                                                  margin: EdgeInsets
+                                                                      .only(
+                                                                          left: 20,
+                                                                          right: 20,
+                                                                          top: 20),
+                                                                  child: TextButton(
+                                                                    onPressed: () {
+                                                                      // Edit address action
+                                                                      Provider.of<DeliveryAddress>(
+                                                                                  context,
+                                                                                  listen:
+                                                                                      false)
+                                                                              .addressType =
+                                                                          AddressType
+                                                                              .EDIT;
+                                                                      Provider.of<DeliveryAddress>(
+                                                                                  context,
+                                                                                  listen:
+                                                                                      false)
+                                                                              .editAddressId =
+                                                                          int.parse(addressData
+                                                                              .allAddressData[
+                                                                                  index]
+                                                                              .id);
+                                                                      Provider.of<DeliveryAddress>(
+                                                                              context,
+                                                                              listen:
+                                                                                  false)
+                                                                          .returnEditingAddressValues();
+
+                                                                      setState(() {
+                                                                        showSheet =
+                                                                            !showSheet;
+                                                                      });
+                                                                      // Navigator.pop(context);
+                                                                      Navigator.pushNamed(
+                                                                          context,
+                                                                          Shipping
+                                                                              .routeName);
+                                                                    },
+                                                                    child:
+                                                                        Container(
+                                                                      height: 30,
+                                                                      padding:
+                                                                          EdgeInsets
+                                                                              .all(
+                                                                                  5),
+                                                                      child: Text(
+                                                                          "Edit"),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Container(
                                                               margin: EdgeInsets
                                                                   .only(
                                                                       left: 20,
                                                                       right: 20,
                                                                       top: 20),
                                                               child: TextButton(
-                                                                onPressed: () {
-                                                                  // Edit address action
-                                                                  Provider.of<DeliveryAddress>(
-                                                                              context,
-                                                                              listen:
-                                                                                  false)
-                                                                          .addressType =
-                                                                      AddressType
-                                                                          .EDIT;
-                                                                  Provider.of<DeliveryAddress>(
-                                                                              context,
-                                                                              listen:
-                                                                                  false)
-                                                                          .editAddressId =
-                                                                      int.parse(addressData
-                                                                          .allAddressData[
-                                                                              index]
-                                                                          .id);
-                                                                  Provider.of<DeliveryAddress>(
-                                                                          context,
-                                                                          listen:
-                                                                              false)
-                                                                      .returnEditingAddressValues();
+                                                                onPressed: () async {
+                                                                  // Remove address action
+                                                                
+                                                                 
+                                                                 setState(() {
+                                                                   //delete loading spinner
+                                                                   isLoadingSpinner = true;
+                                                                 });
+
+                                                                await deleteShippingAddres(addressData
+                                                                              .allAddressData[
+                                                                                  index]
+                                                                              .id);
 
                                                                   setState(() {
+                                                                    isLoadingSpinner = false;
                                                                     showSheet =
                                                                         !showSheet;
                                                                   });
                                                                   // Navigator.pop(context);
-                                                                  Navigator.pushNamed(
-                                                                      context,
-                                                                      Shipping
-                                                                          .routeName);
+                                                                  
                                                                 },
                                                                 child:
                                                                     Container(
@@ -1193,10 +1249,17 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                           .all(
                                                                               5),
                                                                   child: Text(
-                                                                      "Edit Address"),
+                                                                      "Remove",
+                                                                      style: TextStyle(
+                                                                        color: Colors.red,
+                                                                      ),
+                                                                      ),
                                                                 ),
                                                               ),
                                                             ),
+                                                              ],
+                                                            ),
+                                                            
                                                           ],
                                                         ),
                                                       ],

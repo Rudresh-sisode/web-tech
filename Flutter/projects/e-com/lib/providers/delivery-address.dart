@@ -23,6 +23,7 @@ class DeliveryAddress with ChangeNotifier {
   List<CustomerDeliveryAddress> allAddressData = [];
   late CustomerDeliveryAddress editingAddressData;
   late CustomerDeliveryAddress addingAddressDAta;
+  String responseSuccessMessage = "";
   int editAddressId = 0;
   //initial address type value;
   AddressType addressType = AddressType.ADD;
@@ -61,7 +62,7 @@ class DeliveryAddress with ChangeNotifier {
         }),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ${_token}'
+          'Authorization': 'Bearer ${_token}09'
         },
       );
 
@@ -70,14 +71,16 @@ class DeliveryAddress with ChangeNotifier {
       }
       Map<String, dynamic> responseData = json.decode(response.body);
 
-      if (responseData['status'] == false) {
+      if (responseData['status'] == false || responseData['success'] == false) {
         throw HttpException(response.body);
       }
 
       requestingAllDeliveryAvailableAddress();
+      
     } catch (error) {
       throw error;
     }
+
   }
 
   Future<void> addingShippingAddress() async {
@@ -124,7 +127,7 @@ class DeliveryAddress with ChangeNotifier {
   }
 
   Future<void> requestingAllDeliveryAvailableAddress() async {
-    final url = Uri.parse(APIURLS.getAllAddressDataAPIUrl);
+    final url = Uri.parse(APIURLS.deleteShippingAddress);
     try {
       //getting token first
       final prefs = await SharedPreferences.getInstance();
@@ -171,9 +174,43 @@ class DeliveryAddress with ChangeNotifier {
     }
   }
 
+  Future<void> deleteDeliveryAddressById(String id) async{
+     final url = Uri.parse(APIURLS.addShippingAddress + '/$id');
+
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final dynamic extractedUserData =
+          json.decode(prefs.getString("userData").toString());
+      _token = extractedUserData["token"];
+      final response = await http.delete(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${_token}'
+        },
+      );
+
+      if (response.body.runtimeType is Object) {
+        print("response body is object type");
+      }
+      
+      Map<String, dynamic> responseData = json.decode(response.body);
+
+      
+      if (responseData['status'] == false) {
+        throw HttpException(response.body);
+      }
+      responseSuccessMessage = responseData["message"];
+
+    } catch (error) {
+      throw error;
+    }
+  }
+
   void returnEditingAddressValues() {
     editingAddressData = allAddressData
         .firstWhere((element) => element.id == editAddressId.toString());
     // return foundAddress;
   }
+
 }

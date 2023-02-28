@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:ecomm_app/providers/cart.dart';
+import 'package:ecomm_app/providers/products.dart';
 import 'package:flutter/material.dart' ;
 import 'package:badges/badges.dart' as badge;
 import 'package:ecomm_app/app_theme.dart';
@@ -6,12 +9,14 @@ import 'package:ecomm_app/const_error_msg.dart';
 import 'package:ecomm_app/screens/widgets/button.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 import '/bloc/cart_bloc.dart';
 import 'bloc/event/cart_event.dart';
 import 'bloc/state/cart_state.dart';
 import 'checkout_widget.dart';
+import 'components/global_snack_bar.dart';
 import 'models/cart.dart';
 import 'models/product.dart';
 import 'screens/widgets/count_controller.dart';
@@ -30,10 +35,25 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
     with TickerProviderStateMixin {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   int? countControllerValue;
+  bool isLoadingSpinner = true;
 
   @override
   void initState() {
     super.initState();
+    getProductDetails(widget.product.id.toString());
+  }
+
+  Future<void> getProductDetails(String id) async{
+    try {
+        await Provider.of<Products>(context, listen: false).getProductDetailsById(id);
+        setState(() {
+          isLoadingSpinner = false;
+        });
+
+      } catch (error) {
+        Map<String, dynamic> errorRes = json.decode(error.toString());
+        GlobalSnackBar.show(context, errorRes["message"]);
+      }
   }
 
   @override
@@ -54,11 +74,11 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
           ),
         ),
         title: Text(
-          ' ${widget.product.name}',
+          ' ${Provider.of<Products>(context, listen: false).product.name}',
           style: AppTheme.of(context).subtitle2.override(
                 fontFamily: 'Lexend Deca',
                 color: Color(0xFF151B1E),
-                fontSize: 26,
+                fontSize: 20,
                 fontWeight: FontWeight.w500,
               ),
         ),
@@ -106,7 +126,19 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
         elevation: 0,
       ),
       backgroundColor: AppTheme.of(context).secondaryBackground,
-      body: Column(
+      body:
+      isLoadingSpinner ? 
+      Center(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  width: 60,
+                  child: 
+                  SpinKitCubeGrid(
+                    color: kPrimaryColor,
+                  )
+                ),
+              ) :
+       Column(
         mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
@@ -117,13 +149,16 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                 children: [
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
-                    child: Hero(
+                    child: 
+                    //add a carosel here
+                    Hero(
                       tag: 'mainImage',
                       transitionOnUserGestures: true,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12),
                         child: Image.network(
                           widget.product.image,
+                          // Provider.of<Products>(context, listen: false).product.
                           width: double.infinity,
                           height: 300,
                           fit: BoxFit.cover,
@@ -134,8 +169,8 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                     child: Text(
-                      'Detailed Product',
-                      style: AppTheme.of(context).title1,
+                      'Product details',
+                      // style: AppTheme.of(context).title1,
                     ),
                   ),
                   Padding(
@@ -148,11 +183,9 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                     child: RichText(
                       text: TextSpan(
                         children: <TextSpan>[
+                          
                           TextSpan(
-                              text: ("\u20B9"),
-                              style: TextStyle(color: Colors.red)),
-                          TextSpan(
-                              text: ' ${widget.product.price}',
+                              text: '₹ ${Provider.of<Products>(context, listen: false).product.price}',
                               style: TextStyle(color: Colors.blue)),
                         ],
                       ),
@@ -161,7 +194,8 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
                     child: Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.',
+                      Provider.of<Products>(context, listen: false).product.detail,
+                      // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.',
                       style: AppTheme.of(context).bodyText2,
                     ),
                   ),

@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 import 'dart:convert';
 
 import '../../models/delivery-address.dart';
+import '../auth/auth_screen.dart';
 
 class ShippingForm extends StatefulWidget {
   @override
@@ -188,7 +189,10 @@ class _ShippingFormState extends State<ShippingForm> {
       Map<String, dynamic> errorRes = json.decode(error.toString());
       Map<String, dynamic> errorMessage = {};
       if (errorRes["message"] is String) {
-        // _showErrorDialog(errorRes["message"]);
+        GlobalSnackBar.show(context, errorRes["message"]);
+        if(errorRes["message"] == "Unauthenticated token."){
+         Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context) => AuthScreen()), (route) => false);
+        }
       } else if (errorRes["message"] is Map<String, dynamic>) {
         errorMessage = errorRes["message"];
         Map<String, String> newErrorMessage = {};
@@ -278,7 +282,6 @@ class _ShippingFormState extends State<ShippingForm> {
                           .addressType ==
                       AddressType.EDIT){
                         editShippingAddress();
-                        
                       }
                   
                   // KeyboardUtil.hideKeyboard(context);

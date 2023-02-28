@@ -1,8 +1,12 @@
+
 import 'dart:math';
 import 'package:ecomm_app/models/product.dart';
 
 import '../models/apiUrls.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:intl/intl.dart';
+
 
 import 'dart:convert';
 import 'dart:async';
@@ -12,7 +16,10 @@ import 'package:flutter/widgets.dart';
 
 import 'package:http/http.dart' as http;
 
+import '../models/product-details.dart';
+
 class Products with ChangeNotifier {
+  String _token = "null";
   List<Product> products = [
     Product(
         id: 1,
@@ -96,6 +103,8 @@ class Products with ChangeNotifier {
     //     price: 144.5,
     //     quantity: 12),
   ];
+
+  late ProductDetails product ; 
 
   List<Product> get getProducts {
     return products;
@@ -184,6 +193,57 @@ class Products with ChangeNotifier {
           
       }
       return products[index].quantity.toString();
+  }
+
+  Future<void> getProductDetailsById(String id) async{
+    final url = Uri.parse(APIURLS.getProductDetailsById+'/${id}');
+    try {
+      //getting token first
+      final prefs = await SharedPreferences.getInstance();
+      final dynamic extractedUserData =
+          json.decode(prefs.getString("userData").toString());
+      _token = extractedUserData["token"];
+      final response = await http.get(url, headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $_token'
+      });
+
+      Map<String, dynamic> responseData = json.decode(response.body);
+      if (responseData['status'] == false) {
+      
+        notifyListeners();
+        //throwing error message, this will handle in profile widgets
+        throw HttpException(response.body);
+      } else if (responseData['status'] == true){
+
+        Map<String,dynamic> productData = responseData["data"];
+
+        // String htmlString  = parse(productData["detail"]);
+
+        product = ProductDetails(
+          productId: productData['product_id'],
+          mainCategoryId: productData['main_category_id'],
+          categoryId: productData['category_id'],
+          subCategoryId: productData['sub_category_id'],
+          name: productData['name'],
+          detail: Bidi.stripHtmlIfNeeded(productData["detail"]).replaceAll(RegExp(' +'), ' '),
+          price: productData['price'],
+          quantity: productData['quantity'],
+          offerPrice: productData['offer_price'],
+          mainCategoryValue: productData['main_category_value'],
+          categoryValue: productData['category_value'],
+          subCategoryValue: productData['sub_category_value'],
+          productImages: List<ProductImage>.from(productData['product_image'].map((x) => ProductImage.fromMap(x))),
+        );
+
+
+        // _orders = data.map((order) => OrderItems.fromJson(order)).toList();
+
+        notifyListeners();
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 
   // String foundAndReturnProductsRequireData(int id,String request) {
