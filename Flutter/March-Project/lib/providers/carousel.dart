@@ -21,6 +21,8 @@ import 'package:flutter/widgets.dart';
 
 import 'package:http/http.dart' as http;
 
+import '../models/home-page-slider.dart';
+
 class ApiConstants {
   static String baseUrl = 'https://ecom.gunadhyasoftware.com/api';
   static String bannerEndpoint = '/home-sliders';
@@ -30,6 +32,8 @@ class CarouselApi with ChangeNotifier {
   // List<CarouselModel> allSliderImages = [];
 
   List<CarouselModel> allImagesData = [];
+
+ 
 
   final List images = [
   'https://cdn.pixabay.com/photo/2017/12/10/14/47/piza-3010062_1280.jpg',

@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecomm_app/models/carousel.dart';
 import 'package:ecomm_app/providers/carousel.dart';
+import 'package:ecomm_app/providers/home-page-slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,26 +14,22 @@ class Carousel extends StatefulWidget {
 }
 
 class _BannergWidgetState extends State<Carousel> {
-  late List<CarouselModel> imagesList = [];
   bool isLoadingSpinner = true;
-
-  
 
   @override
   void initState() {
     super.initState();
     _getBannerData();
-    
   }
 
   Future<void> _getBannerData() async {
-   await Provider.of<CarouselApi>(context,listen:false).getCarousel();
-   setState(() {
-     isLoadingSpinner = false;
-   });
-
+    //  await Provider.of<CarouselApi>(context,listen:false).getCarousel();
+    await Provider.of<HomePageSlider>(context, listen: false)
+        .getHomeSliderImage();
+    setState(() {
+      isLoadingSpinner = false;
+    });
   }
-
 
   // List itemColors = [Colors.green, Colors.purple, Colors.blue];
 
@@ -41,34 +38,43 @@ class _BannergWidgetState extends State<Carousel> {
     return SafeArea(
         child: Column(
       children: [
-        Provider.of<CarouselApi>(context,listen:false).allImagesData.length == 0 ? 
-        Container(
-          child: Text("pending"),
-        )
-        :
-        Container(
-          child: CarouselSlider.builder(
-        itemCount: Provider.of<CarouselApi>(context,listen:false).allImagesData.length,
-        options: CarouselOptions(
-          autoPlay: true,
-          aspectRatio: 2.0,
-          enlargeCenterPage: true,
-        ),
-        itemBuilder: (context, index, realIdx) {
-          return Container(
-            child: 
-            Center(
-                child: 
-                Text("${Provider.of<CarouselApi>(context,listen:false).allImagesData[index].slider_name}",
-                style: TextStyle(
-                  fontSize: 20
-                ),),
-                // Image.network(images[index],
-                //     fit: BoxFit.cover, width: 1000)),
-          ),
-          );
-        },
-      )),
+        Provider.of<HomePageSlider>(context, listen: false)
+                    .sliderImage
+                    .length ==
+                0
+            ? Container(
+                child: Text("pending"),
+              )
+            : Container(
+              // width: 250,
+                child: CarouselSlider.builder(
+                itemCount: Provider.of<HomePageSlider>(context, listen: false)
+                    .sliderImage
+                    .length,
+                options: CarouselOptions(
+                  autoPlay: true,
+                  aspectRatio: 2.0,
+                  enlargeCenterPage: true,
+                ),
+                itemBuilder: (context, index, realIdx) {
+                  return Container(
+                    child: Center(
+                        child:
+                            // Text("${Provider.of<HomePageSlider>(context,listen:false).sliderImage[index].bannerImagePath}",
+                            // style: TextStyle(
+                            //   fontSize: 20
+                            // ),),
+                            Image.network(
+                                Provider.of<HomePageSlider>(context,
+                                        listen: false)
+                                    .sliderImage[index]
+                                    .bannerImagePath,
+                                fit: BoxFit.cover,
+                                width: 1000)),
+                    // ),
+                  );
+                },
+              )),
       ],
     ));
   }

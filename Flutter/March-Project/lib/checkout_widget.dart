@@ -244,31 +244,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                     ),
                                                   ),
                                                   SizedBox(height: 10),
-                                                  // Row(
-                                                  //   mainAxisSize: MainAxisSize.max,
-                                                  //   crossAxisAlignment: CrossAxisAlignment.end,
-                                                  //   children: [
-
-                                                  //     Container(
-                                                  //       margin: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.05, 0, 0, 0),
-                                                  //       child:
-                                                  // Text(
-
-                                                  //         // 'Quantity: ${cartItems[index].quantity}',
-                                                  //         // 'Quantity: ${product.foundAndReturnProductsQuantity(int.parse(cartItems[index].id))}',
-                                                  //         'Qty: ${cart.findCartItemQuantity(cartItems[index].id)}',
-                                                  //         style: TextStyle(
-                                                  //           fontSize: 14,
-                                                  //           color: Colors.grey,
-                                                  //         ),
-
-                                                  //       ),
-                                                  //     ),
-
-                                                  //   ],
-                                                  // ),
-
-                                                  // SizedBox(height: 10),
+                                                 
                                                   Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
@@ -308,26 +284,11 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                             ],
                                                           ),
                                                         )
-                                                        // Text(
-                                                        //   // '$${cartItems[index].price}',
-                                                        //   '₹ ${product.foundAndReturnProductsPrice(int.parse(cartItems[index].id))}',
-                                                        //   style: TextStyle(
-                                                        //     fontSize: 18,
-                                                        //     fontWeight: FontWeight.bold,
-                                                        //     decoration: TextDecoration.lineThrough
-                                                        //   ),
-                                                        // ),
-                                                        // SizedBox(height: 10),
-                                                        // Text("₹ ${product.foundAndReturnProductsOfferPrice(int.parse(cartItems[index].id))}",
-                                                        // style:TextStyle(
-                                                        //   fontSize: 16,
-                                                        //   fontWeight: FontWeight.bold,),
-                                                        //   ),
+                                                        
                                                       ]),
-                                                  // Spacer(),
+                                                
                                                   SizedBox(height: 15),
-                                                  // Container(
-                                                  //     child:
+                                                
                                                   Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -482,26 +443,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                 ),
                                               ),
                                             ),
-                                            //  Column(
-                                            //    children: [
-                                            //      Container(
-                                            //         alignment: Alignment.topCenter,
-                                            //         height: MediaQuery.of(context).size.height * 0.10,
-                                            //         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                            //         // width: MediaQuery.of(context).size.width * 0.25,
-                                            //         child: IconButton(
-                                            //           icon: Icon(Icons.delete),
-                                            //           onPressed: () {
-                                            //             // your delete function here
-                                            //             cart.deleteItem(cartItems[index].id);
-                                            //             cartItemUpdated();
-                                            //           },
-                                            //         ),
-                                            //       ),
-
-                                            //    ],
-                                            //  ),
-                                            // ),
+                                           
                                           ],
                                         ),
                                       ),
@@ -509,167 +451,6 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                   },
                                 );
 
-                                // return Padding(
-                                //   padding: EdgeInsets.only(
-                                //       top: 0,
-                                //       bottom: 0,
-                                //       left: MediaQuery.of(context).size.width *
-                                //           0.01,
-                                //       right: MediaQuery.of(context).size.width *
-                                //           0.01),
-                                //   child: Container(
-                                //     width: double.infinity,
-                                //     height: 100,
-                                //     decoration: BoxDecoration(
-                                //       color: AppTheme.of(context)
-                                //           .secondaryBackground,
-                                //       boxShadow: [
-                                //         BoxShadow(
-                                //           blurRadius: 4,
-                                //           color: Color(0x320E151B),
-                                //           offset: Offset(0, 1),
-                                //         )
-                                //       ],
-                                //       borderRadius: BorderRadius.circular(12),
-                                //     ),
-                                //     child: Padding(
-                                //       padding: EdgeInsets.only(
-                                //           top: MediaQuery.of(context)
-                                //                   .size
-                                //                   .width *
-                                //               0.01,
-                                //           bottom: MediaQuery.of(context)
-                                //                   .size
-                                //                   .width *
-                                //               0.01,
-                                //           left: MediaQuery.of(context)
-                                //                   .size
-                                //                   .width *
-                                //               0.01,
-                                //           right: MediaQuery.of(context)
-                                //                   .size
-                                //                   .width *
-                                //               0.01),
-                                //       child: Row(
-                                //         mainAxisSize: MainAxisSize.max,
-                                //         mainAxisAlignment:
-                                //             MainAxisAlignment.spaceBetween,
-                                //         children: [
-                                //           Hero(
-                                //             tag: 'ControllerImage',
-                                //             transitionOnUserGestures: true,
-                                //             child: ClipRRect(
-                                //                 borderRadius:
-                                //                     BorderRadius.circular(12),
-                                //                 child: Column(
-                                //                   children: [
-                                //                     Consumer<Products>(
-                                //                       builder:
-                                //                           (_, product, ch) =>
-                                //                               Image.network(
-                                //                         product
-                                //                             .foundAndReturnProductsRequireData(
-                                //                                 int.parse(
-                                //                                     cartItems[index].id),"image"),
-                                //                         width: MediaQuery.of(
-                                //                                     context)
-                                //                                 .size
-                                //                                 .width *
-                                //                             0.2,
-                                //                         height: MediaQuery.of(
-                                //                                     context)
-                                //                                 .size
-                                //                                 .width *
-                                //                             0.2,
-                                //                         fit: BoxFit.fitWidth,
-                                //                       ),
-                                //                     )
-                                //                   ],
-                                //                 )),
-                                //           ),
-                                //           Padding(
-                                //             padding: EdgeInsets.only(
-                                //                 top: 0,
-                                //                 bottom: 0,
-                                //                 left: MediaQuery.of(context)
-                                //                         .size
-                                //                         .width *
-                                //                     0.05,
-                                //                 right: MediaQuery.of(context)
-                                //                         .size
-                                //                         .width *
-                                //                     0.05),
-                                //             child: Column(
-                                //               mainAxisSize: MainAxisSize.max,
-                                //               mainAxisAlignment:
-                                //                   MainAxisAlignment.center,
-                                //               crossAxisAlignment:
-                                //                   CrossAxisAlignment.start,
-                                //               children: [
-                                //                 Padding(
-                                //                     padding: EdgeInsets.only(
-                                //                         top: 0,
-                                //                         bottom: 0,
-                                //                         // left: MediaQuery.of(context).size.width * 0.01,
-                                //                         right: MediaQuery.of(context).size.width * 0.05
-                                //                         ),
-                                //                     child: Consumer<Products>(
-                                //                       builder:
-                                //                           (_, product, ch) =>
-                                //                               Text(
-                                //                         "r",
-                                //                         // product.foundAndReturnProductsRequireData(int.parse(cartItems[index].id),"name"),
-                                //                         style:
-                                //                             AppTheme.of(context)
-                                //                                 .subtitle2
-                                //                                 .override(
-                                //                                   fontFamily:
-                                //                                       'Poppins',
-                                //                                   color: AppTheme.of(
-                                //                                           context)
-                                //                                       .primaryText,
-                                //                                 ),
-                                //                       ),
-                                //                     )),
-                                //                 Consumer<Products>(
-                                //                   builder: (_, product, ch) =>
-                                //                       Text(
-                                //                     // '\u20B9${cartItems[index].price}',
-                                //                     // '\u20B9${product.foundAndReturnProductsRequireData(int.parse(cartItems[index].id), "price")}',
-                                //                     "nm",
-                                //                     style: AppTheme.of(context)
-                                //                         .bodyText2,
-                                //                   ),
-                                //                 ),
-                                //                 Padding(
-                                //                   padding: EdgeInsetsDirectional
-                                //                       .fromSTEB(0, 8, 0, 0),
-                                //                   child: Text(
-                                //                     'Quanity: ${cartItems[index].quantity}',
-                                //                     style: AppTheme.of(context)
-                                //                         .bodyText2,
-                                //                   ),
-                                //                 ),
-                                //               ],
-                                //             ),
-                                //           ),
-                                //           IconButton(
-                                //             icon: Icon(
-                                //               Icons.delete_outline_rounded,
-                                //               color: Color(0xFFE86969),
-                                //               size: 20,
-                                //             ),
-                                //             onPressed: () {
-                                //               // BlocProvider.of<CartBloc>(context)
-                                //               //     .add(RemoveProduct(
-                                //               //         cartItems[index]));
-                                //             },
-                                //           ),
-                                //         ],
-                                //       ),
-                                //     ),
-                                //   ),
-                                // );
                               });
                         }),
                         cartItems.length != 0
@@ -804,49 +585,13 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                           offset: Offset(0, -2),
                         )
                       ],
-                      // borderRadius: BorderRadius.only(
-                      //   bottomLeft: Radius.circular(0),
-                      //   bottomRight: Radius.circular(0),
-                      //   topLeft: Radius.circular(16),
-                      //   topRight: Radius.circular(16),
-                      // ),
+                      
                     ),
                     alignment: AlignmentDirectional(0, -0.35),
-                    // child: Text(
-                    //   'Checkout (\$230.20)',
-                    //   style: AppTheme.of(context).title2.override(
-                    //         fontFamily: 'Poppins',
-                    //         color: AppTheme.of(context).primaryBtnText,
-                    //       ),
-                    // ),
-
-                    // child: RichText(
-                    //   text: TextSpan(
-                    //     children: <TextSpan>[
-                    //       TextSpan(
-                    //         text: ("Checkout  \u20B9"),
-                    //         style: AppTheme.of(context).title2.override(
-                    //               fontFamily: 'Poppins',
-                    //               color: AppTheme.of(context).primaryBtnText,
-                    //             ),
-                    //       ),
-                    //       TextSpan(
-                    //           text: " 123",
-                    //           style: AppTheme.of(context).title2.override(
-                    //               fontFamily: 'Poppins',
-                    //               color: AppTheme.of(context).primaryBtnText)),
-                    //     ],
-                    //   ),
-                    // ),
+                    
                     child: TextButton(
                       onPressed: () async {
-                        // Navigator.pushNamed(context, Shipping.routeName);
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => AddressPageSelection(),
-                        //   ),
-                        // );
+                        
                         setState(() {
                           isLoadingSpinner = true;
                         });
@@ -884,16 +629,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
               ],
             ),
           ),
-          // Center(
-          //       child: Container(
-          //         height: MediaQuery.of(context).size.height * 0.2,
-          //         width: 60,
-          //         child: 
-          //         SpinKitCubeGrid(
-          //           color: kPrimaryColor,
-          //         )
-          //       ),
-          //     ) ,
+          
           isLoadingSpinner ? 
           Center(
                 child: Container(
@@ -978,11 +714,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                         ),
                         SizedBox(
                             height: MediaQuery.of(context).size.width * 0.05),
-                        /**
-                             * Consumer<Cart>(builder: (_, cartState,ch) {
-                              List<CartItem> cartItem = cartState.items;
-                              return Padding(
-                             */
+                       
                         Provider.of<DeliveryAddress>(context, listen: false)
                                     .allAddressData
                                     .length ==

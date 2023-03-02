@@ -17,32 +17,46 @@ class Popular extends StatefulWidget {
 
 class _PopularWidgetState extends State<Popular> {
   late List<PopularModel> imagesList = [];
+  bool isLoaderSpinner = true;
+
 
   @override
   void initState() {
     super.initState();
-    // _getPopularData();
+    _getPopularData();
   }
 
-  // void _getPopularData() async {
-  //   imagesList = (await PopularApi().getPopularProduct())!;
-  //   Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
-  // }
+  Future<void> _getPopularData() async {
+    await Provider.of<PopularApi>(context,listen: false).getPopularProduct();
+    setState(() {
+      isLoaderSpinner = false;
+    });
+
+    
+  }
 
 
- 
   List itemColors = [Colors.green, Colors.purple, Colors.blue];
   final List<int> numbers = [1, 2, 3, 5, 8, 13, 21, 34, 55];
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Container(
+      child:
+      // Provider.of<PopularApi>(context,listen: false).popularProductsImageData.length == 0 ? 
+      isLoaderSpinner ?
+      Center(
+        child: Container(
+            child: Text("loading..."),
+          ),
+      ) :
+
+       Container(
         padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
         height: MediaQuery.of(context).size.height * 0.35,
         child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount:  Provider.of<PopularApi>(context,listen:false).imagesList1.length,
+            itemCount:  Provider.of<PopularApi>(context,listen:false).popularProductsImageData.length,
             itemBuilder: (context, index) {
               return Container(
                 width: MediaQuery.of(context).size.width * 0.6,
@@ -50,7 +64,7 @@ class _PopularWidgetState extends State<Popular> {
                   color: Colors.blue,
                   child: Container(
                     child: Image.network(
-                      Provider.of<PopularApi>(context,listen:false).imagesList1[index].toString(),
+                      Provider.of<PopularApi>(context,listen:false).popularProductsImageData[index].populaImagePath,
                       fit: BoxFit.cover,
                     ),
                     // child: Center(

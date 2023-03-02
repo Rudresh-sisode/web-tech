@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:ecomm_app/product_listing_widget.dart';
 import 'package:ecomm_app/providers/carousel.dart';
 import 'package:ecomm_app/providers/delivery-address.dart';
+import 'package:ecomm_app/providers/home-page-slider.dart';
 import 'package:ecomm_app/providers/orders.dart';
 import 'package:ecomm_app/providers/popular.dart';
 import 'package:ecomm_app/providers/products.dart';
@@ -53,7 +54,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => Orders()),
         ChangeNotifierProvider(create: (_) => DeliveryAddress()),
         ChangeNotifierProvider(create: (_) => CarouselApi()),
-        ChangeNotifierProvider(create: (_) => PopularApi())
+        ChangeNotifierProvider(create: (_) => PopularApi()),
+        ChangeNotifierProvider(create: (_) => HomePageSlider()),
         
       ],
       child: 

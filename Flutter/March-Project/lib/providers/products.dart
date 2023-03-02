@@ -104,6 +104,7 @@ class Products with ChangeNotifier {
   ];
 
    ProductDetails product = ProductDetails(productId: 0, mainCategoryId: 0, categoryId: 0, subCategoryId: 0, name: "Loading", detail: "N.A", price: 0, quantity: 0, offerPrice: 0, mainCategoryValue: "N.A", categoryValue: "N.A", subCategoryValue: "N.A", productImages: []);
+  //  ProductDetails product = {} as ProductDetails;
 
   List<Product> get getProducts {
     return products;
@@ -132,7 +133,6 @@ class Products with ChangeNotifier {
         }
         return products[index].offerPrice.toString();;
   }
-
 
   String foundAndReturnProductsImage(int id){
     int index = -1;
@@ -235,8 +235,6 @@ class Products with ChangeNotifier {
             productImages: List<ProductImage>.from(productData['product_image'].map((x) => ProductImage.fromMap(x))),
           );
 
-        
-
         // _orders = data.map((order) => OrderItems.fromJson(order)).toList();
 
         notifyListeners();
@@ -246,47 +244,5 @@ class Products with ChangeNotifier {
     }
   }
 
-  // String foundAndReturnProductsRequireData(int id,String request) {
-  //   int index = -1;
-  //   if(request.isNotEmpty && request == "name"){
-  //     for (int i = 0; i < products.length; i++) {
-  //       if (products[i].id == id) {
-  //         index = i;
-  //         break;
-  //       }
-  //     }
-  //     if (index == -1) {
-  //         return "Product not avilable";
-          
-  //     }
-  //     return products[index].name;
-  //   }
-  //   else if(request.isNotEmpty && request == "image"){
-  //       for (int i = 0; i < products.length; i++) {
-  //         if (products[i].id == id) {
-  //           index = i;
-  //           break;
-  //         }
-  //       }
-  //       if (index == -1) {
-  //       return "https://png.pngtree.com/png-vector/20210706/ourmid/pngtree-no-result-search-icon-png-image_3563805.jpg";
-  //       }
-  //       return products[index].name;
-  //   }
-  //   else if(request.isNotEmpty && request == "price"){
-  //     for (int i = 0; i < products.length; i++) {
-  //           if (products[i].id == id) {
-  //             index = i;
-  //             break;
-  //           }
-  //         }
-  //         if (index == -1) {
-  //           return "00.00";
-  //         }
-  //         return products[index].price.toString();
-  //   }
-  //   else{
-  //     return request == "image" ? "https://png.pngtree.com/png-vector/20210706/ourmid/pngtree-no-result-search-icon-png-image_3563805.jpg" : request == "name" ? "Product not avilable" : request == "price" ? "00.00" : "N.A";
-  //   }
-  // }
+
 }

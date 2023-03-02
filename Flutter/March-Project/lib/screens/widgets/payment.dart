@@ -24,6 +24,7 @@ class _PaymentState extends State<Payment> {
       await Provider.of<Cart>(context, listen: false).checkoutOrder();
 
       if(Provider.of<Cart>(context,listen: false).checkoutOrderStatus){
+        Provider.of<Cart>(context,listen:false).clear();
         Navigator.pop(context);
         Navigator.pushNamed(context, SuccessMsg.routeName);
       }

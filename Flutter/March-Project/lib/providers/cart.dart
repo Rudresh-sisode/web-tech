@@ -144,6 +144,7 @@ class Cart with ChangeNotifier {
   int get itemCount {
     return _items.length;
   }
+  
 
   void changeGallaryView() {
     isGridView = !isGridView;

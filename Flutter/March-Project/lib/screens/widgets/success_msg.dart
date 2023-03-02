@@ -53,16 +53,22 @@ class _SuccessMsgState extends State<SuccessMsg> {
                             fontSize: 25)),
                   ),
                   Text("Order Id\t"+Provider.of<Cart>(context,listen:false).recentCheckoutOrderId),
-                  SizedBox(height: getProportionateScreenHeight(20)),
-                  SizedBox(
-                    child: DefaultButton(
-                      text: "Home",
-                      press: () {
-                        Navigator.pushNamed(
-                            context, ProductListingWidget.routeName);
-                      },
-                    ),
-                  )
+                  SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, ProductListingWidget.routeName);
+                  },
+                  child: Text("Home"),
+                )
+                  // SizedBox(
+                  //   child: DefaultButton(
+                  //     text: "Home",
+                  //     press: () {
+                  //       Navigator.pushNamed(
+                  //           context, ProductListingWidget.routeName);
+                  //     },
+                  //   ),
+                  // )
                   //   Container(
                   //     child: Row(
                   //   children: <Widget>[
