@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/product-details.dart';
+
 // import '../app_theme.dart';
 // import '../bloc/cart_bloc.dart';
 // import '../models/product.dart';
@@ -15,7 +17,7 @@ import 'package:provider/provider.dart';
 
 class ProductTileAnimation extends StatelessWidget {
   final int itemNo;
-  final Product product;
+  final ProductDetails product;
 
   const ProductTileAnimation({this.itemNo = 0, required this.product});
 
@@ -77,7 +79,7 @@ class ProductTileAnimation extends StatelessWidget {
                             topRight: Radius.circular(8),
                           ),
                           child: Image.network(
-                            product.image,
+                            product.productImages[0].imageFullPath,
                             width: 100,
                             height: 100,
                             fit: BoxFit.cover,

@@ -34,7 +34,7 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
   @override
   void initState() {
     super.initState();
-    products = Provider.of<Products>(context, listen: false).products;
+    // products = Provider.of<Products>(context, listen: false).products;
 
     textController = TextEditingController();
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -221,11 +221,11 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
               ],
             ),
           ),
-          Expanded(
-            child: ProductList(
-              products: isSearchStarted ? searchedProducts : products,
-            ),
-          ),
+          // Expanded(
+          //   // child: ProductList(
+          //   //   // products: isSearchStarted ? searchedProducts : products,
+          //   // ),
+          // ),
         ],
       ),
       bottomNavigationBar: BottomMenu(selectedMenu: MenuState.home),

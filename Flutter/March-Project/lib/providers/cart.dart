@@ -1,5 +1,6 @@
 // import 'dart:js';
 
+import 'package:ecomm_app/models/product-details.dart';
 import 'package:ecomm_app/providers/products.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -45,6 +46,9 @@ class Cart with ChangeNotifier {
   double discountPrice = 0.0;
   double totalPrice = 0.0;
   double basePrice = 0.0;
+
+  String quantityError = "";
+  String quantityStatus = "Available";
   
 
   bool checkoutOrderStatus = false;
@@ -152,23 +156,33 @@ class Cart with ChangeNotifier {
   }
 
   void addItem(String productId, BuildContext context, String prodQuantity) {
-    List<Product> productData =
+    List<ProductDetails> productData =
         Provider.of<Products>(context, listen: false).getProducts;
 
     final product =
-        productData.firstWhere((prod) => prod.id == int.parse(productId));
-    if (product == null || product.quantity == 0) return;
+        productData.firstWhere((prod) => prod.productId == int.parse(productId));
+    if (product == null || product.quantity == 0) {
+      quantityStatus = "Unavailable";
+      return;
+    }
 
+    
     final existingCartItemIndex =
         _items.indexWhere((item) => item.id == productId);
+
+    if(existingCartItemIndex != -1 && product.quantity < _items[existingCartItemIndex].quantity + 1 ){
+      quantityError = "quantity not available more than this.";
+      return;
+    }
+
     if (existingCartItemIndex >= 0) {
       _items[existingCartItemIndex].quantity += int.parse(prodQuantity);
-      _items[existingCartItemIndex].offerPrice = product.offerPrice;
+      _items[existingCartItemIndex].offerPrice = product.offerPrice.toDouble();
       _items[existingCartItemIndex].totalPrice =
           _items[existingCartItemIndex].offerPrice *
               _items[existingCartItemIndex].quantity;
       _items[existingCartItemIndex].discountPrice =
-          (product.price - product.offerPrice);
+          (product.price.toDouble() - product.offerPrice.toDouble());
 
       // deletion of the product quantity need to affect the db.
 
@@ -183,12 +197,12 @@ class Cart with ChangeNotifier {
       Provider.of<Products>(context, listen: false);
     } else {
       final newCartItem = CartItem(
-          id: product.id.toString(),
-          offerPrice: product.offerPrice * int.parse(prodQuantity),
-          productPrice: product.price,
-          discountPrice: (product.price - product.offerPrice),
+          id: product.productId.toString(),
+          offerPrice: product.offerPrice.toDouble() * int.parse(prodQuantity),
+          productPrice: product.price.toDouble(),
+          discountPrice: (product.price.toDouble() - product.offerPrice.toDouble()),
           quantity: int.parse(prodQuantity),
-          totalPrice: product.offerPrice * int.parse(prodQuantity));
+          totalPrice: product.offerPrice.toDouble() * int.parse(prodQuantity));
 
       // for (int i = 0; i < int.parse(prodQuantity); i++) {
       discountPrice += (newCartItem.discountPrice * int.parse(prodQuantity));
@@ -214,11 +228,11 @@ class Cart with ChangeNotifier {
   }
 
   void removeItem(String productId, BuildContext context, String prodQuantity) {
-    List<Product> productData =
+    List<ProductDetails> productData =
         Provider.of<Products>(context, listen: false).getProducts;
 
     final product =
-        productData.firstWhere((prod) => prod.id == int.parse(productId));
+        productData.firstWhere((prod) => prod.productId == int.parse(productId));
     if (product == null || product.quantity == 0) return;
 
     final existingCartItemIndex =
@@ -229,12 +243,12 @@ class Cart with ChangeNotifier {
       }
     if (existingCartItemIndex >= 0) {
       _items[existingCartItemIndex].quantity -= int.parse(prodQuantity);
-      _items[existingCartItemIndex].offerPrice = product.offerPrice;
+      _items[existingCartItemIndex].offerPrice = product.offerPrice.toDouble();
       _items[existingCartItemIndex].totalPrice =
           _items[existingCartItemIndex].offerPrice *
               _items[existingCartItemIndex].quantity;
       _items[existingCartItemIndex].discountPrice =
-          (product.price - product.offerPrice);
+          (product.price.toDouble() - product.offerPrice.toDouble());
 
       // deletion of the product quantity need to affect the db.
       discountPrice -= (_items[existingCartItemIndex].discountPrice *

@@ -19,6 +19,7 @@ import 'bloc/state/cart_state.dart';
 import 'checkout_widget.dart';
 import 'components/global_snack_bar.dart';
 import 'models/cart.dart';
+import 'models/product-details.dart';
 import 'models/product.dart';
 import 'screens/widgets/count_controller.dart';
 
@@ -26,7 +27,7 @@ class ProductDetailWidget extends StatefulWidget {
   const ProductDetailWidget({Key? key, required this.product})
       : super(key: key);
 
-  final Product product;
+  final ProductDetails product;
 
   @override
   _ProductDetailWidgetState createState() => _ProductDetailWidgetState();
@@ -44,7 +45,7 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
   @override
   void initState() {
     super.initState();
-    getProductDetails(widget.product.id.toString());
+    getProductDetails(widget.product.productId.toString());
   }
 
   Future<void> getProductDetails(String id) async{
@@ -81,7 +82,8 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                               padding: EdgeInsets.symmetric(
                                   vertical: 10.0, horizontal: 20.0),
                               child: Text(
-                                'image ${Provider.of<Products>(context, listen: false).product.productImages.indexOf(item)+1}',
+                                // 'image ${Provider.of<Products>(context, listen: false).product.productImages.indexOf(item)+1}',
+                                "${Provider.of<Products>(context, listen: false).product.quantity == 0 ? "Unavailable" : "Available"}",
                                 style: TextStyle(
                                   color: Colors.white,
                                   // fontSize: 20.0,
@@ -268,13 +270,24 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                     child: RichText(
                       text: TextSpan(
                         children: <TextSpan>[
-                          
                           TextSpan(
                               text: '₹ ${Provider.of<Products>(context, listen: false).product.price}',
+                              // style: TextStyle(color: Colors.blue)
+                              style: TextStyle(
+                                                                    color: Colors.blue,
+                                                                    decoration: TextDecoration.lineThrough),),
+                          TextSpan(text: " "),
+                          TextSpan(
+                              text: '₹ ${Provider.of<Products>(context, listen: false).product.offerPrice}',
                               style: TextStyle(color: Colors.blue)),
+                          TextSpan(text: "  "),
+                          TextSpan(text: '(${Provider.of<Products>(context, listen: false).product.offerPrice - Provider.of<Products>(context, listen: false).product.price} ₹ off)',style: TextStyle(color: Colors.blue))
                         ],
                       ),
                     ),
+                  ),
+                  Padding(padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
+                  child: Text("Qty: ${Provider.of<Products>(context, listen: false).product.quantity} available"),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
@@ -288,6 +301,7 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
               ),
             ),
           ),
+          Text(''),
           Material(
             color: Colors.transparent,
             elevation: 3,
@@ -354,8 +368,12 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                     ),
                     MyButtonWidget(
                       onPressed: () {
-                        Product p = widget.product;
-                        Provider.of<Cart>(context,listen: false).addItem(p.id.toString(),context,countControllerValue.toString());
+                        ProductDetails p = widget.product;
+                        Provider.of<Cart>(context,listen: false).addItem(p.productId.toString(),context,countControllerValue.toString());
+                        if(Provider.of<Cart>(context,listen: false).quantityStatus.isNotEmpty){
+                          GlobalSnackBar.show(context, Provider.of<Cart>(context,listen: false).quantityStatus);
+                          Provider.of<Cart>(context,listen: false).quantityStatus = "";
+                        }
                         // BlocProvider.of<CartBloc>(context).add(AddProduct(p));
                       },
                       text: 'Add to Cart',

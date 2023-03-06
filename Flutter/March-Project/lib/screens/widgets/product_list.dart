@@ -10,13 +10,14 @@ import 'package:provider/provider.dart';
 // import '../bloc/cart_bloc.dart';
 // import '../bloc/state/cart_state.dart';
 // import '../models/product.dart';
+import '../../models/product-details.dart';
 import '../../providers/cart.dart';
 import 'product_tile.dart';
 
 class ProductList extends StatelessWidget {
   const ProductList({super.key, required this.products});
 
-  final List<Product> products;
+  final List<ProductDetails> products;
 
   @override
   Widget build(BuildContext context) {

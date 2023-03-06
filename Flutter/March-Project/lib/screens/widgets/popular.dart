@@ -31,8 +31,6 @@ class _PopularWidgetState extends State<Popular> {
     setState(() {
       isLoaderSpinner = false;
     });
-
-    
   }
 
 

@@ -23,6 +23,10 @@ class APIURLS {
   static String _home_slider_image = "home-banner-sliders";
 
   //with getter you are free to access private properties.
+  static String get getProductList{
+    return Url_Key + _product_List;
+  }
+  
   static String get getHomePageSlider{
     return Url_Key + _home_slider_image;
   }

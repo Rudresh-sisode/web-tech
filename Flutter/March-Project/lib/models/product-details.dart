@@ -1,17 +1,17 @@
 class ProductDetails {
-  final int productId;
-  final int mainCategoryId;
-  final int categoryId;
-  final int subCategoryId;
-  final String name;
-  final String detail;
-  final int price;
-  final int quantity;
-  final int offerPrice;
-  final String mainCategoryValue;
-  final String categoryValue;
-  final String subCategoryValue;
-  final List<ProductImage> productImages;
+   int productId;
+   int mainCategoryId;
+   int categoryId;
+   int subCategoryId;
+   String name;
+   String detail;
+   int price;
+   int quantity;
+   int offerPrice;
+   String mainCategoryValue;
+   String categoryValue;
+   String subCategoryValue;
+   List<ProductImage> productImages;
 
   ProductDetails({
     required this.productId,

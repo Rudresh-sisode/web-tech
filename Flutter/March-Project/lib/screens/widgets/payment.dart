@@ -43,9 +43,11 @@ class _PaymentState extends State<Payment> {
       } else if (errorRes["message"] is Map<String, dynamic>) {
         errorMessage = errorRes["message"];
         Map<String, String> newErrorMessage = {};
+        String counterMessage = "";
         errorMessage.forEach((key, value) {
           // for (int i = 0; i < value.length; i++) {
-          newErrorMessage[key] = value;
+          // newErrorMessage[key] = value;
+          counterMessage = value;
           // }
         });
 

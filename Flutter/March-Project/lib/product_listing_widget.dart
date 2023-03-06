@@ -20,6 +20,7 @@ import 'package:provider/provider.dart';
 
 import 'bloc/cart_bloc.dart';
 import 'bloc/state/cart_state.dart';
+import 'models/product-details.dart';
 import 'models/product.dart';
 
 class ProductListingWidget extends StatefulWidget {
@@ -39,9 +40,10 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
   bool isSearchStarted = false;
 
   bool isLoadingSpineer = true;
+  bool productDataLoading = true;
 
-  List<Product> searchedProducts = [];
-  List<Product> products = [];
+  List<ProductDetails> searchedProducts = [];
+  List<ProductDetails> products = [];
   // late List<Product> products = [];
 
   // void _getData() async {
@@ -52,14 +54,32 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
   @override
   void initState() {
     super.initState();
-    products = Provider.of<Products>(context, listen: false).products;
+    // products = Provider.of<Products>(context, listen: false).products;
+    getProductsData();
     textController = TextEditingController();
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final otpMessage =
+      String otpMessage =
           Provider.of<Auth>(context, listen: false).userRegMessage;
-      GlobalSnackBar.show(context, 'Product page laoded');
+          if(otpMessage.isNotEmpty){
+            GlobalSnackBar.show(context, otpMessage);
+
+          }
+          Provider.of<Auth>(context, listen: false).userRegMessage = "";
+
     });
     // _getData();
+  }
+
+  Future<void> getProductsData() async{
+
+    await Provider.of<Products>(context,listen:false).getProductsData();
+    products = Provider.of<Products>(context, listen: false).productDataList;
+
+
+    setState(() {
+      productDataLoading = false;
+    });
+
   }
 
   Future<void> gettingNeededAPICalling() async {
@@ -175,7 +195,7 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                                     searchedProducts = products
                                         .where((item) => item.name
                                             .toLowerCase()
-                                            .contains(textController!.text
+                                            .contains(textController.text
                                                 .trim()
                                                 .toLowerCase()))
                                         .toList();
@@ -293,6 +313,13 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                 ),
               ),
             ),
+            //loading spinner logic
+            productDataLoading ? 
+            Center(
+              child: Container(child: 
+              Text("loading..."),),
+            )
+            :
             Container(
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),

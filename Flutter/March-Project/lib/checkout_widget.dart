@@ -373,6 +373,10 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                       .id,
                                                                   context,
                                                                   "1");
+                                                              if(Provider.of<Cart>(context,listen: false).quantityError.isNotEmpty){
+                                                                GlobalSnackBar.show(context,Provider.of<Cart>(context,listen: false).quantityError);
+                                                                Provider.of<Cart>(context,listen: false).quantityError = "";
+                                                              }
                                                             });
                                                           },
                                                           style: ElevatedButton
@@ -406,6 +410,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                       ),
                                                     ],
                                                   ),
+
                                                   // ),
                                                 ],
                                               ),
