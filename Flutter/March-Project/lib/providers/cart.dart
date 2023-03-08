@@ -265,7 +265,7 @@ class Cart with ChangeNotifier {
 
   // void deleteItem(String productId) {}
 
-  void deleteItem(String productId) {
+  void deleteItem(String productId){
 
     final existingCartItemIndex = _items.indexWhere((item) => item.id == productId);
     bool isLenghZero = _items.length == 1;
@@ -276,16 +276,15 @@ class Cart with ChangeNotifier {
       
       discountPrice -= (removingItemData.discountPrice * removingItemData.quantity);
       if(isLenghZero){
-       totalPrice = 0.0; 
+       totalPrice = 0.0;
       }
       else{
-       totalPrice -= (removingItemData.offerPrice * removingItemData.quantity); 
+       totalPrice -= (removingItemData.offerPrice * removingItemData.quantity);
       }
       
       basePrice -= (removingItemData.productPrice * removingItemData.quantity);
 
     }
-
     notifyListeners();
   }
 

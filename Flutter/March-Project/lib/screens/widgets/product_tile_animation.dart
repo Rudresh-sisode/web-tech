@@ -45,15 +45,21 @@ class ProductTileAnimation extends StatelessWidget {
               color: AppTheme.of(context).secondaryBackground,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: Offset(0, 3), // changes position of shadow
-                  // color: Colors.deepPurpleAccent,
-                  // blurRadius: 10,
-                  // spreadRadius: 0,
-                  // offset: Offset(10, 10)
-                ),
+                  color: Color(0xFF713590),
+                  spreadRadius: 1,
+                  blurRadius: 3,
+                  offset: const Offset(0, 0),
+                )
+                // BoxShadow(
+                //   color: Colors.grey.withOpacity(0.5),
+                //   spreadRadius: 5,
+                //   blurRadius: 7,
+                //   offset: Offset(0, 3), // changes position of shadow
+                //   // color: Colors.deepPurpleAccent,
+                //   // blurRadius: 10,
+                //   // spreadRadius: 0,
+                //   // offset: Offset(10, 10)
+                // ),
                 // BoxShadow(
                 //   blurRadius: 4,
                 //   color: Color(0x3600000F),
@@ -82,7 +88,8 @@ class ProductTileAnimation extends StatelessWidget {
                             product.productImages[0].imageFullPath,
                             width: 100,
                             height: 100,
-                            fit: BoxFit.cover,
+                            // width: double.infinity,
+                            fit: BoxFit.fill,
                           ),
                         ),
                       ),

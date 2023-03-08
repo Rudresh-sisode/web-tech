@@ -19,20 +19,16 @@ class Payment extends StatefulWidget {
 
 class _PaymentState extends State<Payment> {
   Future<void> orderCheckout() async {
-
     try {
       await Provider.of<Cart>(context, listen: false).checkoutOrder();
 
-      if(Provider.of<Cart>(context,listen: false).checkoutOrderStatus){
-        Provider.of<Cart>(context,listen:false).clear();
+      if (Provider.of<Cart>(context, listen: false).checkoutOrderStatus) {
+        Provider.of<Cart>(context, listen: false).clear();
         Navigator.pop(context);
         Navigator.pushNamed(context, SuccessMsg.routeName);
-      }
-      else{
+      } else {
         //show message that unable to order this time.
       }
-      
-      
     } on FormatException catch (_, error) {
       // _showErrorDialog(error.toString());
     } catch (error) {
@@ -66,7 +62,6 @@ class _PaymentState extends State<Payment> {
             : finalPasswordErrorMessage.isNotEmpty
                 ? finalPasswordErrorMessage
                 : errorRes["message_type"];
-
       }
     }
   }
@@ -75,10 +70,18 @@ class _PaymentState extends State<Payment> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kAppBarColor,
+      // appBar: AppBar(
+      //   title: const Text("Payment"),
+      //   centerTitle: true,
+      //   elevation: 0,
+      //   backgroundColor: kPrimaryColor,
+      // ),
       appBar: AppBar(
-        title: const Text("Payment"),
+        iconTheme: const IconThemeData(
+          color: kAppBarColor, //change your color here
+        ),
+        title: const Text("Payment", style: TextStyle(color: kAppBarColor)),
         centerTitle: true,
-        elevation: 0,
         backgroundColor: kPrimaryColor,
       ),
       body: SingleChildScrollView(
@@ -92,9 +95,9 @@ class _PaymentState extends State<Payment> {
                 leading: Container(
                     decoration: BoxDecoration(
                         color: kPrimaryLightColor.withOpacity(0.1)),
-                    child: const Text("123",
+                    child: const Text("",
                         style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 22,
                             fontWeight: FontWeight.w600,
                             color: Color.fromARGB(255, 75, 74, 74)))),
                 title: TextButton(
@@ -123,18 +126,26 @@ class _PaymentState extends State<Payment> {
               ListTile(
                 leading: Container(
                     decoration: BoxDecoration(
-                      color: kPrimaryLightColor.withOpacity(0.1),
-                    ),
-                    child: const Text(
-                      '123',
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          color: Color.fromARGB(255, 75, 74, 74)),
-                    )),
-                title: const Text('Cash On Delivery',
-                    style: TextStyle(
-                        fontSize: 16, color: Color.fromARGB(255, 75, 74, 74))),
+                        color: kPrimaryLightColor.withOpacity(0.1)),
+                    child: const Text("",
+                        style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromARGB(255, 75, 74, 74)))),
+                title: TextButton(
+                  onPressed: () {
+                    orderCheckout();
+                    //here we'll hit checkout method
+                  },
+                  child: const Text(
+                    'Cash On Delivery', //title
+                  ),
+                ),
+                // const Text(
+                //   'Pay Now',
+                //   style: TextStyle(
+                //       fontSize: 16, color: Color.fromARGB(255, 75, 74, 74)),
+                // ),
                 trailing: Container(
                   width: 10,
                   height: 10,
@@ -144,6 +155,32 @@ class _PaymentState extends State<Payment> {
                   child: SvgPicture.asset("assets/icons/arrow_right.svg"),
                 ),
               ),
+
+              // ListTile(
+              //   leading: Container(
+              //       alignment: Alignment.center,
+              //       decoration: BoxDecoration(
+              //         color: kPrimaryLightColor.withOpacity(0.1),
+              //       ),
+              //       child: const Text(
+              //         '',
+              //         style: TextStyle(
+              //             fontSize: 18,
+              //             fontWeight: FontWeight.w600,
+              //             color: Color.fromARGB(255, 75, 74, 74)),
+              //       )),
+              //   title: Text('Cash On Delivery',
+              //       style: TextStyle(
+              //           fontSize: 16, color: Color.fromARGB(255, 75, 74, 74))),
+              //   trailing: Container(
+              //     width: 10,
+              //     height: 10,
+              //     decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(100),
+              //         color: kPrimaryColor.withOpacity(0.1)),
+              //     child: SvgPicture.asset("assets/icons/arrow_right.svg"),
+              //   ),
+              // ),
             ],
           ),
         ),

@@ -16,17 +16,23 @@ class UpdateprofileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: kAppBarColor,
       appBar: AppBar(
-        title: const Text("Update profile"),
+        iconTheme: const IconThemeData(
+          color: kAppBarColor, //change your color here
+        ),
+        title: const Text(
+          "Update profile",
+          style: TextStyle(color: kAppBarColor),
+        ),
         centerTitle: true,
         backgroundColor: kPrimaryColor,
       ),
       body: SingleChildScrollView(
-        padding:
-            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(30),
-            ),
+        padding: EdgeInsets.symmetric(
+          horizontal: getProportionateScreenWidth(30),
+        ),
         child: Column(
           children: <Widget>[
-             SizedBox(
+            SizedBox(
               width: 120,
               height: 120,
               child: Padding(

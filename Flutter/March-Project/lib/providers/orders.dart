@@ -64,8 +64,15 @@ class Orders with ChangeNotifier {
         //throwing error message, this will handle in profile widgets
         throw HttpException(response.body);
       } else if (responseData['status'] == true) {
-        List<dynamic> data = responseData["data"]["orders"];
-        _orders = data.map((order) => OrderItems.fromJson(order)).toList();
+        Map<String,dynamic> availableData = responseData["data"];
+        if(availableData.isNotEmpty){
+          List<dynamic> data = responseData["data"]["orders"];
+          _orders = data.map((order) => OrderItems.fromJson(order)).toList();
+        }
+        else{
+          _orders = [];
+        }
+        
 
         notifyListeners();
       }

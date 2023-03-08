@@ -32,12 +32,11 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
     // isAuth = Provider.of<Auth>(context,listen: false).isAuth;
 
     print("body init printed");
-    email = Provider.of<Auth>(context, listen: false)
-        .customerProfileData.email;
-    userName = Provider.of<Auth>(context, listen: false)
-        .customerProfileData.name;
-    mobile = Provider.of<Auth>(context, listen: false)
-        .customerProfileData.mobile;
+    email = Provider.of<Auth>(context, listen: false).customerProfileData.email;
+    userName =
+        Provider.of<Auth>(context, listen: false).customerProfileData.name;
+    mobile =
+        Provider.of<Auth>(context, listen: false).customerProfileData.mobile;
 
     // Provider.of<Auth>(context,listen: false).getCustomerProfile();
   }
@@ -74,7 +73,6 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
   }
 
   Future<void> _updateProfile() async {
-
     try {
       await Provider.of<Auth>(context, listen: false)
           .updateCustomerProfile(userName, mobile);
@@ -82,7 +80,6 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
       // ignore: use_build_context_synchronously
       // Navigator.pushNamed(context, ProfileScreen.routeName);
       Navigator.pushReplacementNamed(context, ProfileScreen.routeName);
-      
     } on FormatException catch (_, error) {
       _showErrorDialog(error.toString());
     } catch (error) {
@@ -128,71 +125,109 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
       key: _formKey,
       child: Column(
         children: [
-          SizedBox(height: MediaQuery.of(context).size.width * 0.05,),
-          Container(
-          margin: EdgeInsets.only(
-            left: MediaQuery.of(context).size.width * 0.01,
-            right: MediaQuery.of(context).size.width * 0.01,
+          SizedBox(
+            height: MediaQuery.of(context).size.width * 0.05,
           ),
-          child: buildNameFormField(),
-        ),
+          Container(
+            padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
+            margin: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.01,
+              right: MediaQuery.of(context).size.width * 0.01,
+            ),
+            child: buildNameFormField(),
+          ),
           // SizedBox(height:30),
-          SizedBox(height: MediaQuery.of(context).size.width * 0.1,),
-          Container(
-          margin: EdgeInsets.only(
-            left: MediaQuery.of(context).size.width * 0.01,
-            right: MediaQuery.of(context).size.width * 0.01,
+          SizedBox(
+            height: MediaQuery.of(context).size.width * 0.1,
           ),
-          child:buildEmailFormField(), 
-        ),
-        
-          // SizedBox(height: 30),
-          SizedBox(height: MediaQuery.of(context).size.width * 0.1,),
           Container(
-          margin: EdgeInsets.only(
-            left: MediaQuery.of(context).size.width * 0.01,
-            right: MediaQuery.of(context).size.width * 0.01,
+            padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
+            margin: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.01,
+              right: MediaQuery.of(context).size.width * 0.01,
+            ),
+            child: buildEmailFormField(),
           ),
-          child: buildMobileFormField(),
-        ),
-        
-          FormError(errors: errors),
-          // SizedBox(height: 40),
-          SizedBox(height: MediaQuery.of(context).size.width * 0.2,),
-          ElevatedButton(onPressed: (){
-            if (_formKey.currentState!.validate()) {
-                _formKey.currentState!.save();
-                // if all are valid then go to success screen
-                _updateProfile();
-                // GlobalSnackBar.show(context, 'Profile update successful');
-                // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                //   content: Text('Profile updated successfully'),
-                // ));
-              }
-          }, 
-          child: Text("Update Profile"),
-          style: ButtonStyle(
-            
-            backgroundColor: MaterialStateProperty.resolveWith((states) {
-              return kPrimaryColor;
-            } ),
-            
 
+          // SizedBox(height: 30),
+          SizedBox(
+            height: MediaQuery.of(context).size.width * 0.1,
           ),
-          )
+          Container(
+            padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
+            margin: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.01,
+              right: MediaQuery.of(context).size.width * 0.01,
+            ),
+            child: buildMobileFormField(),
+          ),
+
+          Container(
+            padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
+            margin: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.01,
+              right: MediaQuery.of(context).size.width * 0.01,
+            ),
+            child: FormError(errors: errors),
+          ),
+          // SizedBox(height: 40),
+          SizedBox(
+            height: MediaQuery.of(context).size.width * 0.2,
+          ),
+
+          SizedBox(
+              width: 200,
+              child: ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
+                    // if all are valid then go to success screen
+                    _updateProfile();
+                    // GlobalSnackBar.show(context, 'Profile update successful');
+                    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    //   content: Text('Profile updated successfully'),
+                    // ));
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: kPrimaryColor,
+                ),
+                child: const Text('Update Profile'),
+              )),
+
+          // ElevatedButton(
+          //   onPressed: () {
+          //     if (_formKey.currentState!.validate()) {
+          //       _formKey.currentState!.save();
+          //       // if all are valid then go to success screen
+          //       _updateProfile();
+          //       // GlobalSnackBar.show(context, 'Profile update successful');
+          //       // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          //       //   content: Text('Profile updated successfully'),
+          //       // ));
+          //     }
+          //   },
+          //   child: Text("Update Profile"),
+          //   style: ButtonStyle(
+          //     backgroundColor: MaterialStateProperty.resolveWith((states) {
+          //       return kPrimaryColor;
+          //     }),
+          //   ),
+          // )
+
           // DefaultButton(
           //   text: "Update profile",
-            // press: () {
-            //   if (_formKey.currentState!.validate()) {
-            //     _formKey.currentState!.save();
-            //     // if all are valid then go to success screen
-            //     _updateProfile();
-            //     // GlobalSnackBar.show(context, 'Profile update successful');
-            //     // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            //     //   content: Text('Profile updated successfully'),
-            //     // ));
-            //   }
-            // },
+          // press: () {
+          //   if (_formKey.currentState!.validate()) {
+          //     _formKey.currentState!.save();
+          //     // if all are valid then go to success screen
+          //     _updateProfile();
+          //     // GlobalSnackBar.show(context, 'Profile update successful');
+          //     // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          //     //   content: Text('Profile updated successfully'),
+          //     // ));
+          //   }
+          // },
           // ),
         ],
       ),
@@ -231,41 +266,39 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
     );
   }
 
-  TextFormField buildEmailFormField() {
-    return TextFormField(
-      initialValue: email,
-      enabled: false,
-      keyboardType: TextInputType.emailAddress,
-      onSaved: (newValue) => email = newValue.toString(),
-      onChanged: (value) {
-        if (value.isNotEmpty) {
-          removeError(error: kEmailNullError);
-        } else if (emailValidatorRegExp.hasMatch(value)) {
-          removeError(error: kInvalidEmailError);
-        }
-        return null;
-      },
-      validator: (value) {
-        if (value!.isEmpty) {
-          addError(error: kEmailNullError);
-          return "";
-        } else if (!emailValidatorRegExp.hasMatch(value)) {
-          addError(error: kInvalidEmailError);
-          return "";
-        }
-        return null;
-      },
-      decoration: InputDecoration(
-        contentPadding: EdgeInsets.all(12.0),
-        border: OutlineInputBorder(),
-        labelText: "Email",
-        hintText: "Enter your email",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-      ),
-    );
-  }
+  // TextFormField buildEmailFormField() {
+  //   return TextFormField(
+  //     initialValue: email,
+  //     enabled: false,
+  //     keyboardType: TextInputType.emailAddress,
+  //     onSaved: (newValue) => email = newValue.toString(),
+  //     onChanged: (value) {
+  //       if (value.isNotEmpty) {
+  //         removeError(error: kEmailNullError);
+  //       } else if (emailValidatorRegExp.hasMatch(value)) {
+  //         removeError(error: kInvalidEmailError);
+  //       }
+  //       return null;
+  //     },
+  //     validator: (value) {
+  //       if (value!.isEmpty) {
+  //         addError(error: kEmailNullError);
+  //         return "";
+  //       } else if (!emailValidatorRegExp.hasMatch(value)) {
+  //         addError(error: kInvalidEmailError);
+  //         return "";
+  //       }
+  //       return null;
+  //     },
+  //     decoration: InputDecoration(
+  //       contentPadding: EdgeInsets.all(12.0),
+  //       border: OutlineInputBorder(),
+  //       labelText: "Email",
+  //       hintText: "Enter your email",
+  //       floatingLabelBehavior: FloatingLabelBehavior.always,
+  //     ),
+  //   );
+  // }
 
   TextFormField buildNameFormField() {
     return TextFormField(
@@ -294,6 +327,39 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
         hintText: "Enter your name",
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+      ),
+    );
+  }
+
+  TextFormField buildEmailFormField() {
+    return TextFormField(
+      initialValue: email,
+      keyboardType: TextInputType.emailAddress,
+      onSaved: (newValue) => email = newValue.toString(),
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          removeError(error: kEmailNullError);
+        } else if (emailValidatorRegExp.hasMatch(value)) {
+          removeError(error: kInvalidEmailError);
+        }
+        return null;
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          addError(error: kEmailNullError);
+          return "";
+        } else if (!emailValidatorRegExp.hasMatch(value)) {
+          addError(error: kInvalidEmailError);
+          return "";
+        }
+        return null;
+      },
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.all(12.0),
+        border: OutlineInputBorder(),
+        labelText: "Email",
+        hintText: "Enter your email",
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
     );

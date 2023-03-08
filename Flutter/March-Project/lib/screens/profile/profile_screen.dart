@@ -11,12 +11,15 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Profile"),
+        iconTheme: const IconThemeData(
+          color: kAppBarColor, //change your color here
+        ),
+        title: const Text("Profile", style: TextStyle(color: kAppBarColor)),
         centerTitle: true,
         backgroundColor: kPrimaryColor,
       ),
       body: Body(),
-      bottomNavigationBar: BottomMenu(selectedMenu: MenuState.home),
+      bottomNavigationBar: const BottomMenu(selectedMenu: MenuState.home),
     );
   }
 }

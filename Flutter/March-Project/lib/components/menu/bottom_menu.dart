@@ -9,8 +9,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/auth.dart';
+import '../../providers/bottom-menu.dart';
 
-class BottomMenu extends StatelessWidget {
+class BottomMenu extends StatefulWidget {
   const BottomMenu({
     Key? key,
     required this.selectedMenu,
@@ -18,6 +19,11 @@ class BottomMenu extends StatelessWidget {
 
   final MenuState selectedMenu;
 
+  @override
+  State<BottomMenu> createState() => _BottomMenuState();
+}
+
+class _BottomMenuState extends State<BottomMenu> {
   @override
   Widget build(BuildContext context) {
     final Color inActiveIconColor = Color(0xFFB6B6B6);
@@ -45,40 +51,53 @@ class BottomMenu extends StatelessWidget {
               IconButton(
                 icon: SvgPicture.asset(
                   "assets/icons/Home.svg",
-                  color: MenuState.home == selectedMenu
+                  color: MenuState.home == widget.selectedMenu
                       ? kPrimaryColor
                       : inActiveIconColor,
                 ),
-                onPressed: () { 
-                  // Navigator.pop(context);
-                  Navigator.pushNamed(
-                    context, ProductListingWidget.routeName);
-                    },
+                onPressed: Provider.of<BottomMenuHandler>(context,listen: false).currentValue == BottomMuenu.Home ? null : () {
+                    // Navigator.pop(context);
+                    // await .getCustomerProfile();
+                  
+                    setState(() {
+                     Provider.of<BottomMenuHandler>(context,listen: false).currentValue = BottomMuenu.Home; 
+                    });
+                  Navigator.pushNamed(context, ProductListingWidget.routeName);
+                },
               ),
               // IconButton(
               //   icon: SvgPicture.asset("assets/icons/Cart.svg"),
               //   onPressed: () {},
               // ),
               IconButton(
-                icon: SvgPicture.asset("assets/icons/Cart.svg"),
-                onPressed: ()  {
-                  // Navigator.pop(context);
+                icon: SvgPicture.asset("assets/icons/Cart Icon.svg"),
+                onPressed: Provider.of<BottomMenuHandler>(context,listen: false).currentValue == BottomMuenu.Cart ? null : () {
+                    // Navigator.pop(context);
+                    // await .getCustomerProfile();
+                  
+                    setState(() {
+                     Provider.of<BottomMenuHandler>(context,listen: false).currentValue = BottomMuenu.Cart; 
+                    });
                   Navigator.pushNamed(context, CheckoutWidget.routeName);
                 },
               ),
               IconButton(
-                icon: SvgPicture.asset(
-                  "assets/icons/User.svg",
-                  color: MenuState.profile == selectedMenu
-                      ? kPrimaryColor
-                      : inActiveIconColor,
-                ),
-                onPressed: () {
+                  icon: SvgPicture.asset(
+                    "assets/icons/User Icon.svg",
+                    color: MenuState.profile == widget.selectedMenu
+                        ? kPrimaryColor
+                        : inActiveIconColor,
+                  ),
+                  onPressed: Provider.of<BottomMenuHandler>(context,listen: false).currentValue == BottomMuenu.Profile ? null : () {
                     // Navigator.pop(context);
-                    // await Provider.of<Auth>(context,listen: false).getCustomerProfile();
+                    // await .getCustomerProfile();
+                  
+                    setState(() {
+                     Provider.of<BottomMenuHandler>(context,listen: false).currentValue = BottomMuenu.Profile; 
+                    });
+                    
                     Navigator.pushNamed(context, ProfileScreen.routeName);
-                    }
-              ),
+                  }),
             ],
           )),
     );

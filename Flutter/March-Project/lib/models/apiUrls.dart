@@ -21,8 +21,13 @@ class APIURLS {
   static String _product_List = "products";
   static String _sliderImages = "home-sliders";
   static String _home_slider_image = "home-banner-sliders";
+  static String _update_user_password = "update-password";
 
   //with getter you are free to access private properties.
+  static String get updateUserPassword{
+    return Url_Key + _update_user_password;
+  }
+  
   static String get getProductList{
     return Url_Key + _product_List;
   }

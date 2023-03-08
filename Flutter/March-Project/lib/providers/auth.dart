@@ -15,6 +15,7 @@ import '../models/user-profile.dart';
 class Auth with ChangeNotifier {
   String userRegMessage = "";
   String userProfileMessage = "";
+  String userUpdatePasswordMessage = "";
   bool userProfileHasLoaded = false;
   String _token = "null";
   // DateTime _expiryDate = DateTime.now();
@@ -44,6 +45,38 @@ class Auth with ChangeNotifier {
     print("object2 ");
 
     return "null";
+  }
+
+  Future<void> updateuserPassword(String oldPassword,String newPassword,String confirmPassword) async{
+    final url = Uri.parse(APIURLS.updateUserPassword);
+    final responseBody = {"old_password":oldPassword,"password":newPassword,"c_password":confirmPassword};
+    
+
+    try{
+        final prefs = await SharedPreferences.getInstance();
+        final dynamic extractedUserData = json.decode(prefs.getString("userData").toString());
+        _token = extractedUserData["token"];
+        final response = await http.post(url,body:json.encode(responseBody),
+        headers:{'Content-Type': 'application/json','Authorization':'Bearer ${_token}'} );
+
+        Map<String, dynamic> responseData = json.decode(response.body);
+        if (responseData['status'] == false) {
+          // userProfileMessage = responseData["message_type"];
+          notifyListeners();
+     
+          //throwing error message, this will handle in profile widgets
+          throw HttpException(response.body);
+        } else if (responseData['status'] == true) {
+          userUpdatePasswordMessage = "Password updated, successfully!";
+     
+          //make the cart empty promptly
+          // userProfileMessage = responseData["message"];
+          notifyListeners();
+        }
+    }
+    catch(error){
+      throw error;
+    }
   }
 
   Future<void> _authenticate(

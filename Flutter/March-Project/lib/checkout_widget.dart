@@ -6,12 +6,14 @@ import 'package:ecomm_app/components/menu/bottom_menu.dart';
 import 'package:ecomm_app/const_error_msg.dart';
 import 'package:ecomm_app/enums.dart';
 import 'package:ecomm_app/models/product.dart';
+import 'package:ecomm_app/product_listing_widget%20copy.dart';
 import 'package:ecomm_app/providers/cart.dart';
 import 'package:ecomm_app/providers/delivery-address.dart';
 import 'package:ecomm_app/providers/products.dart';
 import 'package:ecomm_app/screens/widgets/count_controller.dart';
 import 'package:ecomm_app/screens/widgets/payment.dart';
 import 'package:ecomm_app/screens/widgets/shipping.dart';
+import 'package:ecomm_app/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,32 +61,33 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
       cartItems = Provider.of<Cart>(context, listen: false).items;
     });
 
-
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      
-    });
+    SchedulerBinding.instance.addPostFrameCallback((_) {});
   }
 
-  Future<void> deleteShippingAddres(String id) async{
-    try{
-       await Provider.of<DeliveryAddress>(context, listen: false).deleteDeliveryAddressById(id);
-       GlobalSnackBar.show(context, Provider.of<DeliveryAddress>(context, listen: false).responseSuccessMessage);
-       Provider.of<DeliveryAddress>(context, listen: false).responseSuccessMessage = "";
-    }
-    catch(error){
+  Future<void> deleteShippingAddres(String id) async {
+    try {
+      await Provider.of<DeliveryAddress>(context, listen: false)
+          .deleteDeliveryAddressById(id);
+      GlobalSnackBar.show(
+          context,
+          Provider.of<DeliveryAddress>(context, listen: false)
+              .responseSuccessMessage);
+      Provider.of<DeliveryAddress>(context, listen: false)
+          .responseSuccessMessage = "";
+    } catch (error) {
       Map<String, dynamic> errorRes = json.decode(error.toString());
       GlobalSnackBar.show(context, errorRes["message"]);
     }
   }
 
-  Future<void> getAllAvailableData() async{
+  Future<void> getAllAvailableData() async {
     try {
-        await Provider.of<DeliveryAddress>(context, listen: false)
-            .requestingAllDeliveryAvailableAddress();
-      } catch (error) {
-        Map<String, dynamic> errorRes = json.decode(error.toString());
-        GlobalSnackBar.show(context, errorRes["message"]);
-      }
+      await Provider.of<DeliveryAddress>(context, listen: false)
+          .requestingAllDeliveryAvailableAddress();
+    } catch (error) {
+      Map<String, dynamic> errorRes = json.decode(error.toString());
+      GlobalSnackBar.show(context, errorRes["message"]);
+    }
   }
 
   void cartItemUpdated() {
@@ -101,7 +104,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(120),
         child: AppBar(
-          backgroundColor: AppTheme.of(context).primaryBackground,
+          // backgroundColor: kAppBarColor,
           automaticallyImplyLeading: false,
           flexibleSpace: Column(
             mainAxisSize: MainAxisSize.max,
@@ -244,7 +247,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                     ),
                                                   ),
                                                   SizedBox(height: 10),
-                                                 
+
                                                   Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
@@ -284,11 +287,10 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                             ],
                                                           ),
                                                         )
-                                                        
                                                       ]),
-                                                
+
                                                   SizedBox(height: 15),
-                                                
+
                                                   Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -373,9 +375,25 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                       .id,
                                                                   context,
                                                                   "1");
-                                                              if(Provider.of<Cart>(context,listen: false).quantityError.isNotEmpty){
-                                                                GlobalSnackBar.show(context,Provider.of<Cart>(context,listen: false).quantityError);
-                                                                Provider.of<Cart>(context,listen: false).quantityError = "";
+                                                              if (Provider.of<
+                                                                          Cart>(
+                                                                      context,
+                                                                      listen:
+                                                                          false)
+                                                                  .quantityError
+                                                                  .isNotEmpty) {
+                                                                GlobalSnackBar.show(
+                                                                    context,
+                                                                    Provider.of<Cart>(
+                                                                            context,
+                                                                            listen:
+                                                                                false)
+                                                                        .quantityError);
+                                                                Provider.of<Cart>(
+                                                                        context,
+                                                                        listen:
+                                                                            false)
+                                                                    .quantityError = "";
                                                               }
                                                             });
                                                           },
@@ -415,7 +433,6 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                 ],
                                               ),
                                             ),
-
                                             Container(
                                               width: 60.0,
                                               height: 60,
@@ -448,14 +465,12 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                 ),
                                               ),
                                             ),
-                                           
                                           ],
                                         ),
                                       ),
                                     );
                                   },
                                 );
-
                               });
                         }),
                         cartItems.length != 0
@@ -571,6 +586,19 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                             : Column(
                                 children: <Widget>[
                                   Text("Your cart is empty!"),
+                                  SizedBox(height: 20),
+                                  SizedBox(
+                                      width: 200,
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.pushNamed(context,
+                                              ProductListingWidget.routeName);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: kPrimaryColor,
+                                        ),
+                                        child: const Text('Shopping now'),
+                                      )),
                                 ],
                               ),
                       ],
@@ -590,13 +618,10 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                           offset: Offset(0, -2),
                         )
                       ],
-                      
                     ),
                     alignment: AlignmentDirectional(0, -0.35),
-                    
                     child: TextButton(
                       onPressed: () async {
-                        
                         setState(() {
                           isLoadingSpinner = true;
                         });
@@ -634,387 +659,377 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
               ],
             ),
           ),
-          
-          isLoadingSpinner ? 
-          Center(
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.2,
-                  width: 60,
-                  child: 
-                  SpinKitCubeGrid(
-                    color: kPrimaryColor,
-                  )
-                ),
-              ) :
-          Offstage(
-            offstage: !showSheet,
-            child: DraggableScrollableSheet(
-                initialChildSize: 0.5,
-                maxChildSize: 1.0,
-                builder: (BuildContext context, ScrollController controller) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
-                    ),
-                    child: ListView(
-                      controller: controller,
-                      padding: EdgeInsets.all(10),
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Select address',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+          isLoadingSpinner
+              ? Center(
+                  child: Container(
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      width: 60,
+                      child: SpinKitCubeGrid(
+                        color: kPrimaryColor,
+                      )),
+                )
+              : Offstage(
+                  offstage: !showSheet,
+                  child: DraggableScrollableSheet(
+                      initialChildSize: 0.5,
+                      maxChildSize: 1.0,
+                      builder:
+                          (BuildContext context, ScrollController controller) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(30),
+                              topRight: Radius.circular(30),
+                            ),
+                          ),
+                          child: ListView(
+                            controller: controller,
+                            padding: EdgeInsets.all(10),
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Select address',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    icon: Icon(Icons.close),
+                                    onPressed: () => setState(() {
+                                      showSheet = !showSheet;
+                                    }),
+                                  ),
+                                ],
                               ),
-                            ),
-                            IconButton(
-                              icon: Icon(Icons.close),
-                              onPressed: () => setState(() {
-                                showSheet = !showSheet;
-                              }),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(
-                                  left:
-                                      MediaQuery.of(context).size.width * 0.01,
-                                  right:
-                                      MediaQuery.of(context).size.width * 0.01,
-                                  top:
-                                      MediaQuery.of(context).size.width * 0.01),
-                              child: TextButton(
-                                onPressed: () {
-                                  // Add new address action
+                              Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                        left:
+                                            MediaQuery.of(context).size.width *
+                                                0.01,
+                                        right:
+                                            MediaQuery.of(context).size.width *
+                                                0.01,
+                                        top: MediaQuery.of(context).size.width *
+                                            0.01),
+                                    child: TextButton(
+                                      onPressed: () {
+                                        // Add new address action
 
-                                  setState(() {
-                                    showSheet = !showSheet;
-                                  });
-                                  Provider.of<DeliveryAddress>(context,
-                                          listen: false)
-                                      .addressType = AddressType.ADD;
-                                  /**
+                                        setState(() {
+                                          showSheet = !showSheet;
+                                        });
+                                        Provider.of<DeliveryAddress>(context,
+                                                listen: false)
+                                            .addressType = AddressType.ADD;
+                                        /**
                                    * AddressType.ADD
                                    */
-                                  Navigator.pushNamed(
-                                      context, Shipping.routeName);
-                                },
-                                child: Container(
-                                  height: 30,
-                                  padding: EdgeInsets.all(5),
-                                  child: Text("Add New Address"),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.width * 0.05),
-                       
-                        Provider.of<DeliveryAddress>(context, listen: false)
-                                    .allAddressData
-                                    .length ==
-                                0
-                            ? Column(
-                                children: [
-                                  Text("No address available!"),
+                                        Navigator.pushNamed(
+                                            context, Shipping.routeName);
+                                      },
+                                      child: Container(
+                                        height: 30,
+                                        padding: EdgeInsets.all(5),
+                                        child: Text("Add New Address"),
+                                      ),
+                                    ),
+                                  ),
                                 ],
-                              )
-                            : Consumer<DeliveryAddress>(
-                                builder: (_, addressData, ch) {
-                                  return Container(
-                                    height:
-                                        MediaQuery.of(context).size.width * 01,
-                                    child: ListView.builder(
-                                        itemCount:
-                                            addressData.allAddressData.length,
-                                        itemBuilder: ((context, index) {
-                                          return Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                02,
-                                            child: Card(
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                              ),
-                                              child: Container(
-                                                padding: EdgeInsets.all(10),
-                                                child: Column(
-                                                  children: [
-                                                    Column(
-                                                      children: [
-                                                        Container(
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                            left: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.05,
-                                                          ),
-                                                          child: Text(
-                                                            // checkoutDetails["name"],
-                                                            addressData
-                                                                    .allAddressData[
-                                                                        index]
-                                                                    .firstName +
-                                                                " " +
-                                                                addressData
-                                                                    .allAddressData[
-                                                                        index]
-                                                                    .lastName,
-                                                            style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontSize: 18,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          margin: EdgeInsets.only(
-                                                              left: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.05,
-                                                              top: 10),
-                                                          child: Text(
-                                                            // "Gunadhya Software, Month Vert Zenith, Baner Road",
-                                                            addressData
-                                                                .allAddressData[
-                                                                    index]
-                                                                .address,
-                                                            style: TextStyle(
-                                                              fontSize: 14,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          margin: EdgeInsets.only(
-                                                              left: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.05,
-                                                              top: 10),
-                                                          child: Text(
-                                                            // "Baner Pashan Link Road, Pune, Maharashtra, 411045, India",
-                                                            addressData
-                                                                    .allAddressData[
-                                                                        index]
-                                                                    .city +
-                                                                ", " +
-                                                                addressData
-                                                                    .allAddressData[
-                                                                        index]
-                                                                    .state +
-                                                                "," +
-                                                                addressData
-                                                                    .allAddressData[
-                                                                        index]
-                                                                    .country +
-                                                                ", " +
-                                                                addressData
-                                                                    .allAddressData[
-                                                                        index]
-                                                                    .pincode,
-                                                            style: TextStyle(
-                                                              fontSize: 14,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  left: 20,
-                                                                  top: 10),
-                                                          child: Text(
-                                                            // "Baner Pashan Link Road, Pune, Maharashtra, 411045, India",
-                                                            addressData
-                                                                .allAddressData[
-                                                                    index]
-                                                                .phone,
-                                                            style: TextStyle(
-                                                              fontSize: 14,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Column(
-                                                          children: <Widget>[
-                                                            ElevatedButton(
-                                                              onPressed: () {
-                                                                Provider.of<Cart>(context, listen: false).preparedCheckout(
-                                                                    addressData
-                                                                        .allAddressData[
-                                                                            index]
-                                                                        .id,
-                                                                    addressData
-                                                                            .allAddressData[
-                                                                                index]
-                                                                            .firstName +
-                                                                        addressData
-                                                                            .allAddressData[
-                                                                                index]
-                                                                            .lastName,
-                                                                    addressData
-                                                                        .allAddressData[
-                                                                            index]
-                                                                        .phone,
-                                                                    addressData
-                                                                        .allAddressData[
-                                                                            index]
-                                                                        .email);
-                                                                setState(() {
-                                                                  showSheet =
-                                                                      !showSheet;
-                                                                });
-
-                                                                Navigator.pushNamed(
-                                                                    context,
-                                                                    Payment
-                                                                        .routeName);
-                                                              },
-                                                              child: Text(
-                                                                "Deliver to this address",
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
+                              ),
+                              SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.width * 0.05),
+                              Provider.of<DeliveryAddress>(context,
+                                              listen: false)
+                                          .allAddressData
+                                          .length ==
+                                      0
+                                  ? Column(
+                                      children: [
+                                        Text("No address available!"),
+                                      ],
+                                    )
+                                  : Consumer<DeliveryAddress>(
+                                      builder: (_, addressData, ch) {
+                                        return Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              01,
+                                          child: ListView.builder(
+                                              itemCount: addressData
+                                                  .allAddressData.length,
+                                              itemBuilder: ((context, index) {
+                                                return Container(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      02,
+                                                  child: Card(
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10.0),
+                                                    ),
+                                                    child: Container(
+                                                      padding:
+                                                          EdgeInsets.all(10),
+                                                      child: Column(
+                                                        children: [
+                                                          Column(
+                                                            children: [
+                                                              Container(
+                                                                margin:
+                                                                    EdgeInsets
+                                                                        .only(
+                                                                  left: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      0.05,
+                                                                ),
+                                                                child: Text(
+                                                                  // checkoutDetails["name"],
+                                                                  addressData
+                                                                          .allAddressData[
+                                                                              index]
+                                                                          .firstName +
+                                                                      " " +
+                                                                      addressData
+                                                                          .allAddressData[
+                                                                              index]
+                                                                          .lastName,
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        18,
+                                                                  ),
+                                                                ),
                                                               ),
-                                                            ),
-                                                            Row(
-                                                              mainAxisAlignment: MainAxisAlignment.center,
-                                                              children: [
-                                                                Container(
-                                                                  margin: EdgeInsets
-                                                                      .only(
-                                                                          left: 20,
-                                                                          right: 20,
-                                                                          top: 20),
-                                                                  child: TextButton(
-                                                                    onPressed: () {
-                                                                      // Edit address action
-                                                                      Provider.of<DeliveryAddress>(
-                                                                                  context,
-                                                                                  listen:
-                                                                                      false)
-                                                                              .addressType =
-                                                                          AddressType
-                                                                              .EDIT;
-                                                                      Provider.of<DeliveryAddress>(
-                                                                                  context,
-                                                                                  listen:
-                                                                                      false)
-                                                                              .editAddressId =
-                                                                          int.parse(addressData
+                                                              Container(
+                                                                margin: EdgeInsets.only(
+                                                                    left: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width *
+                                                                        0.05,
+                                                                    top: 10),
+                                                                child: Text(
+                                                                  // "Gunadhya Software, Month Vert Zenith, Baner Road",
+                                                                  addressData
+                                                                      .allAddressData[
+                                                                          index]
+                                                                      .address,
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Container(
+                                                                margin: EdgeInsets.only(
+                                                                    left: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width *
+                                                                        0.05,
+                                                                    top: 10),
+                                                                child: Text(
+                                                                  // "Baner Pashan Link Road, Pune, Maharashtra, 411045, India",
+                                                                  addressData
+                                                                          .allAddressData[
+                                                                              index]
+                                                                          .city +
+                                                                      ", " +
+                                                                      addressData
+                                                                          .allAddressData[
+                                                                              index]
+                                                                          .state +
+                                                                      "," +
+                                                                      addressData
+                                                                          .allAddressData[
+                                                                              index]
+                                                                          .country +
+                                                                      ", " +
+                                                                      addressData
+                                                                          .allAddressData[
+                                                                              index]
+                                                                          .pincode,
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Container(
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        left:
+                                                                            20,
+                                                                        top:
+                                                                            10),
+                                                                child: Text(
+                                                                  // "Baner Pashan Link Road, Pune, Maharashtra, 411045, India",
+                                                                  addressData
+                                                                      .allAddressData[
+                                                                          index]
+                                                                      .phone,
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Column(
+                                                                children: <
+                                                                    Widget>[
+                                                                  ElevatedButton(
+                                                                    onPressed:
+                                                                        () {
+                                                                      Provider.of<Cart>(context, listen: false).preparedCheckout(
+                                                                          addressData
                                                                               .allAddressData[
                                                                                   index]
-                                                                              .id);
-                                                                      Provider.of<DeliveryAddress>(
-                                                                              context,
-                                                                              listen:
-                                                                                  false)
-                                                                          .returnEditingAddressValues();
-
-                                                                      setState(() {
+                                                                              .id,
+                                                                          addressData.allAddressData[index].firstName +
+                                                                              addressData.allAddressData[index].lastName,
+                                                                          addressData.allAddressData[index].phone,
+                                                                          addressData.allAddressData[index].email);
+                                                                      setState(
+                                                                          () {
                                                                         showSheet =
                                                                             !showSheet;
                                                                       });
-                                                                      // Navigator.pop(context);
+
                                                                       Navigator.pushNamed(
                                                                           context,
-                                                                          Shipping
+                                                                          Payment
                                                                               .routeName);
                                                                     },
-                                                                    child:
-                                                                        Container(
-                                                                      height: 30,
-                                                                      padding:
-                                                                          EdgeInsets
-                                                                              .all(
-                                                                                  5),
-                                                                      child: Text(
-                                                                          "Edit"),
+                                                                    child: Text(
+                                                                      "Deliver to this address",
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .center,
                                                                     ),
                                                                   ),
-                                                                ),
-                                                                Container(
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      left: 20,
-                                                                      right: 20,
-                                                                      top: 20),
-                                                              child: TextButton(
-                                                                onPressed: () async {
-                                                                  // Remove address action
-                                                                
-                                                                 
-                                                                 setState(() {
-                                                                   //delete loading spinner
-                                                                   isLoadingSpinner = true;
-                                                                 });
+                                                                  Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Container(
+                                                                        margin: EdgeInsets.only(
+                                                                            left:
+                                                                                20,
+                                                                            right:
+                                                                                20,
+                                                                            top:
+                                                                                20),
+                                                                        child:
+                                                                            TextButton(
+                                                                          onPressed:
+                                                                              () {
+                                                                            // Edit address action
+                                                                            Provider.of<DeliveryAddress>(context, listen: false).addressType =
+                                                                                AddressType.EDIT;
+                                                                            Provider.of<DeliveryAddress>(context, listen: false).editAddressId =
+                                                                                int.parse(addressData.allAddressData[index].id);
+                                                                            Provider.of<DeliveryAddress>(context, listen: false).returnEditingAddressValues();
 
-                                                                await deleteShippingAddres(addressData
-                                                                              .allAddressData[
-                                                                                  index]
-                                                                              .id);
+                                                                            setState(() {
+                                                                              showSheet = !showSheet;
+                                                                            });
+                                                                            // Navigator.pop(context);
+                                                                            Navigator.pushNamed(context,
+                                                                                Shipping.routeName);
+                                                                          },
+                                                                          child:
+                                                                              Container(
+                                                                            height:
+                                                                                30,
+                                                                            padding:
+                                                                                EdgeInsets.all(5),
+                                                                            child:
+                                                                                Text("Edit"),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                      Container(
+                                                                        margin: EdgeInsets.only(
+                                                                            left:
+                                                                                20,
+                                                                            right:
+                                                                                20,
+                                                                            top:
+                                                                                20),
+                                                                        child:
+                                                                            TextButton(
+                                                                          onPressed:
+                                                                              () async {
+                                                                            // Remove address action
 
-                                                                  setState(() {
-                                                                    isLoadingSpinner = false;
-                                                                    showSheet =
-                                                                        !showSheet;
-                                                                  });
-                                                                  // Navigator.pop(context);
-                                                                  
-                                                                },
-                                                                child:
-                                                                    Container(
-                                                                  height: 30,
-                                                                  padding:
-                                                                      EdgeInsets
-                                                                          .all(
-                                                                              5),
-                                                                  child: Text(
-                                                                      "Remove",
-                                                                      style: TextStyle(
-                                                                        color: Colors.red,
+                                                                            setState(() {
+                                                                              //delete loading spinner
+                                                                              isLoadingSpinner = true;
+                                                                            });
+
+                                                                            await deleteShippingAddres(addressData.allAddressData[index].id);
+
+                                                                            setState(() {
+                                                                              isLoadingSpinner = false;
+                                                                              showSheet = !showSheet;
+                                                                            });
+                                                                            // Navigator.pop(context);
+                                                                          },
+                                                                          child:
+                                                                              Container(
+                                                                            height:
+                                                                                30,
+                                                                            padding:
+                                                                                EdgeInsets.all(5),
+                                                                            child:
+                                                                                Text(
+                                                                              "Remove",
+                                                                              style: TextStyle(
+                                                                                color: Colors.red,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
                                                                       ),
-                                                                      ),
-                                                                ),
+                                                                    ],
+                                                                  ),
+                                                                ],
                                                               ),
-                                                            ),
-                                                              ],
-                                                            ),
-                                                            
-                                                          ],
-                                                        ),
-                                                      ],
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        })),
-                                  );
-                                },
-                              ),
-                      ],
-                    ),
-                  );
-                }),
-          )
+                                                  ),
+                                                );
+                                              })),
+                                        );
+                                      },
+                                    ),
+                            ],
+                          ),
+                        );
+                      }),
+                )
         ],
       ),
       bottomNavigationBar: BottomMenu(selectedMenu: MenuState.home),

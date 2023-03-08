@@ -21,32 +21,30 @@ class ProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    final cart = Provider.of<Cart>(context,listen: true);
-     if (cart.isGridView) {
-        return LayoutBuilder(builder: (context, constraints) {
-          return GridView.builder(
-            itemCount: products.length,
-            itemBuilder: (context, index) => ProductTileAnimation(
+    final cart = Provider.of<Cart>(context, listen: true);
+    if (cart.isGridView) {
+      return LayoutBuilder(builder: (context, constraints) {
+        return GridView.builder(
+          itemCount: products.length,
+          itemBuilder: (context, index) => ProductTileAnimation(
+            itemNo: index,
+            product: products[index],
+          ),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: constraints.maxWidth > 700 ? 4 : 2,
+            childAspectRatio: 1,
+          ),
+        );
+      });
+    } else {
+      return ListView.builder(
+          itemCount: products.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ProductTileAnimation(
               itemNo: index,
               product: products[index],
-            ),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: constraints.maxWidth > 700 ? 4 : 2,
-              childAspectRatio: 1,
-            ),
-          );
-        });
-      } else {
-        return ListView.builder(
-            itemCount: products.length,
-            itemBuilder: (BuildContext context, int index) {
-              return ProductTileAnimation(
-                itemNo: index,
-                product: products[index],
-              );
-            });
-      }
-    
+            );
+          });
+    }
   }
 }

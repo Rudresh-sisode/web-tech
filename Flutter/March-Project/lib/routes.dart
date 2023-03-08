@@ -5,6 +5,7 @@ import 'package:ecomm_app/screens/forget_password/forget_pass_screen.dart';
 // import 'package:ecomm_app/screens/home/components/product_screen.dart';
 import 'package:ecomm_app/screens/otp/otp_screen.dart';
 import 'package:ecomm_app/screens/profile/profile_screen.dart';
+import 'package:ecomm_app/screens/profile/update_pass_screen.dart';
 import 'package:ecomm_app/screens/profile/update_profile_screen.dart';
 import 'package:ecomm_app/screens/register/components/register_screen.dart';
 import 'package:ecomm_app/screens/widgets/orderDetails.dart';
@@ -38,5 +39,6 @@ final Map<String, WidgetBuilder> routes = {
   CheckoutWidget.routeName: (context) => CheckoutWidget(),
   Orders.routeName: (context) => Orders(),
   SuccessMsg.routeName: (context) => SuccessMsg(),
-  OrderDetails.routeName:(context) => OrderDetails(),
+  OrderDetails.routeName: (context) => OrderDetails(),
+  UpdateppassScreen.routeName: (context) => UpdateppassScreen(),
 };

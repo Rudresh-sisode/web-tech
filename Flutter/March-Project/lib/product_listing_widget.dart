@@ -3,6 +3,7 @@ import 'package:ecomm_app/app_theme.dart';
 import 'package:ecomm_app/bloc/event/cart_event.dart';
 import 'package:ecomm_app/components/global_snack_bar.dart';
 import 'package:ecomm_app/components/menu/bottom_menu.dart';
+import 'package:ecomm_app/const_error_msg.dart';
 import 'package:ecomm_app/enums.dart';
 import 'package:ecomm_app/providers/auth.dart';
 import 'package:ecomm_app/providers/carousel.dart';
@@ -16,6 +17,7 @@ import 'package:ecomm_app/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import 'bloc/cart_bloc.dart';
@@ -60,26 +62,21 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       String otpMessage =
           Provider.of<Auth>(context, listen: false).userRegMessage;
-          if(otpMessage.isNotEmpty){
-            GlobalSnackBar.show(context, otpMessage);
-
-          }
-          Provider.of<Auth>(context, listen: false).userRegMessage = "";
-
+      if (otpMessage.isNotEmpty) {
+        GlobalSnackBar.show(context, otpMessage);
+      }
+      Provider.of<Auth>(context, listen: false).userRegMessage = "";
     });
     // _getData();
   }
 
-  Future<void> getProductsData() async{
-
-    await Provider.of<Products>(context,listen:false).getProductsData();
+  Future<void> getProductsData() async {
+    await Provider.of<Products>(context, listen: false).getProductsData();
     products = Provider.of<Products>(context, listen: false).productDataList;
-
 
     setState(() {
       productDataLoading = false;
     });
-
   }
 
   Future<void> gettingNeededAPICalling() async {
@@ -101,14 +98,20 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
     return Scaffold(
       // key: scaffoldKey,
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
-          'Gunadhya Store',
-          style: AppTheme.of(context).title1,
+        centerTitle: true,
+        // title: Text(
+        //   'Store',
+        //   style: AppTheme.of(context).title1,
+
+        // ),
+        iconTheme: const IconThemeData(
+          color: kAppBarColor, //change your color here
         ),
+        title: const Text("Store", style: TextStyle(color: kAppBarColor)),
         elevation: 0,
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
         actions: <Widget>[
           Stack(
             children: [
@@ -129,9 +132,12 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
         ],
       ),
       body: SingleChildScrollView(
+        // reverse: true,
+        physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
-          children: [
-            SizedBox(height: 30),
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
             Container(
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
@@ -238,7 +244,6 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                 ),
               ),
             ),
-            SizedBox(height: 15),
             Container(
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
@@ -253,37 +258,56 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                 ),
               ),
             ),
-            SizedBox(height: 15),
             Container(
+              alignment: Alignment.centerLeft,
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                 child: Column(
                   children: <Widget>[
-                    SizedBox(height: 50),
-                    const SizedBox(
-                      // boxShadow: [
-
-                      // BoxShadow(
-                      // color: Colors.grey.withOpacity(0.5),
-                      // spreadRadius: 5,
-                      // blurRadius: 7,
-                      // offset: Offset(0, 3), // changes position of shadow
-                      // ),
-                      // ],
-
-                      child: Text(
-                        'Popular Products',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(fontSize: 16, color: Colors.grey
-                            // BoxShadow(
-                            // color: Colors.grey.withOpacity(0.5),
-                            // spreadRadius: 5,
-                            // blurRadius: 7,
-                            // offset: Offset(0, 3), // changes position of shadow
-                            // ),
-                            ),
-                      ),
-                    ),
+                    SizedBox(height: 20),
+                    ListTile(
+                        // leading: Container(
+                        //   width: 20,
+                        //   height: 20,
+                        //   decoration: BoxDecoration(
+                        //       borderRadius: BorderRadius.circular(100),
+                        //       color: kPrimaryColor.withOpacity(0.1)),
+                        //   // child:  Icon: SvgPicture.asset("assets/icons/Cart.svg"),
+                        //   child: SvgPicture.asset("assets/icons/Parcel.svg"),
+                        // ),
+                        title: const Text('Popular Products',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Color.fromARGB(255, 147, 3, 138))),
+                        trailing: RawMaterialButton(
+                          onPressed: () {},
+                          elevation: 1.0,
+                          fillColor: Color.fromARGB(255, 255, 255, 255),
+                          child:
+                              SvgPicture.asset("assets/icons/arrow_right.svg"),
+                          // child: Icon(Icons.arrow_right,
+                          //     size: 30.0,
+                          //     color: Color.fromARGB(255, 255, 255, 255)),
+                          padding: EdgeInsets.all(1.0),
+                          shape: CircleBorder(),
+                        )
+                        //  Container(
+                        //   width: 10,
+                        //   height: 10,
+                        //   decoration: BoxDecoration(
+                        //       borderRadius: BorderRadius.circular(100),
+                        //       color: kPrimaryColor.withOpacity(0.1)),
+                        //   child: SvgPicture.asset("assets/icons/arrow_right.svg"),
+                        // ),
+                        ),
+                    // Container(
+                    //   alignment: Alignment.centerLeft,
+                    //   height: 30,
+                    //   child: Text(
+                    //     'Popular Products',
+                    //     style: TextStyle(fontSize: 16, color: Colors.grey),
+                    //   ),
+                    // ),
                     Container(
                       height: 120,
                       width: double.infinity,
@@ -313,32 +337,51 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                 ),
               ),
             ),
-            //loading spinner logic
-            productDataLoading ? 
-            Center(
-              child: Container(child: 
-              Text("loading..."),),
-            )
-            :
-            Container(
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      height: 620,
-                      width: double.infinity,
-                      child: ProductList(
-                        products: isSearchStarted ? searchedProducts : products,
+            productDataLoading
+                ? Center(
+                    child: Container(
+                      child: Text("loading..."),
+                    ),
+                  )
+                : Container(
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            height: 620,
+                            width: double.infinity,
+                            child: ProductList(
+                              products:
+                                  isSearchStarted ? searchedProducts : products,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
+                  ),
           ],
         ),
       ),
+      // body: SingleChildScrollView(
+      //   child: ListView(
+      //     padding: const EdgeInsets.all(8),
+      //     children: <Widget>[
+      //       Container(
+      //         color: Colors.amber[600],
+      //         child: const Center(child: Text('Entry A')),
+      //       ),
+      //       Container(
+      //         color: Colors.amber[500],
+      //         child: const Center(child: Text('Entry B')),
+      //       ),
+      //       Container(
+      //         color: Colors.amber[100],
+      //         child: const Center(child: Text('Entry C')),
+      //       ),
+      //     ],
+      //   ),
+      // ),
 
       bottomNavigationBar: BottomMenu(selectedMenu: MenuState.home),
     );

@@ -19,7 +19,11 @@ class Body extends StatelessWidget {
     return Scaffold(
       backgroundColor: kAppBarColor,
       appBar: AppBar(
-        title: const Text("Forgot password"),
+        iconTheme: const IconThemeData(
+          color: kAppBarColor, //change your color here
+        ),
+        title: const Text("Forgot password",
+            style: TextStyle(color: kAppBarColor)),
         centerTitle: true,
         backgroundColor: kPrimaryColor,
       ),
@@ -98,10 +102,9 @@ class _ForgetFromState extends State<ForgetFrom> {
           .customerForgotPassword(email);
       // successStage = true;
       Navigator.pushNamed(context, OtpScreen.routeName);
-    } on FormatException catch (_, error){
-       _showErrorDialog(error.toString());
+    } on FormatException catch (_, error) {
+      _showErrorDialog(error.toString());
     } catch (error) {
-      
       Map<String, dynamic> errorRes = json.decode(error.toString());
       Map<String, dynamic> errorMessage = errorRes["message"];
 
@@ -121,7 +124,6 @@ class _ForgetFromState extends State<ForgetFrom> {
           : errorRes["message_type"];
 
       _showErrorDialog(finalErrorMessage);
-    
     }
   }
 

@@ -20,7 +20,10 @@ class _SuccessMsgState extends State<SuccessMsg> {
     return Scaffold(
       backgroundColor: kAppBarColor,
       appBar: AppBar(
-        title: const Text(""),
+        iconTheme: const IconThemeData(
+          color: kAppBarColor, //change your color here
+        ),
+        title: const Text("", style: TextStyle(color: kAppBarColor)),
         centerTitle: true,
         backgroundColor: kPrimaryColor,
       ),
@@ -52,14 +55,47 @@ class _SuccessMsgState extends State<SuccessMsg> {
                             color: Color.fromARGB(161, 201, 83, 9),
                             fontSize: 25)),
                   ),
-                  Text("Order Id\t"+Provider.of<Cart>(context,listen:false).recentCheckoutOrderId),
+                  Text("Order Id\t" +
+                      Provider.of<Cart>(context, listen: false)
+                          .recentCheckoutOrderId),
                   SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, ProductListingWidget.routeName);
-                  },
-                  child: Text("Home"),
-                )
+
+                  SizedBox(
+                      width: 200,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, ProductListingWidget.routeName);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kPrimaryColor,
+                        ),
+                        child: const Text('Home'),
+                      )),
+
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     Navigator.pushNamed(
+                  //         context, ProductListingWidget.routeName);
+                  //   },
+                  //   child: ElevatedButton(
+                  //     onPressed: () {
+                  //       // if (Provider.of<Auth>(context, listen: false)
+                  //       // .isAuth) {
+                  //       // print("auth value ",Provider.of<Auth>(context).isAuth);
+                  //       // Navigator.pop(context);
+                  //       Navigator.pushNamed(
+                  //           context, ProductListingWidget.routeName);
+                  //       // } else {
+                  //       //   Navigator.pop(context);
+                  //       // }
+                  //     },
+                  //     style: ElevatedButton.styleFrom(
+                  //       backgroundColor: kPrimaryColor,
+                  //     ),
+                  //     child: const Text('Home'),
+                  //   ),
+                  // )
                   // SizedBox(
                   //   child: DefaultButton(
                   //     text: "Home",

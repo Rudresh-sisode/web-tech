@@ -9,7 +9,10 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(""),
+        iconTheme: const IconThemeData(
+          color: kAppBarColor, //change your color here
+        ),
+        title: const Text("Sign up", style: TextStyle(color: kAppBarColor)),
         centerTitle: true,
         backgroundColor: kPrimaryColor,
       ),

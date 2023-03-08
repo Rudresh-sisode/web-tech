@@ -370,7 +370,7 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                       onPressed: () {
                         ProductDetails p = widget.product;
                         Provider.of<Cart>(context,listen: false).addItem(p.productId.toString(),context,countControllerValue.toString());
-                        if(Provider.of<Cart>(context,listen: false).quantityStatus.isNotEmpty){
+                        if(Provider.of<Cart>(context,listen: false).quantityStatus.isNotEmpty && Provider.of<Cart>(context,listen: false).quantityStatus != "Available"){
                           GlobalSnackBar.show(context, Provider.of<Cart>(context,listen: false).quantityStatus);
                           Provider.of<Cart>(context,listen: false).quantityStatus = "";
                         }
