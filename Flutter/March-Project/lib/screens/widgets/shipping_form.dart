@@ -43,6 +43,8 @@ class _ShippingFormState extends State<ShippingForm> {
   late TextEditingController countryController;
   late TextEditingController cityController;
 
+  var errorValidation = null;
+
   final List<String?> errors = [];
 
   @override
@@ -175,7 +177,7 @@ class _ShippingFormState extends State<ShippingForm> {
 
       await Provider.of<DeliveryAddress>(context, listen: false).editingShippingAddress();
       Navigator.pop(context);
-       Navigator.pushReplacementNamed(context, CheckoutWidget.routeName);
+      Navigator.pushReplacementNamed(context, CheckoutWidget.routeName);
       // Navigator.pushNamed(context, CheckoutWidget.routeName);
 
 
@@ -293,18 +295,7 @@ class _ShippingFormState extends State<ShippingForm> {
                       AddressType.ADD
                   ? const Text("Save & Continue")
                   : const Text("Edit & Continue"))
-          // DefaultButton(
-          //   text: "Save & Continue",
-          //   press: () {
-          //     if (_formKey.currentState!.validate()) {
-          //       _formKey.currentState!.save();
-          //       // if all are valid then go to success screen
-          //       shippingAddress();
-          //       // KeyboardUtil.hideKeyboard(context);
-          //       // Navigator.pushNamed(context, Payment.routeName);
-          //     }
-          //   },
-          // ),
+        
         ],
       ),
     );
@@ -316,17 +307,28 @@ class _ShippingFormState extends State<ShippingForm> {
       onSaved: (newValue) => fullAddress = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kAddressNullError);
-        } else {
-          return null;
+          setState(() {
+            errorValidation = null;
+          });
+        } 
+        else if(value.length < 10){
+          setState(() {
+            errorValidation = null;
+          });
         }
+
+        return null;
       },
       validator: (value) {
-        if (value!.isEmpty) {
-          addError(error: kAddressNullError);
-          return "";
+        if (value!.isEmpty){
+          
+          return "please don't leave an empty field";
         }
-        return null;
+        else if(value.length < 10){
+           return "please provide convenient/reacheable address";
+        }
+
+        return errorValidation;
       },
       decoration: const InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
@@ -346,17 +348,26 @@ class _ShippingFormState extends State<ShippingForm> {
       onSaved: (newValue) => fullAddress2 = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kAddressNullError);
-        } else {
-          return null;
+          setState(() {
+            errorValidation = null;
+          });
+        } 
+        else if(value.length < 10){
+          setState(() {
+            errorValidation = null;
+          });
         }
+
+        return null;
       },
       validator: (value) {
-        if (value!.isEmpty) {
-          addError(error: kAddressNullError);
-          return "";
+        if (value!.isEmpty){
+          return "please don't leave an empty field";
         }
-        return null;
+        else if(value.length < 10){
+           return "please provide convenient/reacheable address";
+        }
+        return errorValidation;
       },
       decoration: const InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
@@ -376,16 +387,17 @@ class _ShippingFormState extends State<ShippingForm> {
       onSaved: (newValue) => city = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kCityNullError);
+          setState(() {
+            errorValidation = null;
+          });
         }
-        return null;
+        return errorValidation;
       },
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kCityNullError);
-          return "";
+          return "please don't leave an empty field";
         }
-        return null;
+        return errorValidation;
       },
       decoration: const InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
@@ -406,14 +418,15 @@ class _ShippingFormState extends State<ShippingForm> {
       onSaved: (newValue) => state = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kStateNullError);
+          setState(() {
+            errorValidation = null;
+          });
         }
         return null;
       },
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kStateNullError);
-          return "";
+          return "please don't leave en empty field";
         }
         return null;
       },
@@ -436,14 +449,15 @@ class _ShippingFormState extends State<ShippingForm> {
       onSaved: (newValue) => country = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kCountyNullError);
+          setState(() {
+            errorValidation = null;
+          });
         }
         return null;
       },
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kCountyNullError);
-          return "";
+          return "please don't leave an empty field";
         }
         return null;
       },
@@ -466,14 +480,20 @@ class _ShippingFormState extends State<ShippingForm> {
       onSaved: (newValue) => pinCode = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kPincodeNullError);
+          setState(() {
+            errorValidation = null;
+          });
         }
+        
         return null;
       },
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kPincodeNullError);
-          return "";
+          return "please don't leave an empty field";
+        }
+        final pincodeRegExp = RegExp(r'^[0-9]{6}$');
+        if (!pincodeRegExp.hasMatch(value)) {
+          return 'Invalid pincode';
         }
         return null;
       },
@@ -481,7 +501,7 @@ class _ShippingFormState extends State<ShippingForm> {
         contentPadding: EdgeInsets.all(12.0),
         border: OutlineInputBorder(),
         labelText: "Pincode",
-        hintText: "Enter your name",
+        hintText: "Enter your pincode",
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -495,14 +515,19 @@ class _ShippingFormState extends State<ShippingForm> {
       onSaved: (newValue) => userName = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kNamelNullError);
+          setState(() {
+            errorValidation = null;
+          });
         }
         return null;
       },
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kNamelNullError);
-          return "";
+          return "please don't leave an empty field";
+        }
+        List<String> names = value.split(" ");
+        if(names.length != 2){
+          return "provide name accordingly, (firstname lastname)";
         }
         return null;
       },
@@ -525,19 +550,21 @@ class _ShippingFormState extends State<ShippingForm> {
       onSaved: (newValue) => email = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kEmailNullError);
-        } else if (emailValidatorRegExp.hasMatch(value)) {
-          removeError(error: kInvalidEmailError);
+          setState(() {
+            errorValidation = null;
+          });
+
         }
+        
         return null;
+        
+        
       },
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kEmailNullError);
-          return "";
+          return "please don't leave an empty field";
         } else if (!emailValidatorRegExp.hasMatch(value)) {
-          addError(error: kInvalidEmailError);
-          return "";
+          return "please provide valid email id";
         }
         return null;
       },
@@ -560,14 +587,20 @@ class _ShippingFormState extends State<ShippingForm> {
       onSaved: (newValue) => mobile = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kPhoneNumberNullError);
+         setState(() {
+            errorValidation = null;
+          });
         }
         return null;
       },
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kPhoneNumberNullError);
-          return "";
+          return kPhoneNumberNullError;
+        }
+
+        final numericRegExp = RegExp(r'^[0-9]+$');
+        if (!numericRegExp.hasMatch(value)) {
+          return 'Invalid number';
         }
         return null;
       },

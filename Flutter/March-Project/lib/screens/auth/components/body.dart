@@ -56,27 +56,9 @@ class Body extends StatelessWidget {
                 // ignore: todo
                 //TODO FORGOT PASSWORD SCREEN GOES HERE
               },
-              // child: const Text(
-              //   'Forgot Password',
-              //   style: TextStyle(color: Colors.blue, fontSize: 15),
-              // ),
+             
             ),
-            // Container(
-            //   height: 50,
-            //   width: 250,
-            //   decoration: BoxDecoration(
-            //       color: Colors.blue, borderRadius: BorderRadius.circular(20)),
-            //   child: DefaultButton(
-            //     press: () {
-            //       Navigator.push(
-            //           context, MaterialPageRoute(builder: (_) => HomeScreen()));
-            //     },
-            //     // child: const Text(
-            //     //   'Login',
-            //     //   style: TextStyle(color: Colors.white, fontSize: 25),
-            //     // ),
-            //   ),
-            // ),
+            
             const SizedBox(
               height: 130,
             ),

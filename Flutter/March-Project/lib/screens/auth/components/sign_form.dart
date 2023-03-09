@@ -25,12 +25,16 @@ class _SignFormState extends State<SignForm> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController(text:"kedar.ahirrao@gunadhyasoft.com",);
   final TextEditingController passwordController = TextEditingController(text: "Kedar@123");
+  final _emailFocusNode = FocusNode();
+  final _passwordFocusNode = FocusNode();
+  bool _obscureText = true;
 
   String? email;
   String? password;
   bool? remember = false;
   final List<String?> errors = [];
   var _isLoading = false;
+  var validError = null;
 
   void _showErrorDialog(String message) {
     showDialog(
@@ -152,8 +156,10 @@ class _SignFormState extends State<SignForm> {
           DefaultButton(
             text: "Continue",
             press: () {
+              FocusScope.of(context).unfocus();
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
+                
                 // if all are valid then go to success screen
                 // KeyboardUtil.hideKeyboard(context);
                 _submitLogin();
@@ -171,23 +177,28 @@ class _SignFormState extends State<SignForm> {
   TextFormField buildPasswordFormField() {
     return TextFormField(
       controller: passwordController,
-      obscureText: true,
+      focusNode: _passwordFocusNode,
+      obscureText: _obscureText,
       onSaved: (newValue) => password = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kPassNullError);
+          setState(() {
+            validError = null;
+          });
         } else if (value.length >= 8) {
-          removeError(error: kShortPassError);
+           setState(() {
+            validError = null;
+          });
         }
         return null;
       },
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kPassNullError);
-          return "";
+        
+          return kPassNullError;
         } else if (value.length < 8) {
-          addError(error: kShortPassError);
-          return "";
+          
+          return kShortPassError;
         }
         return null;
       },
@@ -199,32 +210,46 @@ class _SignFormState extends State<SignForm> {
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
+        // suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
+        suffixIcon: IconButton(
+          icon: Icon(
+            _obscureText ? Icons.visibility : Icons.visibility_off,
+          ),
+          onPressed: () {
+            setState(() {
+              _obscureText = !_obscureText;
+            });
+          },
+        ),
       ),
     );
   }
 
   TextFormField buildEmailFormField() {
     return TextFormField(
-    
+      focusNode: _emailFocusNode,
       controller: emailController,
       keyboardType: TextInputType.emailAddress,
       onSaved: (newValue) => email = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kEmailNullError);
+           setState(() {
+            validError = null;
+          });
         } else if (emailValidatorRegExp.hasMatch(value)) {
-          removeError(error: kInvalidEmailError);
+          setState(() {
+            validError = null;
+          });
         }
         return null;
       },
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kEmailNullError);
-          return "";
+          
+          return kEmailNullError;
         } else if (!emailValidatorRegExp.hasMatch(value)) {
-          addError(error: kInvalidEmailError);
-          return "";
+         
+          return kInvalidEmailError;
         }
         return null;
       },

@@ -210,14 +210,7 @@ class _AuthCardState extends State<AuthCard> {
                       ),
                     ),
 
-                    // style: RoundedRectangleBorder(
-                    //   borderRadius: BorderRadius.circular(30),
-                    // ),
-                    // padding:
-                    //     EdgeInsets.symmetric(horizontal: 30.0, vertical: 8.0),
-                    // color: Theme.of(context).primaryColor,
-                    // textColor: Theme.of(context).primaryTextTheme.button.color,
-                  ),
+                 ),
                 TextButton(
                   child: Text(
                       '${_authMode == AuthMode.Login ? 'SIGNUP' : 'LOGIN'} INSTEAD'),
@@ -225,12 +218,7 @@ class _AuthCardState extends State<AuthCard> {
                   style: ButtonStyle(
                     padding: MaterialStateProperty.all(
                         EdgeInsets.symmetric(vertical: 30.0, horizontal: 4)),
-                    // textStyle: Theme.of(context).colorScheme.primary
                   ),
-
-                  // padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 4),
-                  // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  // textColor: Theme.of(context).primaryColor,
                 ),
               ],
             ),

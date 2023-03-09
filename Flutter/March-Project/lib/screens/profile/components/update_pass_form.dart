@@ -25,6 +25,7 @@ class _UpdatePassFormState extends State<UpdatePassForm> {
   // ignore: non_constant_identifier_names
   bool remember = false;
   final List<String?> errors = [];
+  bool _autoValid = false;
 
   @override
   void initState() {
@@ -231,10 +232,14 @@ class _UpdatePassFormState extends State<UpdatePassForm> {
               width: 200,
               child: ElevatedButton(
                 onPressed: () async{
-                  if (_formKey.currentState!.validate()) {
-                    _formKey.currentState!.save();
-                    await _updatePassword();
-                  }
+                
+                   
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      await _updatePassword();
+                    }
+                 
+                  
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: kPrimaryColor,
@@ -253,17 +258,25 @@ class _UpdatePassFormState extends State<UpdatePassForm> {
       onSaved: (newValue) => password = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kPassNullError);
+       setState(() {
+            conformPasswordError = null;
+           
+          });
         }
-        {
-          removeError(error: kPassNullError);
+        else if(value.length < 8){
+         setState(() {
+            conformPasswordError = null;
+           
+          });
         }
         return null;
       },
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kPassNullError);
-          return "";
+           return "value shouldn't be empty";
+        }
+        else if(value.length < 8){
+          return "At least have 8 character password";
         }
         return null;
       },
@@ -286,19 +299,37 @@ class _UpdatePassFormState extends State<UpdatePassForm> {
       onSaved: (newValue) => newPassword = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kNewPassNullError);
+          setState(() {
+            conformPasswordError = null;
+           
+          });
         }
+        else if(value.length >= 8)
         {
-          removeError(error: kNewPassNullError);
+          setState(() {
+            conformPasswordError = null;
+           
+          });
+        }
+        else if( value == confirmPassword){
+          setState(() {
+            conformPasswordError = null;
+           
+          });
         }
         return null;
       },
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kNewPassNullError);
-          return "";
+          return "value shouldn't be empty";
         }
-        return null;
+        else if(value.length < 8){
+          return "At least have 8 character password";
+        }
+        else if(value != confirmPassword ){
+          return "New password doesn't match with confirm password!";
+        }
+        return conformPasswordError;
       },
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
@@ -314,22 +345,31 @@ class _UpdatePassFormState extends State<UpdatePassForm> {
 
   TextFormField buildConfirmFormField() {
     return TextFormField(
+      
       initialValue: confirmPassword,
       obscureText: true,
       onSaved: (newValue) => confirmPassword = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-         
-          // confirmPassword
-        } else if (emailValidatorRegExp.hasMatch(value)) {
-          removeError(error: kConfirmPassNullError);
-        }
-        else if(value.length > 8){
-         setState(() {
+          setState(() {
             conformPasswordError = null;
+           
+          });
+          // confirmPassword
+        } 
+        else if(value.length >= 8){
+        setState(() {
+            conformPasswordError = null;
+           
           });
         }
-        return null;
+        else if(value == newPassword){
+          setState(() {
+            conformPasswordError = null;
+           
+          });
+        }
+        return conformPasswordError;
       },
       validator: (value) {
         if (value!.isEmpty) {
@@ -338,7 +378,10 @@ class _UpdatePassFormState extends State<UpdatePassForm> {
         else if(value.length < 8){
           return "At least have 8 character password";
         }
-        return null;
+        else if(value != newPassword ){
+          return "New password doesn't match with confirm password!";
+        }
+        return conformPasswordError;
       },
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
@@ -346,6 +389,7 @@ class _UpdatePassFormState extends State<UpdatePassForm> {
         labelText: "Confirm password*",
         hintText: "Re-enter your new password",
         floatingLabelBehavior: FloatingLabelBehavior.always,
+        // er
       ),
     );
   }

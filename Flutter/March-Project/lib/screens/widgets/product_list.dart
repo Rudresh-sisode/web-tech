@@ -25,6 +25,8 @@ class ProductList extends StatelessWidget {
     if (cart.isGridView) {
       return LayoutBuilder(builder: (context, constraints) {
         return GridView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
           itemCount: products.length,
           itemBuilder: (context, index) => ProductTileAnimation(
             itemNo: index,
@@ -38,6 +40,8 @@ class ProductList extends StatelessWidget {
       });
     } else {
       return ListView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
           itemCount: products.length,
           itemBuilder: (BuildContext context, int index) {
             return ProductTileAnimation(
