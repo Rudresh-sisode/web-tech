@@ -13,22 +13,38 @@ class Carousel extends StatefulWidget {
   _BannergWidgetState createState() => _BannergWidgetState();
 }
 
+
+
+
+
 class _BannergWidgetState extends State<Carousel> {
   bool isLoadingSpinner = true;
+  late BuildContext _buildContext;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _buildContext = context;
+  }
 
   @override
   void initState() {
     super.initState();
-    _getBannerData();
+     _buildContext = context;
+    // _getBannerData();
   }
 
   Future<void> _getBannerData() async {
     //  await Provider.of<CarouselApi>(context,listen:false).getCarousel();
-    await Provider.of<HomePageSlider>(context, listen: false)
+   
+      await Provider.of<HomePageSlider>(_buildContext, listen: false)
         .getHomeSliderImage();
+ if(mounted){
     setState(() {
       isLoadingSpinner = false;
     });
+    }
+    
   }
 
   // List itemColors = [Colors.green, Colors.purple, Colors.blue];

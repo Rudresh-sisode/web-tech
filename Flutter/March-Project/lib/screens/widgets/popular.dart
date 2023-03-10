@@ -23,14 +23,18 @@ class _PopularWidgetState extends State<Popular> {
   @override
   void initState() {
     super.initState();
-    _getPopularData();
+    // _getPopularData();
   }
 
   Future<void> _getPopularData() async {
-    await Provider.of<PopularApi>(context, listen: false).getPopularProduct();
+    
+       await Provider.of<PopularApi>(context, listen: false).getPopularProduct();
+    if(mounted){   
     setState(() {
       isLoaderSpinner = false;
     });
+    }
+   
   }
 
   List itemColors = [Colors.green, Colors.purple, Colors.blue];

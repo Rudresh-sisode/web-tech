@@ -40,7 +40,8 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
   late TextEditingController textController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   bool isSearchStarted = false;
-
+  // late BuildContext _buildContext;
+  // late Products _productsProvider;
   bool isLoadingSpineer = true;
   bool productDataLoading = true;
 
@@ -53,11 +54,24 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
   //   Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   // }
 
+
+
+// @override
+// void didChangeDependencies() {
+//   super.didChangeDependencies();
+//   _buildContext = context;
+// }
+
   @override
   void initState() {
     super.initState();
-    // products = Provider.of<Products>(context, listen: false).products;
-    getProductsData();
+    // _buildContext = context;
+    // _productsProvider = Provider.of<Products>(context, listen: false);
+    if(productDataLoading){
+      getProductsData();
+      products = Provider.of<Products>(context, listen: false).productDataList;
+    }
+    
     textController = TextEditingController();
     SchedulerBinding.instance.addPostFrameCallback((_) {
       String otpMessage =
@@ -67,32 +81,24 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
       }
       Provider.of<Auth>(context, listen: false).userRegMessage = "";
     });
-    // _getData();
+ 
   }
 
-  Future<void> getProductsData() async {
+   getProductsData() async {
+    
     await Provider.of<Products>(context, listen: false).getProductsData();
-    products = Provider.of<Products>(context, listen: false).productDataList;
-
-    setState(() {
-      productDataLoading = false;
-    });
+      
+   if(mounted){
+       setState(() {
+        productDataLoading = false;
+      });
+   }
+   
+    
+  
   }
 
-  Future<void> gettingNeededAPICalling() async {
-    try {
-      //first carousel api
-
-      //second popular product's api
-
-      //third product list's api
-
-      // setState(() {
-      //   isLoadingSpineer = false;
-      // });
-    } catch (error) {}
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -351,7 +357,10 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                           Container(
                             height: 620,
                             width: double.infinity,
-                            child: ProductList(
+                            child: 
+                            
+                            
+                            ProductList(
                               products:
                                   isSearchStarted ? searchedProducts : products,
                             ),
@@ -386,4 +395,6 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
       bottomNavigationBar: BottomMenu(selectedMenu: MenuState.home),
     );
   }
+
+ 
 }
