@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ecomm_app/providers/bottom-menu.dart';
 import 'package:ecomm_app/providers/cart.dart';
 import 'package:ecomm_app/providers/products.dart';
 import 'package:flutter/material.dart' ;
@@ -8,6 +9,7 @@ import 'package:badges/badges.dart' as badge;
 import 'package:ecomm_app/app_theme.dart';
 import 'package:ecomm_app/const_error_msg.dart';
 import 'package:ecomm_app/screens/widgets/button.dart';
+import 'package:flutter/scheduler.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -45,7 +47,11 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
   @override
   void initState() {
     super.initState();
+   
     getProductDetails(widget.product.productId.toString());
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      Provider.of<BottomMenuHandler>(context,listen:false).changeCurrentValue(BottomMuenu.Home);
+    });
   }
 
   Future<void> getProductDetails(String id) async{
@@ -115,7 +121,14 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
         automaticallyImplyLeading: false,
         leading: InkWell(
           onTap: () async {
-            Navigator.pop(context);
+            // context.ancestorWidgetOfExactType(MyWidget)
+            // final  previousRouteName =
+        // ModalRoute.of(context)?.settings.name.toString() ;
+        //     print("your scaffold key "+previousRouteName.toString());
+            // final ProductDetailWidget mywd = context.findAncestorStateOfType() as ProductDetailWidget;
+            print("your scaffold key2 ");
+
+            // Navigator.pop(context);
           },
           child: Icon(
             Icons.arrow_back_rounded,

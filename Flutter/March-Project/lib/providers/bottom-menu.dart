@@ -8,5 +8,10 @@ import 'package:flutter/foundation.dart';
 class BottomMenuHandler with ChangeNotifier {
 
   BottomMuenu currentValue = BottomMuenu.Home;
+
+  void changeCurrentValue(BottomMuenu value){
+    currentValue = value;
+    notifyListeners();
+  }
   
 }

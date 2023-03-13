@@ -14,10 +14,10 @@ import '../../providers/bottom-menu.dart';
 class BottomMenu extends StatefulWidget {
   const BottomMenu({
     Key? key,
-    required this.selectedMenu,
+    // required this.selectedMenu,
   }) : super(key: key);
 
-  final MenuState selectedMenu;
+  // final MenuState selectedMenu;
 
   @override
   State<BottomMenu> createState() => _BottomMenuState();
@@ -43,7 +43,8 @@ class _BottomMenuState extends State<BottomMenu> {
           topRight: Radius.circular(40),
         ),
       ),
-      child: SafeArea(
+      child: Consumer<BottomMenuHandler>(builder: (ctx, bottomMenuHandler, _) {
+        return SafeArea(
           top: false,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -51,55 +52,68 @@ class _BottomMenuState extends State<BottomMenu> {
               IconButton(
                 icon: SvgPicture.asset(
                   "assets/icons/Home.svg",
-                  color: MenuState.home == widget.selectedMenu
+                  color: BottomMuenu.Home == bottomMenuHandler.currentValue
                       ? kPrimaryColor
                       : inActiveIconColor,
                 ),
-                onPressed: Provider.of<BottomMenuHandler>(context,listen: false).currentValue == BottomMuenu.Home ? null : () {
-                    // Navigator.pop(context);
-                    // await .getCustomerProfile();
-                  
-                    setState(() {
-                     Provider.of<BottomMenuHandler>(context,listen: false).currentValue = BottomMuenu.Home; 
-                    });
-                  Navigator.pushNamed(context, ProductListingWidget.routeName);
-                },
+                onPressed: bottomMenuHandler.currentValue == BottomMuenu.Home
+                    ? null
+                    : () {
+                        // Navigator.pop(context);
+                        // await .getCustomerProfile();
+
+                        bottomMenuHandler.currentValue = BottomMuenu.Home;
+
+                        Navigator.pushNamed(
+                            context, ProductListingWidget.routeName);
+                      },
               ),
               // IconButton(
               //   icon: SvgPicture.asset("assets/icons/Cart.svg"),
               //   onPressed: () {},
               // ),
               IconButton(
-                icon: SvgPicture.asset("assets/icons/Cart Icon.svg"),
-                onPressed: Provider.of<BottomMenuHandler>(context,listen: false).currentValue == BottomMuenu.Cart ? null : () {
-                    // Navigator.pop(context);
-                    // await .getCustomerProfile();
-                  
-                    setState(() {
-                     Provider.of<BottomMenuHandler>(context,listen: false).currentValue = BottomMuenu.Cart; 
-                    });
-                  Navigator.pushNamed(context, CheckoutWidget.routeName);
-                },
+                icon: SvgPicture.asset(
+                  "assets/icons/Cart Icon.svg",
+                  color: BottomMuenu.Cart == bottomMenuHandler.currentValue
+                      ? kPrimaryColor
+                      : inActiveIconColor,
+                ),
+                onPressed: bottomMenuHandler.currentValue == BottomMuenu.Cart
+                    ? null
+                    : () {
+                        // Navigator.pop(context);
+                        // await .getCustomerProfile();
+
+                        bottomMenuHandler.currentValue = BottomMuenu.Cart;
+
+                        Navigator.pushNamed(context, CheckoutWidget.routeName);
+                      },
               ),
               IconButton(
                   icon: SvgPicture.asset(
                     "assets/icons/User Icon.svg",
-                    color: MenuState.profile == widget.selectedMenu
+                    color: BottomMuenu.Profile == bottomMenuHandler.currentValue
                         ? kPrimaryColor
                         : inActiveIconColor,
                   ),
-                  onPressed: Provider.of<BottomMenuHandler>(context,listen: false).currentValue == BottomMuenu.Profile ? null : () {
-                    // Navigator.pop(context);
-                    // await .getCustomerProfile();
-                  
-                    setState(() {
-                     Provider.of<BottomMenuHandler>(context,listen: false).currentValue = BottomMuenu.Profile; 
-                    });
-                    
-                    Navigator.pushNamed(context, ProfileScreen.routeName);
-                  }),
+                  onPressed: Provider.of<BottomMenuHandler>(context,
+                                  listen: false)
+                              .currentValue ==
+                          BottomMuenu.Profile
+                      ? null
+                      : () {
+                          // Navigator.pop(context);
+                          // await .getCustomerProfile();
+
+                          bottomMenuHandler.currentValue = BottomMuenu.Profile;
+
+                          Navigator.pushNamed(context, ProfileScreen.routeName);
+                        }),
             ],
-          )),
+          ),
+        );
+      }),
     );
   }
 }

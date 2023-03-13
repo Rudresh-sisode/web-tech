@@ -6,6 +6,7 @@ import 'package:ecomm_app/components/menu/bottom_menu.dart';
 import 'package:ecomm_app/const_error_msg.dart';
 import 'package:ecomm_app/enums.dart';
 import 'package:ecomm_app/providers/auth.dart';
+import 'package:ecomm_app/providers/bottom-menu.dart';
 import 'package:ecomm_app/providers/carousel.dart';
 import 'package:ecomm_app/providers/cart.dart';
 import 'package:ecomm_app/providers/products.dart';
@@ -54,8 +55,6 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
   //   Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   // }
 
-
-
 // @override
 // void didChangeDependencies() {
 //   super.didChangeDependencies();
@@ -65,13 +64,10 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
   @override
   void initState() {
     super.initState();
-    // _buildContext = context;
-    // _productsProvider = Provider.of<Products>(context, listen: false);
-    if(productDataLoading){
-      getProductsData();
-      products = Provider.of<Products>(context, listen: false).productDataList;
-    }
+
     
+   
+
     textController = TextEditingController();
     SchedulerBinding.instance.addPostFrameCallback((_) {
       String otpMessage =
@@ -80,25 +76,11 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
         GlobalSnackBar.show(context, otpMessage);
       }
       Provider.of<Auth>(context, listen: false).userRegMessage = "";
+      Provider.of<BottomMenuHandler>(context,listen:true).changeCurrentValue(BottomMuenu.Home);
     });
- 
   }
 
-   getProductsData() async {
-    
-    await Provider.of<Products>(context, listen: false).getProductsData();
-      
-   if(mounted){
-       setState(() {
-        productDataLoading = false;
-      });
-   }
-   
-    
-  
-  }
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,11 +89,7 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
       // backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
-        // title: Text(
-        //   'Store',
-        //   style: AppTheme.of(context).title1,
 
-        // ),
         iconTheme: const IconThemeData(
           color: kAppBarColor, //change your color here
         ),
@@ -194,26 +172,10 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                             child: TextFormField(
                               controller: textController,
                               obscureText: false,
-                              onChanged: (_) => EasyDebounce.debounce(
-                                'tFMemberController',
-                                Duration(milliseconds: 0),
-                                () {
-                                  isSearchStarted = textController!
-                                          .text.isNotEmpty &&
-                                      textController!.text.trim().length > 0;
-                                  print('isSearchStarted $isSearchStarted');
-                                  if (isSearchStarted) {
-                                    print('${textController!.text.trim()}');
-                                    searchedProducts = products
-                                        .where((item) => item.name
-                                            .toLowerCase()
-                                            .contains(textController.text
-                                                .trim()
-                                                .toLowerCase()))
-                                        .toList();
-                                  }
-                                },
-                              ),
+                              onChanged: (_) {
+                                Provider.of<Products>(context, listen: false).searchProductList(textController.text);
+                              },
+                              
                               decoration: const InputDecoration(
                                 labelText: 'Search product here...',
                                 enabledBorder: UnderlineInputBorder(
@@ -272,15 +234,7 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                   children: <Widget>[
                     SizedBox(height: 20),
                     ListTile(
-                        // leading: Container(
-                        //   width: 20,
-                        //   height: 20,
-                        //   decoration: BoxDecoration(
-                        //       borderRadius: BorderRadius.circular(100),
-                        //       color: kPrimaryColor.withOpacity(0.1)),
-                        //   // child:  Icon: SvgPicture.asset("assets/icons/Cart.svg"),
-                        //   child: SvgPicture.asset("assets/icons/Parcel.svg"),
-                        // ),
+                        
                         title: const Text('Popular Products',
                             style: TextStyle(
                                 fontSize: 16,
@@ -297,23 +251,9 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                           padding: EdgeInsets.all(1.0),
                           shape: CircleBorder(),
                         )
-                        //  Container(
-                        //   width: 10,
-                        //   height: 10,
-                        //   decoration: BoxDecoration(
-                        //       borderRadius: BorderRadius.circular(100),
-                        //       color: kPrimaryColor.withOpacity(0.1)),
-                        //   child: SvgPicture.asset("assets/icons/arrow_right.svg"),
-                        // ),
+                        
                         ),
-                    // Container(
-                    //   alignment: Alignment.centerLeft,
-                    //   height: 30,
-                    //   child: Text(
-                    //     'Popular Products',
-                    //     style: TextStyle(fontSize: 16, color: Colors.grey),
-                    //   ),
-                    // ),
+                   
                     Container(
                       height: 120,
                       width: double.infinity,
@@ -343,58 +283,49 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                 ),
               ),
             ),
-            productDataLoading
-                ? Center(
-                    child: Container(
-                      child: Text("loading..."),
-                    ),
-                  )
-                : Container(
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            height: 620,
-                            width: double.infinity,
-                            child: 
-                            
-                            
-                            ProductList(
-                              products:
-                                  isSearchStarted ? searchedProducts : products,
+            Consumer<Products>(
+              builder: (ctx, product, _) => Container(
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                  child: product.productDataList.length > 0
+                      ? Column(
+                          children: <Widget>[
+                            Container(
+                              height: 620,
+                              width: double.infinity,
+                              child: ProductList(
+                                products: product.productRequestingData.length > 0 ? product.productRequestingData : product.productDataList,
+                               
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                          ],
+                        )
+                      : FutureBuilder(
+                          future: product.getExecuteProductData(),
+                          builder: (ctx, productReturnSnapshot) =>
+                              productReturnSnapshot.connectionState ==
+                                      ConnectionState.waiting
+                                  ? Center(
+                                      child: Container(
+                                        child: Text("loading..."),
+                                      ),
+                                    )
+                                  : Center(
+                                      child: Container(
+                                      child: Text("please restart the app."),
+                                    )),
+                        ),
+                ),
+              ),
+            ),
+
           ],
         ),
       ),
-      // body: SingleChildScrollView(
-      //   child: ListView(
-      //     padding: const EdgeInsets.all(8),
-      //     children: <Widget>[
-      //       Container(
-      //         color: Colors.amber[600],
-      //         child: const Center(child: Text('Entry A')),
-      //       ),
-      //       Container(
-      //         color: Colors.amber[500],
-      //         child: const Center(child: Text('Entry B')),
-      //       ),
-      //       Container(
-      //         color: Colors.amber[100],
-      //         child: const Center(child: Text('Entry C')),
-      //       ),
-      //     ],
-      //   ),
-      // ),
-
-      bottomNavigationBar: BottomMenu(selectedMenu: MenuState.home),
+     
+      bottomNavigationBar: BottomMenu(),
+      
+      // ,
     );
   }
-
- 
 }

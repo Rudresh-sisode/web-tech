@@ -7,6 +7,7 @@ import 'package:ecomm_app/const_error_msg.dart';
 import 'package:ecomm_app/enums.dart';
 import 'package:ecomm_app/models/product.dart';
 import 'package:ecomm_app/product_listing_widget%20copy.dart';
+import 'package:ecomm_app/providers/bottom-menu.dart';
 import 'package:ecomm_app/providers/cart.dart';
 import 'package:ecomm_app/providers/delivery-address.dart';
 import 'package:ecomm_app/providers/products.dart';
@@ -53,6 +54,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
     // TODO: implement initState
     super.initState();
     checkoutDetails = Provider.of<Cart>(context, listen: false).checkoutData;
+    
     // allAddressData =
     //     Provider.of<DeliveryAddress>(context, listen: false).allAddressData;
     setState(() {
@@ -61,7 +63,9 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
       cartItems = Provider.of<Cart>(context, listen: false).items;
     });
 
-    SchedulerBinding.instance.addPostFrameCallback((_) {});
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      Provider.of<BottomMenuHandler>(context,listen:false).changeCurrentValue(BottomMuenu.Cart);
+    });
   }
 
   Future<void> deleteShippingAddres(String id) async {
@@ -1032,7 +1036,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                 )
         ],
       ),
-      bottomNavigationBar: BottomMenu(selectedMenu: MenuState.home),
+      bottomNavigationBar: BottomMenu(),
     );
   }
 }

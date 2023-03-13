@@ -17,8 +17,9 @@ import '../models/product-details.dart';
 
 class Products with ChangeNotifier {
   String _token = "null";
-  
+
   List<ProductDetails> productDataList = [];
+  List<ProductDetails> productRequestingData = [];
 
   List<Product> products = [
     Product(
@@ -46,7 +47,6 @@ class Products with ChangeNotifier {
             'https://ecom.gunadhyasoftware.com/public/uploads/product_files/167645770963ecb6ed2b1f5.jpg',
         price: 1300,
         quantity: 12),
-   
   ];
 
   ProductDetails product = ProductDetails(
@@ -69,7 +69,18 @@ class Products with ChangeNotifier {
   //   return products;
   // }
 
-  List<ProductDetails> get getProducts{
+  void searchProductList(String prodNameCharString) {
+    productRequestingData = productDataList
+        .where((item) => item.name
+            .toLowerCase()
+            .contains(prodNameCharString.trim().toLowerCase()))
+        .toList();
+
+    notifyListeners();
+    // return productRequestingData;
+  }
+
+  List<ProductDetails> get getProducts {
     return productDataList;
   }
 
@@ -82,16 +93,15 @@ class Products with ChangeNotifier {
   //   }
   // }
 
-    void updateProductQuantity(int id, [String value = "des"]) {
-    int index = productDataList.indexWhere((element) => element.productId == id);
+  void updateProductQuantity(int id, [String value = "des"]) {
+    int index =
+        productDataList.indexWhere((element) => element.productId == id);
     if (index >= 0 && value == "des") {
       productDataList[index].quantity--;
     } else if (index >= 0 && value == "asc") {
       productDataList[index].quantity++;
     }
   }
-
-
 
   // String foundAndReturnProductsOfferPrice(int id) {
   //   int index = -1;
@@ -105,10 +115,10 @@ class Products with ChangeNotifier {
   //     return "00.00";
   //   }
   //   return products[index].offerPrice.toString();
-    
+
   // }
 
-   String foundAndReturnProductsOfferPrice(int id) {
+  String foundAndReturnProductsOfferPrice(int id) {
     int index = -1;
     for (int i = 0; i < productDataList.length; i++) {
       if (productDataList[i].productId == id) {
@@ -120,7 +130,6 @@ class Products with ChangeNotifier {
       return "00.00";
     }
     return productDataList[index].offerPrice.toString();
-    
   }
 
   // String foundAndReturnProductsImage(int id) {
@@ -137,7 +146,7 @@ class Products with ChangeNotifier {
   //   return products[index].image;
   // }
 
-   String foundAndReturnProductsImage(int id) {
+  String foundAndReturnProductsImage(int id) {
     int index = -1;
     for (int i = 0; i < productDataList.length; i++) {
       if (productDataList[i].productId == id) {
@@ -165,7 +174,7 @@ class Products with ChangeNotifier {
   //   return products[index].price.toString();
   // }
 
-   String foundAndReturnProductsPrice(int id) {
+  String foundAndReturnProductsPrice(int id) {
     int index = -1;
     for (int i = 0; i < productDataList.length; i++) {
       if (productDataList[i].productId == id) {
@@ -194,7 +203,7 @@ class Products with ChangeNotifier {
   //   return products[index].name;
   // }
 
-    String foundAndReturnProductsName(int id) {
+  String foundAndReturnProductsName(int id) {
     int index = -1;
 
     for (int i = 0; i < productDataList.length; i++) {
@@ -224,7 +233,7 @@ class Products with ChangeNotifier {
   //   return products[index].quantity.toString();
   // }
 
-   String foundAndReturnProductsQuantity(int id) {
+  String foundAndReturnProductsQuantity(int id) {
     int index = -1;
 
     for (int i = 0; i < productDataList.length; i++) {
@@ -268,7 +277,8 @@ class Products with ChangeNotifier {
           categoryId: productData['category_id'],
           subCategoryId: productData['sub_category_id'],
           name: productData['name'],
-          detail: Bidi.stripHtmlIfNeeded(productData["detail"]).replaceAll(RegExp(' +'), ' '),
+          detail: Bidi.stripHtmlIfNeeded(productData["detail"])
+              .replaceAll(RegExp(' +'), ' '),
           price: productData['price'],
           quantity: productData['quantity'],
           offerPrice: productData['offer_price'],
@@ -288,35 +298,46 @@ class Products with ChangeNotifier {
     }
   }
 
-    Future<void> getProductsData() async {
-      final url = Uri.parse(APIURLS.getProductList);
-      try {
-        //getting token first
-        final prefs = await SharedPreferences.getInstance();
-        final dynamic extractedUserData =
-            json.decode(prefs.getString("userData").toString());
-        _token = extractedUserData["token"];
-        final response = await http.get(url, headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $_token'
-        });
-
-        Map<String, dynamic> responseData = json.decode(response.body);
-        if (responseData['status'] == false) {
-          notifyListeners();
-          //throwing error message, this will handle in profile widgets
-          throw HttpException(response.body);
-        } else if (responseData['status'] == true) {
-          List<dynamic> productData = responseData["data"];
-          productDataList = productData.map((product) => ProductDetails.fromJson(product)).toList();
-
-          // _orders = data.map((order) => OrderItems.fromJson(order)).toList();
-
-          notifyListeners();
-        }
-      } catch (error) {
-        throw error;
-      }
+  Future<bool> getExecuteProductData() async {
+    try {
+      await getProductsData();
+      return true;
+    } catch (error) {
+      return false;
     }
+  }
 
+  Future<void> getProductsData() async {
+    final url = Uri.parse(APIURLS.getProductList);
+    try {
+      //getting token first
+      final prefs = await SharedPreferences.getInstance();
+      final dynamic extractedUserData =
+          json.decode(prefs.getString("userData").toString());
+      _token = extractedUserData["token"];
+      final response = await http.get(url, headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $_token'
+      });
+
+      Map<String, dynamic> responseData = json.decode(response.body);
+      if (responseData['status'] == false) {
+        notifyListeners();
+        //throwing error message, this will handle in profile widgets
+        throw HttpException(response.body);
+      } else if (responseData['status'] == true) {
+        List<dynamic> productData = responseData["data"];
+        productDataList = productData
+            .map((product) => ProductDetails.fromJson(product))
+            .toList();
+
+        productRequestingData = productDataList;
+
+        notifyListeners();
+       
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 }

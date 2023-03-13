@@ -24,6 +24,17 @@ class HomePageSlider with ChangeNotifier {
    List<HomePageSliderS> sliderImage = [];
    String _token = "null";
 
+   Future<bool> executeGetSlider() async{
+    try{
+      await  getHomeSliderImage();
+      return true;
+
+    }
+    catch(err){
+      return false;
+    }
+   }
+
   Future<void> getHomeSliderImage() async {
     final url = Uri.parse(APIURLS.getHomePageSlider);
     try {

@@ -23,18 +23,6 @@ class _PopularWidgetState extends State<Popular> {
   @override
   void initState() {
     super.initState();
-    // _getPopularData();
-  }
-
-  Future<void> _getPopularData() async {
-    
-       await Provider.of<PopularApi>(context, listen: false).getPopularProduct();
-    if(mounted){   
-    setState(() {
-      isLoaderSpinner = false;
-    });
-    }
-   
   }
 
   List itemColors = [Colors.green, Colors.purple, Colors.blue];
@@ -43,58 +31,57 @@ class _PopularWidgetState extends State<Popular> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child:
-          // Provider.of<PopularApi>(context,listen: false).popularProductsImageData.length == 0 ?
-          isLoaderSpinner
-              ? Center(
-                  child: Container(
-                    child: Text("loading..."),
-                  ),
-                )
-              : Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
-                  height: MediaQuery.of(context).size.height * 0.35,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: Provider.of<PopularApi>(context, listen: false)
-                          .popularProductsImageData
-                          .length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          width: 100,
-                          // width: MediaQuery.of(context).size.width * 0.6,
-                          child: Card(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Color(0xFF713590),
-                                  borderRadius: BorderRadius.circular(15),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        blurRadius: 8,
-                                        offset: Offset(0, 15),
-                                        color:
-                                            Color(0xFF713590).withOpacity(.6),
-                                        spreadRadius: -9)
-                                  ]),
-                              // child:  Icon: SvgPicture.asset("assets/icons/Cart.svg"),
-                              //   child: SvgPicture.asset("assets/icons/Parcel.svg"),
-                              child: Image.network(
-                                Provider.of<PopularApi>(context, listen: false)
-                                    .popularProductsImageData[index]
-                                    .populaImagePath,
-                                fit: BoxFit.fill,
-                              ),
-                              // child: Center(
-                              //     child: Text(
-                              //   imagesList1[index].toString(),
-                              //   style: TextStyle(color: Colors.white, fontSize: 36.0),
-                              // )),
-                            ),
+      child: Consumer<PopularApi>(
+        builder: (ctx, popularAPI, _) => Container(
+          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+          height: MediaQuery.of(context).size.height * 0.35,
+          child: popularAPI.popularProductsImageData.length > 0
+              ? ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: popularAPI.popularProductsImageData.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      width: 100,
+                      // width: MediaQuery.of(context).size.width * 0.6,
+                      child: Card(
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Color(0xFF713590),
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 8,
+                                    offset: Offset(0, 15),
+                                    color: Color(0xFF713590).withOpacity(.6),
+                                    spreadRadius: -9)
+                              ]),
+                          child: Image.network(
+                            popularAPI.popularProductsImageData[index]
+                                .populaImagePath,
+                            fit: BoxFit.fill,
                           ),
-                        );
-                      }),
+                        ),
+                      ),
+                    );
+                  })
+              : FutureBuilder(
+                  future: popularAPI.executeGetProduct(),
+                  builder: (ctx, popularAPIResultSnapshot) =>
+                      popularAPIResultSnapshot.connectionState ==
+                              ConnectionState.waiting
+                          ? Center(
+                              child: Container(
+                                child: Text("loading..."),
+                              ),
+                            )
+                          : Center(
+                              child: Container(
+                                child: Text("please restart the app."),
+                              ),
+                            ),
                 ),
+        ),
+      ),
     );
   }
 }

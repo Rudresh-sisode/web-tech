@@ -19,7 +19,7 @@ class ProfileScreen extends StatelessWidget {
         backgroundColor: kPrimaryColor,
       ),
       body: Body(),
-      bottomNavigationBar: const BottomMenu(selectedMenu: MenuState.home),
+      bottomNavigationBar: const BottomMenu(),
     );
   }
 }

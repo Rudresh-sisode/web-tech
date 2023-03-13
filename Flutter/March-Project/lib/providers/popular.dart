@@ -31,6 +31,16 @@ class PopularApi with ChangeNotifier {
   //   'https://cdn.pixabay.com/photo/2015/10/26/11/10/honey-1006972_1280.jpg',
   // ];
 
+  Future<bool> executeGetProduct() async{
+    try{
+      await getPopularProduct();
+      return true;
+    }
+    catch(error){
+      return false;
+    }
+  }
+
   Future<void> getPopularProduct() async {
     final url = Uri.parse(APIURLS.getPopularProductUrl);
     try {

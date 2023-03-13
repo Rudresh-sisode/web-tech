@@ -47,7 +47,7 @@ class UpdateppassScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomMenu(selectedMenu: MenuState.home),
+      bottomNavigationBar: BottomMenu(),
     );
   }
 }

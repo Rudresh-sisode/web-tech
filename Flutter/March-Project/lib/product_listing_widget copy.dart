@@ -228,7 +228,7 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
           // ),
         ],
       ),
-      bottomNavigationBar: BottomMenu(selectedMenu: MenuState.home),
+      bottomNavigationBar: BottomMenu(),
     );
   }
 }
