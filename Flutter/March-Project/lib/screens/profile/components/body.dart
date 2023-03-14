@@ -13,6 +13,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/user-profile.dart';
+import '../../../providers/bottom-menu.dart';
 import '../../../providers/orders.dart' as OrdersProvider;
 import '../../../components/global_snack_bar.dart';
 import '../../../providers/auth.dart';
@@ -60,11 +61,17 @@ class _ProfileState extends State<Body> {
   }
 
   Future<void> _getData() async {
-    await Provider.of<Auth>(context, listen: false).getCustomerProfile();
+    try{
+      await Provider.of<Auth>(context, listen: false).getCustomerProfile();
     profileData = Provider.of<Auth>(context, listen: false).customerProfileData;
     setState(() {
       isLoadingSpinner = false;
     });
+    }
+    catch(error){
+      GlobalSnackBar.show(context, error.toString());
+    }
+    
   }
 
   Future<void> orderCheckout() async {
@@ -255,6 +262,7 @@ class _ProfileState extends State<Body> {
                                 fontSize: 12,
                                 color: Color.fromARGB(255, 75, 74, 74))),
                         onTap: () {
+                          Provider.of<BottomMenuHandler>(context,listen:false).changeCurrentValue(BottomMuenu.Home);
                           Provider.of<Auth>(context, listen: false).logout();
                           Navigator.pushAndRemoveUntil(
                               context,

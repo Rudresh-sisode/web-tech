@@ -86,7 +86,7 @@ class _BottomMenuState extends State<BottomMenu> {
                         // await .getCustomerProfile();
 
                         bottomMenuHandler.currentValue = BottomMuenu.Cart;
-
+                        // Navigator.pushReplacementNamed(context, CheckoutWidget.routeName);
                         Navigator.pushNamed(context, CheckoutWidget.routeName);
                       },
               ),
@@ -97,9 +97,7 @@ class _BottomMenuState extends State<BottomMenu> {
                         ? kPrimaryColor
                         : inActiveIconColor,
                   ),
-                  onPressed: Provider.of<BottomMenuHandler>(context,
-                                  listen: false)
-                              .currentValue ==
+                  onPressed: bottomMenuHandler.currentValue ==
                           BottomMuenu.Profile
                       ? null
                       : () {

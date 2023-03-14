@@ -14,6 +14,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 
 import '/bloc/cart_bloc.dart';
 import 'bloc/event/cart_event.dart';
@@ -50,7 +51,7 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
    
     getProductDetails(widget.product.productId.toString());
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      Provider.of<BottomMenuHandler>(context,listen:false).changeCurrentValue(BottomMuenu.Home);
+      // Provider.of<BottomMenuHandler>(context,listen:false).changeCurrentValue(BottomMuenu.Home);
     });
   }
 
@@ -117,18 +118,13 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
+        // iconTheme: ,
         backgroundColor: AppTheme.of(context).secondaryBackground,
         automaticallyImplyLeading: false,
         leading: InkWell(
           onTap: () async {
-            // context.ancestorWidgetOfExactType(MyWidget)
-            // final  previousRouteName =
-        // ModalRoute.of(context)?.settings.name.toString() ;
-        //     print("your scaffold key "+previousRouteName.toString());
-            // final ProductDetailWidget mywd = context.findAncestorStateOfType() as ProductDetailWidget;
-            print("your scaffold key2 ");
-
-            // Navigator.pop(context);
+            // Provider.of<BottomMenuHandler>(context,listen: false).backToParentValue();
+            Navigator.pop(context);
           },
           child: Icon(
             Icons.arrow_back_rounded,
@@ -173,6 +169,7 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                     size: 30,
                   ),
                   onPressed: () {
+                    
                     Navigator.push(
                       context,
                       MaterialPageRoute(

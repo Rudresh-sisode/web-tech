@@ -62,6 +62,13 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
 // }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    print('dependancy changes on product listing widget');
+
+  }
+
+  @override
   void initState() {
     super.initState();
 
@@ -76,7 +83,7 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
         GlobalSnackBar.show(context, otpMessage);
       }
       Provider.of<Auth>(context, listen: false).userRegMessage = "";
-      Provider.of<BottomMenuHandler>(context,listen:true).changeCurrentValue(BottomMuenu.Home);
+      // Provider.of<BottomMenuHandler>(context,listen:false).changeCurrentValue(BottomMuenu.Home);
     });
   }
 

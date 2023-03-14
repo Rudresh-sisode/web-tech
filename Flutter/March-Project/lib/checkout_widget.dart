@@ -64,7 +64,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
     });
 
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      Provider.of<BottomMenuHandler>(context,listen:false).changeCurrentValue(BottomMuenu.Cart);
+      // Provider.of<BottomMenuHandler>(context,listen:false).changeCurrentValue(BottomMuenu.Cart);
     });
   }
 
@@ -105,62 +105,89 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
     print("widget build" + checkoutDetails["name"]);
     return Scaffold(
       key: scaffoldKey,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(120),
-        child: AppBar(
+      appBar: 
+      // PreferredSize(
+      //   preferredSize: Size.fromHeight(120),
+        // child: 
+        AppBar(
+          centerTitle: true,
           // backgroundColor: kAppBarColor,
-          automaticallyImplyLeading: false,
-          flexibleSpace: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 8),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.arrow_back_rounded,
-                          color: AppTheme.of(context).primaryText,
-                          size: 30,
-                        ),
-                        onPressed: () async {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
-                      child: Text(
-                        'Back',
-                        style: AppTheme.of(context).title1.override(
-                              fontFamily: 'Poppins',
-                              fontSize: 16,
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
-                  child: Text(
-                    'Cart',
-                    style: AppTheme.of(context).title1,
-                  ),
-                ),
-              ),
-            ],
+          // automaticallyImplyLeading: false,
+          // flexibleSpace: Column(
+          //   mainAxisSize: MainAxisSize.max,
+          //   mainAxisAlignment: MainAxisAlignment.end,
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     Padding(
+          //       padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 8),
+          //       child: Row(
+          //         mainAxisSize: MainAxisSize.max,
+          //         children: [
+          //           Padding(
+          //             padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+          //             child: IconButton(
+          //               icon: Icon(
+          //                 Icons.arrow_back_rounded,
+          //                 color: AppTheme.of(context).primaryText,
+          //                 size: 30,
+          //               ),
+          //               onPressed: () async {
+          //                 // Provider.of<BottomMenuHandler>(context,listen: false).backToParentValue();
+          //                 Navigator.pop(context);
+          //               },
+          //             ),
+          //           ),
+          //           Padding(
+          //             padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
+          //             child: Text(
+          //               'Back',
+          //               style: AppTheme.of(context).title1.override(
+          //                     fontFamily: 'Poppins',
+          //                     fontSize: 16,
+          //                   ),
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //     Expanded(
+          //       child: Padding(
+          //         padding: EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
+          //         child: Text(
+          //           'Cart',
+          //           style: AppTheme.of(context).title1,
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // backgroundColor: AppTheme.of(context).secondaryBackground,
+          backgroundColor: kPrimaryColor,
+        automaticallyImplyLeading: false,
+        leading: InkWell(
+          onTap: () async {
+            // Provider.of<BottomMenuHandler>(context,listen: false).backToParentValue();
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back_rounded,
+            color: Color.fromARGB(255, 253, 253, 253),
+            size: 24,
           ),
+        ),
+        title: Text(
+          'Cart',
+          style: AppTheme.of(context).subtitle2.override(
+                fontFamily: 'Lexend Deca',
+                color: Color.fromARGB(255, 253, 253, 253),
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
+        ),
           actions: [],
           elevation: 0,
         ),
-      ),
+      // ),
       backgroundColor: AppTheme.of(context).primaryBackground,
       body: Stack(
         children: <Widget>[
@@ -1036,7 +1063,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                 )
         ],
       ),
-      bottomNavigationBar: BottomMenu(),
+      bottomNavigationBar:  BottomMenu(),
     );
   }
 }
