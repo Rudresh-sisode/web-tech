@@ -25,7 +25,7 @@ class Auth with ChangeNotifier {
   int count = 0;
   String userEmailAddress = "";
 
-  UserProfile customerProfileData = UserProfile(name: "Pending..", email: "Pending..", mobile: "Pending..");
+  UserProfile customerProfileData = UserProfile(name: "", email: "", mobile: "");
 
   // dynamic _authTimer = Timer(Duration(seconds: 5 ),null)
 
@@ -232,6 +232,15 @@ class Auth with ChangeNotifier {
       }
     } catch (error) {
       throw error;
+    }
+  }
+
+  Future<bool> executeGetProfile() async {
+    try {
+      await getCustomerProfile();
+      return true;
+    } catch (error) {
+      return false;
     }
   }
 

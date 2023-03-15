@@ -111,56 +111,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
         // child: 
         AppBar(
           centerTitle: true,
-          // backgroundColor: kAppBarColor,
-          // automaticallyImplyLeading: false,
-          // flexibleSpace: Column(
-          //   mainAxisSize: MainAxisSize.max,
-          //   mainAxisAlignment: MainAxisAlignment.end,
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   children: [
-          //     Padding(
-          //       padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 8),
-          //       child: Row(
-          //         mainAxisSize: MainAxisSize.max,
-          //         children: [
-          //           Padding(
-          //             padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-          //             child: IconButton(
-          //               icon: Icon(
-          //                 Icons.arrow_back_rounded,
-          //                 color: AppTheme.of(context).primaryText,
-          //                 size: 30,
-          //               ),
-          //               onPressed: () async {
-          //                 // Provider.of<BottomMenuHandler>(context,listen: false).backToParentValue();
-          //                 Navigator.pop(context);
-          //               },
-          //             ),
-          //           ),
-          //           Padding(
-          //             padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
-          //             child: Text(
-          //               'Back',
-          //               style: AppTheme.of(context).title1.override(
-          //                     fontFamily: 'Poppins',
-          //                     fontSize: 16,
-          //                   ),
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //     Expanded(
-          //       child: Padding(
-          //         padding: EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
-          //         child: Text(
-          //           'Cart',
-          //           style: AppTheme.of(context).title1,
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          // ),
+          
           // backgroundColor: AppTheme.of(context).secondaryBackground,
           backgroundColor: kPrimaryColor,
         automaticallyImplyLeading: false,
@@ -622,8 +573,10 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                       width: 200,
                                       child: ElevatedButton(
                                         onPressed: () {
+                                          Provider.of<BottomMenuHandler>(context, listen: false).changeCurrentValue(BottomMuenu.Home);
+                                          Navigator.pop(context);
                                           Navigator.pushNamed(context,
-                                              ProductListingWidget.routeName);
+                                            ProductListingWidget.routeName);
                                         },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: kPrimaryColor,
@@ -718,25 +671,48 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                             controller: controller,
                             padding: EdgeInsets.all(10),
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Select address',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  IconButton(
-                                    icon: Icon(Icons.close),
-                                    onPressed: () => setState(() {
-                                      showSheet = !showSheet;
-                                    }),
-                                  ),
-                                ],
+                              Container(
+                                color: Colors.lightBlue,
+                                height: 40,
+                                //  backgroundColor: Colors.lightBlue,
+                                child: Row(
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: Text(
+                                        'Select address',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            // textAlign:TextAlign.center,/
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
+
+                              // Row(
+                              //   mainAxisAlignment:
+                              //       MainAxisAlignment.spaceBetween,
+                              //   children: [
+                              //     Text(
+                              //       'Select address',
+                              //       style: TextStyle(
+                              //         fontSize: 20,
+                              //         height: 2,
+                              //         backgroundColor: Colors.lightBlue,
+                              //         fontWeight: FontWeight.bold,
+                              //       ),
+                              //     ),
+                              //     IconButton(
+                              //       icon: Icon(Icons.close),
+                              //       onPressed: () => setState(() {
+                              //         showSheet = !showSheet;
+                              //       }),
+                              //     ),
+                              //   ],
+                              // ),
                               Row(
                                 children: [
                                   Container(

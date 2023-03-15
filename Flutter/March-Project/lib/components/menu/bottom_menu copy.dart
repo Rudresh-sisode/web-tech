@@ -30,11 +30,9 @@ class _BottomMenuState extends State<BottomMenu> {
     super.initState();
     print("called this time ");
   }
-
   @override
   Widget build(BuildContext context) {
-    final Color inActiveIconColor = Color(0xFFB6B6B6);
-    // final Color inActiveIconColor = Color.fromARGB(255, 34, 0, 255);
+    final Color inActiveIconColor = Color.fromARGB(255, 34, 0, 255);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 14),
       decoration: BoxDecoration(
@@ -58,19 +56,12 @@ class _BottomMenuState extends State<BottomMenu> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               IconButton(
-                icon: Icon(
-                  Icons.home,
+                icon: SvgPicture.asset(
+                  "assets/icons/Home.svg",
                   color: BottomMuenu.Home == bottomMenuHandler.currentValue
                       ? kPrimaryColor
                       : inActiveIconColor,
-                  size: 24.0,
                 ),
-                // icon: SvgPicture.asset(
-                //   "assets/icons/Home.svg",
-                //   color: BottomMuenu.Home == bottomMenuHandler.currentValue
-                //       ? kPrimaryColor
-                //       : inActiveIconColor,
-                // ),
                 onPressed: bottomMenuHandler.currentValue == BottomMuenu.Home
                     ? null
                     : () {
@@ -89,19 +80,12 @@ class _BottomMenuState extends State<BottomMenu> {
               //   onPressed: () {},
               // ),
               IconButton(
-                icon: Icon(
-                  Icons.shopping_cart,
+                icon: SvgPicture.asset(
+                  "assets/icons/Cart Icon.svg",
                   color: BottomMuenu.Cart == bottomMenuHandler.currentValue
                       ? kPrimaryColor
                       : inActiveIconColor,
-                  size: 24.0,
                 ),
-                // icon: SvgPicture.asset(
-                //   "assets/icons/Cart Icon.svg",
-                //   color: BottomMuenu.Cart == bottomMenuHandler.currentValue
-                //       ? kPrimaryColor
-                //       : inActiveIconColor,
-                // ),
                 onPressed: bottomMenuHandler.currentValue == BottomMuenu.Cart
                     ? null
                     : () {
@@ -115,19 +99,12 @@ class _BottomMenuState extends State<BottomMenu> {
                       },
               ),
               IconButton(
-                  icon: Icon(
-                    Icons.person,
+                  icon: SvgPicture.asset(
+                    "assets/icons/User Icon.svg",
                     color: BottomMuenu.Profile == bottomMenuHandler.currentValue
                         ? kPrimaryColor
                         : inActiveIconColor,
-                    size: 24.0,
                   ),
-                  // icon: SvgPicture.asset(
-                  //   "assets/icons/User Icon.svg",
-                  //   color: BottomMuenu.Profile == bottomMenuHandler.currentValue
-                  //       ? kPrimaryColor
-                  //       : inActiveIconColor,
-                  // ),
                   onPressed: bottomMenuHandler.currentValue ==
                           BottomMuenu.Profile
                       ? null

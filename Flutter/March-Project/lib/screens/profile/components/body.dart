@@ -33,7 +33,6 @@ class Body extends StatefulWidget {
 }
 
 class _ProfileState extends State<Body> {
-  late List<UserModel>? _userModel = [];
   bool isAuth = false;
   late UserProfile profileData;
   bool isLoadingSpinner = true;
@@ -41,11 +40,6 @@ class _ProfileState extends State<Body> {
   @override
   void initState() {
     super.initState();
-
-    //you can add after builder do action here for checking is local time has expired or not.
-
-    // isAuth = Provider.of<Auth>(context,listen: false).isAuth;
-    _getData();
 
     if (Provider.of<Auth>(context, listen: false)
         .userProfileMessage
@@ -60,26 +54,13 @@ class _ProfileState extends State<Body> {
     }
   }
 
-  Future<void> _getData() async {
-    try{
-      await Provider.of<Auth>(context, listen: false).getCustomerProfile();
-    profileData = Provider.of<Auth>(context, listen: false).customerProfileData;
-    setState(() {
-      isLoadingSpinner = false;
-    });
-    }
-    catch(error){
-      GlobalSnackBar.show(context, error.toString());
-    }
-    
-  }
-
   Future<void> orderCheckout() async {
     try {
       // await Provider.of<OrdersProvider.Orders>(context, listen: false).getAllOrderListings();
       Navigator.pushNamed(context, Orders.routeName);
     } on FormatException catch (_, error) {
       // _showErrorDialog(error.toString());
+      GlobalSnackBar.show(context, error.toString());
     } catch (error) {
       Map<String, dynamic> errorRes = json.decode(error.toString());
       Map<String, dynamic> errorMessage = {};
@@ -123,25 +104,12 @@ class _ProfileState extends State<Body> {
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.all(4),
-        child:
-            /**
-         *  Consumer<Cart>(builder: (_, cartState,ch) {
-            List<CartItem> cartItem = cartState.items;
-            eturn Padding(
-         */
-            // Consumer<Auth>(builder: (_,authState,ch) {
-            //   authState.getCustomerProfile();
-            //   return authState.userProfileHasLoaded == false ?
-            isLoadingSpinner
-                ? Center(
-                    child: Container(
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        width: 60,
-                        child: SpinKitCubeGrid(
-                          color: kPrimaryColor,
-                        )),
-                  )
-                : Column(
+        child: Consumer<Auth>(
+          builder: (ctx, authData, _) {
+            return (authData.customerProfileData.name.isNotEmpty &&
+                    authData.customerProfileData.mobile.isNotEmpty &&
+                    authData.customerProfileData.email.isNotEmpty)
+                ? Column(
                     children: <Widget>[
                       const SizedBox(
                         width: 120,
@@ -153,14 +121,14 @@ class _ProfileState extends State<Body> {
                       const SizedBox(height: 10),
                       Text(
                         // authState.customerProfileData.name
-                        profileData.name.isNotEmpty
-                            ? profileData.name
-                            : "user name",
+                        authData.customerProfileData.name.isNotEmpty
+                            ? authData.customerProfileData.name
+                            : "N.A",
                       ),
                       Text(
                         // authState.customerProfileData.email
-                        profileData.email.isNotEmpty
-                            ? profileData.email
+                        authData.customerProfileData.email.isNotEmpty
+                            ? authData.customerProfileData.email
                             : "user email",
                       ),
                       const SizedBox(height: 20),
@@ -190,28 +158,34 @@ class _ProfileState extends State<Body> {
                       // List item
                       ListTile(
                         leading: Container(
-                            width: 20,
-                            height: 20,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: kPrimaryColor.withOpacity(0.1)),
-                            // child:  Icon: SvgPicture.asset("assets/icons/Cart.svg"),
-                            child:
-                                SvgPicture.asset("assets/icons/Settings.svg")),
-                        title: const Text(
-                          'Settings',
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: Color.fromARGB(255, 75, 74, 74)),
-                        ),
-                        trailing: Container(
-                          width: 10,
-                          height: 10,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100),
                               color: kPrimaryColor.withOpacity(0.1)),
-                          child:
-                              SvgPicture.asset("assets/icons/arrow_right.svg"),
+                          // child:  Icon: SvgPicture.asset("assets/icons/Cart.svg"),
+                          child: Icon(
+                            Icons.settings,
+                            color: kPrimaryColor,
+                            size: 30.0,
+                          ),
+                        ),
+                        title: const Text(
+                          'Settings',
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Color.fromARGB(255, 75, 74, 74)),
+                        ),
+                        trailing: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            // color: kPrimaryColor.withOpacity(0.1)
+                          ),
+                          child: Icon(
+                            Icons.arrow_right,
+                            color: kPrimaryColor,
+                            size: 35.0,
+                          ),
+                          // child: SvgPicture.asset(
+                          //     "assets/icons/arrow_right.svg"),
                         ),
                         onTap: () {
                           Navigator.pushNamed(
@@ -223,23 +197,33 @@ class _ProfileState extends State<Body> {
                           width: 20,
                           height: 20,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              color: kPrimaryColor.withOpacity(0.1)),
+                            borderRadius: BorderRadius.circular(100),
+                            // color: kPrimaryColor.withOpacity(0.1)
+                          ),
                           // child:  Icon: SvgPicture.asset("assets/icons/Cart.svg"),
-                          child: SvgPicture.asset("assets/icons/Parcel.svg"),
+                          // child: SvgPicture.asset("assets/icons/Parcel.svg"),
+                          child: Icon(
+                            Icons.shopping_bag,
+                            color: kPrimaryColor,
+                            size: 30.0,
+                          ),
                         ),
                         title: const Text('Orders',
                             style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 16,
                                 color: Color.fromARGB(255, 75, 74, 74))),
                         trailing: Container(
-                          width: 10,
-                          height: 10,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              color: kPrimaryColor.withOpacity(0.1)),
-                          child:
-                              SvgPicture.asset("assets/icons/arrow_right.svg"),
+                            borderRadius: BorderRadius.circular(100),
+                            // color: kPrimaryColor.withOpacity(0.1)
+                          ),
+                          child: Icon(
+                            Icons.arrow_right,
+                            color: kPrimaryColor,
+                            size: 35.0,
+                          ),
+                          // child:
+                          //     SvgPicture.asset("assets/icons/arrow_right.svg"),
                         ),
                         onTap: () {
                           orderCheckout();
@@ -247,22 +231,28 @@ class _ProfileState extends State<Body> {
                       ),
                       ListTile(
                         leading: Container(
-                            width: 20,
-                            height: 20,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: kPrimaryColor.withOpacity(0.1)),
+                          width: 20,
+                          height: 20,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              color: kPrimaryColor.withOpacity(0.1)),
 
-                            // child:  Icon: SvgPicture.asset("assets/icons/Cart.svg"),
-                            child:
-                                SvgPicture.asset("assets/icons/Log out.svg")),
-
+                          // child:  Icon: SvgPicture.asset("assets/icons/Cart.svg"),
+                          // child:
+                          //     SvgPicture.asset("assets/icons/Log out.svg")
+                          child: Icon(
+                            Icons.logout,
+                            color: kPrimaryColor,
+                            size: 30.0,
+                          ),
+                        ),
                         title: const Text('Logout',
                             style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 16,
                                 color: Color.fromARGB(255, 75, 74, 74))),
                         onTap: () {
-                          Provider.of<BottomMenuHandler>(context,listen:false).changeCurrentValue(BottomMuenu.Home);
+                          Provider.of<BottomMenuHandler>(context, listen: false)
+                              .changeCurrentValue(BottomMuenu.Home);
                           Provider.of<Auth>(context, listen: false).logout();
                           Navigator.pushAndRemoveUntil(
                               context,
@@ -270,83 +260,32 @@ class _ProfileState extends State<Body> {
                                   builder: (context) => AuthScreen()),
                               (route) => false);
                         },
-                        // title: TextButton.icon(
-                        //     label: const Text('Logout'),
-                        //     icon: const Icon(Icons.logout),
-                        //     onPressed: () {
-                        //       // Navigator.pop(context);
-                        //       Provider.of<Auth>(context, listen: false)
-                        //           .logout();
-                        //       Navigator.pushAndRemoveUntil(
-                        //           context,
-                        //           MaterialPageRoute(
-                        //               builder: (context) => AuthScreen()),
-                        //           (route) => false);
-                        //       // Navigator.pushNamed(context, AuthScreens.routeName);
-                        //     }),
-
-                        // title: Text('Logout',
-                        //     style: TextStyle(
-                        //         fontSize: 12, color: Color.fromARGB(255, 75, 74, 74))
-                        //         ),
-                        // trailing: Container(
-                        //   width: 10,
-                        //   height: 10,
-                        //   // decoration: BoxDecoration(
-                        //   //     borderRadius: BorderRadius.circular(100),
-                        //   //     color: kPrimaryColor.withOpacity(0.1)),
-                        //   // child:
-                        //   //     SvgPicture.asset("assets/icons/arrow_right.svg"),
-                        // ),
                       ),
                     ],
-                  ),
-        // ,),
-        // Provider.of<Auth>(context,listen:false).userProfileHasLoaded == false ?
+                  )
+                : FutureBuilder(
+                    future: authData.executeGetProfile(),
+                    builder: (ctx, authReturnSnapshot) => authReturnSnapshot
+                                .connectionState ==
+                            ConnectionState.waiting
+                        ? Center(
+                            child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.2,
+                                width: 60,
+                                child: SpinKitCubeGrid(
+                                  color: kPrimaryColor,
+                                )),
+                          )
+                        : Center(
+                            child: Container(
+                              child: Text("please restart the app."),
+                            ),
+                          ),
+                  );
+          },
+        ),
       ),
     );
   }
 }
-
-/**
- * 
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('REST API Example'),
-      ),
-      body: _userModel == null || _userModel!.isEmpty
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : ListView.builder(
-              itemCount: _userModel!.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(_userModel![index].id.toString()),
-                          Text(_userModel![index].username),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(_userModel![index].email),
-                          Text(_userModel![index].website),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-    );
-  }
- */

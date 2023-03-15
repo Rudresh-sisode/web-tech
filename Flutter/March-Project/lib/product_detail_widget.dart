@@ -4,7 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecomm_app/providers/bottom-menu.dart';
 import 'package:ecomm_app/providers/cart.dart';
 import 'package:ecomm_app/providers/products.dart';
-import 'package:flutter/material.dart' ;
+import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badge;
 import 'package:ecomm_app/app_theme.dart';
 import 'package:ecomm_app/const_error_msg.dart';
@@ -41,7 +41,7 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
   final scaffoldKey = GlobalKey<ScaffoldState>();
   int? countControllerValue;
   bool isLoadingSpinner = true;
-  List<Widget> imageSliders = [ ];
+  List<Widget> imageSliders = [];
   final CarouselController _controller = CarouselController();
   int _current = 0;
 
@@ -55,14 +55,17 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
     });
   }
 
-  Future<void> getProductDetails(String id) async{
+  Future<void> getProductDetails(String id) async {
     try {
-        await Provider.of<Products>(context, listen: false).getProductDetailsById(id);
-        setState(() {
-          isLoadingSpinner = false;
-        });
+      await Provider.of<Products>(context, listen: false)
+          .getProductDetailsById(id);
+      setState(() {
+        isLoadingSpinner = false;
+      });
 
-         imageSliders = Provider.of<Products>(context, listen: false).product.productImages
+      imageSliders = Provider.of<Products>(context, listen: false)
+          .product
+          .productImages
           .map((item) => Container(
                 child: Container(
                   margin: EdgeInsets.all(5.0),
@@ -70,7 +73,8 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       child: Stack(
                         children: <Widget>[
-                          Image.network(item.imageFullPath, fit: BoxFit.cover, width: 1000.0),
+                          Image.network(item.imageFullPath,
+                              fit: BoxFit.cover, width: 1000.0),
                           Positioned(
                             bottom: 0.0,
                             left: 0.0,
@@ -104,14 +108,11 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                 ),
               ))
           .toList();
-
-      } catch (error) {
-        Map<String, dynamic> errorRes = json.decode(error.toString());
-        GlobalSnackBar.show(context, errorRes["message"]);
-      }
+    } catch (error) {
+      Map<String, dynamic> errorRes = json.decode(error.toString());
+      GlobalSnackBar.show(context, errorRes["message"]);
+    }
   }
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +143,7 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
               ),
         ),
         actions: [
-          Consumer<Cart>(builder: (_, cartState,ch) {
+          Consumer<Cart>(builder: (_, cartState, ch) {
             List<CartItem> cartItem = cartState.items;
             return Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 8, 24, 0),
@@ -169,7 +170,9 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                     size: 30,
                   ),
                   onPressed: () {
-                    
+                    Provider.of<BottomMenuHandler>(context,
+                                    listen: false)
+                                .changeCurrentValue(BottomMuenu.Cart);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -186,229 +189,262 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
         elevation: 0,
       ),
       backgroundColor: AppTheme.of(context).secondaryBackground,
-      body:
-      isLoadingSpinner ? 
-      Center(
-                child: Container(
+      body: isLoadingSpinner
+          ? Center(
+              child: Container(
                   height: MediaQuery.of(context).size.height * 0.2,
                   width: 60,
-                  child: 
-                  SpinKitCubeGrid(
+                  child: SpinKitCubeGrid(
                     color: kPrimaryColor,
-                  )
-                ),
-              ) :
-       Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  //coreusal here
-                  Column(children: [
-                    CarouselSlider(
-                        items: imageSliders,
-                        carouselController: _controller,
-                        options: CarouselOptions(
-                            autoPlay: true,
-                            enlargeCenterPage: true,
-                            aspectRatio: 2.0,
-                            onPageChanged: (index, reason) {
-                              setState(() {
-                                _current = index;
-                              });
-                            }),
-                      ),
-                   
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: Provider.of<Products>(context, listen: false).product.productImages.asMap().entries.map((entry) {
-                        return GestureDetector(
-                          onTap: () => _controller.animateToPage(entry.key),
-                          child: Container(
-                            width: 12.0,
-                            height: 12.0,
-                            margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: (Theme.of(context).brightness == Brightness.dark
-                                        ? Colors.white
-                                        : Colors.black)
-                                    .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+                  )),
+            )
+          : Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        //coreusal here
+                        Column(children: [
+                          CarouselSlider(
+                            items: imageSliders,
+                            carouselController: _controller,
+                            options: CarouselOptions(
+                                autoPlay: true,
+                                enlargeCenterPage: true,
+                                aspectRatio: 2.0,
+                                onPageChanged: (index, reason) {
+                                  setState(() {
+                                    _current = index;
+                                  });
+                                }),
                           ),
-                        );
-                      }).toList(),
-                    ),
-                  ]),
-                  // Padding(
-                    // padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
-                    // child: 
-                    //add a carosel here
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children:
+                                Provider.of<Products>(context, listen: false)
+                                    .product
+                                    .productImages
+                                    .asMap()
+                                    .entries
+                                    .map((entry) {
+                              return GestureDetector(
+                                onTap: () =>
+                                    _controller.animateToPage(entry.key),
+                                child: Container(
+                                  width: 12.0,
+                                  height: 12.0,
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 8.0, horizontal: 4.0),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: (Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? Colors.white
+                                              : Colors.black)
+                                          .withOpacity(_current == entry.key
+                                              ? 0.9
+                                              : 0.4)),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ]),
+                        // Padding(
+                        // padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                        // child:
+                        //add a carosel here
 
-                    // Hero(
-                    //   tag: 'mainImage',
-                    //   transitionOnUserGestures: true,
-                    //   child: ClipRRect(
-                    //     borderRadius: BorderRadius.circular(12),
-                    //     child: Image.network(
-                    //       widget.product.image,
-                    //       // Provider.of<Products>(context, listen: false).product.
-                    //       width: double.infinity,
-                    //       height: 300,
-                    //       fit: BoxFit.cover,
-                    //     ),
-                    //   ),
-                    // ),
-                  // ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                    child: Text(
-                      'Product details',
-                      // style: AppTheme.of(context).title1,
+                        // Hero(
+                        //   tag: 'mainImage',
+                        //   transitionOnUserGestures: true,
+                        //   child: ClipRRect(
+                        //     borderRadius: BorderRadius.circular(12),
+                        //     child: Image.network(
+                        //       widget.product.image,
+                        //       // Provider.of<Products>(context, listen: false).product.
+                        //       width: double.infinity,
+                        //       height: 300,
+                        //       fit: BoxFit.cover,
+                        //     ),
+                        //   ),
+                        // ),
+                        // ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                          child: Text(
+                            'Product details',
+                            // style: AppTheme.of(context).title1,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(16, 4, 0, 0),
+                          // child: Text(
+                          //   '\$${widget.product.price}',
+                          //   textAlign: TextAlign.start,
+                          //   style: AppTheme.of(context).subtitle1,
+                          // ),
+                          child: RichText(
+                            text: TextSpan(
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text:
+                                      '₹ ${Provider.of<Products>(context, listen: false).product.price}',
+                                  // style: TextStyle(color: Colors.blue)
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      decoration: TextDecoration.lineThrough),
+                                ),
+                                TextSpan(text: " "),
+                                TextSpan(
+                                    text:
+                                        '₹ ${Provider.of<Products>(context, listen: false).product.offerPrice}',
+                                    style: TextStyle(color: Colors.blue)),
+                                TextSpan(text: "  "),
+                                TextSpan(
+                                    text:
+                                        '(${Provider.of<Products>(context, listen: false).product.offerPrice - Provider.of<Products>(context, listen: false).product.price} ₹ off)',
+                                    style: TextStyle(color: Colors.blue))
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
+                          child: Text(
+                              "Qty: ${Provider.of<Products>(context, listen: false).product.quantity} available"),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
+                          child: Text(
+                            Provider.of<Products>(context, listen: false)
+                                .product
+                                .detail as String,
+                            // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.',
+                            style: AppTheme.of(context).bodyText2,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 4, 0, 0),
-                    // child: Text(
-                    //   '\$${widget.product.price}',
-                    //   textAlign: TextAlign.start,
-                    //   style: AppTheme.of(context).subtitle1,
-                    // ),
-                    child: RichText(
-                      text: TextSpan(
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: '₹ ${Provider.of<Products>(context, listen: false).product.price}',
-                              // style: TextStyle(color: Colors.blue)
-                              style: TextStyle(
-                                                                    color: Colors.blue,
-                                                                    decoration: TextDecoration.lineThrough),),
-                          TextSpan(text: " "),
-                          TextSpan(
-                              text: '₹ ${Provider.of<Products>(context, listen: false).product.offerPrice}',
-                              style: TextStyle(color: Colors.blue)),
-                          TextSpan(text: "  "),
-                          TextSpan(text: '(${Provider.of<Products>(context, listen: false).product.offerPrice - Provider.of<Products>(context, listen: false).product.price} ₹ off)',style: TextStyle(color: Colors.blue))
+                ),
+                Text(''),
+                Material(
+                  color: Colors.transparent,
+                  elevation: 3,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(0),
+                  ),
+                  child: Container(
+                    width: double.infinity,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: AppTheme.of(context).primaryBackground,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 4,
+                          color: Color(0x320F1113),
+                          offset: Offset(0, -2),
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(0),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 34),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 130,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: AppTheme.of(context).secondaryBackground,
+                              borderRadius: BorderRadius.circular(12),
+                              shape: BoxShape.rectangle,
+                              border: Border.all(
+                                color: AppTheme.of(context).primaryBackground,
+                                width: 2,
+                              ),
+                            ),
+                            child: CountController(
+                              decrementIconBuilder: (enabled) => Icon(
+                                Icons.remove_rounded,
+                                color: enabled
+                                    ? AppTheme.of(context).secondaryText
+                                    : AppTheme.of(context).secondaryText,
+                                size: 16,
+                              ),
+                              incrementIconBuilder: (enabled) => Icon(
+                                Icons.add_rounded,
+                                color: enabled
+                                    ? AppTheme.of(context).primaryColor
+                                    : AppTheme.of(context).secondaryText,
+                                size: 16,
+                              ),
+                              countBuilder: (count) => Text(
+                                count.toString(),
+                                style: AppTheme.of(context).subtitle1,
+                              ),
+                              count: countControllerValue ??= 1,
+                              updateCount: (count) =>
+                                  setState(() => countControllerValue = count),
+                              stepSize: 1,
+                              minimum: 1,
+                            ),
+                          ),
+                          MyButtonWidget(
+                            onPressed: () {
+                              ProductDetails p = widget.product;
+                              Provider.of<Cart>(context, listen: false).addItem(
+                                  p.productId.toString(),
+                                  context,
+                                  countControllerValue.toString());
+                              if (Provider.of<Cart>(context, listen: false)
+                                      .quantityStatus
+                                      .isNotEmpty &&
+                                  Provider.of<Cart>(context, listen: false)
+                                          .quantityStatus !=
+                                      "Available") {
+                                GlobalSnackBar.show(
+                                    context,
+                                    Provider.of<Cart>(context, listen: false)
+                                        .quantityStatus);
+                                Provider.of<Cart>(context, listen: false)
+                                    .quantityStatus = "";
+                              }
+                              GlobalSnackBar.show(
+                                  context, 'Items added in cart');
+                              // BlocProvider.of<CartBloc>(context).add(AddProduct(p));
+                            },
+                            text: 'Add to Cart',
+                            options: ButtonOptions(
+                                width: 160,
+                                height: 50,
+                                color: kPrimaryColor,
+                                textStyle:
+                                    AppTheme.of(context).subtitle2.override(
+                                          fontFamily: 'Poppins',
+                                          color: Colors.white,
+                                        ),
+                                elevation: 5,
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                  width: 1,
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(36))),
+                          ),
                         ],
                       ),
                     ),
                   ),
-                  Padding(padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
-                  child: Text("Qty: ${Provider.of<Products>(context, listen: false).product.quantity} available"),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
-                    child: Text(
-                      Provider.of<Products>(context, listen: false).product.detail as String,
-                      // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.',
-                      style: AppTheme.of(context).bodyText2,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Text(''),
-          Material(
-            color: Colors.transparent,
-            elevation: 3,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(0),
-            ),
-            child: Container(
-              width: double.infinity,
-              height: 100,
-              decoration: BoxDecoration(
-                color: AppTheme.of(context).primaryBackground,
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 4,
-                    color: Color(0x320F1113),
-                    offset: Offset(0, -2),
-                  )
-                ],
-                borderRadius: BorderRadius.circular(0),
-              ),
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 34),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: 130,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: AppTheme.of(context).secondaryBackground,
-                        borderRadius: BorderRadius.circular(12),
-                        shape: BoxShape.rectangle,
-                        border: Border.all(
-                          color: AppTheme.of(context).primaryBackground,
-                          width: 2,
-                        ),
-                      ),
-                      child: CountController(
-                        decrementIconBuilder: (enabled) => Icon(
-                          Icons.remove_rounded,
-                          color: enabled
-                              ? AppTheme.of(context).secondaryText
-                              : AppTheme.of(context).secondaryText,
-                          size: 16,
-                        ),
-                        incrementIconBuilder: (enabled) => Icon(
-                          Icons.add_rounded,
-                          color: enabled
-                              ? AppTheme.of(context).primaryColor
-                              : AppTheme.of(context).secondaryText,
-                          size: 16,
-                        ),
-                        countBuilder: (count) => Text(
-                          count.toString(),
-                          style: AppTheme.of(context).subtitle1,
-                        ),
-                        count: countControllerValue ??= 1,
-                        updateCount: (count) =>
-                            setState(() => countControllerValue = count),
-                        stepSize: 1,
-                        minimum: 1,
-                      ),
-                    ),
-                    MyButtonWidget(
-                      onPressed: () {
-                        ProductDetails p = widget.product;
-                        Provider.of<Cart>(context,listen: false).addItem(p.productId.toString(),context,countControllerValue.toString());
-                        if(Provider.of<Cart>(context,listen: false).quantityStatus.isNotEmpty && Provider.of<Cart>(context,listen: false).quantityStatus != "Available"){
-                          GlobalSnackBar.show(context, Provider.of<Cart>(context,listen: false).quantityStatus);
-                          Provider.of<Cart>(context,listen: false).quantityStatus = "";
-                        }
-                        // BlocProvider.of<CartBloc>(context).add(AddProduct(p));
-                      },
-                      text: 'Add to Cart',
-                      options: ButtonOptions(
-                          width: 160,
-                          height: 50,
-                          color: kPrimaryColor,
-                          textStyle: AppTheme.of(context).subtitle2.override(
-                                fontFamily: 'Poppins',
-                                color: Colors.white,
-                              ),
-                          elevation: 5,
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(36))),
-                    ),
-                  ],
                 ),
-              ),
+              ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }

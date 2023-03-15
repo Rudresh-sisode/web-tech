@@ -13,7 +13,11 @@ class Shipping extends StatelessWidget {
     return Scaffold(
       backgroundColor: kAppBarColor,
       appBar: AppBar(
-        title: const Text("Shipping"),
+        // title: const Text("Shipping"),
+        iconTheme: const IconThemeData(
+          color: kAppBarColor, //change your color here
+        ),
+        title: const Text("Shipping", style: TextStyle(color: kAppBarColor)),
         // automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: kPrimaryColor,
@@ -22,16 +26,20 @@ class Shipping extends StatelessWidget {
         child: SizedBox(
           width: double.infinity,
           child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(height: 20/**SizeConfig.screenHeight * 0.04*/),
+                  SizedBox(height: 20 /**SizeConfig.screenHeight * 0.04*/),
                   SizedBox(
-                    child: Image(
-                      image: AssetImage('assets/images/fedex-express.png'),
+                    child: Icon(
+                      Icons.delivery_dining,
+                      color: kPrimaryColor,
+                      size: 70.0,
                     ),
+                    // child: Image(
+                    //   image: AssetImage('assets/images/fedex-express.png'),
+                    // ),
                   ),
                   SizedBox(height: 20 /**SizeConfig.screenHeight * 0.08*/),
                   ShippingForm(),

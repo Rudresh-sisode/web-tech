@@ -9,22 +9,20 @@ import '../../enums.dart';
 import '../../providers/bottom-menu.dart';
 
 class ProfileScreen extends StatelessWidget {
-  static String routeName = "/profile";
+  static String routeName = "/Profile";
   final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: 
-      AppBar(
-          
-          backgroundColor: kPrimaryColor,
+      appBar: AppBar(
+        backgroundColor: kPrimaryColor,
         automaticallyImplyLeading: false,
         leading: InkWell(
-          onTap: ()  {
+          onTap: () async {
             // Provider.of<BottomMenuHandler>(context,listen: false).backToParentValue();
-            print("${Provider.of<BottomMenuHandler>(context,listen: false).currentValue}");
-            Navigator.pop(context,true);
+            // print("${Provider.of<BottomMenuHandler>(context,listen: false).currentValue}");
+            Navigator.pop(context);
           },
           child: Icon(
             Icons.arrow_back_rounded,
@@ -42,31 +40,10 @@ class ProfileScreen extends StatelessWidget {
               ),
         ),
         centerTitle: true,
-         
         ),
-      // AppBar(
-      //   automaticallyImplyLeading: false,
-      //   leading: InkWell(
-      //     onTap: () async {
-      //       // Provider.of<BottomMenuHandler>(context,listen: false).backToParentValue();
-      //       Navigator.pop(context);
-      //     },
-      //     // child: Icon(
-      //     //   Icons.arrow_back_rounded,
-      //     //   color: Color.fromARGB(255, 253, 253, 253),
-      //     //   size: 24,
-      //     // ),
-      //   ),
-      //   // iconTheme: const IconThemeData(
-      //   //   color: kAppBarColor, //change your color here
-      //   // ),
-      //   title: const Text("Profile", style: TextStyle(color: kAppBarColor)),
-      //   centerTitle: true,
-      //   backgroundColor: kPrimaryColor,
-      //    elevation: 0,
-      // ),
+     
       body: Body(),
-      bottomNavigationBar:  BottomMenu(),
+      bottomNavigationBar: BottomMenu(),
     );
   }
 }

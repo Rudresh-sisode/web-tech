@@ -87,11 +87,11 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // key: scaffoldKey,
+
       resizeToAvoidBottomInset: false,
       // backgroundColor: Colors.white,
       appBar: AppBar(
@@ -100,27 +100,13 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
         iconTheme: const IconThemeData(
           color: kAppBarColor, //change your color here
         ),
-        title: const Text("Store", style: TextStyle(color: kAppBarColor)),
+        // title: const Text("", style: TextStyle(color: kAppBarColor)),
+        title: Image.asset(
+          "assets/images/G-Store.png",
+          fit: BoxFit.contain,
+          height: 32,
+        ),
         elevation: 0,
-        // backgroundColor: Colors.white,
-        actions: <Widget>[
-          Stack(
-            children: [
-              // Padding(
-              //   padding: const EdgeInsets.only(right: 16),
-              //   child: TextButton.icon(
-              //     style: TextButton.styleFrom(primary: Colors.white),
-              //     onPressed: () {
-              //       //Navigator.pushNamed(context, CartPage.routeName);
-              //     },
-              //     icon: Icon(Icons.shopping_cart),
-              //     label: Text(''),
-              //     key: Key('cart'),
-              //   ),
-              // ),
-            ],
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         // reverse: true,
@@ -180,9 +166,9 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                               controller: textController,
                               obscureText: false,
                               onChanged: (_) {
-                                Provider.of<Products>(context, listen: false).searchProductList(textController.text);
+                                Provider.of<Products>(context, listen: false)
+                                    .searchProductList(textController.text);
                               },
-                              
                               decoration: const InputDecoration(
                                 labelText: 'Search product here...',
                                 enabledBorder: UnderlineInputBorder(
@@ -241,7 +227,6 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                   children: <Widget>[
                     SizedBox(height: 20),
                     ListTile(
-                        
                         title: const Text('Popular Products',
                             style: TextStyle(
                                 fontSize: 16,
@@ -257,10 +242,7 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                           //     color: Color.fromARGB(255, 255, 255, 255)),
                           padding: EdgeInsets.all(1.0),
                           shape: CircleBorder(),
-                        )
-                        
-                        ),
-                   
+                        )),
                     Container(
                       height: 120,
                       width: double.infinity,
@@ -301,8 +283,10 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                               height: 620,
                               width: double.infinity,
                               child: ProductList(
-                                products: product.productRequestingData.length > 0 ? product.productRequestingData : product.productDataList,
-                               
+                                products:
+                                    product.productRequestingData.length > 0
+                                        ? product.productRequestingData
+                                        : product.productDataList,
                               ),
                             ),
                           ],
@@ -325,7 +309,6 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                 ),
               ),
             ),
-
           ],
         ),
       ),
