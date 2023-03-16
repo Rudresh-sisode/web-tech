@@ -1,16 +1,18 @@
 from sys import displayhook
 import QuantLib as ql
 import pandas as pd
+import datetime as dt
 
 
 yts = ql.RelinkableYieldTermStructureHandle()
-df = pd.read_csv('d:/Webfolder/web-tech/Python/QuantLibStuff/instruments.csv', index_col=0)
+df = pd.read_csv('d:/Webfolder/web-tech/Python/QuantLibStuff/iinstruments.csv')
 
 instruments = []
-for col in df.columns:
-    for idx, val in df[col].items():
-        if not pd.isna(val):
-            instruments.append((col, idx, val))
+for index, row in df.iterrows():
+    instrument = row['instrument']
+    tenor = row['tenor']
+    rate = row['rate']
+    instruments.append((instrument, tenor, rate))
 
 helpers = ql.RateHelperVector()
 index = ql.Euribor6M(yts)
@@ -44,17 +46,33 @@ print(f"Swap NPV: {npv:,.3f}")
 print("-----------------------------------")
 pd.options.display.float_format = "{:,.2f}".format
 
+now = dt.datetime.now()
+
+# Format the date and time as a string
+date_str = now.strftime('%Y-%m-%d_%H-%M-%S')
+
+# Append the formatted date string to the CSV filename
+filename = f'cashflows_1_{date_str}.csv'
+
 cashflows = pd.DataFrame({
     'date': cf.date(),
     'amount': cf.amount()
     } for cf in swap.leg(1))
+cashflows.to_csv(filename, index=False)
 displayhook(cashflows)
+now = dt.datetime.now()
+print("-----------------------------------------------------------------")
+# Format the date and time as a string
+date_str = now.strftime('%Y-%m-%d_%H-%M-%S')
 
-'''
-1  instrument      tenor    rate
-2  depo            6M       0.025
-3  fra             6M       0.03
-4  swap            1Y       0.031
-5  swap            2Y       0.032
-6  swap            3Y       0.035
-'''
+# Append the formatted date string to the CSV filename
+filename = f'cashflows_2_{date_str}.csv'
+cashflows = pd.DataFrame({
+    'nominal': cf.nominal(),
+    'accrualStartDate': cf.accrualStartDate().ISO(),
+    'accrualEndDate': cf.accrualEndDate().ISO(),
+    'rate': cf.rate(),
+    'amount': cf.amount()
+    } for cf in map(ql.as_coupon, swap.leg(1)))
+cashflows.to_csv(filename, index=False)
+displayhook(cashflows)
