@@ -23,8 +23,11 @@ class SignForm extends StatefulWidget {
 
 class _SignFormState extends State<SignForm> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController emailController = TextEditingController(text:"kedar.ahirrao@gunadhyasoft.com",);
-  final TextEditingController passwordController = TextEditingController(text: "Kedar@123");
+  final TextEditingController emailController = TextEditingController(
+    text: "rudresh.sisodiya@gunadhyasoft.com",
+  );
+  final TextEditingController passwordController =
+      TextEditingController(text: "Qwerty@123");
   final _emailFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
   bool _obscureText = true;
@@ -71,20 +74,16 @@ class _SignFormState extends State<SignForm> {
     try {
       await Provider.of<Auth>(context, listen: false)
           .login(emailController.text, passwordController.text);
-          if(Provider.of<Auth>(context,listen: false).isAuth){
-              Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => ProductListingWidget()),
-              (route) => false,
-            );
-          }
-
-    }
-    on FormatException catch (_, error){
-       _showErrorDialog(error.toString());
-    }
-     catch (error) {
-      
+      if (Provider.of<Auth>(context, listen: false).isAuth) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => ProductListingWidget()),
+          (route) => false,
+        );
+      }
+    } on FormatException catch (_, error) {
+      _showErrorDialog(error.toString());
+    } catch (error) {
       Map<String, dynamic> errorRes = json.decode(error.toString());
       Map<String, dynamic> errorMessage = errorRes["message"];
 
@@ -159,7 +158,7 @@ class _SignFormState extends State<SignForm> {
               FocusScope.of(context).unfocus();
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-                
+
                 // if all are valid then go to success screen
                 // KeyboardUtil.hideKeyboard(context);
                 _submitLogin();
@@ -186,7 +185,7 @@ class _SignFormState extends State<SignForm> {
             validError = null;
           });
         } else if (value.length >= 8) {
-           setState(() {
+          setState(() {
             validError = null;
           });
         }
@@ -194,10 +193,8 @@ class _SignFormState extends State<SignForm> {
       },
       validator: (value) {
         if (value!.isEmpty) {
-        
           return kPassNullError;
         } else if (value.length < 8) {
-          
           return kShortPassError;
         }
         return null;
@@ -205,6 +202,9 @@ class _SignFormState extends State<SignForm> {
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
         border: OutlineInputBorder(),
+        labelStyle: TextStyle(
+          color: kPrimaryColor, //<-- SEE HERE
+        ),
         labelText: "Password",
         hintText: "Enter your password",
         // If  you are using latest version of flutter then lable text and hint text shown like this
@@ -233,7 +233,7 @@ class _SignFormState extends State<SignForm> {
       onSaved: (newValue) => email = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-           setState(() {
+          setState(() {
             validError = null;
           });
         } else if (emailValidatorRegExp.hasMatch(value)) {
@@ -245,16 +245,17 @@ class _SignFormState extends State<SignForm> {
       },
       validator: (value) {
         if (value!.isEmpty) {
-          
           return kEmailNullError;
         } else if (!emailValidatorRegExp.hasMatch(value)) {
-         
           return kInvalidEmailError;
         }
         return null;
       },
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
+        labelStyle: TextStyle(
+          color: kPrimaryColor,
+        ),
         border: OutlineInputBorder(),
         labelText: "Email",
         hintText: "Enter your email",

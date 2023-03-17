@@ -26,6 +26,8 @@ class BottomMenu extends StatefulWidget {
 class _BottomMenuState extends State<BottomMenu> {
   @override
   void initState() {
+    var myWidgetName = context.widget;
+    print("on what widget I'm on ${myWidgetName}");
     // TODO: implement initState
     super.initState();
     print("called this time ");
@@ -63,7 +65,7 @@ class _BottomMenuState extends State<BottomMenu> {
                   color: BottomMuenu.Home == bottomMenuHandler.currentValue
                       ? kPrimaryColor
                       : inActiveIconColor,
-                  size: 24.0,
+                  size: 30.0,
                 ),
                 // icon: SvgPicture.asset(
                 //   "assets/icons/Home.svg",
@@ -78,7 +80,7 @@ class _BottomMenuState extends State<BottomMenu> {
                         // await .getCustomerProfile();
 
                         bottomMenuHandler.currentValue = BottomMuenu.Home;
-                        // bottomMenuHandler.changeCurrentValue(BottomMuenu.Home);
+                        print(" Home click ${bottomMenuHandler.currentValue}");
 
                         Navigator.pushNamed(
                             context, ProductListingWidget.routeName);
@@ -94,7 +96,7 @@ class _BottomMenuState extends State<BottomMenu> {
                   color: BottomMuenu.Cart == bottomMenuHandler.currentValue
                       ? kPrimaryColor
                       : inActiveIconColor,
-                  size: 24.0,
+                  size: 30.0,
                 ),
                 // icon: SvgPicture.asset(
                 //   "assets/icons/Cart Icon.svg",
@@ -109,8 +111,7 @@ class _BottomMenuState extends State<BottomMenu> {
                         // await .getCustomerProfile();
 
                         bottomMenuHandler.currentValue = BottomMuenu.Cart;
-                        // bottomMenuHandler.changeCurrentValue(BottomMuenu.Cart);
-                        // Navigator.pushReplacementNamed(context, CheckoutWidget.routeName);
+                        print(" Cart click ${bottomMenuHandler.currentValue}");
                         Navigator.pushNamed(context, CheckoutWidget.routeName);
                       },
               ),
@@ -120,7 +121,7 @@ class _BottomMenuState extends State<BottomMenu> {
                     color: BottomMuenu.Profile == bottomMenuHandler.currentValue
                         ? kPrimaryColor
                         : inActiveIconColor,
-                    size: 24.0,
+                    size: 30.0,
                   ),
                   // icon: SvgPicture.asset(
                   //   "assets/icons/User Icon.svg",
@@ -137,6 +138,7 @@ class _BottomMenuState extends State<BottomMenu> {
 
                           bottomMenuHandler.currentValue = BottomMuenu.Profile;
                           // bottomMenuHandler.changeCurrentValue(BottomMuenu.Profile);
+                          print(" profile click ${bottomMenuHandler.currentValue}");
                           Navigator.pushNamed(context, ProfileScreen.routeName);
                         }),
             ],

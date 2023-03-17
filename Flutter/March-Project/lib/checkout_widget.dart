@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:ecomm_app/app_theme.dart';
 import 'package:ecomm_app/bloc/event/cart_event.dart';
@@ -26,6 +27,7 @@ import 'models/cart.dart';
 import 'bloc/cart_bloc.dart';
 import 'bloc/state/cart_state.dart';
 import 'models/delivery-address.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class CheckoutWidget extends StatefulWidget {
   static var routeName = "cart";
@@ -54,7 +56,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
     // TODO: implement initState
     super.initState();
     checkoutDetails = Provider.of<Cart>(context, listen: false).checkoutData;
-    
+
     // allAddressData =
     //     Provider.of<DeliveryAddress>(context, listen: false).allAddressData;
     setState(() {
@@ -105,19 +107,19 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
     print("widget build" + checkoutDetails["name"]);
     return Scaffold(
       key: scaffoldKey,
-      appBar: 
-      // PreferredSize(
-      //   preferredSize: Size.fromHeight(120),
-        // child: 
-        AppBar(
-          centerTitle: true,
-          
-          // backgroundColor: AppTheme.of(context).secondaryBackground,
-          backgroundColor: kPrimaryColor,
+      appBar:
+          // PreferredSize(
+          //   preferredSize: Size.fromHeight(120),
+          // child:
+          AppBar(
+        centerTitle: true,
+
+        // backgroundColor: AppTheme.of(context).secondaryBackground,
+        backgroundColor: kPrimaryColor,
         automaticallyImplyLeading: false,
         leading: InkWell(
           onTap: () async {
-            // Provider.of<BottomMenuHandler>(context,listen: false).backToParentValue();
+           print("checkout back ${Provider.of<BottomMenuHandler>(context,listen: false).currentValue}");
             Navigator.pop(context);
           },
           child: Icon(
@@ -135,9 +137,9 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                 fontWeight: FontWeight.w500,
               ),
         ),
-          actions: [],
-          elevation: 0,
-        ),
+        actions: [],
+        elevation: 0,
+      ),
       // ),
       backgroundColor: AppTheme.of(context).primaryBackground,
       body: Stack(
@@ -567,16 +569,45 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                               )
                             : Column(
                                 children: <Widget>[
-                                  Text("Your cart is empty!"),
-                                  SizedBox(height: 20),
+                                  SizedBox(height: 40),
+                                  SizedBox(
+                                    child: Icon(
+                                      Icons.sentiment_very_dissatisfied,
+                                      size: 40.0,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Your cart is empty!",
+                                    style: TextStyle(fontSize: 24),
+                                  ),
+                                  // AnimatedTextKit(
+                                  //   animatedTexts: [
+                                  //     TypewriterAnimatedText(
+                                  //       'Hello world!',
+                                  //       textStyle: const TextStyle(
+                                  //         fontSize: 32.0,
+                                  //         fontWeight: FontWeight.bold,
+                                  //       ),
+                                  //       speed:
+                                  //           const Duration(milliseconds: 2000),
+                                  //     ),
+                                  //   ],
+                                  //   totalRepeatCount: 4,
+                                  //   pause: const Duration(milliseconds: 1000),
+                                  //   displayFullTextOnTap: true,
+                                  //   stopPauseOnTap: true,
+                                  // ),
+                                  SizedBox(height: 30),
                                   SizedBox(
                                       width: 200,
                                       child: ElevatedButton(
                                         onPressed: () {
-                                          Provider.of<BottomMenuHandler>(context, listen: false).changeCurrentValue(BottomMuenu.Home);
+                                          Provider.of<BottomMenuHandler>(
+                                                  context,
+                                                  listen: false).currentValue = BottomMuenu.Home;
                                           Navigator.pop(context);
                                           Navigator.pushNamed(context,
-                                            ProductListingWidget.routeName);
+                                              ProductListingWidget.routeName);
                                         },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: kPrimaryColor,
@@ -1039,7 +1070,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                 )
         ],
       ),
-      bottomNavigationBar:  BottomMenu(),
+      bottomNavigationBar: BottomMenu(),
     );
   }
 }

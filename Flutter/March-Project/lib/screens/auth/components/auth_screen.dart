@@ -209,8 +209,7 @@ class _AuthCardState extends State<AuthCard> {
                             horizontal: 30.0, vertical: 8.0),
                       ),
                     ),
-
-                 ),
+                  ),
                 TextButton(
                   child: Text(
                       '${_authMode == AuthMode.Login ? 'SIGNUP' : 'LOGIN'} INSTEAD'),

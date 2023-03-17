@@ -108,11 +108,12 @@ class _ShippingFormState extends State<ShippingForm> {
     Provider.of<DeliveryAddress>(context, listen: false).addingAddressDAta =
         newAddressData;
     try {
-      await Provider.of<DeliveryAddress>(context, listen: false).addingShippingAddress();
+      await Provider.of<DeliveryAddress>(context, listen: false)
+          .addingShippingAddress();
 
       Navigator.pop(context);
       Navigator.pushReplacementNamed(context, CheckoutWidget.routeName);
-      
+
       // Navigator.pop(context);
       // ignore: use_build_context_synchronously
       // Navigator.pushNamed(context, ProfileScreen.routeName);
@@ -142,17 +143,19 @@ class _ShippingFormState extends State<ShippingForm> {
             ? newErrorMessage["phone"].toString()
             : "";
 
-        String pinCodeErrorMessage = newErrorMessage.containsKey("pincode") ? newErrorMessage["pincode"].toString() : "";
-
-        
+        String pinCodeErrorMessage = newErrorMessage.containsKey("pincode")
+            ? newErrorMessage["pincode"].toString()
+            : "";
 
         String finalErrorMessage = finalEmailErrorMessage.isNotEmpty
             ? finalEmailErrorMessage
             : finalPhoneErrorMessage.isNotEmpty
                 ? finalPhoneErrorMessage
-                : pinCodeErrorMessage.isNotEmpty ? pinCodeErrorMessage : errorRes["message_type"];
+                : pinCodeErrorMessage.isNotEmpty
+                    ? pinCodeErrorMessage
+                    : errorRes["message_type"];
 
-          GlobalSnackBar.show(context, finalErrorMessage);
+        GlobalSnackBar.show(context, finalErrorMessage);
         // _showErrorDialog(finalErrorMessage);
       }
     }
@@ -173,13 +176,14 @@ class _ShippingFormState extends State<ShippingForm> {
         email: email);
 
     try {
-      Provider.of<DeliveryAddress>(context, listen: false).editingAddressData = editAddressData;
+      Provider.of<DeliveryAddress>(context, listen: false).editingAddressData =
+          editAddressData;
 
-      await Provider.of<DeliveryAddress>(context, listen: false).editingShippingAddress();
+      await Provider.of<DeliveryAddress>(context, listen: false)
+          .editingShippingAddress();
       Navigator.pop(context);
       Navigator.pushReplacementNamed(context, CheckoutWidget.routeName);
       // Navigator.pushNamed(context, CheckoutWidget.routeName);
-
 
       // Navigator.pop(context);
       // ignore: use_build_context_synchronously
@@ -192,8 +196,11 @@ class _ShippingFormState extends State<ShippingForm> {
       Map<String, dynamic> errorMessage = {};
       if (errorRes["message"] is String) {
         GlobalSnackBar.show(context, errorRes["message"]);
-        if(errorRes["message"] == "Unauthenticated token."){
-         Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context) => AuthScreen()), (route) => false);
+        if (errorRes["message"] == "Unauthenticated token.") {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => AuthScreen()),
+              (route) => false);
         }
       } else if (errorRes["message"] is Map<String, dynamic>) {
         errorMessage = errorRes["message"];
@@ -214,17 +221,19 @@ class _ShippingFormState extends State<ShippingForm> {
             ? newErrorMessage["phone"].toString()
             : "";
 
-        String pinCodeErrorMessage = newErrorMessage.containsKey("pincode") ? newErrorMessage["pincode"].toString() : "";
-
-        
+        String pinCodeErrorMessage = newErrorMessage.containsKey("pincode")
+            ? newErrorMessage["pincode"].toString()
+            : "";
 
         String finalErrorMessage = finalEmailErrorMessage.isNotEmpty
             ? finalEmailErrorMessage
             : finalPhoneErrorMessage.isNotEmpty
                 ? finalPhoneErrorMessage
-                : pinCodeErrorMessage.isNotEmpty ? pinCodeErrorMessage : errorRes["message_type"];
+                : pinCodeErrorMessage.isNotEmpty
+                    ? pinCodeErrorMessage
+                    : errorRes["message_type"];
 
-          GlobalSnackBar.show(context, finalErrorMessage);
+        GlobalSnackBar.show(context, finalErrorMessage);
         // _showErrorDialog(finalErrorMessage);
       }
     }
@@ -275,17 +284,17 @@ class _ShippingFormState extends State<ShippingForm> {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
                   // if all are valid then go to success screen
-                  if(Provider.of<DeliveryAddress>(context, listen: false)
+                  if (Provider.of<DeliveryAddress>(context, listen: false)
                           .addressType ==
-                      AddressType.ADD){
-                        shippingAddress();
-                      }
-                      else if(Provider.of<DeliveryAddress>(context, listen: false)
+                      AddressType.ADD) {
+                    shippingAddress();
+                  } else if (Provider.of<DeliveryAddress>(context,
+                              listen: false)
                           .addressType ==
-                      AddressType.EDIT){
-                        editShippingAddress();
-                      }
-                  
+                      AddressType.EDIT) {
+                    editShippingAddress();
+                  }
+
                   // KeyboardUtil.hideKeyboard(context);
                   // Navigator.pushNamed(context, Payment.routeName);
                 }
@@ -295,7 +304,6 @@ class _ShippingFormState extends State<ShippingForm> {
                       AddressType.ADD
                   ? const Text("Save & Continue")
                   : const Text("Edit & Continue"))
-        
         ],
       ),
     );
@@ -310,8 +318,7 @@ class _ShippingFormState extends State<ShippingForm> {
           setState(() {
             errorValidation = null;
           });
-        } 
-        else if(value.length < 10){
+        } else if (value.length < 10) {
           setState(() {
             errorValidation = null;
           });
@@ -320,18 +327,19 @@ class _ShippingFormState extends State<ShippingForm> {
         return null;
       },
       validator: (value) {
-        if (value!.isEmpty){
-          
+        if (value!.isEmpty) {
           return "please don't leave an empty field";
-        }
-        else if(value.length < 10){
-           return "please provide convenient/reacheable address";
+        } else if (value.length < 10) {
+          return "please provide convenient/reacheable address";
         }
 
         return errorValidation;
       },
       decoration: const InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
+        labelStyle: TextStyle(
+          color: kPrimaryColor,
+        ),
         border: OutlineInputBorder(),
         labelText: "Full address",
         hintText: "Enter your full address",
@@ -351,8 +359,7 @@ class _ShippingFormState extends State<ShippingForm> {
           setState(() {
             errorValidation = null;
           });
-        } 
-        else if(value.length < 10){
+        } else if (value.length < 10) {
           setState(() {
             errorValidation = null;
           });
@@ -361,16 +368,18 @@ class _ShippingFormState extends State<ShippingForm> {
         return null;
       },
       validator: (value) {
-        if (value!.isEmpty){
+        if (value!.isEmpty) {
           return "please don't leave an empty field";
-        }
-        else if(value.length < 10){
-           return "please provide convenient/reacheable address";
+        } else if (value.length < 10) {
+          return "please provide convenient/reacheable address";
         }
         return errorValidation;
       },
       decoration: const InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
+        labelStyle: TextStyle(
+          color: kPrimaryColor,
+        ),
         border: OutlineInputBorder(),
         labelText: "Landmark",
         hintText: "Landmark, Near area",
@@ -401,6 +410,9 @@ class _ShippingFormState extends State<ShippingForm> {
       },
       decoration: const InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
+        labelStyle: TextStyle(
+          color: kPrimaryColor,
+        ),
         border: OutlineInputBorder(),
         labelText: "City",
         hintText: "Enter your city",
@@ -432,6 +444,9 @@ class _ShippingFormState extends State<ShippingForm> {
       },
       decoration: const InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
+        labelStyle: TextStyle(
+          color: kPrimaryColor,
+        ),
         border: OutlineInputBorder(),
         labelText: "State",
         hintText: "Enter your state",
@@ -463,6 +478,9 @@ class _ShippingFormState extends State<ShippingForm> {
       },
       decoration: const InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
+        labelStyle: TextStyle(
+          color: kPrimaryColor,
+        ),
         border: OutlineInputBorder(),
         labelText: "Country",
         hintText: "Enter your country name",
@@ -484,7 +502,7 @@ class _ShippingFormState extends State<ShippingForm> {
             errorValidation = null;
           });
         }
-        
+
         return null;
       },
       validator: (value) {
@@ -499,6 +517,9 @@ class _ShippingFormState extends State<ShippingForm> {
       },
       decoration: const InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
+        labelStyle: TextStyle(
+          color: kPrimaryColor,
+        ),
         border: OutlineInputBorder(),
         labelText: "Pincode",
         hintText: "Enter your pincode",
@@ -526,13 +547,16 @@ class _ShippingFormState extends State<ShippingForm> {
           return "please don't leave an empty field";
         }
         List<String> names = value.split(" ");
-        if(names.length != 2){
+        if (names.length != 2) {
           return "provide name accordingly, (firstname lastname)";
         }
         return null;
       },
       decoration: const InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
+        labelStyle: TextStyle(
+          color: kPrimaryColor,
+        ),
         border: OutlineInputBorder(),
         labelText: "Name",
         hintText: "Enter your name",
@@ -553,12 +577,9 @@ class _ShippingFormState extends State<ShippingForm> {
           setState(() {
             errorValidation = null;
           });
-
         }
-        
+
         return null;
-        
-        
       },
       validator: (value) {
         if (value!.isEmpty) {
@@ -571,6 +592,9 @@ class _ShippingFormState extends State<ShippingForm> {
       decoration: const InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
         border: OutlineInputBorder(),
+        labelStyle: TextStyle(
+          color: kPrimaryColor,
+        ),
         labelText: "Email",
         hintText: "Enter your email",
         // If  you are using latest version of flutter then lable text and hint text shown like this
@@ -587,7 +611,7 @@ class _ShippingFormState extends State<ShippingForm> {
       onSaved: (newValue) => mobile = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-         setState(() {
+          setState(() {
             errorValidation = null;
           });
         }
@@ -606,6 +630,9 @@ class _ShippingFormState extends State<ShippingForm> {
       },
       decoration: const InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
+        labelStyle: TextStyle(
+          color: kPrimaryColor,
+        ),
         border: OutlineInputBorder(),
         labelText: "Mobile",
         hintText: "Enter your mobile",

@@ -24,6 +24,7 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
   // ignore: non_constant_identifier_names
   bool remember = false;
   final List<String?> errors = [];
+  var validError = null;
 
   @override
   void initState() {
@@ -195,40 +196,7 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
                 child: const Text('Update Profile'),
               )),
 
-          // ElevatedButton(
-          //   onPressed: () {
-          //     if (_formKey.currentState!.validate()) {
-          //       _formKey.currentState!.save();
-          //       // if all are valid then go to success screen
-          //       _updateProfile();
-          //       // GlobalSnackBar.show(context, 'Profile update successful');
-          //       // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          //       //   content: Text('Profile updated successfully'),
-          //       // ));
-          //     }
-          //   },
-          //   child: Text("Update Profile"),
-          //   style: ButtonStyle(
-          //     backgroundColor: MaterialStateProperty.resolveWith((states) {
-          //       return kPrimaryColor;
-          //     }),
-          //   ),
-          // )
-
-          // DefaultButton(
-          //   text: "Update profile",
-          // press: () {
-          //   if (_formKey.currentState!.validate()) {
-          //     _formKey.currentState!.save();
-          //     // if all are valid then go to success screen
-          //     _updateProfile();
-          //     // GlobalSnackBar.show(context, 'Profile update successful');
-          //     // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          //     //   content: Text('Profile updated successfully'),
-          //     // ));
-          //   }
-          // },
-          // ),
+       
         ],
       ),
     );
@@ -256,6 +224,9 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
       },
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
+        labelStyle: TextStyle(
+          color: kPrimaryColor,
+        ),
         border: OutlineInputBorder(),
         labelText: "Mobile",
         hintText: "Enter your mobile",
@@ -266,39 +237,7 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
     );
   }
 
-  // TextFormField buildEmailFormField() {
-  //   return TextFormField(
-  //     initialValue: email,
-  //     enabled: false,
-  //     keyboardType: TextInputType.emailAddress,
-  //     onSaved: (newValue) => email = newValue.toString(),
-  //     onChanged: (value) {
-  //       if (value.isNotEmpty) {
-  //         removeError(error: kEmailNullError);
-  //       } else if (emailValidatorRegExp.hasMatch(value)) {
-  //         removeError(error: kInvalidEmailError);
-  //       }
-  //       return null;
-  //     },
-  //     validator: (value) {
-  //       if (value!.isEmpty) {
-  //         addError(error: kEmailNullError);
-  //         return "";
-  //       } else if (!emailValidatorRegExp.hasMatch(value)) {
-  //         addError(error: kInvalidEmailError);
-  //         return "";
-  //       }
-  //       return null;
-  //     },
-  //     decoration: InputDecoration(
-  //       contentPadding: EdgeInsets.all(12.0),
-  //       border: OutlineInputBorder(),
-  //       labelText: "Email",
-  //       hintText: "Enter your email",
-  //       floatingLabelBehavior: FloatingLabelBehavior.always,
-  //     ),
-  //   );
-  // }
+
 
   TextFormField buildNameFormField() {
     return TextFormField(
@@ -306,22 +245,24 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
       onSaved: (newValue) => userName = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kNamelNullError);
-        }
-        {
-          removeError(error: kNamelNullError);
+          setState(() {
+            validError = null;
+          });
         }
         return null;
       },
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kNamelNullError);
-          return "";
+         
+          return kNamelNullError;
         }
         return null;
       },
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
+        labelStyle: TextStyle(
+          color: kPrimaryColor,
+        ),
         border: OutlineInputBorder(),
         labelText: "Name",
         hintText: "Enter your name",
@@ -339,24 +280,25 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
       onSaved: (newValue) => email = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kEmailNullError);
-        } else if (emailValidatorRegExp.hasMatch(value)) {
-          removeError(error: kInvalidEmailError);
-        }
+             setState(() {
+            validError = null;
+          });
+        } 
         return null;
       },
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kEmailNullError);
-          return "";
-        } else if (!emailValidatorRegExp.hasMatch(value)) {
-          addError(error: kInvalidEmailError);
-          return "";
+          return kEmailNullError;
+        } else if (!emailValidatorRegExp.hasMatch(value)){
+          return kInvalidEmailError;
         }
         return null;
       },
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
+        labelStyle: TextStyle(
+          color: kPrimaryColor,
+        ),
         border: OutlineInputBorder(),
         labelText: "Email",
         hintText: "Enter your email",

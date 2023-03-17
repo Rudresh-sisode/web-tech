@@ -56,9 +56,7 @@ class Body extends StatelessWidget {
                 // ignore: todo
                 //TODO FORGOT PASSWORD SCREEN GOES HERE
               },
-             
             ),
-            
             const SizedBox(
               height: 130,
             ),

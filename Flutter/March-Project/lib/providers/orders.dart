@@ -57,6 +57,8 @@ class Orders with ChangeNotifier {
         'Authorization': 'Bearer $_token'
       });
 
+     
+
       Map<String, dynamic> responseData = json.decode(response.body);
       if (responseData['status'] == false) {
       
@@ -64,16 +66,54 @@ class Orders with ChangeNotifier {
         //throwing error message, this will handle in profile widgets
         throw HttpException(response.body);
       } else if (responseData['status'] == true) {
-        Map<String,dynamic> availableData = responseData["data"];
-        if(availableData.isNotEmpty){
-          List<dynamic> data = responseData["data"]["orders"];
-          _orders = data.map((order) => OrderItems.fromJson(order)).toList();
+        dynamic availableData = responseData["data"];
+        print("#% ${availableData.runtimeType}");
+
+         if(availableData.runtimeType == Object){
+          print("it's a map");
+         }
+
+        if (availableData.runtimeType == List) {
+          // responseData['data'] is a list
+          List<dynamic> dataList = availableData;
+
+         
+
+          if(dataList.isNotEmpty){
+            List<dynamic> data = responseData["data"]["orders"];
+            _orders = data.map((order) => OrderItems.fromJson(order)).toList();
+          }
+          else{
+            _orders = [];
+          }
+          // use dataList as needed
+        } else {
+          // responseData['data'] is a map
+          Map<String, dynamic> dataMap = availableData;
+          if(dataMap.isNotEmpty){
+            List<dynamic> data = responseData["data"]["orders"];
+            _orders = data.map((order) => OrderItems.fromJson(order)).toList();
+          }
+          else{
+            _orders = [];
+          }
+          // use dataMap as needed
         }
-        else{
-          _orders = [];
-        }
+        // List<dynamic> availableData = responseData["data"];
         
 
+        /**
+         * } else if (responseData['status'] == true) {
+            Map<String,dynamic> availableData = responseData["data"];
+            if(availableData.isNotEmpty){
+            List<dynamic> data = responseData["data"]["orders"];
+            _orders = data.map((order) => OrderItems.fromJson(order)).toList();
+            }
+            else{
+            _orders = [];
+            }
+         */
+        
         notifyListeners();
       }
     } catch (error) {

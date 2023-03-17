@@ -107,7 +107,6 @@ class _ProfileState extends State<Body> {
         child: Consumer<Auth>(
           builder: (ctx, authData, _) {
             return (authData.customerProfileData.name.isNotEmpty &&
-                    authData.customerProfileData.mobile.isNotEmpty &&
                     authData.customerProfileData.email.isNotEmpty)
                 ? Column(
                     children: <Widget>[
@@ -251,8 +250,7 @@ class _ProfileState extends State<Body> {
                                 fontSize: 16,
                                 color: Color.fromARGB(255, 75, 74, 74))),
                         onTap: () {
-                          Provider.of<BottomMenuHandler>(context, listen: false)
-                              .changeCurrentValue(BottomMuenu.Home);
+                          Provider.of<BottomMenuHandler>(context, listen: false).currentValue = BottomMuenu.Home;
                           Provider.of<Auth>(context, listen: false).logout();
                           Navigator.pushAndRemoveUntil(
                               context,
@@ -265,6 +263,7 @@ class _ProfileState extends State<Body> {
                   )
                 : FutureBuilder(
                     future: authData.executeGetProfile(),
+
                     builder: (ctx, authReturnSnapshot) => authReturnSnapshot
                                 .connectionState ==
                             ConnectionState.waiting

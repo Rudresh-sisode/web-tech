@@ -23,17 +23,23 @@ import 'package:http/http.dart' as http;
 class HomePageSlider with ChangeNotifier {
    List<HomePageSliderS> sliderImage = [];
    String _token = "null";
+   bool loading = false;
 
    Future<bool> executeGetSlider() async{
     try{
+      
       await  getHomeSliderImage();
       return true;
-
+      
     }
     catch(err){
       return false;
     }
    }
+
+  //  Future<bool>  getSliderBoolean() async{
+  //   return loading;
+  //  }
 
   Future<void> getHomeSliderImage() async {
     final url = Uri.parse(APIURLS.getHomePageSlider);
@@ -62,11 +68,14 @@ class HomePageSlider with ChangeNotifier {
         //   return PopularModel(id: item['id'], name: item['name']);
         // }).toList();
 
-     
-        notifyListeners();
+     notifyListeners();
+     loading = true;
+        
       }
     } catch (error) {
+      loading = false;
       throw error;
+
     }
   }
 }

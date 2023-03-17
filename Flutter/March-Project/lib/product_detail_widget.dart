@@ -48,7 +48,7 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
   @override
   void initState() {
     super.initState();
-   
+
     getProductDetails(widget.product.productId.toString());
     SchedulerBinding.instance.addPostFrameCallback((_) {
       // Provider.of<BottomMenuHandler>(context,listen:false).changeCurrentValue(BottomMuenu.Home);
@@ -171,8 +171,7 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                   ),
                   onPressed: () {
                     Provider.of<BottomMenuHandler>(context,
-                                    listen: false)
-                                .changeCurrentValue(BottomMuenu.Cart);
+                                    listen: false).currentValue = BottomMuenu.Cart;
                     Navigator.push(
                       context,
                       MaterialPageRoute(

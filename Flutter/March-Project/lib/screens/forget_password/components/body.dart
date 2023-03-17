@@ -62,6 +62,7 @@ class _ForgetFromState extends State<ForgetFrom> {
   final _formKey = GlobalKey<FormState>();
   String email = "";
   bool successStage = false;
+  var validError = null;
 
   final List<String?> errors = [];
 
@@ -157,24 +158,31 @@ class _ForgetFromState extends State<ForgetFrom> {
       onSaved: (newValue) => email = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kEmailNullError);
+          setState(() {
+           validError = null;
+          });
         } else if (emailValidatorRegExp.hasMatch(value)) {
-          removeError(error: kInvalidEmailError);
+          setState(() {
+            validError = null;
+          });
         }
         return null;
       },
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kEmailNullError);
-          return "";
+         
+          return kEmailNullError;
         } else if (!emailValidatorRegExp.hasMatch(value)) {
-          addError(error: kInvalidEmailError);
-          return "";
+         
+          return kInvalidEmailError;
         }
         return null;
       },
       decoration: const InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
+        labelStyle: TextStyle(
+          color: kPrimaryColor,
+        ),
         border: OutlineInputBorder(),
         labelText: "Email/Email",
         hintText: "Enter your email/Mobile",

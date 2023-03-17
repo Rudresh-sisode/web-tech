@@ -86,6 +86,7 @@ class _OtpFromState extends State<OtpFrom> {
   String otp="";
   String password="";
   String c_password = "";
+  var validError = null;
 
   final List<String?> errors = [];
 
@@ -198,7 +199,9 @@ class _OtpFromState extends State<OtpFrom> {
       onSaved: (newValue) => otp = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kOtpStrick);
+          setState(() {
+            validError = null;
+          });
         }
         return null;
       },
@@ -207,12 +210,12 @@ class _OtpFromState extends State<OtpFrom> {
         ],
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kOtpStrick);
-          return "";
+         
+          return kOtpStrick;
         }
         else if(value.length != 6){
-          addError(error: kOtpStrick);
-          return "";
+        
+          return kOtpStrick;
         }
         return null;
       },
@@ -234,19 +237,19 @@ class _OtpFromState extends State<OtpFrom> {
       onChanged: (value) {
         password = value;
         if (value.isNotEmpty) {
-          removeError(error: kShortPassError);
+         setState(() {
+           validError = null;
+         });
         }
         return null;
       },
      
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kFieldEmpty);
-          return "";
+          return kFieldEmpty;
         }
         else if(value.length <= 6){
-          addError(error: kShortPassError);
-          return "";
+          return kShortPassError;
         }
         return null;
       },
@@ -268,24 +271,23 @@ class _OtpFromState extends State<OtpFrom> {
       onChanged: (value) {
         c_password = value;
         if (value.isNotEmpty) {
-          removeError(error: kMatchPassError);
+          setState(() {
+            validError = null;
+          });
         }
         return null;
       },
     
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kFieldEmpty);
-          return "";
+          
+          return kFieldEmpty;
         }
         else if(value.length <= 6){
-          addError(error: kShortPassError);
-          return "";
+          return kShortPassError;
         }
         else if(password != value){
-          print("not match");
-          addError(error:kMatchPassError);
-          return "";
+          return kMatchPassError;
         }
         return null;
       },

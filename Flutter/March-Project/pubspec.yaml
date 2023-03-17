@@ -52,6 +52,9 @@ dependencies:
   flutter_dotenv: ^5.0.2
   carousel_slider: ^4.2.1
   flutter_spinkit: ^5.1.0
+  animated_text_kit: ^4.2.2
+  internet_connection_checker: ^1.0.0+1
+  connectivity_plus: ^3.0.3
 
 dev_dependencies:
   flutter_test:

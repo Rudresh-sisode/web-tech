@@ -89,7 +89,7 @@ class ProductTileAnimation extends StatelessWidget {
                             width: 100,
                             height: 100,
                             // width: double.infinity,
-                            fit: BoxFit.fill,
+                            fit: BoxFit.fitHeight,
                           ),
                         ),
                       ),

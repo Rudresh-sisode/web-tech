@@ -21,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
         leading: InkWell(
           onTap: () async {
             // Provider.of<BottomMenuHandler>(context,listen: false).backToParentValue();
-            // print("${Provider.of<BottomMenuHandler>(context,listen: false).currentValue}");
+            print("value form profile back ${Provider.of<BottomMenuHandler>(context,listen: false).currentValue}");
             Navigator.pop(context);
           },
           child: Icon(

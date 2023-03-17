@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:ecomm_app/app_theme.dart';
 import 'package:ecomm_app/bloc/event/cart_event.dart';
@@ -15,10 +18,12 @@ import 'package:ecomm_app/screens/widgets/popular.dart';
 // import 'package:ecomm_app/screens/widgets/popular.dart';
 import 'package:ecomm_app/screens/widgets/product_list.dart';
 import 'package:ecomm_app/size_config.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 
 import 'bloc/cart_bloc.dart';
@@ -48,6 +53,22 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
 
   List<ProductDetails> searchedProducts = [];
   List<ProductDetails> products = [];
+
+  late StreamSubscription subscription;
+  bool isDeviceConnected = false;
+  bool isAlertSet = false;
+
+  getConnectivity() =>
+      subscription = Connectivity().onConnectivityChanged.listen(
+        (ConnectivityResult result) async {
+          isDeviceConnected = await InternetConnectionChecker().hasConnection;
+          if (!isDeviceConnected && isAlertSet == false) {
+            showDialogBox();
+            setState(() => isAlertSet = true);
+          }
+        },
+      );
+
   // late List<Product> products = [];
 
   // void _getData() async {
@@ -60,21 +81,22 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
 //   super.didChangeDependencies();
 //   _buildContext = context;
 // }
+  @override
+  void dispose() {
+    subscription.cancel();
+    super.dispose();
+  }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     print('dependancy changes on product listing widget');
-
   }
 
   @override
   void initState() {
     super.initState();
-
-    
-   
-
+    getConnectivity();
     textController = TextEditingController();
     SchedulerBinding.instance.addPostFrameCallback((_) {
       String otpMessage =
@@ -94,20 +116,55 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
 
       resizeToAvoidBottomInset: false,
       // backgroundColor: Colors.white,
-      appBar: AppBar(
-        centerTitle: true,
+      // appBar: AppBar(
+      //   centerTitle: false,
 
-        iconTheme: const IconThemeData(
-          color: kAppBarColor, //change your color here
+      //   iconTheme: const IconThemeData(
+      //     color: kAppBarColor, //change your color here
+      //   ),
+      //   // title: const Text("", style: TextStyle(color: kAppBarColor)),
+      //   title: Image.asset(
+      //     "assets/images/G-Store.png",
+      //     fit: BoxFit.cover,
+      //     height: 32,
+      //   ),
+      //   // child:SizedBox('asxas'),
+      //   elevation: 0,
+      // ),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: Image.asset(
+                    'assets/images/G-Store.png',
+                    fit: BoxFit.contain,
+                    height: 32,
+                  ),
+                ),
+                SizedBox(
+                  // alignment: Alignment.topCenter,
+                  child: Text(
+                    "G store",
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+            // Image.asset(
+            //   'assets/images/G-Store.png',
+            //   fit: BoxFit.contain,
+            //   height: 32,
+            // ),
+            // Text("Your Title", textAlign: TextAlign.center),
+          ],
         ),
-        // title: const Text("", style: TextStyle(color: kAppBarColor)),
-        title: Image.asset(
-          "assets/images/G-Store.png",
-          fit: BoxFit.contain,
-          height: 32,
-        ),
-        elevation: 0,
       ),
+      //  );
       body: SingleChildScrollView(
         // reverse: true,
         physics: const AlwaysScrollableScrollPhysics(),
@@ -312,10 +369,33 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
           ],
         ),
       ),
-     
+
       bottomNavigationBar: BottomMenu(),
-      
+
       // ,
     );
   }
+
+  showDialogBox() => showCupertinoDialog<String>(
+        context: context,
+        builder: (BuildContext context) => CupertinoAlertDialog(
+          title: const Text('No Connection'),
+          content: const Text('Please check your internet connectivity'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(context, 'Cancel');
+                setState(() => isAlertSet = false);
+                isDeviceConnected =
+                    await InternetConnectionChecker().hasConnection;
+                if (!isDeviceConnected && isAlertSet == false) {
+                  showDialogBox();
+                  setState(() => isAlertSet = true);
+                }
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
 }

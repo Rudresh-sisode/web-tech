@@ -46,19 +46,20 @@ class _PopularWidgetState extends State<Popular> {
                       child: Card(
                         child: Container(
                           decoration: BoxDecoration(
-                              color: Color(0xFF713590),
+                              // color: Color(0xFF713590),
                               borderRadius: BorderRadius.circular(15),
                               boxShadow: [
                                 BoxShadow(
                                     blurRadius: 8,
                                     offset: Offset(0, 15),
-                                    color: Color(0xFF713590).withOpacity(.6),
+                                    color: Color.fromARGB(255, 255, 255, 255)
+                                        .withOpacity(.6),
                                     spreadRadius: -9)
                               ]),
                           child: Image.network(
                             popularAPI.popularProductsImageData[index]
                                 .populaImagePath,
-                            fit: BoxFit.fill,
+                            fit: BoxFit.fitHeight,
                           ),
                         ),
                       ),

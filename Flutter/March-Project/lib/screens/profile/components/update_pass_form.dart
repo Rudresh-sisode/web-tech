@@ -64,12 +64,9 @@ class _UpdatePassFormState extends State<UpdatePassForm> {
   }
 
   Future<void> _updatePassword() async {
-
-    
-
     if (password.length < 8 ||
-      newPassword.length < 8 ||
-      confirmPassword.length < 8) {
+        newPassword.length < 8 ||
+        confirmPassword.length < 8) {
       print("All passwords must be more than 8 characters long");
       return;
     }
@@ -86,39 +83,43 @@ class _UpdatePassFormState extends State<UpdatePassForm> {
     if (!specialChars.hasMatch(password) ||
         !capitalLetters.hasMatch(password) ||
         !numbers.hasMatch(password)) {
-         
-      GlobalSnackBar.show(context, "Password must contain at least one special character, one capital letter, and one number");
-      print("Password must contain at least one special character, one capital letter, and one number");
+      GlobalSnackBar.show(context,
+          "Password must contain at least one special character, one capital letter, and one number");
+      print(
+          "Password must contain at least one special character, one capital letter, and one number");
       return;
     }
 
     if (!specialChars.hasMatch(newPassword) ||
         !capitalLetters.hasMatch(newPassword) ||
         !numbers.hasMatch(newPassword)) {
+      GlobalSnackBar.show(context,
+          "New password must contain at least one special character, one capital letter, and one number");
 
-        GlobalSnackBar.show(context, "New password must contain at least one special character, one capital letter, and one number");
-        
-        print("New password must contain at least one special character, one capital letter, and one number");
-        return;
+      print(
+          "New password must contain at least one special character, one capital letter, and one number");
+      return;
     }
 
     if (!specialChars.hasMatch(confirmPassword) ||
         !capitalLetters.hasMatch(confirmPassword) ||
         !numbers.hasMatch(confirmPassword)) {
-        GlobalSnackBar.show(context, "Confirm password must contain at least one special character, one capital letter, and one number");
+      GlobalSnackBar.show(context,
+          "Confirm password must contain at least one special character, one capital letter, and one number");
 
-        print("Confirm password must contain at least one special character, one capital letter, and one number");
-        return;
+      print(
+          "Confirm password must contain at least one special character, one capital letter, and one number");
+      return;
     }
 
     try {
-
-      await Provider.of<Auth>(context, listen: false).updateuserPassword(password,newPassword,confirmPassword);
-      GlobalSnackBar.show(context,Provider.of<Auth>(context, listen: false).userUpdatePasswordMessage );
+      await Provider.of<Auth>(context, listen: false)
+          .updateuserPassword(password, newPassword, confirmPassword);
+      GlobalSnackBar.show(context,
+          Provider.of<Auth>(context, listen: false).userUpdatePasswordMessage);
       Provider.of<Auth>(context, listen: false).userUpdatePasswordMessage = "";
       Navigator.pop(context);
       Navigator.pushReplacementNamed(context, ProfileScreen.routeName);
-
     } on FormatException catch (_, error) {
       _showErrorDialog(error.toString());
     } catch (error) {
@@ -135,11 +136,13 @@ class _UpdatePassFormState extends State<UpdatePassForm> {
           // }
         });
 
-        String finalEmailErrorMessage = newErrorMessage.containsKey("Error") ? newErrorMessage["Error"].toString() : newErrorMessage.containsKey("c_password")
-            ? newErrorMessage["c_password"].toString()
-            : newErrorMessage.containsKey("old_password")
-                ? newErrorMessage["old_password"].toString()
-                : "";
+        String finalEmailErrorMessage = newErrorMessage.containsKey("Error")
+            ? newErrorMessage["Error"].toString()
+            : newErrorMessage.containsKey("c_password")
+                ? newErrorMessage["c_password"].toString()
+                : newErrorMessage.containsKey("old_password")
+                    ? newErrorMessage["old_password"].toString()
+                    : "";
         String finalPasswordErrorMessage =
             newErrorMessage.containsKey("password")
                 ? newErrorMessage["password"].toString()
@@ -209,7 +212,6 @@ class _UpdatePassFormState extends State<UpdatePassForm> {
                 //     color: Colors.red, // set text color to red
                 //   ),
                 // ),
-        
               ],
             ),
           ),
@@ -231,15 +233,11 @@ class _UpdatePassFormState extends State<UpdatePassForm> {
           SizedBox(
               width: 200,
               child: ElevatedButton(
-                onPressed: () async{
-                
-                   
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState!.save();
-                      await _updatePassword();
-                    }
-                 
-                  
+                onPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
+                    await _updatePassword();
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: kPrimaryColor,
@@ -258,30 +256,29 @@ class _UpdatePassFormState extends State<UpdatePassForm> {
       onSaved: (newValue) => password = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-       setState(() {
+          setState(() {
             conformPasswordError = null;
-           
           });
-        }
-        else if(value.length < 8){
-         setState(() {
+        } else if (value.length < 8) {
+          setState(() {
             conformPasswordError = null;
-           
           });
         }
         return null;
       },
       validator: (value) {
         if (value!.isEmpty) {
-           return "value shouldn't be empty";
-        }
-        else if(value.length < 8){
+          return "value shouldn't be empty";
+        } else if (value.length < 8) {
           return "At least have 8 character password";
         }
         return null;
       },
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
+        labelStyle: TextStyle(
+          color: kPrimaryColor,
+        ),
         border: OutlineInputBorder(),
         labelText: "Current password",
         hintText: "Enter your Current password",
@@ -301,20 +298,14 @@ class _UpdatePassFormState extends State<UpdatePassForm> {
         if (value.isNotEmpty) {
           setState(() {
             conformPasswordError = null;
-           
           });
-        }
-        else if(value.length >= 8)
-        {
+        } else if (value.length >= 8) {
           setState(() {
             conformPasswordError = null;
-           
           });
-        }
-        else if( value == confirmPassword){
+        } else if (value == confirmPassword) {
           setState(() {
             conformPasswordError = null;
-           
           });
         }
         return null;
@@ -322,17 +313,18 @@ class _UpdatePassFormState extends State<UpdatePassForm> {
       validator: (value) {
         if (value!.isEmpty) {
           return "value shouldn't be empty";
-        }
-        else if(value.length < 8){
+        } else if (value.length < 8) {
           return "At least have 8 character password";
-        }
-        else if(value != confirmPassword ){
+        } else if (value != confirmPassword) {
           return "New password doesn't match with confirm password!";
         }
         return conformPasswordError;
       },
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
+        labelStyle: TextStyle(
+          color: kPrimaryColor,
+        ),
         border: OutlineInputBorder(),
         labelText: "New password",
         hintText: "Enter your new password",
@@ -345,7 +337,6 @@ class _UpdatePassFormState extends State<UpdatePassForm> {
 
   TextFormField buildConfirmFormField() {
     return TextFormField(
-      
       initialValue: confirmPassword,
       obscureText: true,
       onSaved: (newValue) => confirmPassword = newValue.toString(),
@@ -353,20 +344,15 @@ class _UpdatePassFormState extends State<UpdatePassForm> {
         if (value.isNotEmpty) {
           setState(() {
             conformPasswordError = null;
-           
           });
           // confirmPassword
-        } 
-        else if(value.length >= 8){
-        setState(() {
-            conformPasswordError = null;
-           
-          });
-        }
-        else if(value == newPassword){
+        } else if (value.length >= 8) {
           setState(() {
             conformPasswordError = null;
-           
+          });
+        } else if (value == newPassword) {
+          setState(() {
+            conformPasswordError = null;
           });
         }
         return conformPasswordError;
@@ -374,17 +360,18 @@ class _UpdatePassFormState extends State<UpdatePassForm> {
       validator: (value) {
         if (value!.isEmpty) {
           return "value shouldn't be empty";
-        }
-        else if(value.length < 8){
+        } else if (value.length < 8) {
           return "At least have 8 character password";
-        }
-        else if(value != newPassword ){
+        } else if (value != newPassword) {
           return "New password doesn't match with confirm password!";
         }
         return conformPasswordError;
       },
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
+        labelStyle: TextStyle(
+          color: kPrimaryColor,
+        ),
         border: OutlineInputBorder(),
         labelText: "Confirm password*",
         hintText: "Re-enter your new password",

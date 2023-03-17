@@ -27,6 +27,7 @@ class _SignUpFormState extends State<SignUpForm> {
   // ignore: non_constant_identifier_names
   bool remember = false;
   final List<String?> errors = [];
+  var validError = null;
 
   void _showErrorDialog(String message) {
     showDialog(
@@ -55,7 +56,7 @@ class _SignUpFormState extends State<SignUpForm> {
     try {
       await Provider.of<Auth>(context, listen: false)
           .userRegistration(userName, email, password);
-        Navigator.pushNamed(ctx, ProductListingWidget.routeName);
+      Navigator.pushNamed(ctx, ProductListingWidget.routeName);
     } catch (error) {
       Map<String, dynamic> errorRes = json.decode(error.toString());
       Map<String, dynamic> errorMessage = errorRes["message"];
@@ -67,11 +68,13 @@ class _SignUpFormState extends State<SignUpForm> {
         }
       });
 
-      String finalEmailErrorMessage =
-          newErrorMessage.containsKey("email") ? newErrorMessage["email"].toString() : "";
-      String finalPasswordErrorMessage = newErrorMessage.containsKey("c_password")
-          ? newErrorMessage["c_password"].toString()
+      String finalEmailErrorMessage = newErrorMessage.containsKey("email")
+          ? newErrorMessage["email"].toString()
           : "";
+      String finalPasswordErrorMessage =
+          newErrorMessage.containsKey("c_password")
+              ? newErrorMessage["c_password"].toString()
+              : "";
 
       String finalErrorMessage = finalEmailErrorMessage.isNotEmpty
           ? finalEmailErrorMessage
@@ -112,14 +115,12 @@ class _SignUpFormState extends State<SignUpForm> {
           SizedBox(height: getProportionateScreenHeight(40)),
           DefaultButton(
             text: "Continue",
-            press: () async{
+            press: () async {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 // if all are valid then go to success screen
                 await _submitRegistration(context);
                 // GlobalSnackBar.show(context, 'Sign up successful');
-
-              
 
               }
             },
@@ -135,24 +136,25 @@ class _SignUpFormState extends State<SignUpForm> {
       onSaved: (newValue) => password = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kPassNullError);
-        } else if (value.length >= 8) {
-          removeError(error: kShortPassError);
-        }
-        password = value;
+           setState(() {
+            validError = null;
+          });
+        } 
+        return null;
       },
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kPassNullError);
-          return "";
+          return kPassNullError;
         } else if (value.length < 8) {
-          addError(error: kShortPassError);
-          return "";
+          return kShortPassError;
         }
         return null;
       },
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
+        labelStyle: TextStyle(
+          color: kPrimaryColor,
+        ),
         border: OutlineInputBorder(),
         labelText: "Password",
         hintText: "Enter your password",
@@ -170,7 +172,9 @@ class _SignUpFormState extends State<SignUpForm> {
       onSaved: (newValue) => email = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kEmailNullError);
+          setState(() {
+            validError = null;
+          });
         } else if (emailValidatorRegExp.hasMatch(value)) {
           removeError(error: kInvalidEmailError);
         }
@@ -178,16 +182,17 @@ class _SignUpFormState extends State<SignUpForm> {
       },
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kEmailNullError);
-          return "";
+          return kEmailNullError;
         } else if (!emailValidatorRegExp.hasMatch(value)) {
-          addError(error: kInvalidEmailError);
-          return "";
+          return kInvalidEmailError;
         }
         return null;
       },
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
+        labelStyle: TextStyle(
+          color: kPrimaryColor,
+        ),
         border: OutlineInputBorder(),
         labelText: "Email",
         hintText: "Enter your email",
@@ -204,22 +209,25 @@ class _SignUpFormState extends State<SignUpForm> {
       onSaved: (newValue) => userName = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kNamelNullError);
+          setState(() {
+            validError = null;
+          });
         }
-        {
-          removeError(error: kNamelNullError);
-        }
+        
         return null;
       },
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kNamelNullError);
-          return "";
+        
+          return kNamelNullError;
         }
         return null;
       },
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(12.0),
+        labelStyle: TextStyle(
+          color: kPrimaryColor,
+        ),
         border: OutlineInputBorder(),
         labelText: "Name",
         hintText: "Enter your name",

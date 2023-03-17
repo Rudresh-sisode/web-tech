@@ -20,48 +20,47 @@ class _BannergWidgetState extends State<Carousel> {
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: 
-
-        Column(
+        child: Column(
       children: [
-        Consumer<HomePageSlider>(builder: (ctx,hpSlider,_)=> 
-        Container(
-          child:hpSlider.sliderImage.length > 0 ? CarouselSlider.builder(
-                itemCount: hpSlider
-                    .sliderImage
-                    .length,
-                options: CarouselOptions(
-                  autoPlay: true,
-                  aspectRatio: 2.0,
-                  enlargeCenterPage: true,
-                ),
-                itemBuilder: (context, index, realIdx) {
-                  return Container(
-                    child: Center(
-                        child:
-                            Image.network(
-                                hpSlider
-                                    .sliderImage[index]
-                                    .bannerImagePath,
-                                fit: BoxFit.cover,
+        Consumer<HomePageSlider>(
+          builder: (ctx, hpSlider, _) => Container(
+            child: hpSlider.sliderImage.length > 0
+                ? CarouselSlider.builder(
+                    itemCount: hpSlider.sliderImage.length,
+                    options: CarouselOptions(
+                      autoPlay: true,
+                      aspectRatio: 2.0,
+                      enlargeCenterPage: true,
+                    ),
+                    itemBuilder: (context, index, realIdx) {
+                      return Container(
+                        child: Center(
+                            child: Image.network(
+                                hpSlider.sliderImage[index].bannerImagePath,
+                                fit: BoxFit.fitHeight,
                                 width: 1000)),
-                    // ),
-                  );
-                },
-              ) : FutureBuilder(future: hpSlider.executeGetSlider() ,builder: (ctx,hpSliderResultSnapshot)=>
-              hpSliderResultSnapshot.connectionState == ConnectionState.waiting ? Container(
-                child: Text("pending"),
-              ) : Container(
-                child: Text("please restart the app."),
-              )) ,
-        ),),
-       
+                        // ),
+                      );
+                    },
+                  )
+                : FutureBuilder(
+                    future: hpSlider.executeGetSlider(),
+                    builder: (ctx, hpSliderResultSnapshot) =>
+                        hpSliderResultSnapshot.connectionState ==
+                                ConnectionState.waiting
+                            ? Container(
+                                child: Text("pending"),
+                              )
+                            : Container(
+                                child: Text("please restart the app."),
+                              )),
+          ),
+        ),
       ],
     ));
   }
