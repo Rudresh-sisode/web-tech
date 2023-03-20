@@ -25,8 +25,8 @@ class _PopularWidgetState extends State<Popular> {
     super.initState();
   }
 
-  List itemColors = [Colors.green, Colors.purple, Colors.blue];
-  final List<int> numbers = [1, 2, 3, 5, 8, 13, 21, 34, 55];
+  // List itemColors = [Colors.green, Colors.purple, Colors.blue];
+  // final List<int> numbers = [1, 2, 3, 5, 8, 13, 21, 34, 55];
 
   @override
   Widget build(BuildContext context) {

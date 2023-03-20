@@ -280,6 +280,9 @@ class _ShippingFormState extends State<ShippingForm> {
           FormError(errors: errors),
           SizedBox(height: 20),
           ElevatedButton(
+              style: const ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(kPrimaryColor),
+              ),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();

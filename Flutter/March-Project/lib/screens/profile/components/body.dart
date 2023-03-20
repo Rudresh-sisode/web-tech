@@ -251,6 +251,7 @@ class _ProfileState extends State<Body> {
                                 color: Color.fromARGB(255, 75, 74, 74))),
                         onTap: () {
                           Provider.of<BottomMenuHandler>(context, listen: false).currentValue = BottomMuenu.Home;
+                          Provider.of<Auth>(context,listen:false).customerProfileData = UserProfile(name: "", email: "", mobile: "");
                           Provider.of<Auth>(context, listen: false).logout();
                           Navigator.pushAndRemoveUntil(
                               context,

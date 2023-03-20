@@ -42,7 +42,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   bool showSheet = false;
   int countValue = 0;
-  late List<CartItem> cartItems;
+  List<CartItem> cartItems = [];
   Map<String, dynamic> checkoutDetails = {};
   List<CustomerDeliveryAddress> allAddressData = [];
   bool isLoadingSpinner = false;
@@ -61,7 +61,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
     //     Provider.of<DeliveryAddress>(context, listen: false).allAddressData;
     setState(() {
       // cartItems = BlocProvider.of<CartBloc>(context).items;
-      print("checking name " + checkoutDetails["name"]);
+     
       cartItems = Provider.of<Cart>(context, listen: false).items;
     });
 
@@ -104,7 +104,6 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
 
   @override
   Widget build(BuildContext context) {
-    print("widget build" + checkoutDetails["name"]);
     return Scaffold(
       key: scaffoldKey,
       appBar:

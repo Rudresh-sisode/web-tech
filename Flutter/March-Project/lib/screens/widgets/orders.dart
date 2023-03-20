@@ -74,11 +74,11 @@ class _OrdersState extends State<Orders> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: kAppBarColor,
+      // backgroundColor: kPrimaryColor,
       appBar: AppBar(
         // title: const Text("Orders"),
         centerTitle: true,
-        // backgroundColor: kPrimaryColor,
+        backgroundColor: kPrimaryColor,
         iconTheme: const IconThemeData(
           color: kAppBarColor, //change your color here
         ),
@@ -187,10 +187,10 @@ class _OrdersState extends State<Orders> {
                                   },
                                 )
                               : Center(
-                                child: Container(
+                                  child: Container(
                                     child: Text("No orders yet."),
                                   ),
-                              );
+                                );
                         },
                       ),
                       //

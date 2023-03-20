@@ -208,17 +208,20 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
       onSaved: (newValue) => mobile = newValue.toString(),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kPhoneNumberNullError);
+           setState(() {
+            validError = null;
+          });
         }
-        {
-          removeError(error: kPhoneNumberNullError);
-        }
+       
         return null;
       },
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kPhoneNumberNullError);
-          return "";
+          return kPhoneNumberNullError;
+        }
+        if(value.length < 9 || value.length > 11)
+        {
+          return "Please enter 10 digit number.";
         }
         return null;
       },

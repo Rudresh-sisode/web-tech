@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:ecomm_app/components/custom_surfix_icon.dart';
 import 'package:ecomm_app/components/form_error.dart';
 import 'package:ecomm_app/components/keyboard.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 // import 'package:shop_app/screens/forgot_password/forgot_password_screen.dart';
 // import 'package:shop_app/screens/login_success/login_success_screen.dart';
 import 'package:provider/provider.dart';
@@ -31,12 +32,13 @@ class _SignFormState extends State<SignForm> {
   final _emailFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
   bool _obscureText = true;
+  bool _isLoading = false;
 
   String? email;
   String? password;
   bool? remember = false;
   final List<String?> errors = [];
-  var _isLoading = false;
+ 
   var validError = null;
 
   void _showErrorDialog(String message) {
@@ -71,9 +73,17 @@ class _SignFormState extends State<SignForm> {
   }
 
   Future<void> _submitLogin() async {
+      setState(() {
+        _isLoading = true;
+      });
+
     try {
+      
       await Provider.of<Auth>(context, listen: false)
           .login(emailController.text, passwordController.text);
+         setState(() {
+        _isLoading = false;
+      }); 
       if (Provider.of<Auth>(context, listen: false).isAuth) {
         Navigator.pushAndRemoveUntil(
           context,
@@ -82,8 +92,14 @@ class _SignFormState extends State<SignForm> {
         );
       }
     } on FormatException catch (_, error) {
+      setState(() {
+        _isLoading = false;
+      }); 
       _showErrorDialog(error.toString());
     } catch (error) {
+      setState(() {
+        _isLoading = false;
+      }); 
       Map<String, dynamic> errorRes = json.decode(error.toString());
       Map<String, dynamic> errorMessage = errorRes["message"];
 
@@ -152,6 +168,19 @@ class _SignFormState extends State<SignForm> {
           ),
           FormError(errors: errors),
           SizedBox(height: getProportionateScreenHeight(20)),
+          //loading logic here, with button disable
+          _isLoading ? 
+          Center(
+                  child: 
+                  CircularProgressIndicator(color: kPrimaryColor,)
+                  // Container(
+                  //     height: MediaQuery.of(context).size.height * 0.2,
+                  //     width: 60,
+                  //     child: SpinKitCubeGrid(
+                  //       color: kPrimaryColor,
+                  //     ),
+                  //     ),
+                ) :
           DefaultButton(
             text: "Continue",
             press: () {

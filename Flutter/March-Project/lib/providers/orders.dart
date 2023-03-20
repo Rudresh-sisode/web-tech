@@ -77,8 +77,6 @@ class Orders with ChangeNotifier {
           // responseData['data'] is a list
           List<dynamic> dataList = availableData;
 
-         
-
           if(dataList.isNotEmpty){
             List<dynamic> data = responseData["data"]["orders"];
             _orders = data.map((order) => OrderItems.fromJson(order)).toList();
@@ -99,24 +97,11 @@ class Orders with ChangeNotifier {
           }
           // use dataMap as needed
         }
-        // List<dynamic> availableData = responseData["data"];
-        
-
-        /**
-         * } else if (responseData['status'] == true) {
-            Map<String,dynamic> availableData = responseData["data"];
-            if(availableData.isNotEmpty){
-            List<dynamic> data = responseData["data"]["orders"];
-            _orders = data.map((order) => OrderItems.fromJson(order)).toList();
-            }
-            else{
-            _orders = [];
-            }
-         */
         
         notifyListeners();
       }
     } catch (error) {
+      _orders = [];
       throw error;
     }
   }

@@ -12,7 +12,6 @@ import '../models/product.dart';
 import '../models/apiUrls.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 import 'dart:convert';
 import 'dart:async';
 
@@ -49,106 +48,79 @@ class Cart with ChangeNotifier {
 
   String quantityError = "";
   String quantityStatus = "Available";
-  
 
   bool checkoutOrderStatus = false;
   String recentCheckoutOrderId = "";
-  Map<String, dynamic> checkoutData = {
-    "name": "Kedar L Ahirrao",
-    "email": "kedar.ahirrao@gunadhyasoft.com",
-    "mobile": "8768768768",
-    "address_id": "1",
-    "product": [
-      {
-        "product_id": "1",
-        "quantity": "10",
-        "product_price": "300",
-        "discount_price": "100",
-        "product_offer_price": "200",
-        "total_price": "20000"
-      },
-      {
-        "product_id": "2",
-        "quantity": "5",
-        "product_price": "30",
-        "discount_price": "5",
-        "product_offer_price": "25",
-        "total_price": "125"
-      }
-    ],
-    "total_nondiscount_price": "454544",
-    "total_discount_price": "234",
-    "total_price": "23424"
-  };
+  Map<String, dynamic> checkoutData = {};
 
   bool isGridView = true;
-   String _token = "null";
+  String _token = "null";
 
   List<CartItem> get items {
     return [..._items];
   }
 
-  void preparedCheckout(String addressId,String name,String mobile,String email){
+  void preparedCheckout(
+      String addressId, String name, String mobile, String email) {
     checkoutData["name"] = name;
-    checkoutData["email"]= email;
-    checkoutData["mobile"]= mobile;
+    checkoutData["email"] = email;
+    checkoutData["mobile"] = mobile;
     checkoutData["address_id"] = addressId;
     List<Map<String, dynamic>> products = items.map((item) {
-        return {
-          "product_id": item.id,
-          "quantity": item.quantity,
-          "product_price": item.productPrice,
-          "discount_price": item.discountPrice,
-          "product_offer_price": item.offerPrice,
-          "total_price": item.totalPrice,
-        };
-      }).toList();
+      return {
+        "product_id": item.id,
+        "quantity": item.quantity,
+        "product_price": item.productPrice,
+        "discount_price": item.discountPrice,
+        "product_offer_price": item.offerPrice,
+        "total_price": item.totalPrice,
+      };
+    }).toList();
     checkoutData["product"] = products;
-    checkoutData["total_nondiscount_price"] =basePrice;
+    checkoutData["total_nondiscount_price"] = basePrice;
     checkoutData["total_discount_price"] = discountPrice;
     checkoutData["total_price"] = totalPrice;
 
-    print("checkout data "+checkoutData.toString());
-
+    print("checkout data " + checkoutData.toString());
   }
 
   Future<void> checkoutOrder() async {
-
     final url = Uri.parse(APIURLS.orderPlaceWithToken);
 
-    try{
-        final prefs = await SharedPreferences.getInstance();
-        final dynamic extractedUserData = json.decode(prefs.getString("userData").toString());
-        _token = extractedUserData["token"];
-        final response = await http.post(url,body:json.encode(checkoutData),
-        headers:{'Content-Type': 'application/json','Authorization':'Bearer ${_token}'} );
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final dynamic extractedUserData =
+          json.decode(prefs.getString("userData").toString());
+      _token = extractedUserData["token"];
+      final response = await http.post(url,
+          body: json.encode(checkoutData),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${_token}'
+          });
 
-        Map<String, dynamic> responseData = json.decode(response.body);
-        if (responseData['status'] == false) {
-          // userProfileMessage = responseData["message_type"];
-          notifyListeners();
-          checkoutOrderStatus = false;
-          //throwing error message, this will handle in profile widgets
-          throw HttpException(response.body);
-        } else if (responseData['status'] == true) {
-          checkoutOrderStatus = true;
-          recentCheckoutOrderId = responseData["data"]["order_id"];
-          //make the cart empty promptly
-          // userProfileMessage = responseData["message"];
-          notifyListeners();
-        }
-    }
-    catch(error){
+      Map<String, dynamic> responseData = json.decode(response.body);
+      if (responseData['status'] == false) {
+        // userProfileMessage = responseData["message_type"];
+        notifyListeners();
+        checkoutOrderStatus = false;
+        //throwing error message, this will handle in profile widgets
+        throw HttpException(response.body);
+      } else if (responseData['status'] == true) {
+        checkoutOrderStatus = true;
+        recentCheckoutOrderId = responseData["data"]["order_id"];
+        //make the cart empty promptly
+        // userProfileMessage = responseData["message"];
+        notifyListeners();
+      }
+    } catch (error) {
       throw error;
     }
   }
 
-
-
   int get itemCount {
     return _items.length;
   }
-  
 
   void changeGallaryView() {
     isGridView = !isGridView;
@@ -159,18 +131,18 @@ class Cart with ChangeNotifier {
     List<ProductDetails> productData =
         Provider.of<Products>(context, listen: false).getProducts;
 
-    final product =
-        productData.firstWhere((prod) => prod.productId == int.parse(productId));
+    final product = productData
+        .firstWhere((prod) => prod.productId == int.parse(productId));
     if (product == null || product.quantity == 0) {
       quantityStatus = "Unavailable";
       return;
     }
 
-    
     final existingCartItemIndex =
         _items.indexWhere((item) => item.id == productId);
 
-    if(existingCartItemIndex != -1 && product.quantity < _items[existingCartItemIndex].quantity + 1 ){
+    if (existingCartItemIndex != -1 &&
+        product.quantity < _items[existingCartItemIndex].quantity + 1) {
       quantityError = "quantity not available more than this.";
       return;
     }
@@ -200,7 +172,8 @@ class Cart with ChangeNotifier {
           id: product.productId.toString(),
           offerPrice: product.offerPrice.toDouble() * int.parse(prodQuantity),
           productPrice: product.price.toDouble(),
-          discountPrice: (product.price.toDouble() - product.offerPrice.toDouble()),
+          discountPrice:
+              (product.price.toDouble() - product.offerPrice.toDouble()),
           quantity: int.parse(prodQuantity),
           totalPrice: product.offerPrice.toDouble() * int.parse(prodQuantity));
 
@@ -231,16 +204,16 @@ class Cart with ChangeNotifier {
     List<ProductDetails> productData =
         Provider.of<Products>(context, listen: false).getProducts;
 
-    final product =
-        productData.firstWhere((prod) => prod.productId == int.parse(productId));
+    final product = productData
+        .firstWhere((prod) => prod.productId == int.parse(productId));
     if (product == null || product.quantity == 0) return;
 
     final existingCartItemIndex =
         _items.indexWhere((item) => item.id == productId);
-      if(_items[existingCartItemIndex].quantity == 1){
-        //one quantity remain as it is.
-        return;
-      }
+    if (_items[existingCartItemIndex].quantity == 1) {
+      //one quantity remain as it is.
+      return;
+    }
     if (existingCartItemIndex >= 0) {
       _items[existingCartItemIndex].quantity -= int.parse(prodQuantity);
       _items[existingCartItemIndex].offerPrice = product.offerPrice.toDouble();
@@ -253,7 +226,7 @@ class Cart with ChangeNotifier {
       // deletion of the product quantity need to affect the db.
       discountPrice -= (_items[existingCartItemIndex].discountPrice *
           int.parse(prodQuantity));
-  
+
       totalPrice -=
           (_items[existingCartItemIndex].offerPrice * int.parse(prodQuantity));
       basePrice -= (_items[existingCartItemIndex].productPrice *
@@ -265,25 +238,23 @@ class Cart with ChangeNotifier {
 
   // void deleteItem(String productId) {}
 
-  void deleteItem(String productId){
-
-    final existingCartItemIndex = _items.indexWhere((item) => item.id == productId);
+  void deleteItem(String productId) {
+    final existingCartItemIndex =
+        _items.indexWhere((item) => item.id == productId);
     bool isLenghZero = _items.length == 1;
     final removingItemData = _items[existingCartItemIndex];
     _items.removeAt(existingCartItemIndex);
 
     if (existingCartItemIndex >= 0) {
-      
-      discountPrice -= (removingItemData.discountPrice * removingItemData.quantity);
-      if(isLenghZero){
-       totalPrice = 0.0;
+      discountPrice -=
+          (removingItemData.discountPrice * removingItemData.quantity);
+      if (isLenghZero) {
+        totalPrice = 0.0;
+      } else {
+        totalPrice -= (removingItemData.offerPrice * removingItemData.quantity);
       }
-      else{
-       totalPrice -= (removingItemData.offerPrice * removingItemData.quantity);
-      }
-      
-      basePrice -= (removingItemData.productPrice * removingItemData.quantity);
 
+      basePrice -= (removingItemData.productPrice * removingItemData.quantity);
     }
     notifyListeners();
   }

@@ -131,39 +131,62 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
       //   // child:SizedBox('asxas'),
       //   elevation: 0,
       // ),
+
       appBar: AppBar(
+        elevation: 0,
         automaticallyImplyLeading: false,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(
-              children: <Widget>[
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: Image.asset(
-                    'assets/images/G-Store.png',
-                    fit: BoxFit.contain,
-                    height: 32,
-                  ),
-                ),
-                SizedBox(
-                  // alignment: Alignment.topCenter,
-                  child: Text(
-                    "G store",
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
-            ),
-            // Image.asset(
-            //   'assets/images/G-Store.png',
-            //   fit: BoxFit.contain,
-            //   height: 32,
-            // ),
-            // Text("Your Title", textAlign: TextAlign.center),
-          ],
+        // backgroundColor: Color.fromARGB(255, 194, 59, 235),
+        centerTitle: true,
+        // leading: Image.asset(
+        //   "assets/images/G-Store.png",
+        //   // fit: BoxFit.none,
+        //   height: 20,
+        // ),
+        leading: Transform.translate(
+          offset: Offset(7, 0),
+          child: Image.asset(
+            "assets/images/G-Store.png",
+            fit: BoxFit.fitHeight,
+          ),
         ),
+        title: Text('G-Store ',
+            style: TextStyle(
+                fontFamily: 'Open Sans', fontWeight: FontWeight.bold)),
       ),
+
+      // appBar: AppBar(
+      //   automaticallyImplyLeading: false,
+      //   title: Row(
+      //     mainAxisAlignment: MainAxisAlignment.start,
+      //     children: [
+      //       Row(
+      //         children: <Widget>[
+      //           Container(
+      //             alignment: Alignment.topLeft,
+      //             child: Image.asset(
+      //               'assets/images/G-Store.png',
+      //               fit: BoxFit.contain,
+      //               height: 32,
+      //             ),
+      //           ),
+      //           SizedBox(
+      //             // alignment: Alignment.topCenter,
+      //             child: Text(
+      //               "G store",
+      //               textAlign: TextAlign.center,
+      //             ),
+      //           ),
+      //         ],
+      //       ),
+      //       // Image.asset(
+      //       //   'assets/images/G-Store.png',
+      //       //   fit: BoxFit.contain,
+      //       //   height: 32,
+      //       // ),
+      //       // Text("Your Title", textAlign: TextAlign.center),
+      //     ],
+      //   ),
+      // ),
       //  );
       body: SingleChildScrollView(
         // reverse: true,
