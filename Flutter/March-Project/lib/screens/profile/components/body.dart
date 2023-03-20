@@ -99,8 +99,10 @@ class _ProfileState extends State<Body> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
+    print("build run first");
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.all(4),
