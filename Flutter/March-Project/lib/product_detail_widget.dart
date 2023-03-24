@@ -4,6 +4,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecomm_app/providers/bottom-menu.dart';
 import 'package:ecomm_app/providers/cart.dart';
 import 'package:ecomm_app/providers/products.dart';
+import 'package:ecomm_app/screens/wishlist/wishlist.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badge;
 import 'package:ecomm_app/app_theme.dart';
@@ -12,6 +14,7 @@ import 'package:ecomm_app/screens/widgets/button.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/provider.dart';
@@ -170,8 +173,8 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                     size: 30,
                   ),
                   onPressed: () {
-                    Provider.of<BottomMenuHandler>(context,
-                                    listen: false).currentValue = BottomMuenu.Cart;
+                    Provider.of<BottomMenuHandler>(context, listen: false)
+                        .currentValue = BottomMuenu.Cart;
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -272,13 +275,113 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                         //   ),
                         // ),
                         // ),
+
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                          child: Text(
-                            'Product details',
-                            // style: AppTheme.of(context).title1,
+                          // child: Card(
+                          // color: Colors.grey,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      Text('Product details'),
+                                      SizedBox(height: 10),
+                                      // Text('Subscription'),
+                                      RatingBarIndicator(
+                                        rating: 3.50,
+                                        itemBuilder: (context, index) => Icon(
+                                          Icons.star,
+                                          color: Colors.amber,
+                                        ),
+                                        itemCount: 5,
+                                        itemSize: 20.0,
+                                        direction: Axis.horizontal,
+                                      ),
+                                      // RatingBar.builder(
+                                      //     initialRating: 3,
+                                      //     minRating: 1,
+                                      //     direction: Axis.horizontal,
+                                      //     allowHalfRating: true,
+                                      //     itemCount: 5,
+                                      //     itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                                      //     itemBuilder: (context, _) => Icon(
+                                      //       Icons.star,
+                                      //       color: Colors.amber,
+                                      //     ),
+                                      //     onRatingUpdate: (rating) {
+                                      //       print(rating);
+                                      //     },
+                                      //   ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Flexible(
+                                fit: FlexFit.tight,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      IconButton(
+                                        icon: Icon(
+                                          Icons.favorite,
+                                          color: kFavoriteColor,
+                                          size: 30.0,
+                                        ),
+                                        // icon: SvgPicture.asset(
+                                        //   "assets/icons/Home.svg",
+                                        //   color: BottomMuenu.Home == bottomMenuHandler.currentValue
+                                        //       ? kPrimaryColor
+                                        //       : inActiveIconColor,
+                                        // ),
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, Wishlist.routeName);
+                                        },
+                                      ),
+                                      // Text(
+                                      //   '+100',
+                                      //   maxLines: 1,
+                                      //   softWrap: false,
+                                      //   overflow: TextOverflow.fade,
+                                      // ),
+                                      SizedBox(height: 10),
+                                      // Text(
+                                      //   '18 Sept 2021',
+                                      //   maxLines: 1,
+                                      //   softWrap: false,
+                                      //   overflow: TextOverflow.fade,
+                                      // ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
+                          // ),
                         ),
+
+                        // Padding(
+                        //   padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                        //   child: Text(
+                        //     'Product details',
+                        //     // style: AppTheme.of(context).title1,
+                        //   ),
+                        // ),
+
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(16, 4, 0, 0),
                           // child: Text(

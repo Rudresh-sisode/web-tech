@@ -142,13 +142,13 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
         //   // fit: BoxFit.none,
         //   height: 20,
         // ),
-        leading: Transform.translate(
-          offset: Offset(7, 0),
-          child: Image.asset(
-            "assets/images/G-Store.png",
-            fit: BoxFit.fitHeight,
-          ),
-        ),
+
+        leading: SizedBox(
+            height: 10.0,
+            width: 10.0, // fixed width and height
+            child: Image.asset(
+              'assets/images/G-Store.png',
+            )),
         title: Text('G-Store ',
             style: TextStyle(
                 fontFamily: 'Open Sans', fontWeight: FontWeight.bold)),
@@ -190,6 +190,7 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
       //  );
       body: SingleChildScrollView(
         // reverse: true,
+
         physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
           mainAxisSize: MainAxisSize.min,

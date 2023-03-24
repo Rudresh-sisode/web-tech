@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ecomm_app/size_config.dart';
 
 const kPrimaryColor = Color(0xFF713590);
+const kFavoriteColor = Color.fromARGB(255, 225, 7, 7);
 const kPrimaryLightColor = Color(0xFFFFECDF);
 const kAppBarColor = Color.fromARGB(255, 255, 255, 255);
 const kPrimaryGradientColor = LinearGradient(

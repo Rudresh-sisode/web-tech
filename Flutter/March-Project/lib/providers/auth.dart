@@ -27,11 +27,14 @@ class Auth with ChangeNotifier {
 
   UserProfile customerProfileData = UserProfile(name: "", email: "", mobile: "");
 
+
   // dynamic _authTimer = Timer(Duration(seconds: 5 ),null)
 
   bool get isAuth {
     return token == "null" ? false : true;
   }
+
+
 
   String get token {
     if (_token != "null") {
@@ -196,13 +199,7 @@ class Auth with ChangeNotifier {
     count++;
     print("Auth Timer " + count.toString());
 
-    // print(_authTimer);
-    // if (_authTimer != null /** || DateTime.now().second.compareTo(_authTimer.tick) >= 0 */) {
-    //   _authTimer.cancel();
-    //   //_authTimer = Timer(Duration(seconds: DateTime.now().second ),(){});
-    // }
-    // final timeToExpiry = _expiryDate.difference(DateTime.now()).inSeconds;
-    // _authTimer = Timer(Duration(seconds: 3600),logout);
+  
   }
 
   Future<void> updateCustomerProfile(String userName, userMobile) async {
@@ -259,9 +256,8 @@ class Auth with ChangeNotifier {
 
       Map<String, dynamic> responseData = json.decode(response.body);
       if (responseData['status'] == false) {
-        customerProfileData = UserProfile(
-            name: "Pending..", email: "Pending..", mobile: "Pending..");
-            userProfileHasLoaded = false;
+        customerProfileData = UserProfile(name: "", email: "", mobile: "");
+        userProfileHasLoaded = false;
         notifyListeners();
 
         //throwing error message, this will handle in profile widgets

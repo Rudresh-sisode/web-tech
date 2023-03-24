@@ -16,11 +16,105 @@ class Carousel extends StatefulWidget {
 class _BannergWidgetState extends State<Carousel> {
   bool isLoadingSpinner = true;
   late BuildContext _buildContext;
+    var _isInit = true;
+    int value = 0;
 
   @override
   void initState() {
+    //  Future.delayed(Duration.zero).
+    // then((value) {
+    //   Provider.of<HomePageSlider>(context).getHomeSliderImage().then((vl) => setState(() {
+    //     isLoadingSpinner = false;
+    //   }))
+    //   .catchError((onError){
+    //     print(onError);
+    //   });
+    // });
     super.initState();
   }
+
+
+  
+
+  @override
+  Widget build(BuildContext context) {
+    // value++;
+    print("carousel calling");
+    return SafeArea(
+        child: Column(
+      children: [
+        //  Provider.of<HomePageSlider>(context).sliderImage.length <= 0
+        // isLoadingSpinner
+        //   ?
+        //  Container(
+        //           child: Text("pendingss"),
+        //         ) :
+        // CarouselSlider.builder(
+        //             itemCount:Provider.of<HomePageSlider>(context).sliderImage.length ,
+        //             options: CarouselOptions(
+        //               autoPlay: true,
+        //               aspectRatio: 2.0,
+        //               enlargeCenterPage: true,
+        //             ),
+        //             itemBuilder: (context, index, realIdx) {
+        //               return Container(
+        //                 child: Center(
+        //                     child: Image.network(
+        //                         Provider.of<HomePageSlider>(context).sliderImage[index].bannerImagePath,
+        //                         fit: BoxFit.fitHeight,
+        //                         width: 1000)),
+        //                 // ),
+        //               );
+        //             },
+        //           )
+
+        Consumer<HomePageSlider>(
+          builder: (ctx, hpSlider, _) => Container(
+            child: hpSlider.sliderImage.length > 0
+                ? CarouselSlider.builder(
+                    itemCount: hpSlider.sliderImage.length,
+                    options: CarouselOptions(
+                      autoPlay: true,
+                      aspectRatio: 2.0,
+                      enlargeCenterPage: true,
+                    ),
+                    itemBuilder: (context, index, realIdx) {
+                      return Container(
+                        child: Center(
+                            child: Image.network(
+                                hpSlider.sliderImage[index].bannerImagePath,
+                                fit: BoxFit.fitHeight,
+                                width: 1000)),
+                        // ),
+                      );
+                    },
+                  )
+                : FutureBuilder(
+                    future: hpSlider.executeGetSlider(),
+                    builder: (ctx, hpSliderResultSnapshot) =>
+                        hpSliderResultSnapshot.connectionState ==
+                                ConnectionState.waiting
+                            ? Container(
+                                child: Text("pending"),
+                              )
+                            : Container(
+                                child: Text("please restart the app."),
+                              )),
+          ),
+        ),
+
+      ],
+    ));
+  }
+}
+
+
+/**
+*
+
+backup, if something went wrong
+________________________________________________________
+
 
   @override
   Widget build(BuildContext context) {
@@ -65,3 +159,10 @@ class _BannergWidgetState extends State<Carousel> {
     ));
   }
 }
+
+____________________________________________________________________
+
+
+
+*
+*/

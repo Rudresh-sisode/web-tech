@@ -2,6 +2,7 @@ import 'package:ecomm_app/checkout_widget.dart';
 import 'package:ecomm_app/const_error_msg.dart';
 import 'package:ecomm_app/enums.dart';
 import 'package:ecomm_app/product_listing_widget.dart';
+import 'package:ecomm_app/screens/category/category.dart';
 // import 'package:ecomm_app/screens/home/home_screen.dart';
 import 'package:ecomm_app/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -26,8 +27,7 @@ class BottomMenu extends StatefulWidget {
 class _BottomMenuState extends State<BottomMenu> {
   @override
   void initState() {
-    var myWidgetName = context.widget;
-    print("on what widget I'm on ${myWidgetName}");
+ 
     // TODO: implement initState
     super.initState();
     print("called this time ");
@@ -53,8 +53,10 @@ class _BottomMenuState extends State<BottomMenu> {
           topRight: Radius.circular(40),
         ),
       ),
-      child: Consumer<BottomMenuHandler>(builder: (ctx, bottomMenuHandler, _) {
-        return SafeArea(
+      child: 
+      // Consumer<BottomMenuHandler>(builder: (ctx, bottomMenuHandler, _) {
+      //   return 
+        SafeArea(
           top: false,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -62,7 +64,7 @@ class _BottomMenuState extends State<BottomMenu> {
               IconButton(
                 icon: Icon(
                   Icons.home,
-                  color: BottomMuenu.Home == bottomMenuHandler.currentValue
+                  color: BottomMuenu.Home == Provider.of<BottomMenuHandler>(context,listen: false).currentValue
                       ? kPrimaryColor
                       : inActiveIconColor,
                   size: 30.0,
@@ -73,14 +75,14 @@ class _BottomMenuState extends State<BottomMenu> {
                 //       ? kPrimaryColor
                 //       : inActiveIconColor,
                 // ),
-                onPressed: bottomMenuHandler.currentValue == BottomMuenu.Home
+                onPressed: Provider.of<BottomMenuHandler>(context,listen: false).currentValue == BottomMuenu.Home
                     ? null
                     : () {
                         // Navigator.pop(context);
                         // await .getCustomerProfile();
 
-                        bottomMenuHandler.currentValue = BottomMuenu.Home;
-                        print(" Home click ${bottomMenuHandler.currentValue}");
+                        Provider.of<BottomMenuHandler>(context,listen: false).currentValue = BottomMuenu.Home;
+                        print(" Home click ${Provider.of<BottomMenuHandler>(context,listen: false).currentValue}");
 
                         Navigator.pushNamed(
                             context, ProductListingWidget.routeName);
@@ -90,10 +92,12 @@ class _BottomMenuState extends State<BottomMenu> {
               //   icon: SvgPicture.asset("assets/icons/Cart.svg"),
               //   onPressed: () {},
               // ),
+
+              //Category
               IconButton(
                 icon: Icon(
-                  Icons.shopping_cart,
-                  color: BottomMuenu.Cart == bottomMenuHandler.currentValue
+                  Icons.category,
+                  color: BottomMuenu.Category == Provider.of<BottomMenuHandler>(context,listen: false).currentValue
                       ? kPrimaryColor
                       : inActiveIconColor,
                   size: 30.0,
@@ -104,21 +108,49 @@ class _BottomMenuState extends State<BottomMenu> {
                 //       ? kPrimaryColor
                 //       : inActiveIconColor,
                 // ),
-                onPressed: bottomMenuHandler.currentValue == BottomMuenu.Cart
+                onPressed: Provider.of<BottomMenuHandler>(context,listen: false).currentValue ==
+                        BottomMuenu.Category
                     ? null
                     : () {
                         // Navigator.pop(context);
                         // await .getCustomerProfile();
 
-                        bottomMenuHandler.currentValue = BottomMuenu.Cart;
-                        print(" Cart click ${bottomMenuHandler.currentValue}");
+                        Provider.of<BottomMenuHandler>(context,listen: false).currentValue = BottomMuenu.Category;
+                        print(
+                            " Category click ${Provider.of<BottomMenuHandler>(context,listen: false).currentValue}");
+                        Navigator.pushNamed(context, Category.routeName);
+                      },
+              ),
+
+              IconButton(
+                icon: Icon(
+                  Icons.shopping_cart,
+                  color: BottomMuenu.Cart == Provider.of<BottomMenuHandler>(context,listen: false).currentValue
+                      ? kPrimaryColor
+                      : inActiveIconColor,
+                  size: 30.0,
+                ),
+                // icon: SvgPicture.asset(
+                //   "assets/icons/Cart Icon.svg",
+                //   color: BottomMuenu.Cart == bottomMenuHandler.currentValue
+                //       ? kPrimaryColor
+                //       : inActiveIconColor,
+                // ),
+                onPressed: Provider.of<BottomMenuHandler>(context,listen: false).currentValue == BottomMuenu.Cart
+                    ? null
+                    : () {
+                        // Navigator.pop(context);
+                        // await .getCustomerProfile();
+
+                        Provider.of<BottomMenuHandler>(context,listen: false).currentValue = BottomMuenu.Cart;
+                        print(" Cart click ${Provider.of<BottomMenuHandler>(context,listen: false).currentValue}");
                         Navigator.pushNamed(context, CheckoutWidget.routeName);
                       },
               ),
               IconButton(
                   icon: Icon(
                     Icons.person,
-                    color: BottomMuenu.Profile == bottomMenuHandler.currentValue
+                    color: BottomMuenu.Profile == Provider.of<BottomMenuHandler>(context,listen: false).currentValue
                         ? kPrimaryColor
                         : inActiveIconColor,
                     size: 30.0,
@@ -129,22 +161,21 @@ class _BottomMenuState extends State<BottomMenu> {
                   //       ? kPrimaryColor
                   //       : inActiveIconColor,
                   // ),
-                  onPressed: bottomMenuHandler.currentValue ==
+                  onPressed: Provider.of<BottomMenuHandler>(context,listen: false).currentValue ==
                           BottomMuenu.Profile
                       ? null
                       : () {
-                          // Navigator.pop(context);
-                          // await .getCustomerProfile();
+               
 
-                          bottomMenuHandler.currentValue = BottomMuenu.Profile;
+                          Provider.of<BottomMenuHandler>(context,listen: false).currentValue = BottomMuenu.Profile;
                           // bottomMenuHandler.changeCurrentValue(BottomMuenu.Profile);
-                          print(" profile click ${bottomMenuHandler.currentValue}");
+                          print(" profile click ${Provider.of<BottomMenuHandler>(context,listen: false).currentValue}");
                           Navigator.pushNamed(context, ProfileScreen.routeName);
                         }),
             ],
           ),
-        );
-      }),
+        ),
+      // }),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:ecomm_app/app_theme.dart';
 import 'package:ecomm_app/bloc/cart_bloc.dart';
+import 'package:ecomm_app/const_error_msg.dart';
 import 'package:ecomm_app/models/product.dart';
 import 'package:ecomm_app/product_detail_widget.dart';
 import 'package:ecomm_app/providers/cart.dart';
@@ -36,46 +37,58 @@ class ProductTileAnimation extends StatelessWidget {
             product: product,
           );
         },
+        //  double c_width = MediaQuery.of(context).size.width*0.8;
         closedShape: const RoundedRectangleBorder(),
         closedElevation: 0.0,
         closedBuilder: (BuildContext _, VoidCallback openContainer) {
           return Container(
+            // padding: const EdgeInsets.all(2.0),
+            // child: Padding(
+            // padding: const EdgeInsets.all(2.0),
+            // width: MediaQuery.of(context).size.width * 0.8,
             child: Card(
-              // width: MediaQuery.of(context).size.width * 0.45,
               // decoration: BoxDecoration(
               //   color: AppTheme.of(context).secondaryBackground,
-              //   boxShadow: [
-              //     BoxShadow(
-              //       color: Color(0xFF713590),
-              //       spreadRadius: 1,
-              //       blurRadius: 3,
-              //       offset: const Offset(0, 0),
-              //     )
-              //     // BoxShadow(
-              //     //   color: Colors.grey.withOpacity(0.5),
-              //     //   spreadRadius: 5,
-              //     //   blurRadius: 7,
-              //     //   offset: Offset(0, 3), // changes position of shadow
-              //     //   // color: Colors.deepPurpleAccent,
-              //     //   // blurRadius: 10,
-              //     //   // spreadRadius: 0,
-              //     //   // offset: Offset(10, 10)
-              //     // ),
-              //     // BoxShadow(
-              //     //   blurRadius: 4,
-              //     //   color: Color(0x3600000F),
-              //     //   offset: Offset(0, 2),
-              //     // )
-              //   ],
+              //   // boxShadow: [
+              //   //   BoxShadow(
+              //   //     color: Color(0xFF713590),
+              //   //     spreadRadius: 1,
+              //   //     blurRadius: 3,
+              //   //     offset: const Offset(0, 0),
+              //   //   )
+              //   //   // BoxShadow(
+              //   //   //   color: Colors.grey.withOpacity(0.5),
+              //   //   //   spreadRadius: 5,
+              //   //   //   blurRadius: 7,
+              //   //   //   offset: Offset(0, 3), // changes position of shadow
+              //   //   //   // color: Colors.deepPurpleAccent,
+              //   //   //   // blurRadius: 10,
+              //   //   //   // spreadRadius: 0,
+              //   //   //   // offset: Offset(10, 10)
+              //   //   // ),
+              //   //   // BoxShadow(
+              //   //   //   blurRadius: 4,
+              //   //   //   color: Color(0x3600000F),
+              //   //   //   offset: Offset(0, 2),
+              //   //   // )
+              //   // ],
               //   borderRadius: BorderRadius.circular(8),
               // ),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                padding: EdgeInsetsDirectional.all(0),
+                //  width: MediaQuery.of(context).size.width * 0.2,
+                // margin: EdgeInsetsDirectional.all(10),
+                // padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                 child: Column(
-                  mainAxisSize: MainAxisSize.max,
+                  // spacing: 5.0,
+                  // runSpacing: 5.0,
+                  // pad
+                  // direction: Axis.vertical,
+                  // crossAxisAlignment: CrossAxisAlignment.stretch,
+                  // mainAxisSize: MainAxisSize.max,
                   children: [
                     Row(
-                      mainAxisSize: MainAxisSize.max,
+                      // mainAxisSize: MainAxisSize.max,
                       children: [
                         Expanded(
                           child: ClipRRect(
@@ -87,43 +100,38 @@ class ProductTileAnimation extends StatelessWidget {
                             ),
                             child: Image.network(
                               product.productImages[0].imageFullPath,
-                              width: 100,
+                              width: 80,
                               height: 100,
                               // width: double.infinity,
-                              fit: BoxFit.fitHeight,
+                              fit: BoxFit.contain,
                             ),
                           ),
                         ),
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
-                          // Padding(
-                          //     padding:
-                          //         EdgeInsetsDirectional.fromSTEB(8, 4, 0, 0),
                           Flexible(
-                              // padding:
-                              //     EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
-                              child: new Text(
-                            product.name,
-                            style: AppTheme.of(context).bodyText1,
-                          ))
-                          // child: Text(
-                          //   product.name,
-                          //   style: AppTheme.of(context).bodyText1,
-                          //   softWrap: false,
-                          //   maxLines: 3,
-                          //   overflow: TextOverflow.ellipsis,
-                          // ),
-                          // ),
+                            // padding: EdgeInsetsDirectional.fromSTEB(8, 4, 0, 0),
+                            // child: Flexible(
+                            child: Text(
+                              product.name,
+                              style: AppTheme.of(context).bodyText1,
+                              // overflow: TextOverflow.clip
+                              // softWrap: true,
+                              // maxLines: 3,
+                              // overflow: TextOverflow.ellipsis,
+                            ),
+                            // ),
+                          ),
                         ],
                       ),
                     ),
-                    Flexible(
-                      // padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -138,10 +146,11 @@ class ProductTileAnimation extends StatelessWidget {
                                 children: <TextSpan>[
                                   TextSpan(
                                       text: ("\u20B9"),
-                                      style: TextStyle(color: Colors.red)),
+                                      style: TextStyle(
+                                          color: Color.fromARGB(255, 4, 4, 4))),
                                   TextSpan(
                                       text: '${product.price}',
-                                      style: TextStyle(color: Colors.blue)),
+                                      style: TextStyle(color: kPrimaryColor)),
                                 ],
                               ),
                             ),
@@ -153,6 +162,7 @@ class ProductTileAnimation extends StatelessWidget {
                 ),
               ),
             ),
+            // ),
           );
         },
       ),

@@ -6,6 +6,7 @@ import 'package:ecomm_app/providers/bottom-menu.dart';
 import 'package:ecomm_app/providers/carousel.dart';
 import 'package:ecomm_app/providers/delivery-address.dart';
 import 'package:ecomm_app/providers/home-page-slider.dart';
+import 'package:ecomm_app/providers/loader.dart';
 import 'package:ecomm_app/providers/orders.dart';
 import 'package:ecomm_app/providers/popular.dart';
 import 'package:ecomm_app/providers/products.dart';
@@ -55,7 +56,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CarouselApi()),
         ChangeNotifierProvider(create: (_) => PopularApi()),
         ChangeNotifierProvider(create: (_) => HomePageSlider()),
-        ChangeNotifierProvider(create: (_) => BottomMenuHandler())
+        ChangeNotifierProvider(create: (_) => BottomMenuHandler()),
+        ChangeNotifierProvider(create: (_) => TheLoader())
       ],
       child: Consumer<Auth>(
         builder: (ctx, auth, _) => MaterialApp(
