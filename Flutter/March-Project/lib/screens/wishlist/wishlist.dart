@@ -81,7 +81,7 @@ class _WishlistState extends State<Wishlist> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomMenu(),
+      // bottomNavigationBar: BottomMenu(),
     );
   }
 }

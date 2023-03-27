@@ -247,8 +247,9 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                                 Provider.of<Products>(context, listen: false)
                                     .searchProductList(textController.text);
                               },
-                              decoration: const InputDecoration(
-                                labelText: 'Search product here...',
+                              decoration:  InputDecoration(
+                                hintText:'Search product here...',
+                                // labelText: 'Search product here...',
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
