@@ -1,5 +1,4 @@
-import 'package:ecomm_app/bloc/cart_bloc.dart';
-import 'package:ecomm_app/bloc/state/cart_state.dart';
+
 import 'package:ecomm_app/models/product.dart';
 import 'package:ecomm_app/product_detail_widget.dart';
 import 'package:ecomm_app/screens/widgets/product_tile_animation.dart';

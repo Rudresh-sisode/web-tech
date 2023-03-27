@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:ecomm_app/app_theme.dart';
-import 'package:ecomm_app/bloc/event/cart_event.dart';
 import 'package:ecomm_app/components/global_snack_bar.dart';
 import 'package:ecomm_app/components/menu/bottom_menu.dart';
 import 'package:ecomm_app/const_error_msg.dart';
@@ -26,8 +25,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 
-import 'bloc/cart_bloc.dart';
-import 'bloc/state/cart_state.dart';
 import 'models/product-details.dart';
 import 'models/product.dart';
 
@@ -114,7 +111,7 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
     return Scaffold(
       // key: scaffoldKey,
 
-      resizeToAvoidBottomInset: false,
+
       // backgroundColor: Colors.white,
       // appBar: AppBar(
       //   centerTitle: false,

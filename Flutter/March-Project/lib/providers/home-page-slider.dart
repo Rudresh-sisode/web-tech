@@ -23,7 +23,7 @@ import 'package:http/http.dart' as http;
 class HomePageSlider with ChangeNotifier {
    List<HomePageSliderS> sliderImage = [];
    String _token = "null";
-   bool loading = false;
+   bool loading = true;
 
    Future<bool> executeGetSlider() async{
     try{
@@ -42,6 +42,12 @@ class HomePageSlider with ChangeNotifier {
   //  }
 
   Future<void> getHomeSliderImage() async {
+
+    if(loading == false){
+      loading = true;
+      notifyListeners();
+    }
+    
     final url = Uri.parse(APIURLS.getHomePageSlider);
     try {
       //getting token first
@@ -56,6 +62,7 @@ class HomePageSlider with ChangeNotifier {
 
       Map<String, dynamic> responseData = json.decode(response.body);
       if (responseData['status'] == false) {
+        loading = false;
         notifyListeners();
         //throwing error message, this will handle in profile widgets
         throw HttpException(response.body);
@@ -68,14 +75,14 @@ class HomePageSlider with ChangeNotifier {
         //   return PopularModel(id: item['id'], name: item['name']);
         // }).toList();
 
-     notifyListeners();
-     loading = true;
-        
+     
+      loading = false;
+      notifyListeners();  
       }
     } catch (error) {
       loading = false;
+      notifyListeners();
       throw error;
-
     }
   }
 }

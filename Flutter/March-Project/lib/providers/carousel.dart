@@ -47,6 +47,7 @@ class CarouselApi with ChangeNotifier {
 
 
   Future<void> getCarousel() async {
+    
     final url = Uri.parse(APIURLS.getSliderUrl);
     try {
       //getting token first

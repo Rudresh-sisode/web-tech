@@ -1,6 +1,5 @@
 import 'package:animations/animations.dart';
 import 'package:ecomm_app/app_theme.dart';
-import 'package:ecomm_app/bloc/cart_bloc.dart';
 import 'package:ecomm_app/models/product.dart';
 import 'package:ecomm_app/product_detail_widget.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +20,6 @@ class ProductTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color color = Colors.primaries[itemNo % Colors.primaries.length];
-    var cartList = BlocProvider.of<CartBloc>(context).items;
-    ContainerTransitionType _transitionType = ContainerTransitionType.fade;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(

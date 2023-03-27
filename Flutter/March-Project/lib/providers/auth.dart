@@ -17,6 +17,7 @@ class Auth with ChangeNotifier {
   String userProfileMessage = "";
   String userUpdatePasswordMessage = "";
   bool userProfileHasLoaded = false;
+  bool profileLoading = true;
   String _token = "null";
   // DateTime _expiryDate = DateTime.now();
   String _userId = "null";
@@ -27,21 +28,12 @@ class Auth with ChangeNotifier {
 
   UserProfile customerProfileData = UserProfile(name: "", email: "", mobile: "");
 
-
-  // dynamic _authTimer = Timer(Duration(seconds: 5 ),null)
-
   bool get isAuth {
     return token == "null" ? false : true;
   }
 
-
-
   String get token {
     if (_token != "null") {
-      /**
-       * !_expiryDate.isAtSameMomentAs(DateTime.now()) &&
-        _expiryDate.isAfter(DateTime.now()) &&
-       */
       print("object1 " + _token);
       return _token;
     }
@@ -54,7 +46,6 @@ class Auth with ChangeNotifier {
     final url = Uri.parse(APIURLS.updateUserPassword);
     final responseBody = {"old_password":oldPassword,"password":newPassword,"c_password":confirmPassword};
     
-
     try{
         final prefs = await SharedPreferences.getInstance();
         final dynamic extractedUserData = json.decode(prefs.getString("userData").toString());
@@ -64,7 +55,7 @@ class Auth with ChangeNotifier {
 
         Map<String, dynamic> responseData = json.decode(response.body);
         if (responseData['status'] == false) {
-          // userProfileMessage = responseData["message_type"];
+          userProfileMessage = responseData["message_type"];
           notifyListeners();
      
           //throwing error message, this will handle in profile widgets
@@ -73,126 +64,15 @@ class Auth with ChangeNotifier {
           userUpdatePasswordMessage = "Password updated, successfully!";
      
           //make the cart empty promptly
-          // userProfileMessage = responseData["message"];
+          userProfileMessage = responseData["message"];
           notifyListeners();
         }
     }
     catch(error){
-      throw error;
-    }
-  }
-
-  Future<void> _authenticate(
-      String email, String password, String urlSegment) async {
-    // final url = Uri.parse('http://10.0.2.2:8000/api/login');
-
-    final url = Uri.parse(APIURLS.userLoginAPIUrl);
-    try {
-      final response = await http.post(
-        url,
-        body: json.encode({
-          'email': email,
-          'password': password,
-        }),
-        headers: {'Content-Type': 'application/json'},
-      );
-
-      if (response.body.runtimeType is Object) {
-        print("response body is object type");
-      }
-      Map<String, dynamic> responseData = json.decode(response.body);
-
-      // print('your value '+responseData["idToken"]);
-      if (responseData['status'] == false) {
-        _token = "null";
-        _userId = "null";
-        // _expiryDate = DateTime.now();
-        throw HttpException(response.body);
-      }
-
-      _token = responseData["data"]["token"];
-      print("your token value " + _token);
-      _userId = responseData["data"]["name"];
-      print("your local id valeu " + _userId);
-      // _expiryDate = DateTime.now().add(Duration(seconds: 7600));
-      // .add(Duration(seconds: int.parse(responseData["expiresIn"])));
-      // print("your expiry date " + _expiryDate.toString());
-      // _autoLogout();
+      userProfileMessage = "";
       notifyListeners();
-      final prefs = await SharedPreferences.getInstance();
-      final userData = json.encode({
-        'token': _token,
-        'userId': _userId,
-        // 'expiryDate': _expiryDate.toIso8601String()
-      });
-
-      final dynamic extractedUserData =
-          json.decode(jsonEncode(prefs.getString("userData")));
-
-      print("user data ");
-      if (userData is Object) {
-        print("user data is object");
-      }
-      print(userData);
-      prefs.setString("userData", userData);
-      userRegMessage = responseData["message"];
-    } catch (error) {
       throw error;
     }
-  }
-
-  Future<void> signup(String email, String password) async {
-    return _authenticate(email, password, "signUp");
-  }
-
-  Future<void> login(String email, String password) async {
-    //this firebase url is accountable of Rudresh's firebase account.
-    // https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API_KEY]
-    return _authenticate(email, password, "signInWithPassword");
-  }
-
-  Future<bool> tryAutoLogin() async {
-    print("auto login method called");
-
-    final prefs = await SharedPreferences.getInstance();
-    if (!prefs.containsKey("userData")) {
-      print("not containig userData key value pair");
-      return false;
-    }
-    final dynamic extractedUserData =
-        json.decode(prefs.getString("userData").toString());
-    print("your extracted data value ");
-    print(extractedUserData);
-    // final expiryDate = DateTime.parse(extractedUserData["expiryDate"]);
-
-    // if (expiryDate.isBefore(DateTime.now())) {
-    //   // print("time date has issue " + expiryDate.toIso8601String());
-    //   return false;
-    // }
-
-    _token = extractedUserData["token"];
-    _userId = extractedUserData["userId"];
-    // _expiryDate = expiryDate;
-    // _autoLogout();
-    notifyListeners();
-
-    return true;
-  }
-
-  void logout() async {
-    _token = "null";
-    // _expiryDate = DateTime.now();
-    _userId = "null";
-
-    // if (_authTimer != null ) /** || DateTime.now().second.compareTo(_authTimer.tick) >= 0 */{
-    //   _authTimer.cancel();
-    //   _authTimer = null as Timer;
-    //   //_authTimer = Timer(Duration(seconds: DateTime.now().second ),(){});
-    // }
-
-    final prefs = await SharedPreferences.getInstance();
-    prefs.clear();
-    notifyListeners();
   }
 
   void _autoLogout() {
@@ -242,6 +122,9 @@ class Auth with ChangeNotifier {
   }
 
   Future<void> getCustomerProfile() async {
+
+  
+
     final url = Uri.parse(APIURLS.getUserProfileAPIUrl);
     try {
       //getting token first
@@ -258,6 +141,7 @@ class Auth with ChangeNotifier {
       if (responseData['status'] == false) {
         customerProfileData = UserProfile(name: "", email: "", mobile: "");
         userProfileHasLoaded = false;
+        profileLoading = false;
         notifyListeners();
 
         //throwing error message, this will handle in profile widgets
@@ -269,12 +153,15 @@ class Auth with ChangeNotifier {
           email: responseData["data"]["email"],
           mobile: responseData["data"]["mobile"],
         );
-        userProfileHasLoaded = true;
+       
         notifyListeners();
+
       }
     } catch (error) {
+      
       throw error;
     }
+    
   }
 
   Future<void> customerOtpWithPasswordChange(String userEmail, String otpValue,

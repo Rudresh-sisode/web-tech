@@ -13,6 +13,16 @@ class Wishlist extends StatefulWidget {
 class _WishlistState extends State<Wishlist> {
   @override
   Widget build(BuildContext context) {
+    final myImageAndCaption = [
+      ["assets/images/flutter-logo.png", "caption1"],
+      ["assets/images/flutter-logo.png", "caption2"],
+      ["assets/images/flutter-logo.png", "this is a big text"],
+      ["assets/images/flutter-logo.png", "This is almost a bigger text"],
+      ["assets/images/flutter-logo.png", "oh no this a really really big text"],
+      ["assets/images/flutter-logo.png", "yes small one"],
+      ["assets/images/flutter-logo.png", "yes"],
+    ];
+
     return Scaffold(
       backgroundColor: kAppBarColor,
       appBar: AppBar(
@@ -30,17 +40,19 @@ class _WishlistState extends State<Wishlist> {
             scrollDirection: Axis.vertical,
             children: <Widget>[
               WishlistCard(
-                  Icon(
-                    Icons.book,
-                    size: 40,
-                  ),
-                  'Book'),
+                Icon(
+                  Icons.book,
+                  size: 40,
+                ),
+                'Book',
+              ),
               WishlistCard(
-                  Icon(
-                    Icons.computer,
-                    size: 40,
-                  ),
-                  'Laptops'),
+                Icon(
+                  Icons.computer,
+                  size: 40,
+                ),
+                'Laptops',
+              ),
               WishlistCard(
                   Icon(
                     Icons.videogame_asset,

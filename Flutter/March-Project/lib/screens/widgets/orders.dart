@@ -649,7 +649,7 @@ class _OrdersState extends State<Orders> {
                           }),
                     )
             ]),
-      bottomNavigationBar: BottomMenu(),
+      // bottomNavigationBar: BottomMenu(),
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:animations/animations.dart';
 import 'package:ecomm_app/app_theme.dart';
-import 'package:ecomm_app/bloc/cart_bloc.dart';
 import 'package:ecomm_app/const_error_msg.dart';
 import 'package:ecomm_app/models/product.dart';
 import 'package:ecomm_app/product_detail_widget.dart';

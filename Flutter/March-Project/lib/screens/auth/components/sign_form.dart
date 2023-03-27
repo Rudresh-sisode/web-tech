@@ -12,6 +12,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert';
 
+import '../../../providers/auth-checker.dart';
 import '../../../providers/auth.dart';
 import '../../../models/http_exception.dart';
 import '../../../components/default_button.dart';
@@ -79,7 +80,7 @@ class _SignFormState extends State<SignForm> {
 
     try {
       
-      await Provider.of<Auth>(context, listen: false)
+      await Provider.of<AuthChecker>(context, listen: false)
           .login(emailController.text, passwordController.text);
          setState(() {
         _isLoading = false;

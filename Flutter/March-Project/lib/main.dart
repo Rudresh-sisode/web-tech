@@ -2,6 +2,7 @@
 import 'dart:io';
 
 import 'package:ecomm_app/product_listing_widget.dart';
+import 'package:ecomm_app/providers/auth-checker.dart';
 import 'package:ecomm_app/providers/bottom-menu.dart';
 import 'package:ecomm_app/providers/carousel.dart';
 import 'package:ecomm_app/providers/delivery-address.dart';
@@ -21,7 +22,6 @@ import 'package:ecomm_app/routes.dart';
 import 'package:ecomm_app/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ecomm_app/bloc/cart_bloc.dart';
 import 'package:ecomm_app/theme.dart';
 
 Future main() async {
@@ -46,20 +46,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => Auth(),
-        ),
+        ChangeNotifierProvider(create: (_) => AuthChecker()),
+        ChangeNotifierProvider(create: (_) => Auth()),
         ChangeNotifierProvider(create: (_) => Cart()),
         ChangeNotifierProvider(create: (_) => Products()),
         ChangeNotifierProvider(create: (_) => Orders()),
         ChangeNotifierProvider(create: (_) => DeliveryAddress()),
-        ChangeNotifierProvider(create: (_) => CarouselApi()),
+        // ChangeNotifierProvider(create: (_) => CarouselApi()),
         ChangeNotifierProvider(create: (_) => PopularApi()),
         ChangeNotifierProvider(create: (_) => HomePageSlider()),
         ChangeNotifierProvider(create: (_) => BottomMenuHandler()),
-        ChangeNotifierProvider(create: (_) => TheLoader())
       ],
-      child: Consumer<Auth>(
+      child: Consumer<AuthChecker>(
         builder: (ctx, auth, _) => MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
@@ -80,3 +78,25 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+/**
+ * code backup
+ * Consumer<Auth>(
+        builder: (ctx, auth, _) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          theme: theme(),
+          home: auth.isAuth
+              ? ProductListingWidget()
+              : FutureBuilder(
+                  future: auth.tryAutoLogin(),
+                  builder: (ctx, authResultSnapshot) =>
+                      authResultSnapshot.connectionState ==
+                              ConnectionState.waiting
+                          ? AuthSplashScreen()
+                          : AuthScreen(),
+                ),
+          routes: routes,
+        ),
+      ),
+ */

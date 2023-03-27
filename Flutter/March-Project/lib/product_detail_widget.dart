@@ -19,9 +19,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/provider.dart';
 
-import '/bloc/cart_bloc.dart';
-import 'bloc/event/cart_event.dart';
-import 'bloc/state/cart_state.dart';
 import 'checkout_widget.dart';
 import 'components/global_snack_bar.dart';
 import 'models/cart.dart';

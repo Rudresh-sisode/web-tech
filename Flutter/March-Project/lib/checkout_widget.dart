@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:ecomm_app/app_theme.dart';
-import 'package:ecomm_app/bloc/event/cart_event.dart';
 import 'package:ecomm_app/components/menu/bottom_menu.dart';
 import 'package:ecomm_app/const_error_msg.dart';
 import 'package:ecomm_app/enums.dart';
@@ -24,8 +23,6 @@ import 'package:provider/provider.dart';
 import 'components/global_snack_bar.dart';
 import 'models/cart.dart';
 
-import 'bloc/cart_bloc.dart';
-import 'bloc/state/cart_state.dart';
 import 'models/delivery-address.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 

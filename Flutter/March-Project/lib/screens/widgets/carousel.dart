@@ -4,6 +4,7 @@ import 'package:ecomm_app/models/carousel.dart';
 import 'package:ecomm_app/providers/carousel.dart';
 import 'package:ecomm_app/providers/home-page-slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 class Carousel extends StatefulWidget {
@@ -14,23 +15,19 @@ class Carousel extends StatefulWidget {
 }
 
 class _BannergWidgetState extends State<Carousel> {
-  bool isLoadingSpinner = true;
-  late BuildContext _buildContext;
-    var _isInit = true;
-    int value = 0;
+  
+  var _isInit = true;
+  int value = 0;
 
   @override
   void initState() {
-    //  Future.delayed(Duration.zero).
-    // then((value) {
-    //   Provider.of<HomePageSlider>(context).getHomeSliderImage().then((vl) => setState(() {
-    //     isLoadingSpinner = false;
-    //   }))
-    //   .catchError((onError){
-    //     print(onError);
-    //   });
-    // });
     super.initState();
+     SchedulerBinding.instance.addPostFrameCallback((_) {
+       
+      Provider.of<HomePageSlider>(context, listen: false).getHomeSliderImage();
+      // GlobalSnackBar.show(context, otpMessage);
+      
+    });
   }
 
 
@@ -70,7 +67,8 @@ class _BannergWidgetState extends State<Carousel> {
 
         Consumer<HomePageSlider>(
           builder: (ctx, hpSlider, _) => Container(
-            child: hpSlider.sliderImage.length > 0
+            child: 
+            !hpSlider.loading
                 ? CarouselSlider.builder(
                     itemCount: hpSlider.sliderImage.length,
                     options: CarouselOptions(
@@ -89,17 +87,21 @@ class _BannergWidgetState extends State<Carousel> {
                       );
                     },
                   )
-                : FutureBuilder(
-                    future: hpSlider.executeGetSlider(),
-                    builder: (ctx, hpSliderResultSnapshot) =>
-                        hpSliderResultSnapshot.connectionState ==
-                                ConnectionState.waiting
-                            ? Container(
+                : 
+                Container(
                                 child: Text("pending"),
                               )
-                            : Container(
-                                child: Text("please restart the app."),
-                              )),
+                // FutureBuilder(
+                //     future: hpSlider.executeGetSlider(),
+                //     builder: (ctx, hpSliderResultSnapshot) =>
+                //         hpSliderResultSnapshot.connectionState ==
+                //                 ConnectionState.waiting
+                //             ? Container(
+                //                 child: Text("pending"),
+                //               )
+                //             : Container(
+                //                 child: Text("please restart the app."),
+                //               )),
           ),
         ),
 
