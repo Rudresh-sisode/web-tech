@@ -2,6 +2,7 @@ import 'package:ecomm_app/checkout_widget.dart';
 import 'package:ecomm_app/product_listing_widget.dart';
 import 'package:ecomm_app/screens/category/category.dart';
 import 'package:ecomm_app/screens/forget_password/forget_pass_screen.dart';
+import 'package:ecomm_app/screens/location/loaction.dart';
 // import 'package:ecomm_app/screens/home/components/product_list.dart';
 // import 'package:ecomm_app/screens/home/components/product_screen.dart';
 import 'package:ecomm_app/screens/otp/otp_screen.dart';
@@ -19,6 +20,7 @@ import 'package:flutter/widgets.dart';
 import 'package:ecomm_app/screens/splash/splash_screen.dart';
 import 'package:ecomm_app/screens/auth/auth_screen.dart';
 
+import 'screens/wishlist/wishlist.dart';
 import 'screens/wishlist/wishlist.dart';
 
 // import 'screens/sign_up/sign_up_screen.dart';
@@ -46,4 +48,5 @@ final Map<String, WidgetBuilder> routes = {
   UpdateppassScreen.routeName: (context) => UpdateppassScreen(),
   Category.routeName: (context) => Category(),
   Wishlist.routeName: (context) => Wishlist(),
+  Location.routeName: (context) => Location(),
 };

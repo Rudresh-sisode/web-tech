@@ -6,6 +6,7 @@ import 'package:ecomm_app/app_theme.dart';
 import 'package:ecomm_app/components/global_snack_bar.dart';
 import 'package:ecomm_app/components/menu/bottom_menu.dart';
 import 'package:ecomm_app/const_error_msg.dart';
+import 'package:ecomm_app/demo.dart';
 import 'package:ecomm_app/enums.dart';
 import 'package:ecomm_app/providers/auth.dart';
 import 'package:ecomm_app/providers/bottom-menu.dart';
@@ -16,7 +17,10 @@ import 'package:ecomm_app/screens/widgets/carousel.dart';
 import 'package:ecomm_app/screens/widgets/popular.dart';
 // import 'package:ecomm_app/screens/widgets/popular.dart';
 import 'package:ecomm_app/screens/widgets/product_list.dart';
+import 'package:ecomm_app/screens/widgets/recommended.dart';
+import 'package:ecomm_app/services/local_notification_service.dart';
 import 'package:ecomm_app/size_config.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -95,6 +99,55 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
     super.initState();
     getConnectivity();
     textController = TextEditingController();
+
+    // 1. This method call when app in terminated state and you get a notification
+    // when you click on notification app open from terminated state and you can 
+    // get notification data in this method
+
+    FirebaseMessaging.instance.getInitialMessage().then(
+      (message) {
+        print("FirebaseMessaging.instance.getInitialMessage");
+        if (message != null) {
+          print("New Notification");
+          if (message.data['_id'] != null) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => Demo(
+                  id: message.data['_id'],
+                ),
+              ),
+            );
+          }
+        }
+      },
+    );
+
+      // 2. This method only call when App in forground it mean app must be opened
+     FirebaseMessaging.onMessage.listen(
+      (message) {
+        print("FirebaseMessaging.onMessage.listen");
+        if (message.notification != null) {
+          print(message.notification!.title);
+          print(message.notification!.body);
+          print("message.data11 ${message.data}");
+          LocalNotificationService.createanddisplaynotification(message);
+
+        }
+      },
+    );
+
+     // 3. This method only call when App in background and not terminated(not closed)
+    FirebaseMessaging.onMessageOpenedApp.listen(
+      (message) {
+        print("FirebaseMessaging.onMessageOpenedApp.listen");
+        if (message.notification != null) {
+          print(message.notification!.title);
+          print(message.notification!.body);
+          print("message.data22 ${message.data['_id']}");
+        }
+      },
+    );
+
     SchedulerBinding.instance.addPostFrameCallback((_) {
       String otpMessage =
           Provider.of<Auth>(context, listen: false).userRegMessage;
@@ -110,7 +163,6 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       // key: scaffoldKey,
-
 
       // backgroundColor: Colors.white,
       // appBar: AppBar(
@@ -247,8 +299,8 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                                 Provider.of<Products>(context, listen: false)
                                     .searchProductList(textController.text);
                               },
-                              decoration:  InputDecoration(
-                                hintText:'Search product here...',
+                              decoration: InputDecoration(
+                                hintText: 'Search product here...',
                                 // labelText: 'Search product here...',
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
@@ -333,7 +385,7 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
             ),
             Container(
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
@@ -354,7 +406,7 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
             Consumer<Products>(
               builder: (ctx, product, _) => Container(
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 0),
                   child: product.productDataList.length > 0
                       ? Column(
                           children: <Widget>[
@@ -388,6 +440,11 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                 ),
               ),
             ),
+            SizedBox(
+              child: Text('Recomended products',
+              textAlign: TextAlign.start,style: TextStyle(fontSize: 16,color: Color.fromARGB(255, 22, 17, 1)),),
+            ),
+            Recommended()
           ],
         ),
       ),

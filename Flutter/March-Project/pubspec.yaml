@@ -57,6 +57,11 @@ dependencies:
   connectivity_plus: ^3.0.3
   flutter_rating_bar: ^4.0.1
   flutter_fortune_wheel: ^1.2.0
+  firebase_core: ^2.8.0
+  firebase_messaging: ^14.3.0
+  flutter_local_notifications: ^9.2.0
+  geolocator: ^9.0.2
+  geocoding: ^2.1.0
 
 dev_dependencies:
   flutter_test:

@@ -3,6 +3,7 @@ import 'package:ecomm_app/const_error_msg.dart';
 import 'package:ecomm_app/enums.dart';
 import 'package:ecomm_app/product_listing_widget.dart';
 import 'package:ecomm_app/screens/category/category.dart';
+import 'package:ecomm_app/screens/location/loaction.dart';
 // import 'package:ecomm_app/screens/home/home_screen.dart';
 import 'package:ecomm_app/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,6 @@ class BottomMenu extends StatefulWidget {
 class _BottomMenuState extends State<BottomMenu> {
   @override
   void initState() {
- 
     // TODO: implement initState
     super.initState();
     print("called this time ");
@@ -53,128 +53,175 @@ class _BottomMenuState extends State<BottomMenu> {
           topRight: Radius.circular(40),
         ),
       ),
-      child: 
-      // Consumer<BottomMenuHandler>(builder: (ctx, bottomMenuHandler, _) {
-      //   return 
-        SafeArea(
-          top: false,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                icon: Icon(
-                  Icons.home,
-                  color: BottomMuenu.Home == Provider.of<BottomMenuHandler>(context,listen: false).currentValue
-                      ? kPrimaryColor
-                      : inActiveIconColor,
-                  size: 30.0,
-                ),
-                // icon: SvgPicture.asset(
-                //   "assets/icons/Home.svg",
-                //   color: BottomMuenu.Home == bottomMenuHandler.currentValue
-                //       ? kPrimaryColor
-                //       : inActiveIconColor,
-                // ),
-                onPressed: Provider.of<BottomMenuHandler>(context,listen: false).currentValue == BottomMuenu.Home
-                    ? null
-                    : () {
-                        // Navigator.pop(context);
-                        // await .getCustomerProfile();
-
-                        Provider.of<BottomMenuHandler>(context,listen: false).currentValue = BottomMuenu.Home;
-                        print(" Home click ${Provider.of<BottomMenuHandler>(context,listen: false).currentValue}");
-
-                        Navigator.pushNamed(
-                            context, ProductListingWidget.routeName);
-                      },
+      child:
+          // Consumer<BottomMenuHandler>(builder: (ctx, bottomMenuHandler, _) {
+          //   return
+          SafeArea(
+        top: false,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: Icon(
+                Icons.home,
+                color: BottomMuenu.Home ==
+                        Provider.of<BottomMenuHandler>(context, listen: false)
+                            .currentValue
+                    ? kPrimaryColor
+                    : inActiveIconColor,
+                size: 30.0,
               ),
-              // IconButton(
-              //   icon: SvgPicture.asset("assets/icons/Cart.svg"),
-              //   onPressed: () {},
+              // icon: SvgPicture.asset(
+              //   "assets/icons/Home.svg",
+              //   color: BottomMuenu.Home == bottomMenuHandler.currentValue
+              //       ? kPrimaryColor
+              //       : inActiveIconColor,
               // ),
+              onPressed: Provider.of<BottomMenuHandler>(context, listen: false)
+                          .currentValue ==
+                      BottomMuenu.Home
+                  ? null
+                  : () {
+                      // Navigator.pop(context);
+                      // await .getCustomerProfile();
 
-              //Category
-              IconButton(
+                      Provider.of<BottomMenuHandler>(context, listen: false)
+                          .currentValue = BottomMuenu.Home;
+                      print(
+                          " Home click ${Provider.of<BottomMenuHandler>(context, listen: false).currentValue}");
+
+                      Navigator.pushNamed(
+                          context, ProductListingWidget.routeName);
+                    },
+            ),
+            // IconButton(
+            //   icon: SvgPicture.asset("assets/icons/Cart.svg"),
+            //   onPressed: () {},
+            // ),
+
+            //Category
+            IconButton(
+              icon: Icon(
+                Icons.category,
+                color: BottomMuenu.Category ==
+                        Provider.of<BottomMenuHandler>(context, listen: false)
+                            .currentValue
+                    ? kPrimaryColor
+                    : inActiveIconColor,
+                size: 30.0,
+              ),
+              // icon: SvgPicture.asset(
+              //   "assets/icons/Cart Icon.svg",
+              //   color: BottomMuenu.Cart == bottomMenuHandler.currentValue
+              //       ? kPrimaryColor
+              //       : inActiveIconColor,
+              // ),
+              onPressed: Provider.of<BottomMenuHandler>(context, listen: false)
+                          .currentValue ==
+                      BottomMuenu.Category
+                  ? null
+                  : () {
+                      // Navigator.pop(context);
+                      // await .getCustomerProfile();
+
+                      Provider.of<BottomMenuHandler>(context, listen: false)
+                          .currentValue = BottomMuenu.Category;
+                      print(
+                          " Category click ${Provider.of<BottomMenuHandler>(context, listen: false).currentValue}");
+                      Navigator.pushNamed(context, Category.routeName);
+                    },
+            ),
+
+            IconButton(
+              icon: Icon(
+                Icons.shopping_cart,
+                color: BottomMuenu.Cart ==
+                        Provider.of<BottomMenuHandler>(context, listen: false)
+                            .currentValue
+                    ? kPrimaryColor
+                    : inActiveIconColor,
+                size: 30.0,
+              ),
+              // icon: SvgPicture.asset(
+              //   "assets/icons/Cart Icon.svg",
+              //   color: BottomMuenu.Cart == bottomMenuHandler.currentValue
+              //       ? kPrimaryColor
+              //       : inActiveIconColor,
+              // ),
+              onPressed: Provider.of<BottomMenuHandler>(context, listen: false)
+                          .currentValue ==
+                      BottomMuenu.Cart
+                  ? null
+                  : () {
+                      // Navigator.pop(context);
+                      // await .getCustomerProfile();
+
+                      Provider.of<BottomMenuHandler>(context, listen: false)
+                          .currentValue = BottomMuenu.Cart;
+                      print(
+                          " Cart click ${Provider.of<BottomMenuHandler>(context, listen: false).currentValue}");
+                      Navigator.pushNamed(context, CheckoutWidget.routeName);
+                    },
+            ),
+            IconButton(
                 icon: Icon(
-                  Icons.category,
-                  color: BottomMuenu.Category == Provider.of<BottomMenuHandler>(context,listen: false).currentValue
+                  Icons.person,
+                  color: BottomMuenu.Profile ==
+                          Provider.of<BottomMenuHandler>(context, listen: false)
+                              .currentValue
                       ? kPrimaryColor
                       : inActiveIconColor,
                   size: 30.0,
                 ),
                 // icon: SvgPicture.asset(
-                //   "assets/icons/Cart Icon.svg",
-                //   color: BottomMuenu.Cart == bottomMenuHandler.currentValue
+                //   "assets/icons/User Icon.svg",
+                //   color: BottomMuenu.Profile == bottomMenuHandler.currentValue
                 //       ? kPrimaryColor
                 //       : inActiveIconColor,
                 // ),
-                onPressed: Provider.of<BottomMenuHandler>(context,listen: false).currentValue ==
-                        BottomMuenu.Category
+                onPressed: Provider.of<BottomMenuHandler>(context,
+                                listen: false)
+                            .currentValue ==
+                        BottomMuenu.Profile
                     ? null
                     : () {
-                        // Navigator.pop(context);
-                        // await .getCustomerProfile();
-
-                        Provider.of<BottomMenuHandler>(context,listen: false).currentValue = BottomMuenu.Category;
+                        Provider.of<BottomMenuHandler>(context, listen: false)
+                            .currentValue = BottomMuenu.Profile;
+                        // bottomMenuHandler.changeCurrentValue(BottomMuenu.Profile);
                         print(
-                            " Category click ${Provider.of<BottomMenuHandler>(context,listen: false).currentValue}");
-                        Navigator.pushNamed(context, Category.routeName);
-                      },
-              ),
-
-              IconButton(
+                            " profile click ${Provider.of<BottomMenuHandler>(context, listen: false).currentValue}");
+                        Navigator.pushNamed(context, ProfileScreen.routeName);
+                      }),
+            IconButton(
                 icon: Icon(
-                  Icons.shopping_cart,
-                  color: BottomMuenu.Cart == Provider.of<BottomMenuHandler>(context,listen: false).currentValue
+                  Icons.person,
+                  color: BottomMuenu.Location ==
+                          Provider.of<BottomMenuHandler>(context, listen: false)
+                              .currentValue
                       ? kPrimaryColor
                       : inActiveIconColor,
                   size: 30.0,
                 ),
                 // icon: SvgPicture.asset(
-                //   "assets/icons/Cart Icon.svg",
-                //   color: BottomMuenu.Cart == bottomMenuHandler.currentValue
+                //   "assets/icons/User Icon.svg",
+                //   color: BottomMuenu.Profile == bottomMenuHandler.currentValue
                 //       ? kPrimaryColor
                 //       : inActiveIconColor,
                 // ),
-                onPressed: Provider.of<BottomMenuHandler>(context,listen: false).currentValue == BottomMuenu.Cart
-                    ? null
-                    : () {
-                        // Navigator.pop(context);
-                        // await .getCustomerProfile();
-
-                        Provider.of<BottomMenuHandler>(context,listen: false).currentValue = BottomMuenu.Cart;
-                        print(" Cart click ${Provider.of<BottomMenuHandler>(context,listen: false).currentValue}");
-                        Navigator.pushNamed(context, CheckoutWidget.routeName);
-                      },
-              ),
-              IconButton(
-                  icon: Icon(
-                    Icons.person,
-                    color: BottomMuenu.Profile == Provider.of<BottomMenuHandler>(context,listen: false).currentValue
-                        ? kPrimaryColor
-                        : inActiveIconColor,
-                    size: 30.0,
-                  ),
-                  // icon: SvgPicture.asset(
-                  //   "assets/icons/User Icon.svg",
-                  //   color: BottomMuenu.Profile == bottomMenuHandler.currentValue
-                  //       ? kPrimaryColor
-                  //       : inActiveIconColor,
-                  // ),
-                  onPressed: Provider.of<BottomMenuHandler>(context,listen: false).currentValue ==
-                          BottomMuenu.Profile
-                      ? null
-                      : () {
-               
-
-                          Provider.of<BottomMenuHandler>(context,listen: false).currentValue = BottomMuenu.Profile;
-                          // bottomMenuHandler.changeCurrentValue(BottomMuenu.Profile);
-                          print(" profile click ${Provider.of<BottomMenuHandler>(context,listen: false).currentValue}");
-                          Navigator.pushNamed(context, ProfileScreen.routeName);
-                        }),
-            ],
-          ),
+                onPressed:
+                    Provider.of<BottomMenuHandler>(context, listen: false)
+                                .currentValue ==
+                            BottomMuenu.Location
+                        ? null
+                        : () {
+                            // Provider.of<BottomMenuHandler>(context,listen: false).currentValue = BottomMuenu.Profile;
+                            // bottomMenuHandler.changeCurrentValue(BottomMuenu.Profile);
+                            // print(" profile click ${Provider.of<BottomMenuHandler>(context,listen: false).currentValue}");
+                            Navigator.pushNamed(context, Location.routeName);
+                          }),
+          ],
         ),
+      ),
       // }),
     );
   }

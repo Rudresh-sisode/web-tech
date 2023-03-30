@@ -7,15 +7,13 @@ enum BottomMuenu {
   Else,
   favourite,
   CheckoutWidget,
-  Category
+  Category,
+  Location
 }
 
 class BottomMenuHandler with ChangeNotifier {
   BottomMuenu currentValue = BottomMuenu.Home;
 
- 
-
   // List<BottomMuenu> theParants = [];
-
 
 }

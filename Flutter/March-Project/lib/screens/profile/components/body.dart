@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:ecomm_app/const_error_msg.dart';
 import 'package:ecomm_app/models/user.dart';
 import 'package:ecomm_app/screens/auth/auth_screen.dart';
+import 'package:ecomm_app/screens/location/loaction.dart';
 import 'package:ecomm_app/screens/profile/update_pass_screen.dart';
 import 'package:ecomm_app/screens/profile/update_profile_screen.dart';
 import 'package:ecomm_app/screens/widgets/orders.dart';
+import 'package:ecomm_app/screens/wishlist/wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -110,8 +112,7 @@ class _ProfileState extends State<Body> {
           builder: (ctx, authData, _) {
             return (authData.customerProfileData.name.isNotEmpty &&
                     authData.customerProfileData.email.isNotEmpty)
-                ? 
-                Column(
+                ? Column(
                     children: <Widget>[
                       const SizedBox(
                         width: 120,
@@ -236,6 +237,80 @@ class _ProfileState extends State<Body> {
                           width: 20,
                           height: 20,
                           decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            // color: kPrimaryColor.withOpacity(0.1)
+                          ),
+                          // child:  Icon: SvgPicture.asset("assets/icons/Cart.svg"),
+                          // child: SvgPicture.asset("assets/icons/Parcel.svg"),
+                          child: Icon(
+                            Icons.location_city,
+                            color: kPrimaryColor,
+                            size: 30.0,
+                          ),
+                        ),
+                        title: const Text('Location',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Color.fromARGB(255, 75, 74, 74))),
+                        trailing: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            // color: kPrimaryColor.withOpacity(0.1)
+                          ),
+                          child: Icon(
+                            Icons.arrow_right,
+                            color: kPrimaryColor,
+                            size: 35.0,
+                          ),
+                          // child:
+                          //     SvgPicture.asset("assets/icons/arrow_right.svg"),
+                        ),
+                        onTap: () {
+                          Navigator.pushNamed(context, Location.routeName);
+                        },
+                      ),
+                      ListTile(
+                        leading: Container(
+                          width: 20,
+                          height: 20,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            // color: kPrimaryColor.withOpacity(0.1)
+                          ),
+                          // child:  Icon: SvgPicture.asset("assets/icons/Cart.svg"),
+                          // child: SvgPicture.asset("assets/icons/Parcel.svg"),
+                          child: Icon(
+                            Icons.favorite,
+                            color: kPrimaryColor,
+                            size: 30.0,
+                          ),
+                        ),
+                        title: const Text('Wishlist',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Color.fromARGB(255, 75, 74, 74))),
+                        trailing: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            // color: kPrimaryColor.withOpacity(0.1)
+                          ),
+                          child: Icon(
+                            Icons.arrow_right,
+                            color: kPrimaryColor,
+                            size: 35.0,
+                          ),
+                          // child:
+                          //     SvgPicture.asset("assets/icons/arrow_right.svg"),
+                        ),
+                        onTap: () {
+                          Navigator.pushNamed(context, Wishlist.routeName);
+                        },
+                      ),
+                      ListTile(
+                        leading: Container(
+                          width: 20,
+                          height: 20,
+                          decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100),
                               color: kPrimaryColor.withOpacity(0.1)),
 
@@ -253,9 +328,13 @@ class _ProfileState extends State<Body> {
                                 fontSize: 16,
                                 color: Color.fromARGB(255, 75, 74, 74))),
                         onTap: () {
-                          Provider.of<BottomMenuHandler>(context, listen: false).currentValue = BottomMuenu.Home;
-                          Provider.of<Auth>(context,listen:false).customerProfileData = UserProfile(name: "", email: "", mobile: "");
-                          Provider.of<AuthChecker>(context, listen: false).logout();
+                          Provider.of<BottomMenuHandler>(context, listen: false)
+                              .currentValue = BottomMuenu.Home;
+                          Provider.of<Auth>(context, listen: false)
+                                  .customerProfileData =
+                              UserProfile(name: "", email: "", mobile: "");
+                          Provider.of<AuthChecker>(context, listen: false)
+                              .logout();
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
@@ -267,7 +346,6 @@ class _ProfileState extends State<Body> {
                   )
                 : FutureBuilder(
                     future: authData.executeGetProfile(),
-
                     builder: (ctx, authReturnSnapshot) => authReturnSnapshot
                                 .connectionState ==
                             ConnectionState.waiting

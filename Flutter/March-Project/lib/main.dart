@@ -11,6 +11,8 @@ import 'package:ecomm_app/providers/loader.dart';
 import 'package:ecomm_app/providers/orders.dart';
 import 'package:ecomm_app/providers/popular.dart';
 import 'package:ecomm_app/providers/products.dart';
+import 'package:ecomm_app/services/local_notification_service.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 // import 'package:ecomm_app/providers/auth.dart';
 import "./providers/auth.dart";
 import 'package:ecomm_app/providers/cart.dart';
@@ -23,8 +25,18 @@ import 'package:ecomm_app/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ecomm_app/theme.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+Future<void> backgroundHandler(RemoteMessage message) async {
+  	print(message.data.toString());
+ 	print(message.notification!.title);
+	}
 
 Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(backgroundHandler);
+  LocalNotificationService.initialize();
   await dotenv.load(fileName: "assets/.env");
   runApp(MyApp());
 }
