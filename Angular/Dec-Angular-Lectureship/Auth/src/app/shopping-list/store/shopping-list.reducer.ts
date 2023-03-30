@@ -1,5 +1,6 @@
-import { Action } from "@ngrx/store";
+
 import { Ingredient } from "src/app/shared/ingredient.model";
+import * as ShoppingListActions from "./shopping-list.actions";
 
 const initialState = {
     ingredients:  [
@@ -7,13 +8,14 @@ const initialState = {
         new Ingredient('Tomatoes', 10),
       ]
 }
-export function shoppingListReducer(state = initialState,action :Action){
+
+export function shoppingListReducer(state = initialState,action :ShoppingListActions.AddIngredient){
     switch (action.type) {
-        case 'ADD_INGREDIENT':
-            return {...state, ingredients: [...state.ingredients,action]}
+        case ShoppingListActions.ADD_INGREDIENT:
+            return {...state, ingredients: [...state.ingredients,action.payload]}
             break;
     
         default:
-            break;
+            return state;
     }
 }
