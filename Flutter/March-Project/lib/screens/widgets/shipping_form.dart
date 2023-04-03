@@ -10,6 +10,8 @@ import 'package:ecomm_app/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+import 'package:location/location.dart' as LocalLocation;
+import 'package:geocoding/geocoding.dart';
 
 import 'dart:convert';
 
@@ -91,6 +93,57 @@ class _ShippingFormState extends State<ShippingForm> {
       // GlobalSnackBar.show(context, otpMessage);
     });
   }
+
+  Future<void> _getCurrentLocation() async {
+  final LocalLocation.Location location = new LocalLocation.Location();
+
+  bool _serviceEnabled;
+  LocalLocation.PermissionStatus _permissionGranted;
+  LocalLocation.LocationData _locationData;
+
+  // Check if location services are enabled
+  _serviceEnabled = await location.serviceEnabled();
+  if (!_serviceEnabled) {
+    _serviceEnabled = await location.requestService();
+    if (!_serviceEnabled) {
+      // Location services are still not enabled, return early
+      print("user need to turn on location services");
+      // return;
+    }
+  }
+
+  // Check if the app has permission to access location
+  _permissionGranted = await location.hasPermission();
+  if (_permissionGranted == LocalLocation.PermissionStatus.denied) {
+    _permissionGranted = await location.requestPermission();
+    if (_permissionGranted != LocalLocation.PermissionStatus.granted) {
+      // Permission to access location not granted, return early
+      print("user need to granted the location to use this app");
+      // return;
+    }
+  }
+
+  // Get the current location
+  _locationData = await location.getLocation();
+
+  // Print the latitude and longitude of the current location
+  print('Latitude: ${_locationData.latitude}');
+  print('Longitude: ${_locationData.longitude}');
+
+  
+  List<Placemark> placemarks = await placemarkFromCoordinates(
+    _locationData.latitude ?? 0.0, _locationData.longitude ?? 0.0);
+
+  Placemark placemark = placemarks[0];
+  print('Street: ${placemark.street}');
+  print('City: ${placemark.locality}');
+  print('State: ${placemark.administrativeArea}');
+  print('Country: ${placemark.country}');
+  print('Postal code: ${placemark.postalCode}');
+
+  
+}
+
 
   Future<void> shippingAddress() async {
     CustomerDeliveryAddress newAddressData = CustomerDeliveryAddress(
@@ -269,11 +322,46 @@ class _ShippingFormState extends State<ShippingForm> {
           SizedBox(height: 30),
           buildfullAddressFormField2(),
           SizedBox(height: 30),
-          buildPincodeFormField(),
+          Row(
+            
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Expanded(child: buildPincodeFormField()),
+              // MediaQuery.of(context).size.width * 0.95,
+              SizedBox(width:MediaQuery.of(context).size.width * 0.08 ),
+              // Spacer(),
+             ElevatedButton(
+              onPressed: () {
+                _getCurrentLocation();
+              },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(kPrimaryColor),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.location_on_outlined),
+                    SizedBox(width: MediaQuery.of(context).size.width * 0.01),
+                    Text("Use my location"),
+                  ],
+                ),
+              )
+            ],
+          ),
           SizedBox(height: 30),
-          buildCityFormField(),
-          SizedBox(height: 30),
-          buildStateFormField(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+            
+            Expanded(child: buildCityFormField()) ,
+            SizedBox(width:MediaQuery.of(context).size.width * 0.07 ),
+            Expanded(child:buildStateFormField())
+          ],),
+          // buildPincodeFormField(),
+          // SizedBox(height: 30),
+          // buildCityFormField(),
+          // SizedBox(height: 30),
+          // buildStateFormField(),
           SizedBox(height: 30),
           buildCountyFormField(),
           SizedBox(height: 30),

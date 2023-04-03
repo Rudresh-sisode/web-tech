@@ -19,6 +19,8 @@ import 'package:ecomm_app/screens/widgets/popular.dart';
 import 'package:ecomm_app/screens/widgets/product_list.dart';
 import 'package:ecomm_app/screens/widgets/recommended.dart';
 import 'package:ecomm_app/services/local_notification_service.dart';
+import 'package:ecomm_app/screens/widgets/search.dart';
+import 'package:ecomm_app/screens/widgets/trending.dart';
 import 'package:ecomm_app/size_config.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
@@ -363,7 +365,10 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                                 fontSize: 16,
                                 color: Color.fromARGB(255, 147, 3, 138))),
                         trailing: RawMaterialButton(
-                          onPressed: () {},
+                          onPressed: () {
+                                     Navigator.pushNamed(
+                                    context, Search.routeName);
+                          },
                           elevation: 1.0,
                           fillColor: Color.fromARGB(255, 255, 255, 255),
                           child:
@@ -440,6 +445,11 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                 ),
               ),
             ),
+            SizedBox(
+              child: Text('Trending products',
+              textAlign: TextAlign.start,style: TextStyle(fontSize: 16,color: Color.fromARGB(255, 22, 17, 1)),),
+            ),
+            Trending(),
             SizedBox(
               child: Text('Recomended products',
               textAlign: TextAlign.start,style: TextStyle(fontSize: 16,color: Color.fromARGB(255, 22, 17, 1)),),

@@ -13,6 +13,7 @@ import 'package:ecomm_app/screens/register/components/register_screen.dart';
 import 'package:ecomm_app/screens/widgets/orderDetails.dart';
 import 'package:ecomm_app/screens/widgets/orders.dart';
 import 'package:ecomm_app/screens/widgets/payment.dart';
+import 'package:ecomm_app/screens/widgets/search.dart';
 import 'package:ecomm_app/screens/widgets/shipping.dart';
 import 'package:ecomm_app/screens/widgets/success_msg.dart';
 import 'package:flutter/widgets.dart';
@@ -49,4 +50,5 @@ final Map<String, WidgetBuilder> routes = {
   Category.routeName: (context) => Category(),
   Wishlist.routeName: (context) => Wishlist(),
   Location.routeName: (context) => Location(),
+  Search.routeName: (context) => Search(),
 };
