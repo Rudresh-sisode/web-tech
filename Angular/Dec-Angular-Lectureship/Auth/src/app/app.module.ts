@@ -16,7 +16,7 @@ import { AlertComponent } from './shared/alert/alert.component';
 import { PlaceholderDirective } from './shared/placeholder/placeholder.directive';
 import { RecipeModule } from './recipes/recipe.module';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
-import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer';
+import { ingredientReducer } from './shopping-list/store/shopping-list.reducer';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer
   imports: [
     BrowserModule,
     FormsModule,
-    StoreModule.forRoot({shoppingList:shoppingListReducer}),
+    // StoreModule.forRoot({shoppingList:ingredientReducer}),
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
