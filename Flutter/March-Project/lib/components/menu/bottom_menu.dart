@@ -10,8 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/auth.dart';
+import '../../providers/auth-checker.dart';
 import '../../providers/bottom-menu.dart';
+import '../../screens/auth/auth_screen.dart';
 
 class BottomMenu extends StatefulWidget {
   const BottomMenu({
@@ -35,7 +36,7 @@ class _BottomMenuState extends State<BottomMenu> {
 
   @override
   Widget build(BuildContext context) {
-    final Color inActiveIconColor = Color(0xFFB6B6B6);
+    final Color inActiveIconColor = Color.fromARGB(255, 46, 46, 46);
     // final Color inActiveIconColor = Color.fromARGB(255, 34, 0, 255);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 14),
@@ -163,6 +164,7 @@ class _BottomMenuState extends State<BottomMenu> {
                       Navigator.pushNamed(context, CheckoutWidget.routeName);
                     },
             ),
+            Provider.of<AuthChecker>(context,listen:false).isAuth ?
             IconButton(
                 icon: Icon(
                   Icons.person,
@@ -191,8 +193,30 @@ class _BottomMenuState extends State<BottomMenu> {
                         print(
                             " profile click ${Provider.of<BottomMenuHandler>(context, listen: false).currentValue}");
                         Navigator.pushNamed(context, ProfileScreen.routeName);
-                      }),
-            IconButton(
+                      }) : IconButton(
+                icon: Icon(
+                  Icons.login,
+                  color: BottomMuenu.Location ==
+                          Provider.of<BottomMenuHandler>(context, listen: false)
+                              .currentValue
+                      ? kPrimaryColor
+                      : inActiveIconColor,
+                  size: 30.0,
+                ),
+               
+                onPressed:
+                    Provider.of<BottomMenuHandler>(context, listen: false)
+                                .currentValue ==
+                            BottomMuenu.Location
+                        ? null
+                        : () {
+                          Provider.of<BottomMenuHandler>(context, listen: false)
+                                .currentValue = BottomMuenu.Home;
+                          Navigator.pop(context);
+                          Navigator.pushNamed(context, AuthScreen.routeName);
+                          }) ,
+            ...Provider.of<AuthChecker>(context,listen:false).isAuth ?
+            [IconButton(
                 icon: Icon(
                   Icons.person,
                   color: BottomMuenu.Location ==
@@ -202,23 +226,15 @@ class _BottomMenuState extends State<BottomMenu> {
                       : inActiveIconColor,
                   size: 30.0,
                 ),
-                // icon: SvgPicture.asset(
-                //   "assets/icons/User Icon.svg",
-                //   color: BottomMuenu.Profile == bottomMenuHandler.currentValue
-                //       ? kPrimaryColor
-                //       : inActiveIconColor,
-                // ),
+               
                 onPressed:
                     Provider.of<BottomMenuHandler>(context, listen: false)
                                 .currentValue ==
                             BottomMuenu.Location
                         ? null
                         : () {
-                            // Provider.of<BottomMenuHandler>(context,listen: false).currentValue = BottomMuenu.Profile;
-                            // bottomMenuHandler.changeCurrentValue(BottomMuenu.Profile);
-                            // print(" profile click ${Provider.of<BottomMenuHandler>(context,listen: false).currentValue}");
                             Navigator.pushNamed(context, Location.routeName);
-                          }),
+                          })] : []
           ],
         ),
       ),

@@ -252,13 +252,13 @@ class Products with ChangeNotifier {
     final url = Uri.parse(APIURLS.getProductDetailsById + '/${id}');
     try {
       //getting token first
-      final prefs = await SharedPreferences.getInstance();
-      final dynamic extractedUserData =
-          json.decode(prefs.getString("userData").toString());
-      _token = extractedUserData["token"];
+      // final prefs = await SharedPreferences.getInstance();
+      // final dynamic extractedUserData =
+      //     json.decode(prefs.getString("userData").toString());
+      // _token = extractedUserData["token"];
       final response = await http.get(url, headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer $_token'
+        // 'Authorization': 'Bearer $_token'
       });
 
       Map<String, dynamic> responseData = json.decode(response.body);
@@ -311,13 +311,13 @@ class Products with ChangeNotifier {
     final url = Uri.parse(APIURLS.getProductList);
     try {
       //getting token first
-      final prefs = await SharedPreferences.getInstance();
-      final dynamic extractedUserData =
-          json.decode(prefs.getString("userData").toString());
-      _token = extractedUserData["token"];
+      // final prefs = await SharedPreferences.getInstance();
+      // final dynamic extractedUserData =
+      //     json.decode(prefs.getString("userData").toString());
+      // _token = extractedUserData["token"];
       final response = await http.get(url, headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer $_token'
+        // 'Authorization': 'Bearer $_token'
       });
 
       Map<String, dynamic> responseData = json.decode(response.body);

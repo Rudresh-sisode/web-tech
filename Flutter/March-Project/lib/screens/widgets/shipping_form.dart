@@ -4,18 +4,22 @@ import 'package:ecomm_app/components/form_error.dart';
 import 'package:ecomm_app/components/global_snack_bar.dart';
 import 'package:ecomm_app/components/keyboard.dart';
 import 'package:ecomm_app/const_error_msg.dart';
+import 'package:ecomm_app/providers/auth-checker.dart';
 import 'package:ecomm_app/providers/delivery-address.dart';
 import 'package:ecomm_app/screens/widgets/payment.dart';
 import 'package:ecomm_app/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import 'package:location/location.dart' as LocalLocation;
+
 import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 
 import 'dart:convert';
 
 import '../../models/delivery-address.dart';
+import '../../models/guestAddress.dart';
+import '../../providers/cart.dart';
 import '../auth/auth_screen.dart';
 
 class ShippingForm extends StatefulWidget {
@@ -25,6 +29,7 @@ class ShippingForm extends StatefulWidget {
 
 class _ShippingFormState extends State<ShippingForm> {
   final _formKey = GlobalKey<FormState>();
+  bool locationLoader = false;
   String email = "kedar.ahirrao@gunadhyasoft.com";
   String userName = "Kunal Ahirrao";
   String mobile = "7656755768";
@@ -46,6 +51,8 @@ class _ShippingFormState extends State<ShippingForm> {
   late TextEditingController cityController;
 
   var errorValidation = null;
+  String? _currentAddress;
+  Position? _currentPosition;
 
   final List<String?> errors = [];
 
@@ -94,57 +101,25 @@ class _ShippingFormState extends State<ShippingForm> {
     });
   }
 
-  Future<void> _getCurrentLocation() async {
-  final LocalLocation.Location location = new LocalLocation.Location();
+  void addGuestAddress() {
+    GuestAddress guestAddressData = GuestAddress(
+      name: userName.split(" ")[0]+userName.split(" ")[1],
+      address: fullAddress,
+      mobile: mobile,
+      address2: fullAddress2,
+      country: country,
+      state: state,
+      city: city,
+      pincode: pinCode,
+      email: email);
 
-  bool _serviceEnabled;
-  LocalLocation.PermissionStatus _permissionGranted;
-  LocalLocation.LocationData _locationData;
+    Provider.of<Cart>(context, listen: false).guestAddressData = guestAddressData;
+    Provider.of<Cart>(context, listen: false).preparedGuestCheckout();
+    Navigator.pushNamed(context,Payment.routeName);
 
-  // Check if location services are enabled
-  _serviceEnabled = await location.serviceEnabled();
-  if (!_serviceEnabled) {
-    _serviceEnabled = await location.requestService();
-    if (!_serviceEnabled) {
-      // Location services are still not enabled, return early
-      print("user need to turn on location services");
-      // return;
-    }
+
   }
-
-  // Check if the app has permission to access location
-  _permissionGranted = await location.hasPermission();
-  if (_permissionGranted == LocalLocation.PermissionStatus.denied) {
-    _permissionGranted = await location.requestPermission();
-    if (_permissionGranted != LocalLocation.PermissionStatus.granted) {
-      // Permission to access location not granted, return early
-      print("user need to granted the location to use this app");
-      // return;
-    }
-  }
-
-  // Get the current location
-  _locationData = await location.getLocation();
-
-  // Print the latitude and longitude of the current location
-  print('Latitude: ${_locationData.latitude}');
-  print('Longitude: ${_locationData.longitude}');
-
   
-  List<Placemark> placemarks = await placemarkFromCoordinates(
-    _locationData.latitude ?? 0.0, _locationData.longitude ?? 0.0);
-
-  Placemark placemark = placemarks[0];
-  print('Street: ${placemark.street}');
-  print('City: ${placemark.locality}');
-  print('State: ${placemark.administrativeArea}');
-  print('Country: ${placemark.country}');
-  print('Postal code: ${placemark.postalCode}');
-
-  
-}
-
-
   Future<void> shippingAddress() async {
     CustomerDeliveryAddress newAddressData = CustomerDeliveryAddress(
         id: "id",
@@ -212,6 +187,84 @@ class _ShippingFormState extends State<ShippingForm> {
         // _showErrorDialog(finalErrorMessage);
       }
     }
+  }
+
+    Future<bool> _handleLocationPermission() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text(
+              'Location services are disabled. Please enable the services')));
+      return false;
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Location permissions are denied')));
+        return false;
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text(
+              'Location permissions are permanently denied, we cannot request permissions.')));
+      return false;
+    }
+    return true;
+  }
+
+    Future<void> _getCurrentPosition() async {
+
+      setState(() {
+        locationLoader = true;
+      });
+    
+    final hasPermission = await _handleLocationPermission();
+
+    if (!hasPermission) return;
+    await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
+        .then((Position position) {
+      setState(() => _currentPosition = position);
+      _getAddressFromLatLng(_currentPosition!);
+    }).catchError((e) {
+      debugPrint(e);
+    });
+   
+  }
+
+   Future<void> _getAddressFromLatLng(Position position) async {
+    await placemarkFromCoordinates(
+            _currentPosition!.latitude, _currentPosition!.longitude)
+        .then((List<Placemark> placemarks) {
+      Placemark place = placemarks[0];
+
+      setState(() {
+        _currentAddress =
+            '${place.street}, ${place.subLocality}, ${place.subAdministrativeArea}, ${place.postalCode}';
+        fullAddress = place.subLocality ?? "";
+        fullAddressController = TextEditingController(text: fullAddress);
+
+        pinCode = place.postalCode ?? "";
+        pinCodeController = TextEditingController(text: pinCode);
+
+        state = place.administrativeArea ?? "";
+        stateController = TextEditingController(text: state);
+
+        city = place.locality ?? "";
+        cityController = TextEditingController(text: city);
+
+        locationLoader = false;
+
+
+      });
+    }).catchError((e) {
+      debugPrint(e);
+    });
   }
 
   Future<void> editShippingAddress() async {
@@ -332,7 +385,7 @@ class _ShippingFormState extends State<ShippingForm> {
               // Spacer(),
              ElevatedButton(
               onPressed: () {
-                _getCurrentLocation();
+                _getCurrentPosition();
               },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(kPrimaryColor),
@@ -342,7 +395,7 @@ class _ShippingFormState extends State<ShippingForm> {
                   children: [
                     Icon(Icons.location_on_outlined),
                     SizedBox(width: MediaQuery.of(context).size.width * 0.01),
-                    Text("Use my location"),
+                    Text(locationLoader ? "Please wait..." : "Use my location"),
                   ],
                 ),
               )
@@ -372,7 +425,8 @@ class _ShippingFormState extends State<ShippingForm> {
                 backgroundColor: MaterialStatePropertyAll(kPrimaryColor),
               ),
               onPressed: () {
-                if (_formKey.currentState!.validate()) {
+                if(Provider.of<AuthChecker>(context,listen: false).isAuth){
+                  if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
                   // if all are valid then go to success screen
                   if (Provider.of<DeliveryAddress>(context, listen: false)
@@ -383,18 +437,24 @@ class _ShippingFormState extends State<ShippingForm> {
                               listen: false)
                           .addressType ==
                       AddressType.EDIT) {
-                    editShippingAddress();
-                  }
+                      editShippingAddress();
+                    }
 
-                  // KeyboardUtil.hideKeyboard(context);
-                  // Navigator.pushNamed(context, Payment.routeName);
+                    // KeyboardUtil.hideKeyboard(context);
+                    // Navigator.pushNamed(context, Payment.routeName);
+                  }
+                }else{
+                  //guest delivery
+                  addGuestAddress();
                 }
+                
               },
-              child: Provider.of<DeliveryAddress>(context, listen: false)
+              child: Provider.of<AuthChecker>(context,listen: false).isAuth ? 
+               Provider.of<DeliveryAddress>(context, listen: false)
                           .addressType ==
                       AddressType.ADD
                   ? const Text("Save & Continue")
-                  : const Text("Edit & Continue"))
+                  : const Text("Edit & Continue") : const Text("Deliver here."),)
         ],
       ),
     );

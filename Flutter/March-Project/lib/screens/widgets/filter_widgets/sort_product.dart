@@ -1,43 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:ecomm_app/models/Sort.dart';
 // This is the main application widget.
+
+enum SingingCharacter { lafayette, jefferson }
+
+
 class SortProduct extends StatefulWidget {
-   SortProduct() : super();
+  SortProduct() : super();
 
   @override
   _SortState createState() => _SortState();
 }
 
-
 class _SortState extends State<SortProduct> {
-
- late List<Sort> users;
+  late List<Sort> users;
   late Sort selectedUser;
   late int selectedRadio;
   late int selectedRadioTile;
-@override
+  @override
   void initState() {
     super.initState();
     selectedRadio = 0;
     selectedRadioTile = 0;
     users = Sort.getUsers();
   }
-setSelectedRadio(int val) {
+
+  setSelectedRadio(int val) {
     setState(() {
       selectedRadio = val;
     });
   }
-setSelectedRadioTile(int val) {
+
+  setSelectedRadioTile(int val) {
     setState(() {
       selectedRadioTile = val;
     });
   }
-setSelectedUser(Sort user) {
+
+  setSelectedUser(Sort user) {
     setState(() {
       selectedUser = user;
     });
   }
-List<Widget> createRadioListUsers() {
+
+  List<Widget> createRadioListUsers() {
     List<Widget> widgets = [];
     for (Sort user in users) {
       widgets.add(
@@ -60,9 +66,14 @@ List<Widget> createRadioListUsers() {
 
   @override
   Widget build(BuildContext context) {
+    SingingCharacter? _character = SingingCharacter.lafayette;
+
     return Center(
       child: ElevatedButton(
-        child: const Text('Sort'),
+        child: const Text('Sort By'),
+  //       style: ElevatedButton.styleFrom(
+  //   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10)
+  // ),
         onPressed: () {
           // when raised button is pressed
           // we display showModalBottomSheet
@@ -76,12 +87,70 @@ List<Widget> createRadioListUsers() {
 
               // Returning SizedBox instead of a Container
               return SizedBox(
-                height: 200,
+                height: 300,
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
-                      Text('test'),
+                    children: <Widget>[
+                      Text('SORT BY'),
+                     Divider(),
+                      ListTile(
+                        title: const Text('Relevance'),
+                        leading: Radio<SingingCharacter>(
+                          value: SingingCharacter.lafayette,
+                          groupValue: _character,
+                          onChanged: (SingingCharacter? value) {
+                            setState(() {
+                              _character = value;
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: const Text('Popularity'),
+                        leading: Radio<SingingCharacter>(
+                          value: SingingCharacter.jefferson,
+                          groupValue: _character,
+                          onChanged: (SingingCharacter? value) {
+                            setState(() {
+                              _character = value;
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: const Text('Price - Low to High'),
+                        leading: Radio<SingingCharacter>(
+                          value: SingingCharacter.jefferson,
+                          groupValue: _character,
+                          onChanged: (SingingCharacter? value) {
+                            setState(() {
+                              _character = value;
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: const Text('Price - High to Low'),
+                        leading: Radio<SingingCharacter>(
+                          value: SingingCharacter.jefferson,
+                          groupValue: _character,
+                          onChanged: (SingingCharacter? value) {
+                            setState(() {
+                              _character = value;
+                            });
+                          },
+                        ),
+                      ),
+
+                      // ListTile(
+                      //   leading: new Icon(Icons.share),
+                      //   title: new Text('Share'),
+                      //   onTap: () {
+                      //     Navigator.pop(context);
+                      //   },
+                      // ),
+                      // Text('test'),
                     ],
                   ),
                 ),

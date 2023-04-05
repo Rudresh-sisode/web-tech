@@ -84,8 +84,9 @@ class _SignFormState extends State<SignForm> {
           .login(emailController.text, passwordController.text);
          setState(() {
         _isLoading = false;
-      }); 
-      if (Provider.of<Auth>(context, listen: false).isAuth) {
+      });
+
+      if (Provider.of<AuthChecker>(context, listen: false).isAuth) {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => ProductListingWidget()),
@@ -156,6 +157,18 @@ class _SignFormState extends State<SignForm> {
               //   },
               // ),
               // Text("Remember me"),
+              GestureDetector(
+                onTap: () {
+                  Provider.of<AuthChecker>(context,listen: false).doesUserHadTour = true;
+                   Navigator.pop(context);
+                   Navigator.pushNamed(context,ProductListingWidget.routeName);
+                },
+                   
+                child: Text(
+                  "Continue without login",
+                  style: TextStyle(decoration: TextDecoration.underline),
+                ),
+              ),
               Spacer(),
               GestureDetector(
                 onTap: () =>
@@ -187,6 +200,7 @@ class _SignFormState extends State<SignForm> {
             press: () {
               FocusScope.of(context).unfocus();
               if (_formKey.currentState!.validate()) {
+
                 _formKey.currentState!.save();
 
                 // if all are valid then go to success screen

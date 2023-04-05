@@ -261,11 +261,6 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                       width: 2,
                     ),
                     boxShadow: [
-                      // BoxShadow(
-                      // blurRadius: 4,
-                      // color: Color(0x3600000F),
-                      // offset: Offset(0, 2),
-                      // )
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 5,

@@ -19,14 +19,14 @@ class _SuccessMsgState extends State<SuccessMsg> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kAppBarColor,
-      appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: kAppBarColor, //change your color here
-        ),
-        title: const Text("", style: TextStyle(color: kAppBarColor)),
-        centerTitle: true,
-        backgroundColor: kPrimaryColor,
-      ),
+      // appBar: AppBar(
+      //   iconTheme: const IconThemeData(
+      //     color: kAppBarColor, //change your color here
+      //   ),
+      //   title: const Text("", style: TextStyle(color: kAppBarColor)),
+      //   centerTitle: true,
+      //   backgroundColor: kPrimaryColor,
+      // ),
       body: SafeArea(
         child: SizedBox(
           width: double.infinity,

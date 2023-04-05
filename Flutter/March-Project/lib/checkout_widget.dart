@@ -7,6 +7,7 @@ import 'package:ecomm_app/const_error_msg.dart';
 import 'package:ecomm_app/enums.dart';
 import 'package:ecomm_app/models/product.dart';
 import 'package:ecomm_app/product_listing_widget%20copy.dart';
+import 'package:ecomm_app/providers/auth-checker.dart';
 import 'package:ecomm_app/providers/bottom-menu.dart';
 import 'package:ecomm_app/providers/cart.dart';
 import 'package:ecomm_app/providers/delivery-address.dart';
@@ -633,16 +634,24 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                     alignment: AlignmentDirectional(0, -0.35),
                     child: TextButton(
                       onPressed: () async {
-                        setState(() {
-                          isLoadingSpinner = true;
-                        });
+                        if(Provider.of<AuthChecker>(context,listen: false).isAuth)
+                        {
+                          setState(() {
+                            isLoadingSpinner = true;
+                          });
 
-                        await getAllAvailableData();
+                          await getAllAvailableData();
 
-                        setState(() {
-                          isLoadingSpinner = false;
-                          showSheet = !showSheet;
-                        });
+                          setState(() {
+                            isLoadingSpinner = false;
+                            showSheet = !showSheet;
+                          });
+
+                        }
+                        else{
+                          Navigator.pushNamed(context, Shipping.routeName);
+                        }
+                         
                         // Navigator.pushNamed(context, AddressPageSelection.routeName);
                       },
                       child: RichText(
@@ -714,32 +723,17 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                    )
+                                    ),
+                                    IconButton(
+                                    icon: Icon(Icons.close),
+                                    onPressed: () => setState(() {
+                                      showSheet = !showSheet;
+                                    }),
+                                  ),
                                   ],
                                 ),
                               ),
 
-                              // Row(
-                              //   mainAxisAlignment:
-                              //       MainAxisAlignment.spaceBetween,
-                              //   children: [
-                              //     Text(
-                              //       'Select address',
-                              //       style: TextStyle(
-                              //         fontSize: 20,
-                              //         height: 2,
-                              //         backgroundColor: Colors.lightBlue,
-                              //         fontWeight: FontWeight.bold,
-                              //       ),
-                              //     ),
-                              //     IconButton(
-                              //       icon: Icon(Icons.close),
-                              //       onPressed: () => setState(() {
-                              //         showSheet = !showSheet;
-                              //       }),
-                              //     ),
-                              //   ],
-                              // ),
                               Row(
                                 children: [
                                   Container(

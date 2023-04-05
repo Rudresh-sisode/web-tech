@@ -123,8 +123,6 @@ class Auth with ChangeNotifier {
 
   Future<void> getCustomerProfile() async {
 
-  
-
     final url = Uri.parse(APIURLS.getUserProfileAPIUrl);
     try {
       //getting token first

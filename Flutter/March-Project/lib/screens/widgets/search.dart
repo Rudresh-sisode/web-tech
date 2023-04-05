@@ -1,5 +1,8 @@
 import 'package:ecomm_app/const_error_msg.dart';
 import 'package:ecomm_app/models/recomended.dart';
+import 'package:ecomm_app/screens/widgets/filter_widgets/brand.dart';
+import 'package:ecomm_app/screens/widgets/filter_widgets/price_range.dart';
+import 'package:ecomm_app/screens/widgets/filter_widgets/rating.dart';
 import 'package:ecomm_app/screens/widgets/filter_widgets/sort_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -78,35 +81,57 @@ class _SearchState extends State<Search> {
           ),
           // SizedBox(height: 10),
           SizedBox(
-            child: Container(
+              // child: Container(
               // margin: const EdgeInsets.symmetric(vertical: 60.0),
               height: 100.0,
-              child: ListView.builder(
+              child: ListView(
                   scrollDirection: Axis.horizontal,
                   // padding: const EdgeInsets.symmetric(
                   //     vertical: 60.0, horizontal: 10.0),
-                  shrinkWrap: true,
-                  itemCount: products.length,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      color: Color.fromARGB(255, 208, 224, 233),
-                      elevation: 5.0,
+                  // shrinkWrap: true,
+                  // itemCount: products.length,
+                  // itemBuilder: (context, index) {
+                  children: <Widget>[
+                    // SizedBox(
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.all(0.0),
+                    //     child: Row(
+                    //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //       mainAxisSize: MainAxisSize.max,
+                    //       children: [
+                    //         SizedBox(width: 100, child: SortProduct()),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.all(0.0),
+                    //     child: Row(
+                    //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //       mainAxisSize: MainAxisSize.max,
+                    //       children: [
+                    //         SizedBox(width: 100, child: PriceRange()),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
+                    SizedBox(
                       child: Padding(
                         padding: const EdgeInsets.all(0.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            SizedBox(
-                                width: 100,
-                                child: SortProduct()),
+                            SizedBox(width: 90, child: SortProduct()),
+                            SizedBox(width: 90, child: PriceRange()),
+                            SizedBox(width: 90, child: Rating()),
+                            SizedBox(width: 90, child: Brand()),
                           ],
                         ),
                       ),
-                    );
-                  }),
-            ),
-          ),
+                    ),
+                  ])),
           Expanded(
             child: LayoutBuilder(builder: (context, constraints) {
               return GridView.builder(

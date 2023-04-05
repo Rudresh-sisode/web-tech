@@ -23,6 +23,7 @@ class DeliveryAddress with ChangeNotifier {
   List<CustomerDeliveryAddress> allAddressData = [];
   late CustomerDeliveryAddress editingAddressData;
   late CustomerDeliveryAddress addingAddressDAta;
+  late CustomerDeliveryAddress guestAddressData;
   String responseSuccessMessage = "";
   int editAddressId = 0;
   //initial address type value;

@@ -19,6 +19,7 @@ class AuthChecker with ChangeNotifier {
   bool userProfileHasLoaded = false;
   String _token = "null";
   String _userId = "null";
+  bool doesUserHadTour = false;
 
   int count = 0;
   String userEmailAddress = "";
@@ -37,22 +38,21 @@ class AuthChecker with ChangeNotifier {
     return "null";
   }
 
-    Future<void> _authenticate(
-      String email, String password, String urlSegment) async {
-    // final url = Uri.parse('http://10.0.2.2:8000/api/login');
+  Future<void> _authenticate(String email, String password, String urlSegment) async {
+  // final url = Uri.parse('http://10.0.2.2:8000/api/login');
 
-    final url = Uri.parse(APIURLS.userLoginAPIUrl);
-    try {
-      final response = await http.post(
-        url,
-        body: json.encode({
-          'email': email,
-          'password': password,
-        }),
-        headers: {'Content-Type': 'application/json'},
-      );
+  final url = Uri.parse(APIURLS.userLoginAPIUrl);
+  try {
+    final response = await http.post(
+      url,
+      body: json.encode({
+        'email': email,
+        'password': password,
+      }),
+      headers: {'Content-Type': 'application/json'},
+    );
 
-      if (response.body.runtimeType is Object) {
+    if(response.body.runtimeType is Object) {
         print("response body is object type");
       }
       Map<String, dynamic> responseData = json.decode(response.body);
@@ -73,7 +73,7 @@ class AuthChecker with ChangeNotifier {
       // .add(Duration(seconds: int.parse(responseData["expiresIn"])));
       // print("your expiry date " + _expiryDate.toString());
       // _autoLogout();
-      notifyListeners();
+      
       final prefs = await SharedPreferences.getInstance();
       final userData = json.encode({
         'token': _token,
@@ -91,6 +91,7 @@ class AuthChecker with ChangeNotifier {
       print(userData);
       prefs.setString("userData", userData);
       userRegMessage = responseData["message"];
+      notifyListeners();
     } catch (error) {
       throw error;
     }

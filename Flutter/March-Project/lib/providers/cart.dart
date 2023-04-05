@@ -7,6 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 import '../models/cart.dart';
+import '../models/guestAddress.dart';
 import '../models/product.dart';
 
 import '../models/apiUrls.dart';
@@ -41,6 +42,7 @@ class Cart with ChangeNotifier {
    */
 
   List<CartItem> _items = [];
+  late GuestAddress guestAddressData;
 
   double discountPrice = 0.0;
   double totalPrice = 0.0;
@@ -60,8 +62,36 @@ class Cart with ChangeNotifier {
     return [..._items];
   }
 
+  void preparedGuestCheckout(){
+    checkoutData = {};
+    checkoutData["name"] = guestAddressData.name;
+    checkoutData["email"] = guestAddressData.email;
+    checkoutData["mobile"] = guestAddressData.mobile;
+    checkoutData["address"] = guestAddressData.address;
+    checkoutData["address2"] = guestAddressData.address2;
+    checkoutData["country"] = guestAddressData.country;
+    checkoutData["state"] = guestAddressData.state;
+    checkoutData["city"] = guestAddressData.city;
+    checkoutData["pincode"] = guestAddressData.pincode;
+    List<Map<String, dynamic>> products = items.map((item) {
+      return {
+        "product_id": item.id,
+        "quantity": item.quantity,
+        "product_price": item.productPrice,
+        "discount_price": item.discountPrice,
+        "product_offer_price": item.offerPrice,
+        "total_price": item.totalPrice,
+      };
+    }).toList();
+    checkoutData["product"] = products;
+    checkoutData["total_nondiscount_price"] = basePrice;
+    checkoutData["total_discount_price"] = discountPrice;
+    checkoutData["total_price"] = totalPrice;
+  }
+
   void preparedCheckout(
       String addressId, String name, String mobile, String email) {
+    checkoutData = {};
     checkoutData["name"] = name;
     checkoutData["email"] = email;
     checkoutData["mobile"] = mobile;
@@ -84,9 +114,38 @@ class Cart with ChangeNotifier {
     print("checkout data " + checkoutData.toString());
   }
 
+
+  Future<void> guestCheckoutOrder() async{
+    final url = Uri.parse(APIURLS.orderPlaceWithToken);
+    try {
+      final response = await http.post(url,
+          body: json.encode(checkoutData),
+          headers:  {
+            'Content-Type': 'application/json'
+          });
+
+      Map<String, dynamic> responseData = json.decode(response.body);
+      if (responseData['status'] == false) {
+        // userProfileMessage = responseData["message_type"];
+        notifyListeners();
+        checkoutOrderStatus = false;
+        //throwing error message, this will handle in profile widgets
+        throw HttpException(response.body);
+      } else if (responseData['status'] == true) {
+        checkoutOrderStatus = true;
+        recentCheckoutOrderId = responseData["data"]["order_id"];
+        //make the cart empty promptly
+        // userProfileMessage = responseData["message"];
+        notifyListeners();
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+
   Future<void> checkoutOrder() async {
     final url = Uri.parse(APIURLS.orderPlaceWithToken);
-
     try {
       final prefs = await SharedPreferences.getInstance();
       final dynamic extractedUserData =
@@ -94,7 +153,7 @@ class Cart with ChangeNotifier {
       _token = extractedUserData["token"];
       final response = await http.post(url,
           body: json.encode(checkoutData),
-          headers: {
+          headers:  {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ${_token}'
           });

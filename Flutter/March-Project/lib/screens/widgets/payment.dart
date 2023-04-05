@@ -1,6 +1,7 @@
 import 'package:ecomm_app/components/menu/bottom_menu.dart';
 import 'package:ecomm_app/const_error_msg.dart';
 import 'package:ecomm_app/enums.dart';
+import 'package:ecomm_app/providers/auth-checker.dart';
 import 'package:ecomm_app/screens/profile/update_profile_screen.dart';
 import 'package:ecomm_app/screens/widgets/success_msg.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,57 @@ class Payment extends StatefulWidget {
 }
 
 class _PaymentState extends State<Payment> {
+
+  Future<void> guestCheckout() async{
+    try {
+      await Provider.of<Cart>(context, listen: false).guestCheckoutOrder();
+      
+      if (Provider.of<Cart>(context, listen: false).checkoutOrderStatus) {
+        Provider.of<Cart>(context, listen: false).clear();
+        Navigator.pop(context);
+        Navigator.pushNamed(context, SuccessMsg.routeName);
+      } else {
+        //show message that unable to order this time.
+      }
+    } on FormatException catch (_, error) {
+      // _showErrorDialog(error.toString());
+    }
+    catch (error) {
+      Map<String, dynamic> errorRes = json.decode(error.toString());
+      Map<String, dynamic> errorMessage = {};
+      if (errorRes["message"] is String) {
+        // _showErrorDialog(errorRes["message"]);
+      } else if (errorRes["message"] is Map<String, dynamic>) {
+        errorMessage = errorRes["message"];
+        Map<String, String> newErrorMessage = {};
+        String counterMessage = "";
+        errorMessage.forEach((key, value) {
+          // for (int i = 0; i < value.length; i++) {
+          // newErrorMessage[key] = value;
+          counterMessage = value;
+          // }
+        });
+
+        String finalEmailErrorMessage = newErrorMessage.containsKey("error")
+            ? newErrorMessage["error"].toString()
+            : newErrorMessage.containsKey("email")
+                ? newErrorMessage["email"].toString()
+                : "";
+        String finalPasswordErrorMessage =
+            newErrorMessage.containsKey("c_password")
+                ? newErrorMessage["c_password"].toString()
+                : "";
+
+        String finalErrorMessage = finalEmailErrorMessage.isNotEmpty
+            ? finalEmailErrorMessage
+            : finalPasswordErrorMessage.isNotEmpty
+                ? finalPasswordErrorMessage
+                : errorRes["message_type"];
+      }
+    }
+
+  }
+
   Future<void> orderCheckout() async {
     try {
       await Provider.of<Cart>(context, listen: false).checkoutOrder();
@@ -102,7 +154,9 @@ class _PaymentState extends State<Payment> {
                             color: Color.fromARGB(255, 75, 74, 74)))),
                 title: TextButton(
                   onPressed: () {
-                    orderCheckout();
+                    Provider.of<AuthChecker>(context,listen:false).isAuth ? 
+                    orderCheckout() : guestCheckout();
+
                     //here we'll hit checkout method
                   },
                   child: const Text(

@@ -45,6 +45,7 @@ class _LocationState extends State<Location> {
   }
 
   Future<void> _getCurrentPosition() async {
+    
     final hasPermission = await _handleLocationPermission();
 
     if (!hasPermission) return;
@@ -62,6 +63,7 @@ class _LocationState extends State<Location> {
             _currentPosition!.latitude, _currentPosition!.longitude)
         .then((List<Placemark> placemarks) {
       Placemark place = placemarks[0];
+      
       setState(() {
         _currentAddress =
             '${place.street}, ${place.subLocality}, ${place.subAdministrativeArea}, ${place.postalCode}';
