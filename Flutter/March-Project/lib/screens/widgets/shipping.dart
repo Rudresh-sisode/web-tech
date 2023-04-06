@@ -11,6 +11,7 @@ class Shipping extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: kAppBarColor,
       appBar: AppBar(
         // title: const Text("Shipping"),
@@ -28,6 +29,7 @@ class Shipping extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
+              // physics: AlwaysScrollableScrollPhysics(),
               child: Column(
                 children: [
                   SizedBox(height: 20 /**SizeConfig.screenHeight * 0.04*/),
@@ -42,6 +44,10 @@ class Shipping extends StatelessWidget {
                     // ),
                   ),
                   SizedBox(height: 20 /**SizeConfig.screenHeight * 0.08*/),
+                  // SingleChildScrollView(
+                  // //   physics: AlwaysScrollableScrollPhysics(),
+                  //   child: ShippingForm(),
+                  // ),
                   ShippingForm(),
                   SizedBox(height: 20),
                   SizedBox(height: 20),

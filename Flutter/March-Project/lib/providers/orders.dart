@@ -57,8 +57,6 @@ class Orders with ChangeNotifier {
         'Authorization': 'Bearer $_token'
       });
 
-     
-
       Map<String, dynamic> responseData = json.decode(response.body);
       if (responseData['status'] == false) {
       

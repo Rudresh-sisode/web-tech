@@ -96,7 +96,7 @@ class _SignFormState extends State<SignForm> {
     } on FormatException catch (_, error) {
       setState(() {
         _isLoading = false;
-      }); 
+      });
       _showErrorDialog(error.toString());
     } catch (error) {
       setState(() {

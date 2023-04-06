@@ -17,6 +17,7 @@ import 'package:provider/provider.dart';
 import '../../../models/user-profile.dart';
 import '../../../providers/auth-checker.dart';
 import '../../../providers/bottom-menu.dart';
+import '../../../providers/cart.dart';
 import '../../../providers/orders.dart' as OrdersProvider;
 import '../../../components/global_snack_bar.dart';
 import '../../../providers/auth.dart';
@@ -328,11 +329,13 @@ class _ProfileState extends State<Body> {
                                 fontSize: 16,
                                 color: Color.fromARGB(255, 75, 74, 74))),
                         onTap: () {
+
                           Provider.of<BottomMenuHandler>(context, listen: false)
                               .currentValue = BottomMuenu.Home;
                           Provider.of<Auth>(context, listen: false)
                                   .customerProfileData =
                               UserProfile(name: "", email: "", mobile: "");
+                              Provider.of<Cart>(context,listen: false).clear();
                           Provider.of<AuthChecker>(context, listen: false)
                               .logout();
                           Navigator.pushAndRemoveUntil(

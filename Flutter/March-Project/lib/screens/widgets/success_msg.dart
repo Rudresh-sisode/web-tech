@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/cart.dart';
+import '../../providers/bottom-menu.dart';
 
 class SuccessMsg extends StatefulWidget {
   static var routeName = "success";
@@ -64,13 +65,15 @@ class _SuccessMsgState extends State<SuccessMsg> {
                       width: 200,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(
-                              context, ProductListingWidget.routeName);
+                          Provider.of<BottomMenuHandler>(context, listen: false)
+                                .currentValue =
+                            BottomMuenu.Home;
+                          Navigator.pushNamed(context, ProductListingWidget.routeName);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: kPrimaryColor,
                         ),
-                        child: const Text('Home'),
+                        child: const Text('Continue Shopping'),
                       )),
 
                   // ElevatedButton(

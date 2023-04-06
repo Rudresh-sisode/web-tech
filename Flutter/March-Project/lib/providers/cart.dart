@@ -135,6 +135,10 @@ class Cart with ChangeNotifier {
         checkoutOrderStatus = true;
         recentCheckoutOrderId = responseData["data"]["order_id"];
         //make the cart empty promptly
+        _items = [];
+        discountPrice = 0.0;
+        totalPrice = 0.0;
+        basePrice = 0.0;
         // userProfileMessage = responseData["message"];
         notifyListeners();
       }
@@ -169,6 +173,11 @@ class Cart with ChangeNotifier {
         checkoutOrderStatus = true;
         recentCheckoutOrderId = responseData["data"]["order_id"];
         //make the cart empty promptly
+        _items = [];
+        discountPrice = 0.0;
+        totalPrice = 0.0;
+        basePrice = 0.0;
+
         // userProfileMessage = responseData["message"];
         notifyListeners();
       }
@@ -320,6 +329,9 @@ class Cart with ChangeNotifier {
 
   void clear() {
     _items = [];
+    discountPrice = 0.0;
+    totalPrice = 0.0;
+    basePrice = 0.0;
     notifyListeners();
   }
 }

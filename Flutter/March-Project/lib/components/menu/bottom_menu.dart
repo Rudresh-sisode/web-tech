@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 
 import '../../providers/auth-checker.dart';
 import '../../providers/bottom-menu.dart';
+import '../../providers/cart.dart';
 import '../../screens/auth/auth_screen.dart';
 
 class BottomMenu extends StatefulWidget {
@@ -210,6 +211,7 @@ class _BottomMenuState extends State<BottomMenu> {
                             BottomMuenu.Location
                         ? null
                         : () {
+                          Provider.of<Cart>(context,listen: false).clear();
                           Provider.of<BottomMenuHandler>(context, listen: false)
                                 .currentValue = BottomMuenu.Home;
                           Navigator.pop(context);

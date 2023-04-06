@@ -20,6 +20,7 @@ class AuthScreen extends StatelessWidget {
     return Scaffold(
         // child: AuthScreens() ,
         // child: Scaffold(
+          resizeToAvoidBottomInset: false,
         backgroundColor: kAppBarColor,
         appBar: AppBar(
           title: const Text(""),
