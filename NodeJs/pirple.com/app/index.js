@@ -1,7 +1,6 @@
 /**
  * primary files for the API
  */
-
 // Dependencies
 const http = require('http');
 const url = require('url');
@@ -15,11 +14,20 @@ const server = http.createServer((req, res) => {
     const path = parsedUrl.pathname;
     const trimmedPath = path.replace(/^\/+|\/+$/g, '');
 
+    // Get the query string as an object
+    const queryStringObject = parsedUrl.query;
+
+    //get the HTTP method
+    const method = req.method.toLowerCase();
+
+    //getting the headers as an object
+    const headers = req.headers;
+
     // Send the response
     res.end('Hello World\n');
 
     // Log the request path
-    console.log('Request received on path: ' + trimmedPath);
+    console.log('Request received on path: ' + trimmedPath + ' with method: ' + method+' and with these query string parameters', queryStringObject);
 });
 
 // Start the server, and have it listen on port 3000
