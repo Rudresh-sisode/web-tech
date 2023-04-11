@@ -63,6 +63,7 @@ class PopularApi with ChangeNotifier {
         List<dynamic> data = responseData["data"];
         List<dynamic> popularField = data.firstWhere((element) => element["slider_name"] == "Popular")["product"];
         for(int i = 0; i < popularField.length; i++){
+          // allPopularData.add();
           popularProductsImageData.add(PopularProducts(productId: popularField[i]["product_id"], populaImagePath: popularField[i]["slider_image_full_path"]) );
         }
 

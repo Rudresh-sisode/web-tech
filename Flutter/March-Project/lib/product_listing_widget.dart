@@ -12,9 +12,11 @@ import 'package:ecomm_app/providers/auth.dart';
 import 'package:ecomm_app/providers/bottom-menu.dart';
 import 'package:ecomm_app/providers/carousel.dart';
 import 'package:ecomm_app/providers/cart.dart';
+import 'package:ecomm_app/providers/filter-provider.dart';
 import 'package:ecomm_app/providers/products.dart';
 import 'package:ecomm_app/screens/widgets/carousel.dart';
 import 'package:ecomm_app/screens/widgets/popular.dart';
+import 'package:ecomm_app/screens/widgets/premium.dart';
 // import 'package:ecomm_app/screens/widgets/popular.dart';
 import 'package:ecomm_app/screens/widgets/product_list.dart';
 import 'package:ecomm_app/screens/widgets/recommended.dart';
@@ -103,7 +105,7 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
     textController = TextEditingController();
 
     // 1. This method call when app in terminated state and you get a notification
-    // when you click on notification app open from terminated state and you can 
+    // when you click on notification app open from terminated state and you can
     // get notification data in this method
 
     FirebaseMessaging.instance.getInitialMessage().then(
@@ -124,8 +126,8 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
       },
     );
 
-      // 2. This method only call when App in forground it mean app must be opened
-     FirebaseMessaging.onMessage.listen(
+    // 2. This method only call when App in forground it mean app must be opened
+    FirebaseMessaging.onMessage.listen(
       (message) {
         print("FirebaseMessaging.onMessage.listen");
         if (message.notification != null) {
@@ -133,12 +135,11 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
           print(message.notification!.body);
           print("message.data11 ${message.data}");
           LocalNotificationService.createanddisplaynotification(message);
-
         }
       },
     );
 
-     // 3. This method only call when App in background and not terminated(not closed)
+    // 3. This method only call when App in background and not terminated(not closed)
     FirebaseMessaging.onMessageOpenedApp.listen(
       (message) {
         print("FirebaseMessaging.onMessageOpenedApp.listen");
@@ -189,17 +190,17 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
         // backgroundColor: Color.fromARGB(255, 194, 59, 235),
         centerTitle: true,
         // leading: Image.asset(
-        //   "assets/images/G-Store.png",
-        //   // fit: BoxFit.none,
+        //  "assets/images/G-Store.png",
+        //// fit: BoxFit.none,
         //   height: 20,
         // ),
-
         leading: SizedBox(
             height: 10.0,
             width: 10.0, // fixed width and height
             child: Image.asset(
               'assets/images/G-Store.png',
-            )),
+            ),
+          ),
         title: Text('G-Store ',
             style: TextStyle(
                 fontFamily: 'Open Sans', fontWeight: FontWeight.bold)),
@@ -361,8 +362,8 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                                 color: Color.fromARGB(255, 147, 3, 138))),
                         trailing: RawMaterialButton(
                           onPressed: () {
-                                     Navigator.pushNamed(
-                                    context, Search.routeName);
+                            Provider.of<FilterProvider>(context, listen: false).setChannelType(ChannelType.Popular);
+                            Navigator.pushNamed(context, Search.routeName);
                           },
                           elevation: 1.0,
                           fillColor: Color.fromARGB(255, 255, 255, 255),
@@ -441,15 +442,32 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
               ),
             ),
             SizedBox(
-              child: Text('Trending products',
-              textAlign: TextAlign.start,style: TextStyle(fontSize: 16,color: Color.fromARGB(255, 22, 17, 1)),),
+              child: Text(
+                'Trending products',
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                    fontSize: 16, color: Color.fromARGB(255, 22, 17, 1)),
+              ),
             ),
             Trending(),
             SizedBox(
-              child: Text('Recomended products',
-              textAlign: TextAlign.start,style: TextStyle(fontSize: 16,color: Color.fromARGB(255, 22, 17, 1)),),
+              child: Text(
+                'Recomended products',
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                    fontSize: 16, color: Color.fromARGB(255, 22, 17, 1)),
+              ),
             ),
-            Recommended()
+            Recommended(),
+            SizedBox(
+              child: Text(
+                'Premium products',
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                    fontSize: 16, color: Color.fromARGB(255, 22, 17, 1)),
+              ),
+            ),
+            Premium()
           ],
         ),
       ),

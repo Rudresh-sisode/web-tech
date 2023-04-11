@@ -26,6 +26,7 @@ import 'models/cart.dart';
 
 import 'models/delivery-address.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class CheckoutWidget extends StatefulWidget {
   static var routeName = "cart";
@@ -45,11 +46,15 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
   List<CustomerDeliveryAddress> allAddressData = [];
   bool isLoadingSpinner = false;
   int? countControllerValue;
-
+  Razorpay _razorpay = Razorpay();
   //here need to implement address provider's logic
 
   @override
   void initState() {
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+
     print(" widget  created ");
     // TODO: implement initState
     super.initState();
@@ -59,7 +64,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
     //     Provider.of<DeliveryAddress>(context, listen: false).allAddressData;
     setState(() {
       // cartItems = BlocProvider.of<CartBloc>(context).items;
-     
+
       cartItems = Provider.of<Cart>(context, listen: false).items;
     });
 
@@ -67,6 +72,31 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
       // Provider.of<BottomMenuHandler>(context,listen:false).changeCurrentValue(BottomMuenu.Cart);
     });
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _razorpay.clear();
+  }
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    // Do something when payment succeeds
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    // Do something when payment fails
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    // Do something when an external wallet was selected
+  }
+  var options = {
+    'key': 'rzp_test_WrQBsNAtdv4k3e',
+    'amount': 100,
+    'name': 'Acme Corp.',
+    'description': 'Fine T-Shirt',
+    'prefill': {'contact': '8888888888', 'email': 'test@razorpay.com'}
+  };
 
   Future<void> deleteShippingAddres(String id) async {
     try {
@@ -116,7 +146,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
         automaticallyImplyLeading: false,
         leading: InkWell(
           onTap: () async {
-           print("checkout back ${Provider.of<BottomMenuHandler>(context,listen: false).currentValue}");
+            print(
+                "checkout back ${Provider.of<BottomMenuHandler>(context, listen: false).currentValue}");
             Navigator.pop(context);
           },
           child: Icon(
@@ -601,7 +632,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                         onPressed: () {
                                           Provider.of<BottomMenuHandler>(
                                                   context,
-                                                  listen: false).currentValue = BottomMuenu.Home;
+                                                  listen: false)
+                                              .currentValue = BottomMuenu.Home;
                                           Navigator.pop(context);
                                           Navigator.pushNamed(context,
                                               ProductListingWidget.routeName);

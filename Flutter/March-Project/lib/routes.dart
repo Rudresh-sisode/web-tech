@@ -16,6 +16,7 @@ import 'package:ecomm_app/screens/widgets/payment.dart';
 import 'package:ecomm_app/screens/widgets/search.dart';
 import 'package:ecomm_app/screens/widgets/shipping.dart';
 import 'package:ecomm_app/screens/widgets/success_msg.dart';
+import 'package:ecomm_app/screens/widgets/test.dart';
 import 'package:flutter/widgets.dart';
 // import 'package:ecomm_app/screens/home/home_screen.dart';
 import 'package:ecomm_app/screens/splash/splash_screen.dart';
@@ -51,4 +52,5 @@ final Map<String, WidgetBuilder> routes = {
   Wishlist.routeName: (context) => Wishlist(),
   Location.routeName: (context) => Location(),
   Search.routeName: (context) => Search(),
+  Test.routeName: (context) => Test(),
 };

@@ -75,7 +75,7 @@ class HomePageSlider with ChangeNotifier {
         //   return PopularModel(id: item['id'], name: item['name']);
         // }).toList();
 
-     
+        
         loading = false;
         notifyListeners();  
       }

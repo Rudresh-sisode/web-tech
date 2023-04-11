@@ -1,6 +1,7 @@
 
 import 'package:ecomm_app/models/product.dart';
 import 'package:ecomm_app/product_detail_widget.dart';
+import 'package:ecomm_app/providers/filter-provider.dart';
 import 'package:ecomm_app/screens/widgets/product_tile_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,7 +25,7 @@ class ProductList extends StatelessWidget {
     if (cart.isGridView) {
       return LayoutBuilder(builder: (context, constraints) {
         return GridView.builder(
-          physics: NeverScrollableScrollPhysics(),
+          physics: Provider.of<FilterProvider>(context,listen: false).isFilterActive ? null : NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: products.length,
           itemBuilder: (context, index) => ProductTileAnimation(

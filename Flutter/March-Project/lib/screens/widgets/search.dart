@@ -4,8 +4,13 @@ import 'package:ecomm_app/screens/widgets/filter_widgets/brand.dart';
 import 'package:ecomm_app/screens/widgets/filter_widgets/price_range.dart';
 import 'package:ecomm_app/screens/widgets/filter_widgets/rating.dart';
 import 'package:ecomm_app/screens/widgets/filter_widgets/sort_product.dart';
+import 'package:ecomm_app/screens/widgets/product_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
+import 'package:ecomm_app/providers/products.dart';
+
+import '../../providers/filter-provider.dart';
 
 class Search extends StatefulWidget {
   static String routeName = "/search";
@@ -16,6 +21,19 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   final items = List<String>.generate(10000, (i) => "Item $i");
+  late TextEditingController textController;
+  List<Widget> sortingWidgets = [
+    SortProduct(),
+    PriceRange(),
+    Rating(),
+    Brand()
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    textController = TextEditingController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,88 +81,91 @@ class _SearchState extends State<Search> {
     return Scaffold(
       // appBar: AppBar(title: Text('GridView Demo')),
       appBar: AppBar(
+        title: Text(
+            "Search ${Provider.of<FilterProvider>(context, listen: false).channelType == ChannelType.Popular ? "Popular Products" : Provider.of<FilterProvider>(context, listen: false).channelType == ChannelType.Trending ? "Trending Products" : "Products"}"),
         elevation: 0,
         automaticallyImplyLeading: true,
-        backgroundColor: Color.fromARGB(255, 194, 59, 235),
+        backgroundColor: kPrimaryColor,
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          SizedBox(height: 10),
-          TextField(
-            controller: controller,
-            textInputAction: TextInputAction.send,
-            style: TextStyle(
-                color: Color.fromARGB(255, 179, 16, 243),
-                fontWeight: FontWeight.w300),
-            decoration: InputDecoration(prefixIcon: Icon(Icons.search)),
-          ),
-          // SizedBox(height: 10),
-          SizedBox(
-              // child: Container(
-              // margin: const EdgeInsets.symmetric(vertical: 60.0),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 10),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.05),
+              child: TextField(
+                controller: textController,
+                onChanged: (_) {
+                  Provider.of<Products>(context, listen: false)
+                      .searchProductList(textController.text);
+                      print("entered text ${textController.text}");
+                },
+                textInputAction: TextInputAction.send,
+                style: TextStyle(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontWeight: FontWeight.w300),
+                decoration: InputDecoration(prefixIcon: Icon(Icons.search)),
+              ),
+            ),
+
+            SizedBox(height: MediaQuery.of(context).size.height * 0.001),
+            // SizedBox(height: 10),
+            SizedBox(
               height: 100.0,
-              child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  // padding: const EdgeInsets.symmetric(
-                  //     vertical: 60.0, horizontal: 10.0),
-                  // shrinkWrap: true,
-                  // itemCount: products.length,
-                  // itemBuilder: (context, index) {
-                  children: <Widget>[
-                    // SizedBox(
-                    //   child: Padding(
-                    //     padding: const EdgeInsets.all(0.0),
-                    //     child: Row(
-                    //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //       mainAxisSize: MainAxisSize.max,
-                    //       children: [
-                    //         SizedBox(width: 100, child: SortProduct()),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
-                    // SizedBox(
-                    //   child: Padding(
-                    //     padding: const EdgeInsets.all(0.0),
-                    //     child: Row(
-                    //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //       mainAxisSize: MainAxisSize.max,
-                    //       children: [
-                    //         SizedBox(width: 100, child: PriceRange()),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
-                    SizedBox(
-                      child: Padding(
-                        padding: const EdgeInsets.all(0.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            SizedBox(width: 90, child: SortProduct()),
-                            SizedBox(width: 90, child: PriceRange()),
-                            SizedBox(width: 90, child: Rating()),
-                            SizedBox(width: 90, child: Brand()),
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: sortingWidgets.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    width: MediaQuery.of(context).size.width *
+                        0.25, // 30% of screen width
+                    child: sortingWidgets[index],
+                  );
+                },
+              ),
+            ),
+
+            Consumer<Products>(
+              builder: (ctx, product, _) => Container(
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 2),
+                  child: product.productDataList.length > 0
+                      ? Column(
+                          children: <Widget>[
+                            Container(
+                              // height: ,
+                              width: double.infinity,
+                              child: (textController.text.length > 0 && product.productRequestingData.length == 0) ? Center(child: Text("Nothing Found"),) : ProductList(
+                                products:
+                                    product.productRequestingData.length > 0
+                                        ? product.productRequestingData
+                                        : product.productDataList,
+                              ),
+                            ),
                           ],
+                        )
+                      : FutureBuilder(
+                          future: product.getExecuteProductData(),
+                          builder: (ctx, productReturnSnapshot) =>
+                              productReturnSnapshot.connectionState ==
+                                      ConnectionState.waiting
+                                  ? Center(
+                                      child: Container(
+                                        child: Text("loading..."),
+                                      ),
+                                    )
+                                  : Center(
+                                      child: Container(
+                                      child: Text("please restart the app."),
+                                    )),
                         ),
-                      ),
-                    ),
-                  ])),
-          Expanded(
-            child: LayoutBuilder(builder: (context, constraints) {
-              return GridView.builder(
-                itemCount: 100,
-                itemBuilder: (context, index) => ItemList(index),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: constraints.maxWidth > 700 ? 4 : 2,
-                  childAspectRatio: 2,
                 ),
-              );
-            }),
-          ),
-        ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -6,6 +6,7 @@ import 'package:ecomm_app/providers/auth-checker.dart';
 import 'package:ecomm_app/providers/bottom-menu.dart';
 import 'package:ecomm_app/providers/carousel.dart';
 import 'package:ecomm_app/providers/delivery-address.dart';
+import 'package:ecomm_app/providers/filter-provider.dart';
 import 'package:ecomm_app/providers/home-page-slider.dart';
 import 'package:ecomm_app/providers/loader.dart';
 import 'package:ecomm_app/providers/orders.dart';
@@ -68,6 +69,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => PopularApi()),
         ChangeNotifierProvider(create: (_) => HomePageSlider()),
         ChangeNotifierProvider(create: (_) => BottomMenuHandler()),
+        // add FilterProvider here
+        ChangeNotifierProvider(create: (_) => FilterProvider()),
       ],
       child: Consumer<AuthChecker>(
         builder: (ctx, auth, _) => MaterialApp(

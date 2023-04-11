@@ -4,13 +4,10 @@ import 'dart:math';
 import '../models/apiUrls.dart';
 import '../models/delivery-address.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'dart:convert';
 import 'dart:async';
-
 import 'package:ecomm_app/models/http_exception.dart';
 import 'package:flutter/widgets.dart';
-
 import 'package:http/http.dart' as http;
 
 enum AddressType {

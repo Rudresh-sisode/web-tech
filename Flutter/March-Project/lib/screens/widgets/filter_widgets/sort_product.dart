@@ -94,6 +94,7 @@ class _SortState extends State<SortProduct> {
                     children: <Widget>[
                       Text('SORT BY'),
                      Divider(),
+                     
                       ListTile(
                         title: const Text('Relevance'),
                         leading: Radio<SingingCharacter>(
