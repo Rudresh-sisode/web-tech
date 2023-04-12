@@ -80,9 +80,16 @@ class Products with ChangeNotifier {
     // return productRequestingData;
   }
 
+  void sortProductLowestToHighest() {
+    productRequestingData = productDataList;
+    productRequestingData.sort((a, b) => a.offerPrice.compareTo(b.offerPrice));
+    notifyListeners();
+  }
+
   List<ProductDetails> get getProducts {
     return productDataList;
   }
+
 
   // void updateProductQuantity(int id, [String value = "des"]) {
   //   int index = products.indexWhere((element) => element.id == id);
@@ -297,6 +304,8 @@ class Products with ChangeNotifier {
       throw error;
     }
   }
+
+
 
   Future<bool> getExecuteProductData() async {
     try {

@@ -25,7 +25,7 @@ class ProductList extends StatelessWidget {
     if (cart.isGridView) {
       return LayoutBuilder(builder: (context, constraints) {
         return GridView.builder(
-          physics: Provider.of<FilterProvider>(context,listen: false).isFilterActive ? null : NeverScrollableScrollPhysics(),
+          physics: /**Provider.of<FilterProvider>(context,listen: false).isFilterActive ? null : */  NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: products.length,
           itemBuilder: (context, index) => ProductTileAnimation(

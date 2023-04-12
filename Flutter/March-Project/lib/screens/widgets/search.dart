@@ -12,6 +12,8 @@ import 'package:ecomm_app/providers/products.dart';
 
 import '../../providers/filter-provider.dart';
 
+enum SingingCharacter { lafayette, jefferson }
+
 class Search extends StatefulWidget {
   static String routeName = "/search";
 
@@ -22,12 +24,24 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   final items = List<String>.generate(10000, (i) => "Item $i");
   late TextEditingController textController;
+  List<String> sortingButton = [
+    "Sort",
+    "Price",
+    "Rating",
+    "Brand",
+  ];
+
   List<Widget> sortingWidgets = [
     SortProduct(),
     PriceRange(),
     Rating(),
     Brand()
   ];
+
+  bool showSheet = false;
+  SingingCharacter? _character = SingingCharacter.lafayette;
+
+  int _selectedIndex = -1;
 
   @override
   void initState() {
@@ -37,6 +51,7 @@ class _SearchState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
+    
     TextEditingController controller = TextEditingController();
     controller.addListener(() {
       print('Text field data');
@@ -68,106 +83,285 @@ class _SearchState extends State<Search> {
           image: 'assets/images/Image Popular Product 3.png'),
     ];
 
-// List<DropdownMenuItem<String>> get dropdownItems{
-//   List<DropdownMenuItem<String>> menuItems = [
-//     DropdownMenuItem(child: Text("USA"),value: "USA"),
-//     DropdownMenuItem(child: Text("Canada"),value: "Canada"),
-//     DropdownMenuItem(child: Text("Brazil"),value: "Brazil"),
-//     DropdownMenuItem(child: Text("England"),value: "England"),
-//   ];
-//   return menuItems;
-// }
-
     return Scaffold(
-      // appBar: AppBar(title: Text('GridView Demo')),
-      appBar: AppBar(
-        title: Text(
-            "Search ${Provider.of<FilterProvider>(context, listen: false).channelType == ChannelType.Popular ? "Popular Products" : Provider.of<FilterProvider>(context, listen: false).channelType == ChannelType.Trending ? "Trending Products" : "Products"}"),
-        elevation: 0,
-        automaticallyImplyLeading: true,
-        backgroundColor: kPrimaryColor,
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(height: 10),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width * 0.05),
-              child: TextField(
-                controller: textController,
-                onChanged: (_) {
-                  Provider.of<Products>(context, listen: false)
-                      .searchProductList(textController.text);
-                      print("entered text ${textController.text}");
-                },
-                textInputAction: TextInputAction.send,
-                style: TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontWeight: FontWeight.w300),
-                decoration: InputDecoration(prefixIcon: Icon(Icons.search)),
-              ),
-            ),
+        appBar: AppBar(
+          title: Text(
+              "Search ${Provider.of<FilterProvider>(context, listen: false).channelType == ChannelType.Popular ? "Popular Products" : Provider.of<FilterProvider>(context, listen: false).channelType == ChannelType.Trending ? "Trending Products" : "Products"}"),
+          elevation: 0,
+          automaticallyImplyLeading: true,
+          backgroundColor: kPrimaryColor,
+          centerTitle: true,
+        ),
+        body: Stack(children: <Widget>[
+          GestureDetector(
+            onTap: () {
+              print("tapped");
 
-            SizedBox(height: MediaQuery.of(context).size.height * 0.001),
-            // SizedBox(height: 10),
-            SizedBox(
-              height: 100.0,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: sortingWidgets.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return SizedBox(
-                    width: MediaQuery.of(context).size.width *
-                        0.25, // 30% of screen width
-                    child: sortingWidgets[index],
-                  );
-                },
-              ),
-            ),
+              FocusScope.of(context).requestFocus(new FocusNode());
+            },
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.05),
+                    child: TextField(
+                      controller: textController,
+                      onChanged: (_) {
+                        Provider.of<Products>(context, listen: false)
+                            .searchProductList(textController.text);
+                        print("entered text ${textController.text}");
+                      },
+                      textInputAction: TextInputAction.send,
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontWeight: FontWeight.w300),
+                      decoration:
+                          InputDecoration(prefixIcon: Icon(Icons.search)),
+                    ),
+                  ),
 
-            Consumer<Products>(
-              builder: (ctx, product, _) => Container(
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 2),
-                  child: product.productDataList.length > 0
-                      ? Column(
-                          children: <Widget>[
-                            Container(
-                              // height: ,
-                              width: double.infinity,
-                              child: (textController.text.length > 0 && product.productRequestingData.length == 0) ? Center(child: Text("Nothing Found"),) : ProductList(
-                                products:
-                                    product.productRequestingData.length > 0
-                                        ? product.productRequestingData
-                                        : product.productDataList,
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.001),
+                  // SizedBox(height: 10),
+                  SizedBox(
+                    // height: 100.0,
+                    height: MediaQuery.of(context).size.height * 0.06,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      // itemCount: sortingWidgets.length,
+                      itemCount: sortingButton.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
+                            // height:,
+                            width: MediaQuery.of(context).size.width *
+                                0.25, // 30% of screen width
+                            // child: sortingWidgets[index],
+                            child: ElevatedButton(
+                              child: Text("${sortingButton[index]}"),
+                              onPressed: () {
+                                setState(() {
+                                  if (_selectedIndex == -1) {
+                                    showSheet = !showSheet;
+                                  }
+                                  _selectedIndex = index;
+
+                                  // if(_selectedIndex == index){
+
+                                  // }
+
+                                  // showSheet = !showSheet;
+                                });
+
+                                // setState(() {
+                                //   _selectedIndex = index;
+                                //   showSheet = !showSheet;
+                                // });
+                              },
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                backgroundColor: _selectedIndex == index
+                                    ? Color.fromARGB(255, 102, 59, 123)
+                                    : Colors.grey,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(32.0),
+                                ),
                               ),
                             ),
-                          ],
-                        )
-                      : FutureBuilder(
-                          future: product.getExecuteProductData(),
-                          builder: (ctx, productReturnSnapshot) =>
-                              productReturnSnapshot.connectionState ==
-                                      ConnectionState.waiting
-                                  ? Center(
-                                      child: Container(
-                                        child: Text("loading..."),
-                                      ),
-                                    )
-                                  : Center(
-                                      child: Container(
-                                      child: Text("please restart the app."),
-                                    )),
-                        ),
-                ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+
+                  Consumer<Products>(
+                    builder: (ctx, product, _) => Container(
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 2),
+                        child: product.productDataList.length > 0
+                            ? Column(
+                                children: <Widget>[
+                                  Container(
+                                    // height: ,
+                                    width: double.infinity,
+                                    child: (textController.text.length > 0 &&
+                                            product.productRequestingData
+                                                    .length ==
+                                                0)
+                                        ? Center(
+                                            child: Text("Nothing Found"),
+                                          )
+                                        : ProductList(
+                                            products: product
+                                                        .productRequestingData
+                                                        .length >
+                                                    0
+                                                ? product.productRequestingData
+                                                : product.productDataList,
+                                          ),
+                                  ),
+                                ],
+                              )
+                            : FutureBuilder(
+                                future: product.getExecuteProductData(),
+                                builder: (ctx, productReturnSnapshot) =>
+                                    productReturnSnapshot.connectionState ==
+                                            ConnectionState.waiting
+                                        ? Center(
+                                            child: Container(
+                                              child: Text("loading..."),
+                                            ),
+                                          )
+                                        : Center(
+                                            child: Container(
+                                            child:
+                                                Text("please restart the app."),
+                                          )),
+                              ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+          //     isLoadingSpinner
+          // ? Center(
+          //     child: Container(
+          //         height: MediaQuery.of(context).size.height * 0.2,
+          //         width: 60,
+          //         child: SpinKitCubeGrid(
+          //           color: kPrimaryColor,
+          //         )),
+          //   )
+          // :
+          Offstage(
+            offstage: !showSheet,
+            child: DraggableScrollableSheet(
+                initialChildSize: 0.5,
+                maxChildSize: 0.5,
+                builder: (BuildContext context, ScrollController controller) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: kPrimaryBackShade,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      ),
+                    ),
+                    child: ListView(
+                      controller: controller,
+                      padding: EdgeInsets.all(10),
+                      children: [
+                        Container(
+                          height: MediaQuery.of(context).size.height * 0.04,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                'Apply filter',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    // textAlign:TextAlign.center,/
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.close),
+                                color: Color.fromARGB(255, 44, 41, 41),
+                                onPressed: () => setState(() {
+                                  showSheet = !showSheet;
+                                  _selectedIndex = -1;
+                                }),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.05),
+                        Center(
+                          child: 
+                          
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text('SORT BY'),
+                              Divider(),
+                              ListTile(
+                                title: const Text('Relevance'),
+                                leading: Radio<SingingCharacter>(
+                                  value: SingingCharacter.lafayette,
+                                  groupValue: _character,
+                                  onChanged: (SingingCharacter? value) {
+                                    setState(() {
+                                      _character = value;
+                                    });
+                                  },
+                                ),
+                              ),
+                              ListTile(
+                                title: const Text('Popularity'),
+                                leading: Radio<SingingCharacter>(
+                                  value: SingingCharacter.jefferson,
+                                  groupValue: _character,
+                                  onChanged: (SingingCharacter? value) {
+                                    setState(() {
+                                      _character = value;
+                                    });
+                                  },
+                                ),
+                              ),
+                              ListTile(
+                                title: const Text('Price - Low to High'),
+                                leading: Radio<SingingCharacter>(
+                                  value: SingingCharacter.jefferson,
+                                  groupValue: _character,
+                                  onChanged: (SingingCharacter? value) {
+                                    setState(() {
+                                      _character = value;
+                                    });
+                                  },
+                                ),
+                              ),
+                              ListTile(
+                                title: const Text('Price - High to Low'),
+                                leading: Radio<SingingCharacter>(
+                                  value: SingingCharacter.jefferson,
+                                  groupValue: _character,
+                                  onChanged: (SingingCharacter? value) {
+                                    setState(() {
+                                      _character = value;
+                                    });
+                                  },
+                                ),
+                              ),
+
+                              // ListTile(
+                              //   leading: new Icon(Icons.share),
+                              //   title: new Text('Share'),
+                              //   onTap: () {
+                              //     Navigator.pop(context);
+                              //   },
+                              // ),
+                              // Text('test'),
+                            ],
+                          ),
+                          // Column(
+                          //     children: [
+                          //       Text("No address available!"),
+                          //     ],
+                          //   ),
+                        )
+                      ],
+                    ),
+                  );
+                }),
+          )
+        ]));
   }
 }
 

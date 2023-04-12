@@ -58,7 +58,7 @@ class Orders with ChangeNotifier {
       });
 
       Map<String, dynamic> responseData = json.decode(response.body);
-      if (responseData['status'] == false) {
+      if(responseData['status'] == false) {
       
         notifyListeners();
         //throwing error message, this will handle in profile widgets
@@ -128,6 +128,7 @@ class Orders with ChangeNotifier {
         List<dynamic> orderProducts = responseData["data"]["order_product"];
         ordersProduct = orderProducts.map((item) => OrdersProduct.fromJson(item)).toList();
         Map<String,dynamic> orderAddress = orderDetails["shipping_address"];
+        orderAddress["id"] = "0";
         addressDetails = CustomerDeliveryAddress.fromJson(orderAddress);
         orderPricing = OrderPricing(orderDate:orderDetails["order_date"] ,orderDiscountAmount:orderDetails["order_discount_amount"] ,orderId: orderDetails["order_id"],orderSubtotal:orderDetails["order_subtotal"] ,orderTotal: orderDetails["order_total"], status: orderDetails["status"],tokenOrderId:orderDetails["token_order_id"] ,totalProducts:orderDetails["total_products"]);
      

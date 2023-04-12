@@ -32,7 +32,7 @@ class OrderItems {
       totalProducts: json['total_products'],
       orderDate: json['order_date'],
       status: json['status'],
-      deliveredDate: json['delivered_date'],
+      deliveredDate: json['delivered_date'] == null ? "" : json['delivered_date'],
     );
   }
 }

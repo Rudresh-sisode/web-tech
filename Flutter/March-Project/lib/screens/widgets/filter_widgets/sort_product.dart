@@ -74,9 +74,8 @@ class _SortState extends State<SortProduct> {
   //       style: ElevatedButton.styleFrom(
   //   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10)
   // ),
-        onPressed: () {
-          // when raised button is pressed
-          // we display showModalBottomSheet
+        onPressed: () 
+        {
           showModalBottomSheet<void>(
             // context and builder are
             // required properties in this widget
@@ -94,7 +93,6 @@ class _SortState extends State<SortProduct> {
                     children: <Widget>[
                       Text('SORT BY'),
                      Divider(),
-                     
                       ListTile(
                         title: const Text('Relevance'),
                         leading: Radio<SingingCharacter>(

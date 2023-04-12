@@ -711,6 +711,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
               ],
             ),
           ),
+
           isLoadingSpinner
               ? Center(
                   child: Container(
@@ -816,7 +817,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                         Text("No address available!"),
                                       ],
                                     )
-                                  : Consumer<DeliveryAddress>(
+                                  : 
+                                  Consumer<DeliveryAddress>(
                                       builder: (_, addressData, ch) {
                                         return Container(
                                           height: MediaQuery.of(context)
