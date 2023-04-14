@@ -8,6 +8,26 @@ const url = require('url');
 const StringDecoder = require('string_decoder').StringDecoder;
 const config = require('./config');
 const fs = require('fs');
+const _data = require('./lib/data');
+
+// TESTING
+// @TODO delete this
+
+_data.delete('test', 'newFile', (err) => {
+    console.log('this was the error', err);
+});
+
+// _data.update('test', 'newFile', {'fizz': 'buzz'}, (err) => {
+//     console.log('this was the error', err);
+// });
+
+// _data.read('test', 'newFile', (err, data) => {
+//     console.log('this was the error', err, 'and this was the data', data);
+// });
+
+// _data.create('test', 'newFile', {'foo': 'bar'}, (err) => {
+//     console.log('this was the error', err);
+// });
 
 // Instantiate the HTTP server
 const httpServer = http.createServer((req, res) => {
@@ -111,19 +131,18 @@ const unifiedServer = (req, res) => {
 //define the handlers
 const handlers = {};
 
-//sample handler
-handlers.sample = (data, callback) => {
-    //callback a http status code, and a payload object
-    callback(406, {'name': 'sample handler'});
+handlers.ping = (data, callback) => {
+    // Callback a http status code, and a payload object
+    callback(200);
 };
 
 // Not found handler
-
 handlers.notFound = (data, callback) => {
     callback(404);
 };
 
 // Define a request router
 const router = {
-    'sample': handlers.sample
+    'ping': handlers.ping
 };
+
