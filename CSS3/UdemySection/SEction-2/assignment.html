@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    h1 {
+      color: blue;
+      font-family: sans-serif;
+    }
+
+    code {
+      color: red;
+      font-family: monospace;
+    }
+
+    .second-li code {
+      color: green;
+    }
+
+    ol li:not(:first-child) {
+      background-color: black;
+      color: white;
+    }
+
+    ol li {
+      background-color: white;
+      color: black;
+    }
+
+    body {
+      font-family: sans-serif;
+    }
+
+    li {
+      font-family: inherit;
+    }
+  </style>
+</head>
+<body>
+  <h1>My Heading</h1>
+  <p>Some text...</p>
+
+  <ul>
+    <li><code>Code 1</code></li>
+    <li class="second-li"><code>Code 2</code></li>
+    <li><code>Code 3</code></li>
+  </ul>
+
+  <ol>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+  </ol>
+</body>
+</html>
