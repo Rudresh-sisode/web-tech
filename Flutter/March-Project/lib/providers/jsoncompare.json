@@ -1,0 +1,37 @@
+[
+    {
+        "product_id": 3,
+        "main_category_id": 2,
+        "category_id": 2,
+        "sub_category_id": 3,
+        "name": "Formal Office Shirt",
+        "detail": "<p>Carporate office shirt</p>",
+        "price": 1300,
+        "quantity": 41,
+        "offer_price": 950,
+        "slider_image_name": "167645770963ecb6ed2b1f5.jpg",
+        "slider_image_path": "/uploads/product_files/banner/1680686633642d3e29a48d9.jpg",
+        "main_category_value": "Clothes",
+        "category_value": "shirts",
+        "sub_category_value": "fullShirt",
+        "slider_image_full_path": "https://ecom.gunadhyasoftware.com/public/uploads/product_files/banner/1680686633642d3e29a48d9.jpg"
+    },
+    {
+        "product_id": 5,
+        "main_category_id": 1,
+        "category_id": 3,
+        "sub_category_id": 4,
+        "name": "Sony Headphone",
+        "detail": "<p>The Sonic B Heroic Gaming Wired Headset includes a built-in microphone for hands-free talking and playing. The headset includes a mute switch, volume control features and pro-light illuminated LED ear clips. Pro-tested sweat proof with a flexible microphone that bends to your desired position, this headset is perfect for gamers!<br><br>- Built-in microphone for hands-free talking/playing.<br>- Microphone noise reduction<br>- Enhanced treble and bass<br>- On-ear comfort for long listening<br>- Compatible with Xbox One, PS4, Nintendo Switch, Mobiles/Tablets<br><br>Please note: Please advise in your personal shopper notes your preferred colour when reviewing your order at checkout. Please note the colour delivered is</p>",
+        "price": 700,
+        "quantity": 81,
+        "offer_price": 500,
+        "slider_image_name": "167835177264099d9c9c5d3.jpg",
+        "slider_image_path": "/uploads/product_files/banner/1680686566642d3de6b7ad9.jpg",
+        "main_category_value": "Electronics",
+        "category_value": "headphone",
+        "sub_category_value": "headphone",
+        "total": "19",
+        "slider_image_full_path": "https://ecom.gunadhyasoftware.com/public/uploads/product_files/banner/1680686566642d3de6b7ad9.jpg"
+    }
+]

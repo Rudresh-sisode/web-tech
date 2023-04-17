@@ -4,6 +4,9 @@ import 'package:flutter/foundation.dart';
 enum ChannelType {
   Popular,
   Trending,
+  MostSelling,
+  PrimiumProduct,
+  MostValuable,
   None
 
 }

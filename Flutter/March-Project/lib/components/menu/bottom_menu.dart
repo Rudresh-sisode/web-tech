@@ -166,78 +166,87 @@ class _BottomMenuState extends State<BottomMenu> {
                       Navigator.pushNamed(context, CheckoutWidget.routeName);
                     },
             ),
-            Provider.of<AuthChecker>(context,listen:false).isAuth ?
-            IconButton(
-                icon: Icon(
-                  Icons.person,
-                  color: BottomMuenu.Profile ==
-                          Provider.of<BottomMenuHandler>(context, listen: false)
-                              .currentValue
-                      ? kPrimaryColor
-                      : inActiveIconColor,
-                  size: 30.0,
-                ),
-                // icon: SvgPicture.asset(
-                //   "assets/icons/User Icon.svg",
-                //   color: BottomMuenu.Profile == bottomMenuHandler.currentValue
-                //       ? kPrimaryColor
-                //       : inActiveIconColor,
-                // ),
-                onPressed: Provider.of<BottomMenuHandler>(context,
-                                listen: false)
-                            .currentValue ==
-                        BottomMuenu.Profile
-                    ? null
-                    : () {
+            Provider.of<AuthChecker>(context, listen: false).isAuth
+                ? IconButton(
+                    icon: Icon(
+                      Icons.person,
+                      color: BottomMuenu.Profile ==
+                              Provider.of<BottomMenuHandler>(context,
+                                      listen: false)
+                                  .currentValue
+                          ? kPrimaryColor
+                          : inActiveIconColor,
+                      size: 30.0,
+                    ),
+                    // icon: SvgPicture.asset(
+                    //   "assets/icons/User Icon.svg",
+                    //   color: BottomMuenu.Profile == bottomMenuHandler.currentValue
+                    //       ? kPrimaryColor
+                    //       : inActiveIconColor,
+                    // ),
+                    onPressed:
                         Provider.of<BottomMenuHandler>(context, listen: false)
-                            .currentValue = BottomMuenu.Profile;
-                        // bottomMenuHandler.changeCurrentValue(BottomMuenu.Profile);
-                        print(
-                            " profile click ${Provider.of<BottomMenuHandler>(context, listen: false).currentValue}");
-                        Navigator.pushNamed(context, ProfileScreen.routeName);
-                      }) : IconButton(
-                icon: Icon(
-                  Icons.login,
-                  color: BottomMuenu.Location ==
-                          Provider.of<BottomMenuHandler>(context, listen: false)
-                              .currentValue
-                      ? kPrimaryColor
-                      : inActiveIconColor,
-                  size: 30.0,
-                ),
-               
-                onPressed:
-                    Provider.of<BottomMenuHandler>(context, listen: false)
+                                    .currentValue ==
+                                BottomMuenu.Profile
+                            ? null
+                            : () {
+                                Provider.of<BottomMenuHandler>(context,
+                                        listen: false)
+                                    .currentValue = BottomMuenu.Profile;
+                                // bottomMenuHandler.changeCurrentValue(BottomMuenu.Profile);
+                                print(
+                                    " profile click ${Provider.of<BottomMenuHandler>(context, listen: false).currentValue}");
+                                Navigator.pushNamed(
+                                    context, ProfileScreen.routeName);
+                              })
+                : IconButton(
+                    icon: Icon(
+                      Icons.login,
+                      color: BottomMuenu.Location ==
+                              Provider.of<BottomMenuHandler>(context,
+                                      listen: false)
+                                  .currentValue
+                          ? kPrimaryColor
+                          : inActiveIconColor,
+                      size: 30.0,
+                    ),
+                    onPressed: Provider.of<BottomMenuHandler>(context,
+                                    listen: false)
                                 .currentValue ==
                             BottomMuenu.Location
                         ? null
                         : () {
-                          Provider.of<Cart>(context,listen: false).clear();
-                          Provider.of<BottomMenuHandler>(context, listen: false)
+                            Provider.of<Cart>(context, listen: false).clear();
+                            Provider.of<BottomMenuHandler>(context,
+                                    listen: false)
                                 .currentValue = BottomMuenu.Home;
-                          Navigator.pop(context);
-                          Navigator.pushNamed(context, AuthScreen.routeName);
-                          }) ,
-            ...Provider.of<AuthChecker>(context,listen:false).isAuth ?
-            [IconButton(
-                icon: Icon(
-                  Icons.person,
-                  color: BottomMuenu.Location ==
-                          Provider.of<BottomMenuHandler>(context, listen: false)
-                              .currentValue
-                      ? kPrimaryColor
-                      : inActiveIconColor,
-                  size: 30.0,
-                ),
-               
-                onPressed:
-                    Provider.of<BottomMenuHandler>(context, listen: false)
-                                .currentValue ==
-                            BottomMuenu.Location
-                        ? null
-                        : () {
-                            Navigator.pushNamed(context, Location.routeName);
-                          })] : []
+                            Navigator.pop(context);
+                            Navigator.pushNamed(context, AuthScreen.routeName);
+                          }),
+            ...Provider.of<AuthChecker>(context, listen: false).isAuth
+                ? [
+                    IconButton(
+                        icon: Icon(
+                          Icons.person,
+                          color: BottomMuenu.Location ==
+                                  Provider.of<BottomMenuHandler>(context,
+                                          listen: false)
+                                      .currentValue
+                              ? kPrimaryColor
+                              : inActiveIconColor,
+                          size: 30.0,
+                        ),
+                        onPressed: Provider.of<BottomMenuHandler>(context,
+                                        listen: false)
+                                    .currentValue ==
+                                BottomMuenu.Location
+                            ? null
+                            : () {
+                                Navigator.pushNamed(
+                                    context, Test.routeName);
+                              })
+                  ]
+                : []
           ],
         ),
       ),

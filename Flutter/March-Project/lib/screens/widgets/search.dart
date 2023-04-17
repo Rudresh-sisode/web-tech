@@ -12,7 +12,7 @@ import 'package:ecomm_app/providers/products.dart';
 
 import '../../providers/filter-provider.dart';
 
-enum SingingCharacter { lafayette, jefferson }
+enum SingingCharacter {lowToHigh, highToLow, showAll }
 
 class Search extends StatefulWidget {
   static String routeName = "/search";
@@ -24,6 +24,7 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   final items = List<String>.generate(10000, (i) => "Item $i");
   late TextEditingController textController;
+  bool value = false;
   List<String> sortingButton = [
     "Sort",
     "Price",
@@ -31,15 +32,14 @@ class _SearchState extends State<Search> {
     "Brand",
   ];
 
-  List<Widget> sortingWidgets = [
-    SortProduct(),
-    PriceRange(),
-    Rating(),
-    Brand()
-  ];
+
+  RangeValues _currentRangeValues = RangeValues(100, 50000);
 
   bool showSheet = false;
-  SingingCharacter? _character = SingingCharacter.lafayette;
+  SingingCharacter? _character = SingingCharacter.showAll;
+  Icon customIcon = Icon(Icons.search);
+  late Widget customSearchBar;
+   
 
   int _selectedIndex = -1;
 
@@ -47,11 +47,19 @@ class _SearchState extends State<Search> {
   void initState() {
     super.initState();
     textController = TextEditingController();
+
+   customSearchBar = Text(
+              "Search ${Provider.of<FilterProvider>(context, listen: false).channelType == ChannelType.Popular ? "Popular Products" : Provider.of<FilterProvider>(context, listen: false).channelType == ChannelType.Trending ? "Trending Products" : Provider.of<FilterProvider>(context, listen: false).channelType == ChannelType.MostSelling ? "Most Selling Products": Provider.of<FilterProvider>(context, listen: false).channelType == ChannelType.PrimiumProduct ? "Premium Product" : "Products"}",
+              style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20,
+                  fontFamily: "Roboto"),
+                  );
   }
 
   @override
   Widget build(BuildContext context) {
-    
     TextEditingController controller = TextEditingController();
     controller.addListener(() {
       print('Text field data');
@@ -60,37 +68,106 @@ class _SearchState extends State<Search> {
       // Do something here
     });
 
-    List<Item> products = [
-      Item(
-          name: 'Apple',
-          unit: 'Kg',
-          price: 20,
-          image: 'assets/images/tshirt.png'),
-      Item(
-          name: 'Mango',
-          unit: 'Doz',
-          price: 30,
-          image: 'assets/images/glap.png'),
-      Item(
-          name: 'Strawberry',
-          unit: 'Box',
-          price: 12,
-          image: 'assets/images/ps4_console_white_2.png'),
-      Item(
-          name: 'Fruit Basket',
-          unit: 'Kg',
-          price: 55,
-          image: 'assets/images/Image Popular Product 3.png'),
-    ];
-
     return Scaffold(
         appBar: AppBar(
-          title: Text(
-              "Search ${Provider.of<FilterProvider>(context, listen: false).channelType == ChannelType.Popular ? "Popular Products" : Provider.of<FilterProvider>(context, listen: false).channelType == ChannelType.Trending ? "Trending Products" : "Products"}"),
+          title: customSearchBar ,
           elevation: 0,
           automaticallyImplyLeading: true,
           backgroundColor: kPrimaryColor,
           centerTitle: true,
+          actions: [
+            IconButton(
+              icon: customIcon,
+              onPressed: () {
+                print("search");
+
+                setState(() {
+                  if (this.customIcon.icon == Icons.search) {
+                      this.customIcon = Icon(Icons.close);
+                      //  customIcon = const Icon(Icons.cancel);
+                      customSearchBar = 
+                      Row(
+                        // crossAxisAlignment: CrossAxisAlignment.,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Icon(
+                            Icons.search,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        Container(
+                          height: MediaQuery.of(context).size.width * 0.1,
+
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          child: 
+                          TextField(
+                            decoration: 
+                            InputDecoration(
+                            hintText: 'type in journal name...',
+                            hintStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontStyle: FontStyle.italic,
+                            ),
+                            border: InputBorder.none,
+                            ),
+                            style: TextStyle(
+                            color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],);
+                      /**
+                       * 
+                       *  
+                       * ListTile(
+                      leading: Icon(
+                        Icons.search,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                      title: 
+                      Container(
+                        height: 60,
+                        child: 
+                        TextField(
+                          
+                          decoration: 
+                          InputDecoration(
+                            
+                          hintText: 'type in journal name...',
+                          hintStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontStyle: FontStyle.italic,
+                          ),
+                          border: InputBorder.none,
+                          ),
+                          style: TextStyle(
+                          color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    );
+                       */
+                     
+                  } else {
+                    this.customIcon = Icon(Icons.search);
+                    customSearchBar = Text(
+                        "Search ${Provider.of<FilterProvider>(context, listen: false).channelType == ChannelType.Popular ? "Popular Products" : Provider.of<FilterProvider>(context, listen: false).channelType == ChannelType.Trending ? "Trending Products" : Provider.of<FilterProvider>(context, listen: false).channelType == ChannelType.MostSelling ? "Most Selling Products": Provider.of<FilterProvider>(context, listen: false).channelType == ChannelType.PrimiumProduct ? "Premium Product" : "Products"}",
+                        style: TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 20,
+                        fontFamily: "Roboto"),
+                      );
+                  }
+                });
+              },
+              color: Colors.white,
+              
+            )
+          ],
         ),
         body: Stack(children: <Widget>[
           GestureDetector(
@@ -147,18 +224,7 @@ class _SearchState extends State<Search> {
                                     showSheet = !showSheet;
                                   }
                                   _selectedIndex = index;
-
-                                  // if(_selectedIndex == index){
-
-                                  // }
-
-                                  // showSheet = !showSheet;
                                 });
-
-                                // setState(() {
-                                //   _selectedIndex = index;
-                                //   showSheet = !showSheet;
-                                // });
                               },
                               style: ElevatedButton.styleFrom(
                                 foregroundColor: Colors.white,
@@ -186,10 +252,11 @@ class _SearchState extends State<Search> {
                                   Container(
                                     // height: ,
                                     width: double.infinity,
-                                    child: (textController.text.length > 0 &&
-                                            product.productRequestingData
-                                                    .length ==
-                                                0)
+                                    child: !product.isFounded
+                                    // (textController.text.length > 0 &&
+                                    //         product.productRequestingData
+                                    //                 .length ==
+                                    //             0 )
                                         ? Center(
                                             child: Text("Nothing Found"),
                                           )
@@ -218,7 +285,8 @@ class _SearchState extends State<Search> {
                                             child: Container(
                                             child:
                                                 Text("please restart the app."),
-                                          )),
+                                          ),
+                                          ),
                               ),
                       ),
                     ),
@@ -240,8 +308,8 @@ class _SearchState extends State<Search> {
           Offstage(
             offstage: !showSheet,
             child: DraggableScrollableSheet(
-                initialChildSize: 0.5,
-                maxChildSize: 0.5,
+                initialChildSize: 0.6,
+                maxChildSize: 0.6,
                 builder: (BuildContext context, ScrollController controller) {
                   return Container(
                     decoration: BoxDecoration(
@@ -266,9 +334,11 @@ class _SearchState extends State<Search> {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     // textAlign:TextAlign.center,/
-                                    color: Colors.white,
+                                    color: kPrimaryBackShadeLightCheckboxText,
+                                    // color: Colors.black,
                                     fontSize: 18,
-                                    fontWeight: FontWeight.bold),
+                                    // fontWeight: FontWeight.bold
+                                    ),
                               ),
                               IconButton(
                                 icon: Icon(Icons.close),
@@ -284,78 +354,340 @@ class _SearchState extends State<Search> {
                         SizedBox(
                             height: MediaQuery.of(context).size.width * 0.05),
                         Center(
-                          child: 
-                          
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text('SORT BY'),
-                              Divider(),
-                              ListTile(
-                                title: const Text('Relevance'),
-                                leading: Radio<SingingCharacter>(
-                                  value: SingingCharacter.lafayette,
-                                  groupValue: _character,
-                                  onChanged: (SingingCharacter? value) {
-                                    setState(() {
-                                      _character = value;
-                                    });
-                                  },
-                                ),
-                              ),
-                              ListTile(
-                                title: const Text('Popularity'),
-                                leading: Radio<SingingCharacter>(
-                                  value: SingingCharacter.jefferson,
-                                  groupValue: _character,
-                                  onChanged: (SingingCharacter? value) {
-                                    setState(() {
-                                      _character = value;
-                                    });
-                                  },
-                                ),
-                              ),
-                              ListTile(
-                                title: const Text('Price - Low to High'),
-                                leading: Radio<SingingCharacter>(
-                                  value: SingingCharacter.jefferson,
-                                  groupValue: _character,
-                                  onChanged: (SingingCharacter? value) {
-                                    setState(() {
-                                      _character = value;
-                                    });
-                                  },
-                                ),
-                              ),
-                              ListTile(
-                                title: const Text('Price - High to Low'),
-                                leading: Radio<SingingCharacter>(
-                                  value: SingingCharacter.jefferson,
-                                  groupValue: _character,
-                                  onChanged: (SingingCharacter? value) {
-                                    setState(() {
-                                      _character = value;
-                                    });
-                                  },
-                                ),
-                              ),
+                            child: _selectedIndex == 0
+                                ? Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text('SORT BY',style: TextStyle(fontSize: 16,color: Colors.black)),
+                                      Divider(),
+                                      // ListTile(
+                                      //   title: const Text('Relevance'),
+                                      //   leading: Radio<SingingCharacter>(
+                                      //     value: SingingCharacter.relevance,
+                                      //     groupValue: _character,
+                                      //     onChanged: (SingingCharacter? value) {
+                                      //       setState(() {
+                                      //         _character = value;
+                                      //       });
+                                      //     },
+                                      //   ),
+                                      // ),
+                                      ListTile(
+                                        title: const Text('Show All'),
+                                        leading: Radio<SingingCharacter>(
+                                          value: SingingCharacter.showAll,
+                                          groupValue: _character,
+                                          onChanged: (SingingCharacter? value) {
+                                            setState(() {
+                                              _character = value;
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                      ListTile(
+                                        title:
+                                            const Text('Price - Low to High'),
+                                        leading: Radio<SingingCharacter>(
+                                          value: SingingCharacter.lowToHigh,
+                                          groupValue: _character,
+                                          onChanged: (SingingCharacter? value) {
+                                            setState(() {
+                                              _character = value;
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                      ListTile(
+                                        title:
+                                            const Text('Price - High to Low'),
+                                        leading: Radio<SingingCharacter>(
+                                          value: SingingCharacter.highToLow,
+                                          groupValue: _character,
+                                          onChanged: (SingingCharacter? value) {
+                                            setState(() {
+                                              _character = value;
 
-                              // ListTile(
-                              //   leading: new Icon(Icons.share),
-                              //   title: new Text('Share'),
-                              //   onTap: () {
-                              //     Navigator.pop(context);
-                              //   },
-                              // ),
-                              // Text('test'),
-                            ],
-                          ),
-                          // Column(
-                          //     children: [
-                          //       Text("No address available!"),
-                          //     ],
-                          //   ),
-                        )
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                      
+
+                                      //Add ElevatedButton
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: kPrimaryColorLight,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(32.0),
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          // Navigator.pop(context);
+                                          // if(_character == SingingCharacter.relevance){
+                                          //   // Provider.of<Products>(context,listen: false).s(0);
+                                          // }else if(_character == SingingCharacter.popularity){
+                                          //   // Provider.of<Products>(context,listen: false).sortProductDataList(1);
+                                          // }
+                                          // else 
+                                          if(_character == SingingCharacter.lowToHigh){
+                                            Provider.of<Products>(context,listen: false).sortProductLowestToHighest();
+                                            setState(() {
+
+                                              showSheet = !showSheet;
+                                              _selectedIndex = -1;
+                                            });
+                                          }else if(_character == SingingCharacter.highToLow){
+                                            Provider.of<Products>(context,listen: false).sortProductHighestToLowest();
+                                            setState(() {
+
+                                              showSheet = !showSheet;
+                                              _selectedIndex = -1;
+                                            });
+                                          }
+                                          else if(_character == SingingCharacter.showAll){
+                                            Provider.of<Products>(context,listen: false).showAllProducts();
+                                            setState(() {
+                                              showSheet = !showSheet;
+                                              _selectedIndex = -1;
+                                            });
+                                          }
+                                        },
+                                        child: Text(
+                                          "Apply",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                :
+                                //add Column and Price Range also show selected price range
+                                _selectedIndex == 1
+                                    ? 
+                                    Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Text('PRICE RANGE',style: TextStyle(fontSize: 16,color: Colors.black)),
+                                          Divider(),
+                                          RangeSlider(
+                                            // activeColor: Color.fromARGB(255, 49, 47, 47),
+                                            // inactiveColor: ,
+                                            values: _currentRangeValues,
+                                            max: 50000,
+                                            // min: ,
+                                            divisions: 10,
+                                            labels: RangeLabels(
+                                              "${_currentRangeValues.start.round().toString()}₹",
+                                              "${_currentRangeValues.end.round().toString()}₹",
+                                            ),
+                                            onChanged: (RangeValues values) {
+                                              setState(() {
+                                                _currentRangeValues = values;
+                                              });
+                                            },
+                                          ),
+                                          Text(
+                                            'Selected range: ${_currentRangeValues.start.toStringAsFixed(2)}₹ - ${_currentRangeValues.end.toStringAsFixed(2)}₹',
+                                            style: TextStyle(fontSize: 16,color: Colors.green),
+                                          ),
+                                          //Add ElevatedButton
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor:
+                                                  kPrimaryColorLight,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(32.0),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                            Provider.of<Products>(context,listen: false).sortProductBetweenPriceRange(_currentRangeValues.start.toInt(),_currentRangeValues.end.toInt());
+                                              // Navigator.pop(context);
+                                              setState(() {
+                                                showSheet = !showSheet;
+                                                _selectedIndex = -1;
+                                              });
+                                            },
+                                            child: Text(
+                                              "Apply",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : _selectedIndex == 2
+                                        ? 
+                                        Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Text('RATING',style: TextStyle(fontSize: 16,color: Colors.black)),
+                                              Divider(),
+                                              RatingBar.builder(
+                                                initialRating: 3,
+                                                minRating: 1,
+                                                direction: Axis.horizontal,
+                                                allowHalfRating: true,
+                                                itemCount: 5,
+                                                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                                                itemBuilder: (context, _) => Icon(
+                                                  Icons.star,
+                                                  color: Colors.amber,
+                                                ),
+                                                onRatingUpdate: (rating) {
+                                                  print(rating);
+                                                },
+                                              ),
+                                              //Add ElevatedButton
+                                              ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                      kPrimaryColorLight,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            32.0),
+                                                  ),
+                                                ),
+                                                onPressed: () {
+                                                  // Navigator.pop(context);
+                                                },
+                                                child: Text(
+                                                  "Apply",
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 18,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        : _selectedIndex == 3
+                                            ? 
+                                             Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: <Widget>[
+                                                  Text('BRAND',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(fontSize: 16,color: Colors.black),
+                                                          ),
+                                                  Divider(),
+
+                                                  Row(
+                                                    // crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceAround,
+                                                    children: <Widget>[
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ), //SizedBox
+                                                      Text(
+                                                        'Sam-sunga-sunga',
+                                                        // style: TextStyle(
+                                                        //     fontSize: 17.0,
+                                                        //     color: kPrimaryBackShadeLightCheckboxText),
+                                                      ), //Text
+                                                      SizedBox(
+                                                          width: 10), //SizedBox
+                                                      /** Checkbox Widget **/
+                                                      CheckboxTheme(
+                                                        data: CheckboxThemeData(
+                                                          shape: RoundedRectangleBorder( borderRadius:
+                                                                BorderRadius.circular(5.0),
+                                                            side: BorderSide(color: Color.fromARGB(255, 158, 158, 158)),
+                                                          ),
+                                                          fillColor: MaterialStateColor.resolveWith(
+                                                                      (states) {
+                                                            if (states.contains(
+                                                                MaterialState.disabled)) {
+                                                              return Colors.grey
+                                                                  .shade400;
+                                                            }
+                                                            return kPrimaryBackShadeLightCheckbox;
+                                                          }),
+                                                        ),
+                                                        child: Checkbox(
+                                                          value: this.value,
+                                                          onChanged:
+                                                              (bool? value) {
+                                                            setState(() {
+                                                              this.value =
+                                                                  value!;
+                                                            });
+                                                          },
+                                                        ),
+                                                      )
+                                                    ], 
+                                                  ),
+
+                                                ],
+                                              )
+                                            : 
+                                            Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: <Widget>[
+                                                  Text('DISCOUNT'),
+                                                  Divider(),
+                                                  RatingBar.builder(
+                                                    initialRating: 3,
+                                                    minRating: 1,
+                                                    direction: Axis.horizontal,
+                                                    allowHalfRating: true,
+                                                    itemCount: 5,
+                                                    itemPadding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 4.0),
+                                                    itemBuilder: (context, _) =>
+                                                        Icon(
+                                                      Icons.star,
+                                                      color: Colors.amber,
+                                                    ),
+                                                    onRatingUpdate: (rating) {
+                                                      print(rating);
+                                                    },
+                                                  ),
+                                                  //Add ElevatedButton
+                                                  ElevatedButton(
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      backgroundColor:
+                                                          kPrimaryColorLight,
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(32.0),
+                                                      ),
+                                                    ),
+                                                    onPressed: () {
+                                                      // Navigator.pop(context);
+                                                    },
+                                                    child: Text(
+                                                      "Apply",
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 18,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
+                                           
+
+                            // Add Five Star rating bar design
+
+                            )
                       ],
                     ),
                   );

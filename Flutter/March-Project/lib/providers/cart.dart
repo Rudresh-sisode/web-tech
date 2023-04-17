@@ -54,6 +54,7 @@ class Cart with ChangeNotifier {
   bool checkoutOrderStatus = false;
   String recentCheckoutOrderId = "";
   Map<String, dynamic> checkoutData = {};
+  List<ProductDetails> productData = [];
 
   bool isGridView = true;
   String _token = "null";
@@ -195,10 +196,8 @@ class Cart with ChangeNotifier {
     notifyListeners();
   }
 
-  void addItem(String productId, BuildContext context, String prodQuantity) {
-    List<ProductDetails> productData =
-        Provider.of<Products>(context, listen: false).getProducts;
-
+  void addItem(String productId, String prodQuantity) {
+   
     final product = productData
         .firstWhere((prod) => prod.productId == int.parse(productId));
     if (product == null || product.quantity == 0) {
@@ -234,7 +233,6 @@ class Cart with ChangeNotifier {
           (_items[existingCartItemIndex].offerPrice * int.parse(prodQuantity));
       basePrice += (_items[existingCartItemIndex].productPrice *
           int.parse(prodQuantity));
-      Provider.of<Products>(context, listen: false);
     } else {
       final newCartItem = CartItem(
           id: product.productId.toString(),

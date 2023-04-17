@@ -28,7 +28,7 @@ class ProductTileAnimation extends StatelessWidget {
     // final cartList = Provider.of<Cart>(context)
     ContainerTransitionType _transitionType = ContainerTransitionType.fade;
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.fromLTRB(4.0,2.0,2.0,1.0),
       child: OpenContainer<bool>(
         transitionType: _transitionType,
         openBuilder: (BuildContext _, VoidCallback openContainer) {
@@ -109,7 +109,7 @@ class ProductTileAnimation extends StatelessWidget {
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(3.0, 0, 0, 0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
@@ -130,12 +130,12 @@ class ProductTileAnimation extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(3.0, 2, 0, 0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(8, 4, 0, 0),
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
                             // child: Text(
                             //   '123',
                             //   style: AppTheme.of(context).bodyText2,

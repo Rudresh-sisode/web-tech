@@ -20,6 +20,7 @@ class Products with ChangeNotifier {
 
   List<ProductDetails> productDataList = [];
   List<ProductDetails> productRequestingData = [];
+  bool isFounded = true;
 
   List<Product> products = [
     Product(
@@ -69,13 +70,19 @@ class Products with ChangeNotifier {
   //   return products;
   // }
 
+  void showAllProducts() {
+    productRequestingData = productDataList;
+    isFounded = productRequestingData.length > 0 ? true : false;
+    notifyListeners();
+  }
+
   void searchProductList(String prodNameCharString) {
     productRequestingData = productDataList
         .where((item) => item.name
             .toLowerCase()
             .contains(prodNameCharString.trim().toLowerCase()))
         .toList();
-
+    isFounded = productRequestingData.length > 0 ? true : false;
     notifyListeners();
     // return productRequestingData;
   }
@@ -83,8 +90,27 @@ class Products with ChangeNotifier {
   void sortProductLowestToHighest() {
     productRequestingData = productDataList;
     productRequestingData.sort((a, b) => a.offerPrice.compareTo(b.offerPrice));
+    isFounded = productRequestingData.length > 0 ? true : false;
     notifyListeners();
   }
+
+  void sortProductHighestToLowest() {
+    productRequestingData = productDataList;
+    productRequestingData.sort((a, b) => b.offerPrice.compareTo(a.offerPrice));
+    isFounded = productRequestingData.length > 0 ? true : false;
+    notifyListeners();
+  }
+
+  void sortProductBetweenPriceRange(int minPrice, int maxPrice) {
+    productRequestingData = productDataList;
+    productRequestingData = productRequestingData
+        .where((item) =>
+            item.offerPrice >= minPrice && item.offerPrice <= maxPrice)
+        .toList();
+    isFounded = productRequestingData.length > 0 ? true : false;
+    notifyListeners();
+  }
+
 
   List<ProductDetails> get getProducts {
     return productDataList;

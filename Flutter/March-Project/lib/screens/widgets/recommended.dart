@@ -2,6 +2,11 @@ import 'package:ecomm_app/const_error_msg.dart';
 import 'package:ecomm_app/models/recomended.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
+
+import '../../components/global_snack_bar.dart';
+import '../../providers/cart.dart';
+import '../../providers/popular.dart';
 
 class Recommended extends StatelessWidget {
   List<Item> products = [
@@ -34,12 +39,16 @@ class Recommended extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 20.0),
           height: 100.0,
-          child: ListView.builder(
+          child: 
+          Consumer<PopularApi>(
+            builder: (ctx, product, _) => Container(
+                child: product.mostSellingProductsImageData.length > 0 ?
+                ListView.builder(
               scrollDirection: Axis.horizontal,
               padding:
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
               shrinkWrap: true,
-              itemCount: products.length,
+              itemCount: product.mostSellingProductsImageData.length,
               itemBuilder: (context, index) {
                 return Card(
                   color: Color.fromARGB(255, 208, 224, 233),
@@ -50,10 +59,10 @@ class Recommended extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Image(
+                        Image.network(
+                          product.mostSellingProductsImageData[index].sliderImageFullPath,
                           height: 80,
                           width: 80,
-                          image: AssetImage(products[index].image.toString()),
                         ),
                         SizedBox(
                           width: 130,
@@ -74,7 +83,7 @@ class Recommended extends StatelessWidget {
                                     children: [
                                       TextSpan(
                                           text:
-                                              '${products[index].name.toString()}\n',
+                                              '${product.mostSellingProductsImageData[index].name}\n',
                                           style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 12.0)),
@@ -83,14 +92,14 @@ class Recommended extends StatelessWidget {
                               RichText(
                                 maxLines: 1,
                                 text: TextSpan(
-                                    text: 'Price: ' r"$",
+                                    text:  'Price: ' + "₹: ",
                                     style: TextStyle(
                                         color: Colors.blueGrey.shade800,
                                         fontSize: 11.0),
                                     children: [
                                       TextSpan(
                                           text:
-                                              '${products[index].price.toString()}\n',
+                                              '${product.mostSellingProductsImageData[index].price.toString()}\n',
                                           style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 12.0)),
@@ -108,20 +117,7 @@ class Recommended extends StatelessWidget {
                                   direction: Axis.horizontal,
                                 ),
                               )
-                              //   maxLines: 1,
-                              //   text: TextSpan(
-                              //       text: 'Unit: ',
-                              //       style: TextStyle(
-                              //           color: Colors.blueGrey.shade800,
-                              //           fontSize: 16.0),
-                              //       children: [
-                              //         TextSpan(
-                              //             text:
-                              //                 '${products[index].unit.toString()}\n',
-                              //             style: const TextStyle(
-                              //                 fontWeight: FontWeight.bold)),
-                              //       ]),
-                              // ),
+                              
                             ],
                           ),
                         ),
@@ -136,6 +132,9 @@ class Recommended extends StatelessWidget {
                             ),
                             onPressed: () {
                               //  saveData(index);
+                               Provider.of<Cart>(context, listen: false).addItem(
+                                  product.mostSellingProductsImageData[index].productId.toString(),"1");
+                                  GlobalSnackBar.show(context, 'Items added in cart');
                             },
                             child: const Text(
                               'Add to Cart',
@@ -145,7 +144,15 @@ class Recommended extends StatelessWidget {
                     ),
                   ),
                 );
-              }),
+              }) :
+              Center(child: 
+                Text('Please wait...', 
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+            ),
+          ),
+
         ),
       ),
     );

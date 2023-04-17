@@ -15,6 +15,7 @@ import 'package:ecomm_app/providers/cart.dart';
 import 'package:ecomm_app/providers/filter-provider.dart';
 import 'package:ecomm_app/providers/products.dart';
 import 'package:ecomm_app/screens/widgets/carousel.dart';
+import 'package:ecomm_app/screens/widgets/most_value_product.dart';
 import 'package:ecomm_app/screens/widgets/popular.dart';
 import 'package:ecomm_app/screens/widgets/premium.dart';
 // import 'package:ecomm_app/screens/widgets/popular.dart';
@@ -62,7 +63,10 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
   late StreamSubscription subscription;
   bool isDeviceConnected = false;
   bool isAlertSet = false;
+  Icon customIcon = const Icon(Icons.search);
+  Widget customSearchBar = const Text('search products...');
 
+  
   getConnectivity() =>
       subscription = Connectivity().onConnectivityChanged.listen(
         (ConnectivityResult result) async {
@@ -165,35 +169,10 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // key: scaffoldKey,
-
-      // backgroundColor: Colors.white,
-      // appBar: AppBar(
-      //   centerTitle: false,
-
-      //   iconTheme: const IconThemeData(
-      //     color: kAppBarColor, //change your color here
-      //   ),
-      //   // title: const Text("", style: TextStyle(color: kAppBarColor)),
-      //   title: Image.asset(
-      //     "assets/images/G-Store.png",
-      //     fit: BoxFit.cover,
-      //     height: 32,
-      //   ),
-      //   // child:SizedBox('asxas'),
-      //   elevation: 0,
-      // ),
-
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: false,
-        // backgroundColor: Color.fromARGB(255, 194, 59, 235),
         centerTitle: true,
-        // leading: Image.asset(
-        //  "assets/images/G-Store.png",
-        //// fit: BoxFit.none,
-        //   height: 20,
-        // ),
         leading: SizedBox(
             height: 10.0,
             width: 10.0, // fixed width and height
@@ -206,43 +185,9 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                 fontFamily: 'Open Sans', fontWeight: FontWeight.bold)),
       ),
 
-      // appBar: AppBar(
-      //   automaticallyImplyLeading: false,
-      //   title: Row(
-      //     mainAxisAlignment: MainAxisAlignment.start,
-      //     children: [
-      //       Row(
-      //         children: <Widget>[
-      //           Container(
-      //             alignment: Alignment.topLeft,
-      //             child: Image.asset(
-      //               'assets/images/G-Store.png',
-      //               fit: BoxFit.contain,
-      //               height: 32,
-      //             ),
-      //           ),
-      //           SizedBox(
-      //             // alignment: Alignment.topCenter,
-      //             child: Text(
-      //               "G store",
-      //               textAlign: TextAlign.center,
-      //             ),
-      //           ),
-      //         ],
-      //       ),
-      //       // Image.asset(
-      //       //   'assets/images/G-Store.png',
-      //       //   fit: BoxFit.contain,
-      //       //   height: 32,
-      //       // ),
-      //       // Text("Your Title", textAlign: TextAlign.center),
-      //     ],
-      //   ),
-      // ),
-      //  );
+      
       body: SingleChildScrollView(
-        // reverse: true,
-
+       
         physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -276,7 +221,8 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                   ),
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-                    child: Row(
+                    child: 
+                    Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
@@ -290,41 +236,36 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                         Expanded(
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
-                            child: TextFormField(
+                            child: 
+                            
+                            TextField(
                               controller: textController,
                               obscureText: false,
-                              onChanged: (_) {
-                                Provider.of<Products>(context, listen: false)
-                                    .searchProductList(textController.text);
-                              },
                               decoration: InputDecoration(
-                                hintText: 'Search product here...',
-                                // labelText: 'Search product here...',
+                                hintText: 'Search',
+                                hintStyle: TextStyle(
+                                  color: Color(0xFF95A1AC),
+                                ),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(0x00000000),
+                                    color: Colors.transparent,
                                     width: 1,
                                   ),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(4.0),
-                                    topRight: Radius.circular(4.0),
-                                  ),
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(0x00000000),
+                                    color: Colors.transparent,
                                     width: 1,
                                   ),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(4.0),
-                                    topRight: Radius.circular(4.0),
-                                  ),
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
                               ),
-                              style: AppTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Poppins',
-                                    color: Color(0xFF95A1AC),
-                                  ),
+                              style: TextStyle(
+                                color: Color(0xFF95A1AC),
+                              ),
+                              textAlign: TextAlign.start,
+                              keyboardType: TextInputType.text,
                             ),
                           ),
                         ),
@@ -348,42 +289,40 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                 ),
               ),
             ),
-            Container(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(height: 20),
-                    ListTile(
-                        title: const Text('Popular Products',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Color.fromARGB(255, 147, 3, 138))),
-                        trailing: RawMaterialButton(
-                          onPressed: () {
-                            Provider.of<FilterProvider>(context, listen: false).setChannelType(ChannelType.Popular);
-                            Navigator.pushNamed(context, Search.routeName);
-                          },
-                          elevation: 1.0,
-                          fillColor: Color.fromARGB(255, 255, 255, 255),
-                          child:
-                              SvgPicture.asset("assets/icons/arrow_right.svg"),
-                          // child: Icon(Icons.arrow_right,
-                          //     size: 30.0,
-                          //     color: Color.fromARGB(255, 255, 255, 255)),
-                          padding: EdgeInsets.all(1.0),
-                          shape: CircleBorder(),
-                        )),
-                    Container(
-                      height: 120,
-                      width: double.infinity,
-                      child: Popular(),
-                    ),
-                  ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                  child: Text(
+                    'Popular products',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                        fontSize: 16, color: Color.fromARGB(255, 22, 17, 1)),
+                  ),
                 ),
-              ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                  child:
+                   RawMaterialButton(
+                    onPressed: () {
+                     Provider.of<FilterProvider>(context, listen: false).setChannelType(ChannelType.Popular);
+                    Navigator.pushNamed(context, Search.routeName);
+                    },
+                    elevation: 1.0,
+                    fillColor: Color.fromARGB(255, 255, 255, 255),
+                    child: SvgPicture.asset("assets/icons/arrow_right.svg"),
+                    // child: Icon(Icons.arrow_right,
+                    //     size: 30.0,
+                    //     color: Color.fromARGB(255, 255, 255, 255)),
+                    padding: EdgeInsets.all(1.0),
+                    shape: CircleBorder(),
+                  ),
+                ),
+              ],
             ),
+            Popular(),
+            
             Container(
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 0),
@@ -441,33 +380,155 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                 ),
               ),
             ),
-            SizedBox(
-              child: Text(
-                'Trending products',
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                    fontSize: 16, color: Color.fromARGB(255, 22, 17, 1)),
-              ),
+
+//Trending products
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Padding(
+                  // padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                                    padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+
+                  child: Text(
+                    'Trending products',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                        fontSize: 16, color: Color.fromARGB(255, 22, 17, 1)),
+                  ),
+                ),
+                Padding(
+                  // padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+
+                  child: RawMaterialButton(
+                    onPressed: () {
+                      Provider.of<FilterProvider>(context, listen: false).setChannelType(ChannelType.Trending);
+                      Navigator.pushNamed(context, Search.routeName);
+                    },
+                    elevation: 1.0,
+                    fillColor: Color.fromARGB(255, 255, 255, 255),
+                    child: SvgPicture.asset("assets/icons/arrow_right.svg"),
+                    // child: Icon(Icons.arrow_right,
+                    //     size: 30.0,
+                    //     color: Color.fromARGB(255, 255, 255, 255)),
+                    padding: EdgeInsets.all(1.0),
+                    shape: CircleBorder(),
+                  ),
+                ),
+              ],
             ),
             Trending(),
-            SizedBox(
-              child: Text(
-                'Recomended products',
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                    fontSize: 16, color: Color.fromARGB(255, 22, 17, 1)),
-              ),
+
+// most selling products
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Padding(
+                  // padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                                    padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+
+                  child: Text(
+                    'Most selling products',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                        fontSize: 16, color: Color.fromARGB(255, 22, 17, 1)),
+                  ),
+                ),
+                Padding(
+                  // padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+
+                  child: RawMaterialButton(
+                    onPressed: () {
+                      Provider.of<FilterProvider>(context, listen: false).setChannelType(ChannelType.MostSelling);
+                      Navigator.pushNamed(context, Search.routeName);
+                    },
+                    elevation: 1.0,
+                    fillColor: Color.fromARGB(255, 255, 255, 255),
+                    child: SvgPicture.asset("assets/icons/arrow_right.svg"),
+                    // child: Icon(Icons.arrow_right,
+                    //     size: 30.0,
+                    //     color: Color.fromARGB(255, 255, 255, 255)),
+                    padding: EdgeInsets.all(1.0),
+                    shape: CircleBorder(),
+                  ),
+                ),
+              ],
             ),
             Recommended(),
-            SizedBox(
-              child: Text(
-                'Premium products',
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                    fontSize: 16, color: Color.fromARGB(255, 22, 17, 1)),
-              ),
+
+// most Primium products
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Padding(
+                  // padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+
+                  child: Text(
+                    'Premium products',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                        fontSize: 16, color: Color.fromARGB(255, 22, 17, 1)),
+                  ),
+                ),
+                Padding(
+                  // padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+
+                  child: RawMaterialButton(
+                    onPressed: () {
+                      Provider.of<FilterProvider>(context, listen: false).setChannelType(ChannelType.PrimiumProduct);
+                      Navigator.pushNamed(context, Search.routeName);
+                    },
+                    elevation: 1.0,
+                    fillColor: Color.fromARGB(255, 255, 255, 255),
+                    child: SvgPicture.asset("assets/icons/arrow_right.svg"),
+                    // child: Icon(Icons.arrow_right,
+                    //     size: 30.0,
+                    //     color: Color.fromARGB(255, 255, 255, 255)),
+                    padding: EdgeInsets.all(1.0),
+                    shape: CircleBorder(),
+                  ),
+                ),
+              ],
             ),
-            Premium()
+            Premium(),
+
+// most valuable products
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: <Widget>[
+            //     Padding(
+            //       padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+            //       child: Text(
+            //         'Most Valuable Product',
+            //         textAlign: TextAlign.start,
+            //         style: TextStyle(
+            //             fontSize: 16, color: Color.fromARGB(255, 22, 17, 1)),
+            //       ),
+            //     ),
+            //     Padding(
+            //       padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+            //       child: RawMaterialButton(
+            //         onPressed: () {
+            //           Provider.of<FilterProvider>(context, listen: false).setChannelType(ChannelType.MostValuable);
+            //           Navigator.pushNamed(context, Search.routeName);
+            //         },
+            //         elevation: 1.0,
+            //         fillColor: Color.fromARGB(255, 255, 255, 255),
+            //         child: SvgPicture.asset("assets/icons/arrow_right.svg"),
+            //         // child: Icon(Icons.arrow_right,
+            //         //     size: 30.0,
+            //         //     color: Color.fromARGB(255, 255, 255, 255)),
+            //         padding: EdgeInsets.all(1.0),
+            //         shape: CircleBorder(),
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            // mostValueProduct(),
+            
           ],
         ),
       ),

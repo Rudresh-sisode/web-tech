@@ -385,7 +385,6 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                   cartItems[
                                                                           index]
                                                                       .id,
-                                                                  context,
                                                                   "1");
                                                               if (Provider.of<
                                                                           Cart>(

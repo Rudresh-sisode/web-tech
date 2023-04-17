@@ -498,9 +498,11 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                           MyButtonWidget(
                             onPressed: () {
                               ProductDetails p = widget.product;
+                              Provider.of<Cart>(context, listen: false).productData =
+                              Provider.of<Products>(context, listen: false).getProducts;
                               Provider.of<Cart>(context, listen: false).addItem(
                                   p.productId.toString(),
-                                  context,
+                                  
                                   countControllerValue.toString());
                               if (Provider.of<Cart>(context, listen: false)
                                       .quantityStatus
