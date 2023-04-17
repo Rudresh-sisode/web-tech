@@ -9,6 +9,8 @@ const StringDecoder = require('string_decoder').StringDecoder;
 const config = require('./config');
 const fs = require('fs');
 const _data = require('./lib/data');
+const handlers = require('./lib/handlers');
+const helpers = require('./lib/helpers');
 
 // TESTING
 // @TODO delete this
@@ -93,7 +95,7 @@ const unifiedServer = (req, res) => {
              'queryStringObject' : queryStringObject,
              'method' : method,
              'headers' : headers,
-             'payload' : buffer
+             'payload' : helpers.parseJsonToObject(buffer)
          };
  
          // Route the request to the handler specified in the router
@@ -128,21 +130,10 @@ const unifiedServer = (req, res) => {
      // Send the response
 };
 
-//define the handlers
-const handlers = {};
-
-handlers.ping = (data, callback) => {
-    // Callback a http status code, and a payload object
-    callback(200);
-};
-
-// Not found handler
-handlers.notFound = (data, callback) => {
-    callback(404);
-};
 
 // Define a request router
 const router = {
-    'ping': handlers.ping
+    'ping': handlers.ping,
+    'users': handlers.users
 };
 
