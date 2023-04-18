@@ -22,6 +22,24 @@ body{
     /* font-family: inherit; */
 }
 
+.main-header > div{
+    display:inline-block;
+}
+
+.main-nav{
+    display: inline-block;
+    
+}
+
+.main-nav__items{
+    display: inline-block;
+}
+
+.main-nav__item{
+    display: inline-block;
+}
+
+
 .main-header{
     width: 100%;
     background-color: #2ddf5c;
