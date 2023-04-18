@@ -45,8 +45,8 @@ httpServer.listen(config.httpPort, () => {
 
 // Instantiate the HTTPS server
 let httpsServerOptions = {
-    'key': fs.readFileSync('./https/key.pem'),
-    'cert': fs.readFileSync('./https/cert.pem')
+    'key': fs.readFileSync('D:/Webfolder/web-tech/NodeJs/pirple.com/app/https/key.pem'),
+    'cert': fs.readFileSync('D:/Webfolder/web-tech/NodeJs/pirple.com/app/https/cert.pem')
 };
 const httpsServer = https.createServer(httpsServerOptions,(req, res) => {
     unifiedServer(req, res);
