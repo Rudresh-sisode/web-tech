@@ -9,15 +9,15 @@ const StringDecoder = require('string_decoder').StringDecoder;
 const config = require('./config');
 const fs = require('fs');
 const _data = require('./lib/data');
-const handlers = require('./lib/handlers');
+const handlers = require('./lib/handler');
 const helpers = require('./lib/helpers');
 
 // TESTING
 // @TODO delete this
 
-_data.delete('test', 'newFile', (err) => {
-    console.log('this was the error', err);
-});
+// _data.delete('test', 'newFile', (err) => {
+//     console.log('this was the error', err);
+// });
 
 // _data.update('test', 'newFile', {'fizz': 'buzz'}, (err) => {
 //     console.log('this was the error', err);

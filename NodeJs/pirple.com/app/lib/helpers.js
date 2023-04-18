@@ -5,7 +5,7 @@
 
 // Dependencies
 const crypto = require('crypto');
-const config = require('./config');
+const config = require('../config');
 
 // Container for all the helpers
 const helpers = {};
@@ -34,6 +34,6 @@ helpers.parseJsonToObject = (str) => {
 }
 
 
-
 //export the module
 module.exports = helpers;
+// module.exports = handlers;
