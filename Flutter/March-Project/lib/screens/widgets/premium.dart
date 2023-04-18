@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../../components/global_snack_bar.dart';
 import '../../providers/cart.dart';
 import '../../providers/popular.dart';
+import '../../providers/products.dart';
 
 class Premium extends StatelessWidget {
   List<Item> products = [
@@ -132,6 +133,7 @@ class Premium extends StatelessWidget {
                                               ),
                                               onPressed: () {
                                                 //  saveData(index);
+                                                Provider.of<Cart>(context, listen: false).productData = Provider.of<Products>(context, listen: false).productDataList;
                                                 Provider.of<Cart>(context, listen: false).addItem(
                                                 product.premiumProductsImageData[index].id.toString(),"1");
                                                 GlobalSnackBar.show(context, 'Items added in cart');

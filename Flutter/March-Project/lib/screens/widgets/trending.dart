@@ -164,6 +164,7 @@ double nearLength = 25;
                             ),
                             onPressed: () {
                               //add the product to cart
+                              Provider.of<Cart>(context, listen: false).productData = Provider.of<Products>(context, listen: false).productDataList;
                              Provider.of<Cart>(context, listen: false).addItem(
                                   product.trendingProductsImageData[index].productId.toString(),"1");
                                   GlobalSnackBar.show(context, 'Items added in cart');

@@ -380,6 +380,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                         child: ElevatedButton(
                                                           onPressed: () {
                                                             // your on pressed function here
+                                                            cart.productData = product.productDataList;
                                                             setState(() {
                                                               cart.addItem(
                                                                   cartItems[
