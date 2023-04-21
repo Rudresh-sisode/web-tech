@@ -34,14 +34,14 @@ class _PopularWidgetState extends State<Popular> {
       child: Consumer<PopularApi>(
         builder: (ctx, popularAPI, _) => Container(
           padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
-          height: 120.0,
+          height: 200.0,
           child: popularAPI.popularProductsImageData.length > 0
               ? ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: popularAPI.popularProductsImageData.length,
                   itemBuilder: (context, index) {
                     return Container(
-                      width: 100.0,
+                      width: 200.0,
                       // width: MediaQuery.of(context).size.width * 0.2,
                       child: Card(
                         child: Container(

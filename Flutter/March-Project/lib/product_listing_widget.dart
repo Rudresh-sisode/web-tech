@@ -177,7 +177,7 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
             height: 10.0,
             width: 10.0, // fixed width and height
             child: Image.asset(
-              'assets/images/G-Store.png',
+              'assets/images/logo1.png',
             ),
           ),
         title: Text('G-Store ',
@@ -193,88 +193,88 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Container(
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.95,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: AppTheme.of(context).secondaryBackground,
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: AppTheme.of(context).primaryBackground,
-                      width: 2,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
-                        // color: Colors.deepPurpleAccent,
-                        // blurRadius: 10,
-                        // spreadRadius: 0,
-                        // offset: Offset(10, 10)
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-                    child: 
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(4, 0, 4, 0),
-                          child: Icon(
-                            Icons.search_rounded,
-                            color: Color(0xFF95A1AC),
-                            size: 24,
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
-                            child: 
+            // Container(
+            //   child: Padding(
+            //     padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+            //     child: Container(
+            //       width: MediaQuery.of(context).size.width * 0.95,
+            //       height: 50,
+            //       decoration: BoxDecoration(
+            //         color: AppTheme.of(context).secondaryBackground,
+            //         borderRadius: BorderRadius.circular(8),
+            //         border: Border.all(
+            //           color: AppTheme.of(context).primaryBackground,
+            //           width: 2,
+            //         ),
+            //         boxShadow: [
+            //           BoxShadow(
+            //             color: Colors.grey.withOpacity(0.5),
+            //             spreadRadius: 5,
+            //             blurRadius: 7,
+            //             offset: Offset(0, 3), // changes position of shadow
+            //             // color: Colors.deepPurpleAccent,
+            //             // blurRadius: 10,
+            //             // spreadRadius: 0,
+            //             // offset: Offset(10, 10)
+            //           ),
+            //         ],
+            //       ),
+            //       child: Padding(
+            //         padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
+            //         child: 
+            //         Row(
+            //           mainAxisSize: MainAxisSize.max,
+            //           children: [
+            //             Padding(
+            //               padding: EdgeInsetsDirectional.fromSTEB(4, 0, 4, 0),
+            //               child: Icon(
+            //                 Icons.search_rounded,
+            //                 color: Color(0xFF95A1AC),
+            //                 size: 24,
+            //               ),
+            //             ),
+            //             Expanded(
+            //               child: Padding(
+            //                 padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
+            //                 child: 
                             
-                            TextField(
-                              controller: textController,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                hintText: 'Search',
-                                hintStyle: TextStyle(
-                                  color: Color(0xFF95A1AC),
-                                ),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                              ),
-                              style: TextStyle(
-                                color: Color(0xFF95A1AC),
-                              ),
-                              textAlign: TextAlign.start,
-                              keyboardType: TextInputType.text,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            //                 TextField(
+            //                   controller: textController,
+            //                   obscureText: false,
+            //                   decoration: InputDecoration(
+            //                     hintText: 'Search',
+            //                     hintStyle: TextStyle(
+            //                       color: Color(0xFF95A1AC),
+            //                     ),
+            //                     enabledBorder: UnderlineInputBorder(
+            //                       borderSide: BorderSide(
+            //                         color: Colors.transparent,
+            //                         width: 1,
+            //                       ),
+            //                       borderRadius: BorderRadius.circular(8),
+            //                     ),
+            //                     focusedBorder: UnderlineInputBorder(
+            //                       borderSide: BorderSide(
+            //                         color: Colors.transparent,
+            //                         width: 1,
+            //                       ),
+            //                       borderRadius: BorderRadius.circular(8),
+            //                     ),
+            //                   ),
+            //                   style: TextStyle(
+            //                     color: Color(0xFF95A1AC),
+            //                   ),
+            //                   textAlign: TextAlign.start,
+            //                   keyboardType: TextInputType.text,
+            //                 ),
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Container(
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
@@ -322,27 +322,32 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
               ],
             ),
             Popular(),
-            
-            Container(
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    Consumer<Cart>(
-                      builder: (_, cart, ch) => IconButton(
-                          onPressed: () {
-                            // cart.isGridView = !cart.isGridView;
-                            cart.changeGallaryView();
-                          },
-                          icon: !cart.isGridView
-                              ? Icon(Icons.grid_on)
-                              : Icon(Icons.list)),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            Text(
+                    'Availble products',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                        fontSize: 16, color: Color.fromARGB(255, 22, 17, 1)),
+                  ),
+            // Container(
+            //   child: Padding(
+            //     padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 0),
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.end,
+            //       children: <Widget>[
+            //         Consumer<Cart>(
+            //           builder: (_, cart, ch) => IconButton(
+            //               onPressed: () {
+            //                 // cart.isGridView = !cart.isGridView;
+            //                 cart.changeGallaryView();
+            //               },
+            //               icon: !cart.isGridView
+            //                   ? Icon(Icons.grid_on)
+            //                   : Icon(Icons.list)),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
             Consumer<Products>(
               builder: (ctx, product, _) => Container(
                 child: Padding(

@@ -10,7 +10,9 @@ import 'package:ecomm_app/screens/widgets/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:badges/badges.dart' as badge;
 
+import '../../app_theme.dart';
 import '../../providers/auth-checker.dart';
 import '../../providers/bottom-menu.dart';
 import '../../providers/cart.dart';
@@ -135,37 +137,94 @@ class _BottomMenuState extends State<BottomMenu> {
                     },
             ),
 
-            IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-                color: BottomMuenu.Cart ==
+            Stack(
+              children: <Widget>[
+                IconButton(
+                icon: Icon(
+                  Icons.shopping_cart,
+                  color: BottomMuenu.Cart ==
+                          Provider.of<BottomMenuHandler>(context, listen: false)
+                              .currentValue
+                      ? kPrimaryColor
+                      : inActiveIconColor,
+                  size: 30.0,
+                ),
+                onPressed: Provider.of<BottomMenuHandler>(context, listen: false)
+                            .currentValue ==
+                        BottomMuenu.Cart
+                    ? null
+                    : () {
                         Provider.of<BottomMenuHandler>(context, listen: false)
-                            .currentValue
-                    ? kPrimaryColor
-                    : inActiveIconColor,
-                size: 30.0,
+                            .currentValue = BottomMuenu.Cart;
+                        print(
+                            " Cart click ${Provider.of<BottomMenuHandler>(context, listen: false).currentValue}");
+                        Navigator.pushNamed(context, CheckoutWidget.routeName);
+                      },
               ),
-              // icon: SvgPicture.asset(
-              //   "assets/icons/Cart Icon.svg",
-              //   color: BottomMuenu.Cart == bottomMenuHandler.currentValue
-              //       ? kPrimaryColor
-              //       : inActiveIconColor,
-              // ),
-              onPressed: Provider.of<BottomMenuHandler>(context, listen: false)
-                          .currentValue ==
-                      BottomMuenu.Cart
-                  ? null
-                  : () {
-                      // Navigator.pop(context);
-                      // await .getCustomerProfile();
+              Consumer<Cart>(
+              builder: (ctx, product, _) {
+              return Positioned(
+                top: 0.8,
+                right: 3,
+                child: Container(
+                padding: EdgeInsets.zero,
+                child: product.itemCount != 0 ?
+                // Positioned(
+                //   child:
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(156, 39, 37, 37),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: EdgeInsets.zero,
+                    height: MediaQuery.of(context).size.height * 0.02,
+                    width: MediaQuery.of(context).size.width * 0.05,
+                    child: Center(child: Text("${product.totalProd}",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ),
+                    )
+                  // top: 0.8,right: 3,
+                // ) 
+                : null,
+                ),
+              );
+              
+              }
+              
+              // Text("${Provider.of<Cart>(context,listen:false).itemCount}"),
+              
+              ),
 
-                      Provider.of<BottomMenuHandler>(context, listen: false)
-                          .currentValue = BottomMuenu.Cart;
-                      print(
-                          " Cart click ${Provider.of<BottomMenuHandler>(context, listen: false).currentValue}");
-                      Navigator.pushNamed(context, CheckoutWidget.routeName);
-                    },
+              // ...Provider.of<Cart>(context,listen: false).itemCount != 0 ?
+              // [Positioned(
+              //   child:
+              //   Container(
+              //     decoration: BoxDecoration(
+              //       color: Color.fromARGB(156, 39, 37, 37),
+              //       borderRadius: BorderRadius.circular(10),
+              //     ),
+              //     padding: EdgeInsets.zero,
+              //     height: MediaQuery.of(context).size.height * 0.02,
+              //     width: MediaQuery.of(context).size.width * 0.05,
+              //     child: Center(child: Text("${Provider.of<Cart>(context,listen:false).itemCount}",
+              //         style: TextStyle(
+              //             color: Colors.white,
+              //             fontSize: 13,
+              //             fontWeight: FontWeight.bold
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   top: 0.8,right: 3,
+              // )] : [],
+            ],
             ),
+
             Provider.of<AuthChecker>(context, listen: false).isAuth
                 ? IconButton(
                     icon: Icon(

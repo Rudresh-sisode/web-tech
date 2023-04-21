@@ -70,6 +70,8 @@ class Products with ChangeNotifier {
   //   return products;
   // }
 
+  
+
   void showAllProducts() {
     productRequestingData = productDataList;
     isFounded = productRequestingData.length > 0 ? true : false;

@@ -47,6 +47,7 @@ class Cart with ChangeNotifier {
   double discountPrice = 0.0;
   double totalPrice = 0.0;
   double basePrice = 0.0;
+  int totalProd = 0;
 
   String quantityError = "";
   String quantityStatus = "Available";
@@ -208,11 +209,11 @@ class Cart with ChangeNotifier {
     final existingCartItemIndex =
         _items.indexWhere((item) => item.id == productId);
 
-    if (existingCartItemIndex != -1 &&
-        product.quantity < _items[existingCartItemIndex].quantity + 1) {
-      quantityError = "quantity not available more than this.";
-      return;
-    }
+    // if (existingCartItemIndex != -1 &&
+    //     product.quantity == _items[existingCartItemIndex].quantity) {
+    //   quantityError = "Quantity not available";
+    //   return;
+    // }
 
     if (existingCartItemIndex >= 0) {
       _items[existingCartItemIndex].quantity += int.parse(prodQuantity);
@@ -231,17 +232,26 @@ class Cart with ChangeNotifier {
       // }
       totalPrice +=
           (_items[existingCartItemIndex].offerPrice * int.parse(prodQuantity));
+
+      totalProd += int.parse(prodQuantity);
+
       basePrice += (_items[existingCartItemIndex].productPrice *
           int.parse(prodQuantity));
+      if (existingCartItemIndex != -1 && product.quantity == _items[existingCartItemIndex].quantity) {
+          quantityError = "Quantity not available more than ${product.quantity}";
+        }
     } else {
       final newCartItem = CartItem(
+
           id: product.productId.toString(),
           offerPrice: product.offerPrice.toDouble() * int.parse(prodQuantity),
           productPrice: product.price.toDouble(),
           discountPrice:
               (product.price.toDouble() - product.offerPrice.toDouble()),
           quantity: int.parse(prodQuantity),
+          availableQuantity: product.quantity,
           totalPrice: product.offerPrice.toDouble() * int.parse(prodQuantity));
+
 
       // for (int i = 0; i < int.parse(prodQuantity); i++) {
       discountPrice += (newCartItem.discountPrice * int.parse(prodQuantity));
@@ -249,7 +259,7 @@ class Cart with ChangeNotifier {
 
       totalPrice += newCartItem.totalPrice;
       basePrice += (newCartItem.productPrice * int.parse(prodQuantity));
-
+      totalProd += int.parse(prodQuantity);
       _items.add(newCartItem);
       //deletion of the product quantity need to affect the db.
       // product.quantity--;
@@ -297,6 +307,7 @@ class Cart with ChangeNotifier {
           (_items[existingCartItemIndex].offerPrice * int.parse(prodQuantity));
       basePrice -= (_items[existingCartItemIndex].productPrice *
           int.parse(prodQuantity));
+      totalProd -= int.parse(prodQuantity);
       Provider.of<Products>(context, listen: false);
     }
     notifyListeners();
@@ -316,8 +327,10 @@ class Cart with ChangeNotifier {
           (removingItemData.discountPrice * removingItemData.quantity);
       if (isLenghZero) {
         totalPrice = 0.0;
+        totalProd = 0;
       } else {
         totalPrice -= (removingItemData.offerPrice * removingItemData.quantity);
+        totalProd -= removingItemData.quantity;
       }
 
       basePrice -= (removingItemData.productPrice * removingItemData.quantity);
@@ -325,11 +338,21 @@ class Cart with ChangeNotifier {
     notifyListeners();
   }
 
+  bool isProductInCart(String productId) {
+    final existingCartItemIndex =
+        _items.indexWhere((item) => item.id == productId);
+    if (existingCartItemIndex >= 0) {
+      return true;
+    }
+    return false;
+  }
+
   void clear() {
     _items = [];
     discountPrice = 0.0;
     totalPrice = 0.0;
     basePrice = 0.0;
+    totalProd = 0;
     notifyListeners();
   }
 }

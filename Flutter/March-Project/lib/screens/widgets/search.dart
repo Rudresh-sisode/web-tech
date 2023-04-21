@@ -73,7 +73,17 @@ class _SearchState extends State<Search> {
           automaticallyImplyLeading: true,
           backgroundColor: kPrimaryColor,
           centerTitle: true,
-          
+          leading: InkWell(
+          onTap: () async {
+            Provider.of<Products>(context, listen: false).showAllProducts();
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back_rounded,
+            color: Color.fromARGB(255, 253, 253, 253),
+            size: 24,
+          ),
+        ),
           actions: [
             IconButton(
               icon: customIcon,

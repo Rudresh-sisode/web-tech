@@ -149,7 +149,7 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
               padding: EdgeInsetsDirectional.fromSTEB(0, 8, 24, 0),
               child: badge.Badge(
                 badgeContent: Text(
-                  '${cartItem.length}',
+                  '${cartState.totalProd}',
                   style: AppTheme.of(context).bodyText1.override(
                         fontFamily: 'Poppins',
                         color: Colors.white,
@@ -432,14 +432,15 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                 ),
                 Text(''),
                 Material(
-                  color: Colors.transparent,
+                  // color: Colors.transparent,
                   elevation: 3,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(0),
                   ),
                   child: Container(
-                    width: double.infinity,
-                    height: 100,
+
+                    width: MediaQuery.of(context).size.width * 1,
+                    height: MediaQuery.of(context).size.width * 0.2,
                     decoration: BoxDecoration(
                       color: AppTheme.of(context).primaryBackground,
                       boxShadow: [
@@ -449,11 +450,45 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                           offset: Offset(0, -2),
                         )
                       ],
-                      borderRadius: BorderRadius.circular(0),
+                      borderRadius: BorderRadius.horizontal(left: Radius.circular(10), right: Radius.circular(10)),
                     ),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 34),
-                      child: Row(
+                    child: 
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 20),
+                      child:
+                      Provider.of<Cart>(context,listen: false).isProductInCart(widget.product.productId.toString()) ?
+                       Center(child: MyButtonWidget(
+                            onPressed: () {
+                            Provider.of<BottomMenuHandler>(context, listen: false)
+                            .currentValue = BottomMuenu.Cart;
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CheckoutWidget(),
+                                ),
+                            );
+                            },
+                            text: 'Go to cart',
+                            options: ButtonOptions(
+                                width: 160,
+                                height: 50,
+                                color: kPrimaryColor,
+                                textStyle:
+                                    AppTheme.of(context).subtitle2.override(
+                                          fontFamily: 'Poppins',
+                                          color: Colors.white,
+                                        ),
+                                elevation: 5,
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                  width: 1,
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(36))),
+                          ),
+                          )
+                        :
+                      Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -470,6 +505,7 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                               ),
                             ),
                             child: CountController(
+
                               decrementIconBuilder: (enabled) => Icon(
                                 Icons.remove_rounded,
                                 color: enabled
@@ -495,6 +531,7 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                               minimum: 1,
                             ),
                           ),
+
                           MyButtonWidget(
                             onPressed: () {
                               ProductDetails p = widget.product;
@@ -517,8 +554,7 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                                 Provider.of<Cart>(context, listen: false)
                                     .quantityStatus = "";
                               }
-                              GlobalSnackBar.show(
-                                  context, 'Items added in cart');
+                              GlobalSnackBar.show(context, 'Items added in cart');
                               // BlocProvider.of<CartBloc>(context).add(AddProduct(p));
                             },
                             text: 'Add to Cart',
@@ -539,8 +575,10 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(36))),
                           ),
+                        
                         ],
                       ),
+                    
                     ),
                   ),
                 ),

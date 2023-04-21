@@ -193,294 +193,435 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                               itemBuilder: (BuildContext context, int index) {
                                 return Consumer<Products>(
                                   builder: (_, product, prod) {
-                                    return Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
+                                    return 
+                                    Stack(
+                                    children: <Widget>[
+                                    Container(
+                                      // decoration: BoxDecoration(
+                                      //   borderRadius: BorderRadius.circular(10),
+                                      //   color: Color.fromARGB(255, 116, 102, 102),
+                                      // ),
                                       child: Card(
+                                        
                                         child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: <Widget>[
-                                            Card(
-                                              child: Container(
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.15,
+                                          // crossAxisAlignment: CrossAxisAlignment.center,
+                                          // children: <Widget>[
+                                          //   Stack(
+                                              children: <Widget>[
+                                                Card(
+                                                  child: Container(
+                                                    height: MediaQuery.of(context)
+                                                            .size
+                                                            .height *
+                                                        0.15,
+                                                    width: MediaQuery.of(context)
+                                                            .size
+                                                            .width *
+                                                        0.25,
+                                                    decoration: BoxDecoration(
+                                                      image: DecorationImage(
+                                                        // image: NetworkImage(cartItems[index].image),
+                                                        image: NetworkImage(product
+                                                            .foundAndReturnProductsImage(
+                                                                int.parse(
+                                                                    cartItems[index]
+                                                                        .id))),
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(10),
+                                                    ),
+                                                  ),
+                                                ),
+                                                // Positioned(
+                                                //   bottom: 3,
+                                                //   right:2,
+                                                //   child:
+                                                //       Container(
+                                                //         decoration: BoxDecoration(
+                                                //           borderRadius: BorderRadius.circular(9),
+                                                //           color: Color.fromRGBO(219, 199, 199, 0.5), // Use a transparent color here
+                                                //         ),
+                                                //         // padding: EdgeInsets.fromLTRB(0, 50, 20, 25),
+                                                //           width: MediaQuery.of(context).size.width * 0.09, // adjust the factor as needed
+                                                //           height: MediaQuery.of(context).size.width * 0.1,
+                                                //         child: 
+                                                //         Center(
+                                                //             child: 
+                                                //             ElevatedButton(
+                                                              
+                                                              
+                                                //               onPressed: () {
+                                                //                 // add your click event here
+                                                //               },
+                                                //               style: ElevatedButton.styleFrom(
+                                                //                 backgroundColor: Colors.transparent,
+                                                //                 elevation: 0,
+                                                //                 padding:
+                                                //                     EdgeInsets.zero,
+                                                //               ),
+                                                //               child: Icon(
+                                                //                 Icons.delete,
+                                                //                 color: Color.fromARGB(255, 234, 70, 70),
+                                                //                 size: 20.0,
+                                                //               ),
+                                                //             ),
+                                                //             // IconButton(
+                                                //             //   onPressed: () {
+                                                //             //     // add your click event here
+                                                //             //   },
+                                                //             //   icon: Icon(
+                                                //             //     Icons.delete,
+                                                //             //     color: Color.fromARGB(255, 234, 70, 70),
+                                                //             //     size: 20.0,
+                                                //             //   ),
+                                                //             // ),
+                                                          
+                                                //           ),
+                                                //       ),
+                                                //     )
+                                              // ],
+                                              // ),
+                                            
+                                            // Stack(
+                                            //   children: <Widget>[
+                                                  Container(
+                                                // decoration: BoxDecoration(
+                                                //   borderRadius:
+                                                //       BorderRadius.circular(10),
+                                                //   color: Color.fromARGB(
+                                                //       255, 116, 102, 102),
+                                                // ),
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width *
-                                                    0.25,
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                    // image: NetworkImage(cartItems[index].image),
-                                                    image: NetworkImage(product
-                                                        .foundAndReturnProductsImage(
-                                                            int.parse(
-                                                                cartItems[index]
-                                                                    .id))),
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                color: Colors.white,
-                                              ),
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.15,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.5,
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    // cartItems[index].name,
-                                                    product
-                                                        .foundAndReturnProductsName(
-                                                            int.parse(
-                                                                cartItems[index]
-                                                                    .id)),
-                                                    style: TextStyle(
-                                                      fontSize: 18,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                  SizedBox(height: 10),
-
-                                                  Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Text.rich(
-                                                          TextSpan(
-                                                            children: [
-                                                              TextSpan(
-                                                                text:
-                                                                    '₹ ${product.foundAndReturnProductsPrice(int.parse(cartItems[index].id))}',
-                                                                style: TextStyle(
-                                                                    // fontSize: 18,
-                                                                    // fontWeight: FontWeight.bold,
-                                                                    decoration: TextDecoration.lineThrough),
-                                                              ),
-                                                              WidgetSpan(
-                                                                child: SizedBox(
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      0.05, // your of space
-                                                                ),
-                                                              ),
-                                                              TextSpan(
-                                                                text:
-                                                                    '₹ ${product.foundAndReturnProductsOfferPrice(int.parse(cartItems[index].id))}',
-                                                                style: TextStyle(
-                                                                    // fontSize: 16,
-                                                                    // fontWeight: FontWeight.bold,
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        )
-                                                      ]),
-
-                                                  SizedBox(height: 15),
-
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
+                                                    0.5,
+                                                child: Padding(
+                                                  padding: EdgeInsets.fromLTRB(20,0,0,0),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment
+                                                        .start,
+                                                    // mainAxisAlignment:
+                                                    //     MainAxisAlignment.center,
                                                     children: [
                                                       Text(
-                                                        // 'Quantity: ${cartItems[index].quantity}',
-                                                        // 'Quantity: ${product.foundAndReturnProductsQuantity(int.parse(cartItems[index].id))}',
-                                                        'Qty:',
+                                                        // cartItems[index].name,
+                                                        product
+                                                            .foundAndReturnProductsName(
+                                                                int.parse(
+                                                                    cartItems[index]
+                                                                        .id)),
                                                         style: TextStyle(
-                                                          fontSize: 14,
-                                                          color: Colors.grey,
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                       ),
-
-                                                      //Remove button here
+                                                      SizedBox(height: 10),
+                                                
+                                                      Row(
+                                                          // mainAxisAlignment:
+                                                          //     MainAxisAlignment
+                                                          //         .spaceEvenly,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text.rich(
+                                                              TextSpan(
+                                                                children: [
+                                                                  TextSpan(
+                                                                    text:
+                                                                        '₹ ${product.foundAndReturnProductsPrice(int.parse(cartItems[index].id))}',
+                                                                    style: TextStyle(
+                                                                        fontSize: 16,
+                                                                        // fontWeight: FontWeight.bold,
+                                                                        decoration: TextDecoration.lineThrough),
+                                                                  ),
+                                                                  WidgetSpan(
+                                                                    child: SizedBox(
+                                                                      width: MediaQuery.of(
+                                                                                  context)
+                                                                              .size
+                                                                              .width *
+                                                                          0.05, // your of space
+                                                                    ),
+                                                                  ),
+                                                                  TextSpan(
+                                                                    text:
+                                                                        '₹ ${product.foundAndReturnProductsOfferPrice(int.parse(cartItems[index].id))}',
+                                                                    style: TextStyle(
+                                                                        fontSize: 18,
+                                                                        // fontWeight: FontWeight.bold,
+                                                                        ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            )
+                                                          ]),
+                                                
+                                                      SizedBox(height: 15),
+                                                
                                                       Container(
-                                                        width: 25.0,
-                                                        height: 25,
-                                                        child: ElevatedButton(
-                                                          onPressed: () {
-                                                            setState(() {
-                                                              cart.removeItem(
-                                                                  cartItems[
-                                                                          index]
-                                                                      .id,
-                                                                  context,
-                                                                  "1");
-                                                            });
-                                                            // your on pressed function here
-                                                          },
-                                                          style: ElevatedButton
-                                                              .styleFrom(
-                                                            backgroundColor:
-                                                                Colors
-                                                                    .grey[500],
-                                                            shape:
-                                                                RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          40.0),
-                                                            ),
-                                                            padding:
-                                                                EdgeInsets.zero,
-                                                          ),
-                                                          child: Container(
-                                                            width: 20.0,
-                                                            height: 20,
-                                                            child: Center(
-                                                              child: Icon(
-                                                                Icons.remove,
-                                                                color: Colors
-                                                                    .white,
-                                                                size: 15.0,
+                                                        // decoration: BoxDecoration(
+                                                        //   borderRadius:
+                                                        //       BorderRadius.circular(
+                                                        //           10),
+                                                        //   color: Color.fromARGB(255, 132, 51, 51),
+                                                        // ),
+                                                        width: 
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.2,
+                                                            height: MediaQuery.of(context)
+                                                                .size
+                                                                .height * 0.03,
+                                                        child: Row(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            // Text(
+                                                            //   // 'Quantity: ${cartItems[index].quantity}',
+                                                            //   // 'Quantity: ${product.foundAndReturnProductsQuantity(int.parse(cartItems[index].id))}',
+                                                            //   'Qty:',
+                                                            //   style: TextStyle(
+                                                            //     fontSize: 14,
+                                                            //     color: Color.fromARGB(255, 106, 106, 106),
+                                                            //   ),
+                                                            // ),
+                                                            //Remove button here
+                                                            Container(
+                                                              width: 25.0,
+                                                              height: 25,
+                                                              child: ElevatedButton(
+                                                                onPressed: () {
+                                                                  setState(() {
+                                                                    cart.removeItem(
+                                                                        cartItems[
+                                                                                index]
+                                                                            .id,
+                                                                        context,
+                                                                        "1");
+                                                                  });
+                                                                  // your on pressed function here
+                                                                },
+                                                                style: ElevatedButton
+                                                                    .styleFrom(
+                                                                  backgroundColor:
+                                                                      Color.fromRGBO(140, 140, 140, 1),
+                                                                  shape:
+                                                                      RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(
+                                                                                40.0),
+                                                                  ),
+                                                                  padding:
+                                                                      EdgeInsets.zero,
+                                                                ),
+                                                                child: Container(
+                                                                  width: 20.0,
+                                                                  height: 20,
+                                                                  child: Center(
+                                                                    child: Icon(
+                                                                      Icons.remove,
+                                                                      color: Colors
+                                                                          .white,
+                                                                      size: 15.0,
+                                                                    ),
+                                                                  ),
+                                                                ),
                                                               ),
                                                             ),
-                                                          ),
-                                                        ),
-                                                      ),
-
-                                                      Text(
-                                                        // "${countValue.toString()}",
-                                                        // 'Quantity: ${cartItems[index].quantity}',
-                                                        // 'Quantity: ${product.foundAndReturnProductsQuantity(int.parse(cartItems[index].id))}',
-                                                        '${cart.findCartItemQuantity(cartItems[index].id)}',
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                          color: Colors.grey,
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        width: 25.0,
-                                                        height: 25,
-                                                        child: ElevatedButton(
-                                                          onPressed: () {
-                                                            // your on pressed function here
-                                                            cart.productData = product.productDataList;
-                                                            setState(() {
-                                                              cart.addItem(
-                                                                  cartItems[
-                                                                          index]
-                                                                      .id,
-                                                                  "1");
-                                                              if (Provider.of<
-                                                                          Cart>(
-                                                                      context,
-                                                                      listen:
-                                                                          false)
-                                                                  .quantityError
-                                                                  .isNotEmpty) {
-                                                                GlobalSnackBar.show(
-                                                                    context,
-                                                                    Provider.of<Cart>(
+                                                                                                    
+                                                            Text(
+                                                              // "${countValue.toString()}",
+                                                              // 'Quantity: ${cartItems[index].quantity}',
+                                                              // 'Quantity: ${product.foundAndReturnProductsQuantity(int.parse(cartItems[index].id))}',
+                                                              '${cart.findCartItemQuantity(cartItems[index].id)}',
+                                                              style: TextStyle(
+                                                                fontSize: 15,
+                                                                color: Color.fromARGB(255, 106, 106, 106),
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              width: 25.0,
+                                                              height: 25,
+                                                              child: ElevatedButton(
+                                                                onPressed: cartItems[index].availableQuantity == cartItems[index].quantity ? null : () {
+                                                                  // your on pressed function here
+                                                                  cart.productData = product.productDataList;
+                                                                  setState(() {
+                                                                    cart.addItem(
+                                                                        cartItems[
+                                                                                index]
+                                                                            .id,
+                                                                        "1");
+                                                                    if (Provider.of<
+                                                                                Cart>(
                                                                             context,
                                                                             listen:
                                                                                 false)
-                                                                        .quantityError);
-                                                                Provider.of<Cart>(
-                                                                        context,
-                                                                        listen:
-                                                                            false)
-                                                                    .quantityError = "";
-                                                              }
-                                                            });
-                                                          },
-                                                          style: ElevatedButton
-                                                              .styleFrom(
-                                                            backgroundColor:
-                                                                Colors
-                                                                    .green[500],
-                                                            shape:
-                                                                RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          40.0),
-                                                            ),
-                                                            padding:
-                                                                EdgeInsets.zero,
-                                                          ),
-                                                          child: Container(
-                                                            width: 20.0,
-                                                            height: 20,
-                                                            child: Center(
-                                                              child: Icon(
-                                                                Icons.add,
-                                                                color: Colors
-                                                                    .white,
-                                                                size: 15.0,
+                                                                        .quantityError
+                                                                        .isNotEmpty) {
+                                                                      GlobalSnackBar.show(
+                                                                          context,
+                                                                          Provider.of<Cart>(
+                                                                                  context,
+                                                                                  listen:
+                                                                                      false)
+                                                                              .quantityError);
+                                                                      Provider.of<Cart>(
+                                                                              context,
+                                                                              listen:
+                                                                                  false)
+                                                                          .quantityError = "";
+                                                                    }
+                                                                  });
+                                                                },
+                                                                style: ElevatedButton
+                                                                    .styleFrom(
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .green[500],
+                                                                  shape:
+                                                                      RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(
+                                                                                40.0),
+                                                                  ),
+                                                                  padding:
+                                                                      EdgeInsets.zero,
+                                                                ),
+                                                                child: Container(
+                                                                  width: 20.0,
+                                                                  height: 20,
+                                                                  child: Center(
+                                                                    child: Icon(
+                                                                      Icons.add,
+                                                                      color: Colors
+                                                                          .white,
+                                                                      size: 15.0,
+                                                                    ),
+                                                                  ),
+                                                                ),
                                                               ),
                                                             ),
-                                                          ),
+                                                            //delete icon button here
+                                                          
+                                                          ],
                                                         ),
                                                       ),
+                                                
+                                                      // ),
                                                     ],
                                                   ),
-
-                                                  // ),
-                                                ],
-                                              ),
-                                            ),
-                                            Container(
-                                              width: 60.0,
-                                              height: 60,
-                                              child: ElevatedButton(
-                                                onPressed: () {
-                                                  // your on pressed function here
-                                                  cart.deleteItem(
-                                                      cartItems[index].id);
-                                                  cartItemUpdated();
-                                                },
-                                                style: ElevatedButton.styleFrom(
-                                                  primary: Colors.red,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30.0),
-                                                  ),
-                                                  padding: EdgeInsets.zero,
-                                                ),
-                                                child: Container(
-                                                  // width: 20.0,
-                                                  // height: 20,
-                                                  child: Center(
-                                                    child: Icon(
-                                                      Icons.delete,
-                                                      color: Colors.white,
-                                                      size: 20.0,
-                                                    ),
-                                                  ),
                                                 ),
                                               ),
-                                            ),
                                           ],
                                         ),
                                       ),
+                                    ),
+                                    Positioned(
+                                                  top: 6,
+                                                  right:6,
+                                                  child:
+                                                  Container(
+                                                              // decoration: BoxDecoration(
+                                                              //   borderRadius: BorderRadius.circular(20), // Use a transparent color here
+                                                              // ),
+                                                    
+                                                              width: 40.0,
+                                                              height: 40,
+                                                              child: 
+                                                              ElevatedButton(
+                                                                onPressed: () {
+                                                                  // your on pressed function here
+                                                                  setState(() {
+                                                                    cart.deleteItem(cartItems[index].id);
+                                                                    cartItemUpdated();
+                                                                  });
+                                                                  
+                                                                },
+                                                                style: ElevatedButton
+                                                                    .styleFrom(
+                                                                  backgroundColor:
+                                                                      Color.fromARGB(197, 247, 225, 224),
+                                                                  shape:
+                                                                      RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(
+                                                                                40.0),
+                                                                  ),
+                                                                  padding:
+                                                                      EdgeInsets.zero,
+                                                                ),
+                                                                child: Container(
+                                                                  width: 20.0,
+                                                                  height: 20,
+                                                                  child: Center(
+                                                                    child: Icon(
+                                                                      Icons.delete,
+                                                                      color: Color.fromARGB(255, 247, 76, 76),
+                                                                      size: 20,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                      // Container(
+                                                      //   decoration: BoxDecoration(
+                                                      //     borderRadius: BorderRadius.circular(9),
+                                                      //     color: Color.fromRGBO(219, 199, 199, 0.5), // Use a transparent color here
+                                                      //   ),
+                                                      //   // padding: EdgeInsets.fromLTRB(0, 50, 20, 25),
+                                                      //     width: MediaQuery.of(context).size.width * 0.09, // adjust the factor as needed
+                                                      //     height: MediaQuery.of(context).size.width * 0.1,
+                                                      //   child: 
+                                                      //   Center(
+                                                      //       child: 
+                                                      //       ElevatedButton(
+                                                            
+                                                      //         onPressed: () {
+                                                      //           // add your click event here
+                                                      //         },
+                                                      //         style: 
+                                                      //         ElevatedButton.styleFrom(
+                                                      //           backgroundColor: Color.fromARGB(71, 227, 109, 109),
+                                                      //           elevation: 0,
+                                                      //           padding:
+                                                      //               EdgeInsets.zero,
+                                                      //         ),
+                                                      //         child: Icon(
+                                                      //           Icons.delete,
+                                                      //           color: Color.fromARGB(255, 64, 62, 62),
+                                                      //           size: 20.0,
+                                                      //         ),
+                                                      //       ),
+                                                      //       // IconButton(
+                                                      //       //   onPressed: () {
+                                                      //       //     // add your click event here
+                                                      //       //   },
+                                                      //       //   icon: Icon(
+                                                      //       //     Icons.delete,
+                                                      //       //     color: Color.fromARGB(255, 234, 70, 70),
+                                                      //       //     size: 20.0,
+                                                      //       //   ),
+                                                      //       // ),
+                                                          
+                                                      //     ),
+                                                      // ),
+                                                    ),
+
+                                              ]
                                     );
+
+                                   
                                   },
                                 );
                               });
@@ -496,7 +637,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                       children: [
                                         Text(
                                           'Price Breakdown',
-                                          style: AppTheme.of(context).bodyText2,
+                                          style:TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
                                         ),
                                       ],
                                     ),
@@ -511,11 +652,11 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                       children: [
                                         Text(
                                           'Base Price',
-                                          style: AppTheme.of(context).subtitle2,
+                                          style: TextStyle(fontSize: 16),
                                         ),
                                         Text(
                                           '₹${Provider.of<Cart>(context, listen: false).basePrice}',
-                                          style: AppTheme.of(context).subtitle1,
+                                          style: TextStyle(fontSize: 16),
                                         ),
                                       ],
                                     ),
@@ -530,11 +671,11 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                       children: [
                                         Text(
                                           'Taxes',
-                                          style: AppTheme.of(context).subtitle2,
+                                          style: TextStyle(fontSize: 16),
                                         ),
                                         Text(
                                           '₹ 00.00',
-                                          style: AppTheme.of(context).subtitle1,
+                                          style: TextStyle(fontSize: 16),
                                         ),
                                       ],
                                     ),
@@ -549,11 +690,11 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                       children: [
                                         Text(
                                           'Discount',
-                                          style: AppTheme.of(context).subtitle2,
+                                          style: TextStyle(fontSize: 16),
                                         ),
                                         Text(
-                                          '₹ ${Provider.of<Cart>(context, listen: false).discountPrice}',
-                                          style: AppTheme.of(context).subtitle1,
+                                          '- ₹ ${Provider.of<Cart>(context, listen: false).discountPrice}',
+                                          style: TextStyle(fontSize: 16),
                                         ),
                                       ],
                                     ),
@@ -571,8 +712,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                           children: [
                                             Text(
                                               'Total',
-                                              style: AppTheme.of(context)
-                                                  .subtitle2,
+                                              style: TextStyle(fontSize: 17),
                                             ),
                                             IconButton(
                                               icon: Icon(
@@ -588,7 +728,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                         ),
                                         Text(
                                           '₹${Provider.of<Cart>(context, listen: false).totalPrice}',
-                                          style: AppTheme.of(context).title1,
+                                          style: TextStyle(fontSize: 17),
                                         ),
                                       ],
                                     ),
@@ -650,64 +790,116 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                   ),
                 ),
                 if (cartItems.length != 0)
-                  Container(
-                    width: double.infinity,
-                    height: 70,
-                    decoration: const BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 4,
-                          color: Color(0x320E151B),
-                          offset: Offset(0, -2),
-                        )
-                      ],
-                    ),
-                    alignment: AlignmentDirectional(0, -0.35),
-                    child: TextButton(
-                      onPressed: () async {
-                        if(Provider.of<AuthChecker>(context,listen: false).isAuth)
-                        {
-                          setState(() {
-                            isLoadingSpinner = true;
-                          });
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 4,
+                        color: Color(0x320E151B),
+                        offset: Offset(0, -2),
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(30), // added border radius
+                  ),
+                  alignment: AlignmentDirectional(0, -0.35),
+                  child: TextButton(
+                    onPressed: () async {
+                      if (Provider.of<AuthChecker>(context, listen: false).isAuth) {
+                        setState(() {
+                          isLoadingSpinner = true;
+                        });
 
-                          await getAllAvailableData();
+                        await getAllAvailableData();
 
-                          setState(() {
-                            isLoadingSpinner = false;
-                            showSheet = !showSheet;
-                          });
+                        setState(() {
+                          isLoadingSpinner = false;
+                          showSheet = !showSheet;
+                        });
+                      } else {
+                        Navigator.pushNamed(context, Shipping.routeName);
+                      }
 
-                        }
-                        else{
-                          Navigator.pushNamed(context, Shipping.routeName);
-                        }
-                         
-                        // Navigator.pushNamed(context, AddressPageSelection.routeName);
-                      },
-                      child: RichText(
-                        text: TextSpan(
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: ("Checkout ₹"),
-                              style: AppTheme.of(context).title2.override(
-                                    fontFamily: 'Poppins',
-                                    color: AppTheme.of(context).primaryBtnText,
-                                  ),
-                            ),
-                            TextSpan(
-                                text:
-                                    "${Provider.of<Cart>(context, listen: false).totalPrice}",
-                                style: AppTheme.of(context).title2.override(
-                                    fontFamily: 'Poppins',
-                                    color:
-                                        AppTheme.of(context).primaryBtnText)),
-                          ],
-                        ),
+                      // Navigator.pushNamed(context, AddressPageSelection.routeName);
+                    },
+                    child: RichText(
+                      text: TextSpan(
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: ("Checkout "),
+                            style:
+                                TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                
+                          ),
+                          TextSpan(
+                              text:
+                                  "₹",
+                              style:
+                                  TextStyle(fontSize: 18, fontWeight: FontWeight.bold,)),
+                          TextSpan(
+                              text:
+                                  "${Provider.of<Cart>(context, listen: false).totalPrice}",
+                              style:
+                                  TextStyle(fontSize: 20, fontWeight: FontWeight.bold,)),
+                        ],
                       ),
                     ),
                   ),
+                ),
+                  // Container(
+                  //   width: double.infinity,
+                  //   height: MediaQuery.of(context).size.height * 0.07,
+                  //   decoration: const BoxDecoration(
+                  //     color: kPrimaryColor,
+                  //     boxShadow: [
+                  //       BoxShadow(
+                  //         blurRadius: 4,
+                  //         color: Color(0x320E151B),
+                  //         offset: Offset(0, -2),
+                  //       )
+                  //     ],
+                  //   ),
+                  //   alignment: AlignmentDirectional(0, -0.35),
+                  //   child: TextButton(
+                  //     onPressed: () async {
+                  //       if(Provider.of<AuthChecker>(context,listen: false).isAuth)
+                  //       {
+                  //         setState(() {
+                  //           isLoadingSpinner = true;
+                  //         });
+
+                  //         await getAllAvailableData();
+
+                  //         setState(() {
+                  //           isLoadingSpinner = false;
+                  //           showSheet = !showSheet;
+                  //         });
+
+                  //       }
+                  //       else{
+                  //         Navigator.pushNamed(context, Shipping.routeName);
+                  //       }
+                         
+                  //       // Navigator.pushNamed(context, AddressPageSelection.routeName);
+                  //     },
+                  //     child: RichText(
+                  //       text: TextSpan(
+                  //         children: <TextSpan>[
+                  //           TextSpan(
+                  //             text: ("Checkout "),
+                  //             style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                  //           ),
+                  //           TextSpan(
+                  //               text:
+                  //                   "₹${Provider.of<Cart>(context, listen: false).totalPrice}",
+                  //               style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
               ],
             ),
           ),
@@ -730,33 +922,36 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                           (BuildContext context, ScrollController controller) {
                         return Container(
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30),
-                            ),
-                          ),
+                        color: kPrimaryBackShade,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                        ),
+                      ),
                           child: ListView(
                             controller: controller,
                             padding: EdgeInsets.all(10),
                             children: [
                               Container(
-                                color: Colors.lightBlue,
+                                // color: Colors.lightBlue,
                                 height: 40,
                                 //  backgroundColor: Colors.lightBlue,
                                 child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    Expanded(
-                                      child: Text(
-                                        'Select address',
+                                    // Expanded(
+                                    //   child:
+                                       Text(
+                                        'Select below address',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             // textAlign:TextAlign.center,/
-                                            color: Colors.white,
+                                            color: Colors.black,
                                             fontSize: 20,
-                                            fontWeight: FontWeight.bold),
+                                            ),
                                       ),
-                                    ),
+                                    // ),
                                     IconButton(
                                     icon: Icon(Icons.close),
                                     onPressed: () => setState(() {
@@ -779,26 +974,42 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                 0.01,
                                         top: MediaQuery.of(context).size.width *
                                             0.01),
-                                    child: TextButton(
-                                      onPressed: () {
-                                        // Add new address action
-
-                                        setState(() {
-                                          showSheet = !showSheet;
-                                        });
-                                        Provider.of<DeliveryAddress>(context,
-                                                listen: false)
-                                            .addressType = AddressType.ADD;
-                                        /**
-                                   * AddressType.ADD
-                                   */
-                                        Navigator.pushNamed(
-                                            context, Shipping.routeName);
-                                      },
-                                      child: Container(
-                                        height: 30,
-                                        padding: EdgeInsets.all(5),
-                                        child: Text("Add New Address"),
+                                    child: Container(
+                                      height: MediaQuery.of(context).size.height *
+                                          0.05,
+                                          width: MediaQuery.of(context).size.width * 0.4,
+                                      padding: EdgeInsets.zero,
+                                      child: Center(
+                                        child: TextButton(
+                                          
+                                          style: TextButton.styleFrom(
+                                            backgroundColor:  Color.fromARGB(195, 188, 82, 241),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            // Add new address action
+                                                                          
+                                            setState(() {
+                                              showSheet = !showSheet;
+                                            });
+                                            Provider.of<DeliveryAddress>(context,
+                                                    listen: false)
+                                                .addressType = AddressType.ADD;
+                                            /**
+                                                                         * AddressType.ADD
+                                                                         */
+                                            Navigator.pushNamed(
+                                                context, Shipping.routeName);
+                                          },
+                                          child: Container(
+                                            height: 30,
+                                            padding: EdgeInsets.all(5),
+                                            child: Text("Add New Address",style:TextStyle(fontSize: 16,color: Colors.white)),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -814,7 +1025,11 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                       0
                                   ? Column(
                                       children: [
-                                        Text("No address available!"),
+                                        Text("No address available!",
+                                            style: TextStyle(
+                                                color: Colors.redAccent,
+                                                fontSize: 20,
+                                                )),
                                       ],
                                     )
                                   : 
