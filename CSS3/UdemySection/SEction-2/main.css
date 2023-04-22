@@ -24,23 +24,65 @@ body{
 
 .main-header > div{
     display:inline-block;
+    vertical-align: middle;
+}
+
+.main-header__brand{
+    color:#0e4f1f;
+    text-decoration: none;
 }
 
 .main-nav{
     display: inline-block;
+    text-align: right;
+    width: calc(100% - 73px);
+    vertical-align: middle;
+
     
 }
 
 .main-nav__items{
-    
+    list-style: none;
 }
 
 .main-nav__item{
     display: inline-block;
+    margin: 0 16px;
 }
 
 
 .main-header{
     width: 100%;
     background-color: #2ddf5c;
+}
+
+.main-nav__item a{
+    color: #0e4f1f;
+    text-decoration: none;
+}
+
+.main-nav__item a:hover{
+    color: #ff1b68;
+    border-bottom:5px solid white
+}
+
+.main-nav__item a:active,
+.main-nav__item a::after{
+    content:" (link)";
+    color: rebeccapurple;
+    
+}
+
+.main-nav__item--cta a{
+    background-color: #7c2ea3c5;
+    color: #2ddf5c;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.main-nav__item--cta a:hover,
+.main-nav__item--cta a:active{
+    color: #ff1b68;
+    background:white;
+    border:none;
 }
