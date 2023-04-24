@@ -39,8 +39,6 @@ body{
     text-align: right;
     width: calc(100% - 73px);
     vertical-align: middle;
-
-    
 }
 
 .main-nav__items{
@@ -87,4 +85,16 @@ body{
     color: #ff1b68;
     background:white;
     border:none;
+}
+
+.highlighets{
+    border: 2px solid black;
+}
+
+.main_section{
+ border: 1px solid black;
+}
+
+#abc{
+    border: 3px solid black;
 }
