@@ -42,7 +42,7 @@ helpers.sendTwilioSms('4158375309', 'Hello!', (err) => {
 
 // Instantiate the HTTP server
 server.httpServer = http.createServer((req, res) => {
-   unifiedServer(req, res);
+   server.unifiedServer(req, res);
     
 });
 
@@ -53,7 +53,7 @@ server.httpsServerOptions = {
     'cert': fs.readFileSync('D:/Webfolder/web-tech/NodeJs/pirple.com/app/https/cert.pem')
 };
 server.httpsServer = https.createServer(server.httpsServerOptions,(req, res) => {
-    unifiedServer(req, res);
+    server.unifiedServer(req, res);
 });
 
 
