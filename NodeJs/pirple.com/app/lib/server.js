@@ -47,21 +47,19 @@ server.httpServer = http.createServer((req, res) => {
 });
 
 
-
-
 // Instantiate the HTTPS server
-let httpsServerOptions = {
+server.httpsServerOptions = {
     'key': fs.readFileSync('D:/Webfolder/web-tech/NodeJs/pirple.com/app/https/key.pem'),
     'cert': fs.readFileSync('D:/Webfolder/web-tech/NodeJs/pirple.com/app/https/cert.pem')
 };
-const httpsServer = https.createServer(httpsServerOptions,(req, res) => {
+server.httpsServer = https.createServer(server.httpsServerOptions,(req, res) => {
     unifiedServer(req, res);
 });
 
 
 
 // All the server logic for both the http and https server
-const unifiedServer = (req, res) => {
+server.unifiedServer = (req, res) => {
      // Get the URL and parse it
      const parsedUrl = url.parse(req.url, true);
 
@@ -90,7 +88,7 @@ const unifiedServer = (req, res) => {
          buffer += decoder.end();
  
          // Choose the handler this request should go to. If one is not found, use the notFound handler
-         const chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.notFound;
+         const chosenHandler = typeof(server.router[trimmedPath]) !== 'undefined' ? server.router[trimmedPath] : handlers.notFound;
  
          // Construct the data object to send to the handler
          const data = {
@@ -135,7 +133,7 @@ const unifiedServer = (req, res) => {
 
 
 // Define a request router
-const router = {
+server.router = {
     'ping': handlers.ping,
     'users': handlers.users,
     'tokens': handlers.tokens,
