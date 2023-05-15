@@ -53,6 +53,84 @@ workers.validateCheckData = (originalCheckData) => {
 
     //Set the keys that may not be set (if the workers have never seen this check before)  
     originalCheckData.state = typeof (originalCheckData.state) == 'string' && ['up', 'down'].indexOf(originalCheckData.state) > -1 ? originalCheckData.state : 'down';
+    originalCheckData.lastChecked = typeof (originalCheckData.lastChecked) == 'number' && originalCheckData.lastChecked > 0 ? originalCheckData.lastChecked : false;
+
+    //If all the checks pass, pass the data along to the next step in the process
+    if (originalCheckData.id && originalCheckData.userPhone && originalCheckData.protocol && originalCheckData.url &&   originalCheckData.method && originalCheckData.successCodes && originalCheckData.timeoutSeconds) {
+        workers.performCheck(originalCheckData);
+    }
+    else {
+        console.log("Error: One of the checks is not properly formatted. Skipping it.");
+    }
+};
+
+//Perform the check, send the originalCheckData and the outcome of the check process, to the next step in the process
+workers.performCheck = (originalCheckData) => {
+    //Prepare the initial check outcome
+    const checkOutcome = {
+        'error': false,
+        'responseCode': false
+    };
+
+    //Mark that the outcome has not been sent yet
+    let outcomeSent = false;
+
+    //Parse the hostname and the path out of the original check data
+    const parsedUrl = url.parse(originalCheckData.protocol + '://' + originalCheckData.url, true);
+    const hostName = parsedUrl.hostname;
+    const path = parsedUrl.path; //Using path and not "pathname" because we want the query string
+
+    //Construct the request
+    const requestDetails = {
+        'protocol': originalCheckData.protocol + ':',
+        'hostname': hostName,
+        'method': originalCheckData.method.toUpperCase(),
+        'path': path,
+        'timeout': originalCheckData.timeoutSeconds * 1000
+    };
+
+    //Instantiate the request object (using either the http or https module)
+    const _moduleToUse = originalCheckData.protocol == 'http' ? http : https;
+    const req = _moduleToUse.request(requestDetails, (res) => {
+        //Grab the status of the sent request
+        const status = res.statusCode;
+
+        //Update the checkOutcome and pass the data along
+        checkOutcome.responseCode = status;
+
+        if (!outcomeSent) {
+            workers.processCheckOutcome(originalCheckData, checkOutcome);
+            outcomeSent = true;
+        }
+    });
+
+    //Bind to the error event so it doesn't get thrown
+    req.on('error', (e) => {
+        //Update the checkOutcome and pass the data along
+        checkOutcome.error = {
+            'error': true,
+            'value': e
+        };
+
+        if (!outcomeSent) {
+            workers.processCheckOutcome(originalCheckData, checkOutcome);
+            outcomeSent = true;
+        }
+    });
+
+    //Bind to the timeout event
+    req.on('timeout', (e) => {
+        //Update the checkOutcome and pass the data along
+        checkOutcome.error = {
+            'error': true,
+            'value': 'timeout'
+        };
+
+        if (!outcomeSent) {
+            workers.processCheckOutcome(originalCheckData, checkOutcome);
+            outcomeSent = true;
+        }
+    });
 };
 
 //Timer to execute the worker-process once per minute
