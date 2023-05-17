@@ -18,9 +18,14 @@ main {
 .package__badge{
 
     position: absolute;
-    top: 50px;
-    left: 400px;
+    top: 0;
+    right: 10px;
     margin: 20px;
+    font-weight: bold;
+    font-size: 22px;
+    background: #ff5454;
+    color:white;
+    border-radius: 20px;
 }
 
 .package:hover,
