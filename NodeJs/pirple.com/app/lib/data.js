@@ -114,7 +114,10 @@ lib.delete = (dir, file, callback) => {
         }
     });
 
-    // List all the items in a directory
+   
+}
+
+ // List all the items in a directory
     lib.list = (dir, callback) => {
         fs.readdir(lib.baseDir+dir+'/', (err, data) => {
             if(!err && data && data.length > 0){
@@ -129,9 +132,6 @@ lib.delete = (dir, file, callback) => {
             }
         });
     }
-}
-
-
 
 // Export the module
 module.exports = lib;
