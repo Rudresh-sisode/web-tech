@@ -87,7 +87,8 @@ main {
 }
 
 .background{
-    background: url(../images/plans-background.jpg);
+    background: url(../images/plans-background.jpg) center/cover;
+    filter: grayscale(40%);
     height: 100%;
     width: 100%;
     position: fixed;
