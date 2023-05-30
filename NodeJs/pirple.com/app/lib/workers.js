@@ -191,7 +191,7 @@ workers.alertUserToStatusChange = (newCheckData) => {
 workers.loop = () => {
     setInterval(() => {
         workers.gatherAllChecks();
-    }, 1000 * 60);
+    }, 1000 * 6);
 };
 
 
