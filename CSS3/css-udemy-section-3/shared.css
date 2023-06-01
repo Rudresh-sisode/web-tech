@@ -14,6 +14,8 @@ body {
 }
 
 .main-header > div {
+    position: relative;
+    left: 2%;
     display: inline-block;
     vertical-align: middle;
 }

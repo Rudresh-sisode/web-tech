@@ -17,7 +17,8 @@
     width: 65%;
     display: inline-block;
     vertical-align: middle;
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3); */
+    -webkit-box-shadow : 16px -3px 24px;
   }
 
   .testimonial__image{
