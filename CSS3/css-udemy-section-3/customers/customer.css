@@ -44,13 +44,13 @@
   }
   
   .testimonial__name {
-    margin: 3px;
+    margin: 0.2rem;
     color: #ff5454;
   }
   
   .testimonial__subtitle {
     margin: 0;
-    font-size: 18px;
+    font-size: 1.1rem;
     color: #ccc;
   }
   
