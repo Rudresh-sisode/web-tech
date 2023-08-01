@@ -1,5 +1,7 @@
-select d.name AS Department, e.name AS employees
-e.salary AS salary from Employee e
-inner join Department d on e.departmentId = d.id
-where (e.departmentId, e.salary) in
-(select departmentId, max(salary) from Employee group by departmentId)
+SELECT d.name AS Department, e.name AS Employee, e.salary AS Salary FROM Employee e 
+INNER JOIN Department d ON e.departmentId = d.id WHERE 
+( SELECT COUNT(DISTINCT salary) FROM Employee WHERE
+ departmentId = e.departmentId AND 
+ salary > e.salary 
+) < 3
+  ORDER BY Department, Salary DESC;
