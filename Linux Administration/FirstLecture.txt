@@ -52,4 +52,49 @@ Modern Linux distributions, such as CentOS, often use systemd as the init system
 
 
 
+_______________________________________________________________________________________________________________________________
+root ALL=(ALL) ALL 
+centos ALL=(ALL) /usr/bin/vi /etc/hosts
 
+These lines are entries in the /etc/sudoers file, which controls the 
+sudo access on the system. Here's what each line means:
+
+root ALL=(ALL) ALL: This line grants the root user permission
+ to run any command with sudo, on any host, as any user. This is the 
+ most permissive sudo access possible, and should be used with caution.
+
+centos ALL=(ALL) /usr/bin/vi /etc/hosts: This line grants the 
+centos user permission to run the vi command with sudo, specifically 
+on the /etc/hosts file. The (ALL) part means that the centos user can 
+run the vi command as any user, and on any host. This is a more 
+restrictive sudo access than the first line, as it only allows the centos 
+user to run a specific command with sudo, and only on a specific file.
+_______________________________________________________________________________________________________________________________
+
+
+In CentOS, RPM stands for "Red Hat Package Manager". RPM is a package management system that is used to install, update, and remove software packages on CentOS and other Linux-based operating systems.
+
+RPM packages are pre-compiled binary files that contain the software and its dependencies, as well as installation scripts and other metadata. RPM packages have a .rpm file extension and can be installed using the rpm command.
+
+The rpm command can be used to perform a variety of tasks, such as installing, upgrading, and removing packages, as well as querying the system for information about installed packages. For example, to install an RPM package called example.rpm, you would use the following command:
+
+This would install the example.rpm package on the system. You can also use the rpm command to query the system for information about installed packages, such as the package name, version, and release. For example, to display information about an installed package called example, you would use the following command:
+
+This would display information about the example package, such as its name, version, release, and description.
+
+______________________________________________________
+
+The rpm -ql quota command is used to list the files that are included in the quota package on a CentOS or other Linux-based operating system. Here's what each option means:
+
+-q: Queries the package database to retrieve information about the package.
+-l: Lists the files that are included in the package.
+The basic syntax of the rpm -ql command is as follows:
+
+Here, [package_name] is the name of the package that you want to query.
+
+For example, to list the files that are included in the quota package, you would use the following command:
+
+This would display a list of files that are included in the quota package, such as configuration files, documentation files, and executable files. You can use this information to determine what files are installed on the system as part of the quota package, and where they are located.
+
+Note that the rpm -ql command requires root privileges, so you may need to run it with sudo or as the root user. Additionally, you can use other options with the rpm command to perform other tasks, such as installing, upgrading, and removing packages, as well as querying the system for information about installed packages.
+______________________________________________________________
