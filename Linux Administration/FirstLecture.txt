@@ -98,3 +98,24 @@ This would display a list of files that are included in the quota package, such 
 
 Note that the rpm -ql command requires root privileges, so you may need to run it with sudo or as the root user. Additionally, you can use other options with the rpm command to perform other tasks, such as installing, upgrading, and removing packages, as well as querying the system for information about installed packages.
 ______________________________________________________________
+
+what is NFS?
+NFS (Network File System) is a distributed file system protocol that allows a user on a client computer to access files over a network as if those files were on the local computer. NFS storage is a type of storage that uses the NFS protocol to provide access to files over a network.
+
+With NFS storage, files are stored on a remote server, and clients can access those files over the network using the NFS protocol. This allows multiple clients to access the same files simultaneously, which can be useful in environments where multiple users need to collaborate on the same files.
+
+NFS storage is commonly used in enterprise environments, where it is used to provide shared access to files across multiple servers and clients. It is also used in cloud computing environments, where it is used to provide shared storage for virtual machines and other cloud resources.
+
+Note that NFS storage requires a network connection between the client and server, and the performance of NFS storage can be affected by network latency and bandwidth limitations. Additionally, NFS storage can be less secure than local storage, as files are transmitted over the network in plain text unless encryption is used.
+
+16 August 2023 | Linux admin lecture command
+
+cat /etc/yum.conf
+
+any configuration file is alway's place in the /etc directory
+
+>cat /etc/os-release
+to know the os destro name and version
+
+>yum remove httpd -y 
+to remove the httpd package
