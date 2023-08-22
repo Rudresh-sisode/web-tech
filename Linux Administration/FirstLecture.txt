@@ -119,3 +119,9 @@ to know the os destro name and version
 
 >yum remove httpd -y 
 to remove the httpd package
+
+Recording 3:
+> yum list all | grep httpd.
+> yum update -y
+this command will update all the packages and check there vulnerabilities
+> yum info httpd
