@@ -1,33 +1,22 @@
+var minimumReplacement = function(nums) {
+  const n = nums.length;
+  let last = nums[n - 1];  // Initialize 'last' with the last element
+  let ans = 0;  // Initialize the total operations count
 
-function minimumReplacement(numberArray){
-    //get the copy of original array
-    let copyOfArray = [...numberArray];
-    //[3,40,43,32]
-    console.log("started")
-  //   while(!areTheyInAscendingOrder(copyOfArray)){
-      console.log("while started")
-      for(let i = 0; i < copyOfArray.length; i++){
-       for(let j = 1; j < copyOfArray.length; j++){
-           let breakNumber = [];
-           if(copyOfArray[i] > copyOfArray[j]){
-             console.log(i)
-            //break the array into two both are need to <= next element
-             let smallOne = Math.floor(copyOfArray[i] / 2);
-             console.log(smallOne)
-             breakNumber.push(smallOne);
-             let bigOne = (copyOfArray[i] % 2 + Math.floor(copyOfArray[i] / 2));
-             breakNumber.push(bigOne);
-             console.log(bigOne,'big')
-             copyOfArray[i] = breakNumber.flat();
-                                
+  // Traverse the array in reverse order
+  for (let i = n - 2; i >= 0; --i) {
+      if (nums[i] > last) {  // If the current element needs replacement
+          let t = Math.floor(nums[i] / last);  // Calculate how many times the element needs to be divided
+          if (nums[i] % last !== 0) {
+              t++;  // If there's a remainder, increment 't'
           }
-       }
-     }
-  //   }
-    console.log(copyOfArray);
-    
+          last = Math.floor(nums[i] / t);  // Update 'last' for the next comparison
+          ans += t - 1;  // Add (t - 1) to 'ans' for the number of operations
+      } else {
+          last = nums[i];  // Update 'last' without replacement
+      }
   }
-  
-  console.log("slsl")
-  
-  minimumReplacement([3,40,43,35]);
+  return ans;  // Return the total number of operations
+};
+
+console.log(minimumReplacement([7,3,5,4,8]))
