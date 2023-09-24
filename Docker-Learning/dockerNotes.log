@@ -1,0 +1,39 @@
+##🎀##
+
+docker run -d --rm -p 3000:80 --name feedback-app -v feedback:/app/feedback -v "<path>:/app:ro" -v /app/node_modules -v /app/temp feedback-node:volume
+
+docker run is the command to start a new container.
+-d runs the container in detached mode, which means it runs in the background and doesn't attach to the terminal.
+--rm removes the container and its filesystem when the container exits.
+-p 3000:80 maps port 3000 on the host to port 80 in the container.
+--name feedback-app gives the container a name of "feedback-app".
+-v feedback:/app/feedback creates a volume named "feedback" and mounts it to the "/app/feedback" directory in the container.
+-v "<path>:/app:ro" mounts a read-only bind mount from the host to the "/app" directory in the container. Replace "" with the path to the directory on the host that you want to mount.
+-v /app/node_modules mounts the "/app/node_modules" directory in the container as a volume. This is done to prevent the node_modules directory from being overwritten by the bind mount.
+-v /app/temp mounts the "/app/temp" directory in the container as a volume.
+feedback-node:volume is the name of the Docker image to use for the container.
+
+Overall, this command starts a new container from the "feedback-node:volume" image, maps port 3000 on the host to port 80 in the container, creates and mounts volumes for the "/app/feedback" and "/app/temp" directories, and mounts a read-only bind mount from the host to the "/app" directory in the container.
+
+Q) -v /app/node_modules mounts the "/app/node_modules" directory in the container as a volume. This is done to prevent the node_modules directory from being overwritten by the bind mount.
+
+how this prevent to be overwritten explain me in more details
+
+When you mount a directory from the host into a container
+using a bind mount, the contents of the directory in the container are replaced with the contents of the directory on the host. 
+This means that if you have a "node_modules" directory in the container, and you mount a directory from the host 
+into the container that also contains a "node_modules" directory,
+the "node_modules" directory in the container will be overwritten with the one from the host.
+To prevent this from happening, you can mount the "node_modules" directory in the container as 
+a volume instead of using a bind mount. When you mount a volume, the contents of the directory
+in the container are not replaced with the contents of the volume. Instead, the contents of the 
+volume are merged with the contents of the directory in the container. 
+This means that if you have a "node_modules" directory in the container, 
+and you mount a volume that also contains a "node_modules" directory, 
+the contents of both directories will be available in the container.
+
+By mounting the "node_modules" directory in the container as a volume, 
+you ensure that the dependencies installed in the container are not overwritten by the 
+dependencies installed on the host. This is important because the dependencies installed in 
+the container may be different from the ones installed on the host, and you want to make sure 
+that the container is using the correct dependencies.
