@@ -7,14 +7,27 @@ abstract class FirstBase{
 }
 
 class Child extends FirstBase{
-    constructor(public name:string){
+    private constructor(public name:string){
         super(name);
+    }
+
+    private static intance:Child;
+
+    static getIntance(){
+        if(this.intance){
+            return this.intance;
+        }
+        let objInstance = new Child("");
+        return objInstance;
     }
 
     getName(): string {
         return this.name;
     }
+
 }
 
-let instanceOfClass = new Child("");
+let instanceOfClass = Child.getIntance();
+
+
 
