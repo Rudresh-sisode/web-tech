@@ -17,3 +17,4 @@ class Child extends FirstBase{
 }
 
 let instanceOfClass = new Child("");
+
