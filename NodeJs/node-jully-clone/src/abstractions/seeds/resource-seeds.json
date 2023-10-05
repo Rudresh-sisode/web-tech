@@ -1,0 +1,26 @@
+[
+    {
+        "name":"ATTENDENCE",
+        "value":"attendence"
+    },
+    {
+        "name":"LEAVE",
+        "value":"leave"
+    },
+    {
+        "name":"DASHBOARD",
+        "value":"dashboard"
+    },
+    {
+        "name":"REPORT",
+        "value":"report"
+    },
+    {
+        "name":"SYSTEMS",
+        "value":"systems"
+    },
+    {
+        "name":"DESKTOP",
+        "value":"desktop"
+    }
+]

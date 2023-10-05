@@ -1,0 +1,88 @@
+import { DataTypes } from "sequelize";
+import sequelize from "../../utilities/database-connect";
+
+const AttendanceTableModel = sequelize.define('attendance_table',{
+    id:{
+        type:DataTypes.UUID,
+        defaultValue:DataTypes.UUIDV1,
+        allowNull:false,
+        primaryKey:true
+    },
+    device_id:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
+    picutres:{
+        type:DataTypes.BLOB,
+        defaultValue:null
+    },
+    checkout_picutres:{//checkout_picutres
+        type:DataTypes.BLOB,
+        defaultValue:null
+    },
+    check_in_path:{
+        type:DataTypes.STRING,
+    },
+    check_out_path:{
+        type:DataTypes.STRING,
+    },
+    date:{
+        type:DataTypes.DATE,
+        allowNull:false
+    },
+    check_in_time:{
+        type:DataTypes.TIME,
+        allowNull:false
+    },
+    edit_by:{
+        type:DataTypes.STRING,
+    },
+    added_by:{
+        type:DataTypes.STRING,
+    },
+    check_out_time:{
+        type:DataTypes.TIME,
+        defaultValue:null
+    },
+    total_worked_hours:{
+        type:DataTypes.STRING,
+    },
+    check_in_location:{
+        type:DataTypes.JSON
+    },
+    check_out_location:{
+        type:DataTypes.JSON
+    },
+    created_at:{
+        type:DataTypes.DATE,
+        defaultValue:null,
+    },
+    created_by:{
+        type:DataTypes.STRING,
+        defaultValue:null
+    },
+    updated_at:{
+        type:DataTypes.DATE,
+        defaultValue:null
+    },
+    updated_by:{
+        type:DataTypes.STRING,
+        defaultValue:null
+    },
+    is_deleted:{
+        type:DataTypes.BOOLEAN,
+        defaultValue:false
+    },
+    deleted_at:{
+        type:DataTypes.DATE,
+        defaultValue:null
+    },
+    deleted_by:{
+        type:DataTypes.STRING,
+        defaultValue:null
+    }
+},{
+    timestamps: false
+});
+
+export default AttendanceTableModel;

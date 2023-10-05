@@ -1,0 +1,84 @@
+import { DataTypes } from "sequelize";
+import sequelize from "../../utilities/database-connect";
+
+const UserTableModel = sequelize.define('user_table',{
+    id:{
+        type:DataTypes.UUID,
+        defaultValue:DataTypes.UUIDV1,
+        allowNull:false,
+        primaryKey:true
+    },
+    email:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
+    username:{
+        type:DataTypes.STRING,
+    },
+    work_mode:{
+        type:DataTypes.STRING,
+        allowNull:false,
+        defaultValue:'office'
+    },
+    password:{
+        type:DataTypes.STRING,
+    },
+    temporary_password:{
+        type:DataTypes.STRING,
+    },
+    temporary_password_expiry_date:{
+        type:DataTypes.DATE,
+        defaultValue:null
+    },
+    device_id:{
+        type:DataTypes.STRING,
+        defaultValue:null
+    },
+    is_device_verified:{
+        type:DataTypes.BOOLEAN,
+        defaultValue:false
+    },
+    login_token:{
+        type:DataTypes.STRING,
+    },
+    login_token_status:{
+        type:DataTypes.BOOLEAN,
+        defaultValue:false
+    },
+    is_active:{
+        type:DataTypes.BOOLEAN,
+        defaultValue:true
+    },
+    created_at:{
+        type:DataTypes.DATE,
+        defaultValue:null,
+    },
+    created_by:{
+        type:DataTypes.STRING,
+        defaultValue:null
+    },
+    updated_at:{
+        type:DataTypes.DATE,
+        defaultValue:null
+    },
+    updated_by:{
+        type:DataTypes.STRING,
+        defaultValue:null
+    },
+    is_deleted:{
+        type:DataTypes.BOOLEAN,
+        defaultValue:false
+    },
+    deleted_at:{
+        type:DataTypes.DATE,
+        defaultValue:null
+    },
+    deleted_by:{
+        type:DataTypes.STRING,
+        defaultValue:null
+    }
+},{
+    timestamps: false
+});
+
+export default UserTableModel;

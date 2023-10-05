@@ -1,0 +1,13 @@
+
+Thu Sep 07 2023 14:33:25 GMT+0530 (India Standard Time)
+syntax error at or near "AS"
+Thu Sep 07 2023 14:46:09 GMT+0530 (India Standard Time)
+syntax error at or near "AS"
+Thu Sep 07 2023 16:01:30 GMT+0530 (India Standard Time)
+column attendance_tables.leavestatus does not exist
+Thu Sep 07 2023 17:17:25 GMT+0530 (India Standard Time)
+column attendance_tables.leaveStatus does not exist
+Thu Sep 07 2023 18:01:40 GMT+0530 (India Standard Time)
+missing FROM-clause entry for table "$attendance_tables"
+Thu Sep 07 2023 18:21:13 GMT+0530 (India Standard Time)
+missing FROM-clause entry for table "AttendanceTableModels"

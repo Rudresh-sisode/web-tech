@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Registration Email Template</title>
+</head>
+
+<body>
+    <div style="width: 100%; max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
+        <div style="padding: 20px; background-color: #f2f2f2; text-align: center; border-radius: 10px 10px 0 0;">
+            <h2 style="font-size: 24px; margin: 0;">Welcome to the team!</h2>
+        </div>
+        <div style=" padding: 20px;">
+            <p style="font-size: 16px; margin: 0 0 10px 0;">Dear #{userFullName},</p>
+            <!-- <p style="font-size: 16px; margin: 0 0 10px 0;">We welcome you on board. Your registration has been completed and your account has been created successfully.</p> -->
+            <p style="font-size: 16px; margin: 0 0 10px 0;">We welcome you on board in #{compName}. Your registration has been completed and your account has been created successfully.</p>
+
+
+            <ul style="font-weight: bold; list-style-type: none; padding: 0; margin: 0;">
+                <li style="font-size: 16px; line-height: 1.5; margin: 0 0 5px 0;">Email: #{userEmail}</li>
+                <li style="font-size: 16px; line-height: 1.5; margin: 0 0 5px 0;">Employee ID: #{employeeID}</li>
+            </ul>
+
+            <p style="font-size: 16px; margin: 20px 0 10px 0;">Please click on the following link to generate your password:</p>
+            <div style="text-align: center;">
+                <a href="#{passwordLink}" target="_blank" style="display: inline-block; background-color: #007bff; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Generate Password</a>
+            </div>
+        </div>
+        <div style=" padding: 20px; text-align: center; border-radius: 0 0 10px 10px; background-color: #f2f2f2;">
+            <p style="font-size: 16px; line-height: 1.5; margin: 0;">Best regards,<br> #{teamName}</p>
+        </div>
+    </div>
+</body>
+
+</html>

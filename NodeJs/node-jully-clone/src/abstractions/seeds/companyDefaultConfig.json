@@ -1,0 +1,28 @@
+{
+    "app": {
+        "is_display": {
+            "time": false,
+            "photo": false
+        },
+        "cico_with_otp": false
+    },
+    "web": {
+        "is_display": {
+          "time": true,
+          "photo": false
+        }
+    },
+    "desktop": {
+        "is_display": {
+          "time": true,
+          "photo": false
+        }
+    },
+    "work_hours": "09:00:00",
+    "visitors":{
+        "document":false,
+        "checkout":true,
+        "time":true
+    },
+    "weekend": "Saturday,Sunday"
+}

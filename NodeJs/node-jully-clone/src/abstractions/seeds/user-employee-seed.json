@@ -1,0 +1,37 @@
+[
+    {
+        "employeeId": "1023",
+        "firstName": "Rudresh",
+        "middleName": "Manohar",
+        "lastName": "Sisodiya",
+        "dateOfBirth": "1999-04-21",
+        "joiningDate": "2022-03-01",
+        "personalEmail": "sohamerajput@example.com",
+        "mobile": "9890789890",
+        "currentAddress": {
+          "addressLine1": "123 Main St",
+          "addressLine2": "Apt 4",
+          "city": "Anytown",
+          "state": "CA",
+          "country": "USA",
+          "pincode": "12345"
+        },
+        "permanentAddress": {
+          "addressLine1": "456 Maple Ave",
+          "addressLine2": "",
+          "city": "Somewhere",
+          "state": "NY",
+          "country": "USA",
+          "pincode": "67890"
+        },
+        "emergencyContact": {
+          "personName": "Ganesh Sisodiya",
+          "personMobile": "0987654321",
+          "personRelation": "Kin member",
+          "personEmail": "gana@gmail.com",
+          "personAddress": "789 Oak St"
+        },
+        "bothAddressSame": false
+      }
+      
+]

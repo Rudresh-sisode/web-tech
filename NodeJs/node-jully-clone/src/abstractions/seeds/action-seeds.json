@@ -1,0 +1,11 @@
+[
+    {
+        "name":"READ",
+        "value":"read"
+    },
+    {
+        "name":"WRITE",
+        "value":"write"
+    }
+
+]

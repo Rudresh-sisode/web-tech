@@ -1,0 +1,39 @@
+[
+    {
+       "name":"RESEARCH",
+       "value":"research"
+    },
+    {
+       "name":"DEVELOPMENT",
+       "value":"development"
+    },
+    {
+       "name":"TESTING",
+       "value":"testing"
+    },
+    {
+       "name":"PRODUCTION",
+       "value":"production"
+    },
+    {
+         "name":"DEPLOYMENT",
+         "value":"deployment"
+    },
+    {
+         "name":"MAINTENANCE",
+         "value":"maintenance"
+    },
+    {
+         "name":"SUPPORT",
+         "value":"support"
+    },
+    {
+         "name":"RETIREMENT",
+         "value":"retirement"
+    },
+    {
+        "name":"MANAGEMENT",
+        "value":"management"
+    }
+
+]

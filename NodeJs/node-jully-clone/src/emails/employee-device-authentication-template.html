@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Employee Login | Device Authentication</title>
+</head>
+<body>
+    <div style="width: 100%; max-width: 600px; margin: 0 auto;">
+        <div style="padding: 20px; background-color: #f2f2f2; text-align: center; border-radius: 10px;">
+            <h2 style="font-size: 24px; margin: 20px;">Device Verification Request</h2>
+        </div>
+        <div style="padding: 20px;">
+            <p style="font-size: 16px; margin: 0 0 10px 0;">Dear Admin,</p>
+            <p style="font-size: 16px;">Employee is requesting for device authentication.</p>
+            <p style="font-size: 16px;">Employee details are:</p>
+            <ul style="font-weight: bold; list-style-type: none; padding: 0; margin: 0;">
+                <li style="font-size: 16px; line-height: 1.5; margin: 0 0 5px 0;">Username: #{userId}</li>
+                <li style="font-size: 16px; line-height: 1.5; margin: 0 0 5px 0;">Empolyee Id: #{empId}</li>
+                <li style="font-size: 16px; line-height: 1.5; margin: 0 0 5px 0;">Device Id: #{deviceId}</li>
+            </ul>
+            <p style="font-size: 16px;">Best regards,<br> #{teamName}</p>
+        </div>
+    </div>
+</body>
+</html>

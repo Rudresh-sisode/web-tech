@@ -1,0 +1,86 @@
+with the sequelize, 
+in the 'role' table there is the one column 'priviledge' which has json type'
+so in that there will be 'resourceId' key and 'actionId' key, which will stored the 'resource' table primary key and 'action' table primary key, 
+with the association how can I set the relation?
+
+To set up the association between the Role model and the Resource and Action models in Sequelize, you can use the belongsTo method to define a foreign key for each of the resourceId and actionId properties. Here's an example:
+
+javascript
+
+const Role = sequelize.define('role', {
+  priviledge: {
+    type: DataTypes.JSON,
+    allowNull: false
+  }
+});
+
+const Resource = sequelize.define('resource', {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
+});
+
+const Action = sequelize.define('action', {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
+});
+
+Role.belongsTo(Resource, { foreignKey: 'priviledge.resourceId' });
+Role.belongsTo(Action, { foreignKey: 'priviledge.actionId' });
+
+With this setup, you can retrieve a Role record with its associated Resource and Action records like so:
+
+javascript
+
+const role = await Role.findOne({
+  where: { id: 1 },
+  include: [
+    { model: Resource },
+    { model: Action }
+  ]
+});
+
+console.log(role.priviledge.resourceId); // Resource primary key
+console.log(role.priviledge.actionId); // Action primary key
+console.log(role.resource.name); // Resource name
+console.log(role.action.name); // Act
+
+
+26 April 2023
+
+
+let data = [
+{"resourceId": 'f5653480-e43a-11ed-a6e0-e3e4d95ecd3f', "actionId": 'f569a150-e43a-11ed-a6e0-e3e4d95ecd3f'},
+{"resourceId": 'f5653480-e43a-11ed-a6e0-e3e4d95ecd3f', "actionId": 'f569c860-e43a-11ed-a6e0-e3e4d95ecd3f'},
+{"resourceId": 'f5655b90-e43a-11ed-a6e0-e3e4d95ecd3f', "actionId": 'f569a150-e43a-11ed-a6e0-e3e4d95ecd3f'},
+{"resourceId": 'f5655b90-e43a-11ed-a6e0-e3e4d95ecd3f', "actionId": 'f569c860-e43a-11ed-a6e0-e3e4d95ecd3f'},
+{"resourceId": 'f5655b91-e43a-11ed-a6e0-e3e4d95ecd3f', "actionId": 'f569a150-e43a-11ed-a6e0-e3e4d95ecd3f'},
+{"resourceId": 'f5655b91-e43a-11ed-a6e0-e3e4d95ecd3f', "actionId": 'f569c860-e43a-11ed-a6e0-e3e4d95ecd3f'},
+{"resourceId": 'f5655b92-e43a-11ed-a6e0-e3e4d95ecd3f', "actionId": 'f569a150-e43a-11ed-a6e0-e3e4d95ecd3f'},
+{"resourceId": 'f5655b92-e43a-11ed-a6e0-e3e4d95ecd3f', "actionId": 'f569c860-e43a-11ed-a6e0-e3e4d95ecd3f'},
+{"resourceId": 'f5655b93-e43a-11ed-a6e0-e3e4d95ecd3f', "actionId": 'f569a150-e43a-11ed-a6e0-e3e4d95ecd3f'},
+{"resourceId": 'f5655b93-e43a-11ed-a6e0-e3e4d95ecd3f', "actionId": 'f569c860-e43a-11ed-a6e0-e3e4d95ecd3f'}
+];
+
+25 July 2023
+
+-- UPDATE attendance_tables
+-- SET total_worked_hours = (
+--   CASE
+--     WHEN check_out_time IS NULL THEN NULL
+--     ELSE EXTRACT(HOUR FROM COALESCE(check_out_time, check_in_time) - check_in_time) || ':' ||
+--          EXTRACT(MINUTE FROM COALESCE(check_out_time, check_in_time) - check_in_time) || ':' ||
+--          EXTRACT(SECOND FROM COALESCE(check_out_time, check_in_time) - check_in_time)
+--   END
+-- );
+
+UPDATE attendance_tables
+SET total_worked_hours = (
+  CASE
+    WHEN check_out_time IS NULL THEN NULL
+    ELSE TO_CHAR(COALESCE(check_out_time, check_in_time) - check_in_time, 'HH24:MI:SS')
+  END
+);

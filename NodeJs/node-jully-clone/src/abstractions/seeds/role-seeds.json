@@ -1,0 +1,22 @@
+[
+    {
+        "name":"SUPER-ADMIN",
+        "value":"super-admin"
+    },
+    {
+        "name":"ADMIN",
+        "value":"admin"
+    },
+    {
+        "name":"HR",
+        "value":"hr"
+    },
+    {
+        "name":"EMPLOYEE",
+        "value":"employee"
+    },
+    {
+        "name":"GUEST",
+        "value":"guest"
+    }
+]

@@ -1,0 +1,1 @@
+column "user_table.email" must appear in the GROUP BY clause or be used in an aggregate function
