@@ -20,6 +20,9 @@ import EmployeeDeviceModel from "./abstractions/models/employee-device-model";
 import VisitorAttendanceTable from "./abstractions/models/visitor-table-model";
 import EmployeeLeaveModel from "./abstractions/models/employee-leave-model";
 import HolidayTableModel from './abstractions/models/holiday-calender-table-model';
+import moment from "moment";
+import path from "path";
+import fs from "fs";
 
 //json file imports below
 const userSeeds = require("./abstractions/seeds/user-seeds.json");
@@ -167,6 +170,21 @@ sequelize.sync().then(async (_)=>{
   console.error(`~unable to start server ${err}~`);
 });
 
-process.on('uncaughtException', (err) => {
+process.on('uncaughtException', async (err:any) => {
   console.error(`~uncaughtException ${err}~`);
+
+  const momentDate = moment().startOf('day').utcOffset('+05:30').format('YYYY-MM-DD');
+    const errorLogPath = path.join(__dirname, './public', 'log-error', momentDate);
+    try{
+      if (fs.existsSync(errorLogPath)) {
+        await fs.promises.appendFile(path.join(errorLogPath, 'error.log'),"\n"+new Date()+"\n"+ err.message +"\n on company id \t"+global.companyState.companyId);
+      } else {
+        fs.mkdirSync(errorLogPath, { recursive: true });
+        await fs.promises.writeFile(path.join(errorLogPath, 'error.log'), err.message +"\n on company id \t"+global.companyState.companyId);
+      }
+    }
+    catch(err){
+      console.error(`~ ERROR \n${err}~`);
+    }
+    
 });

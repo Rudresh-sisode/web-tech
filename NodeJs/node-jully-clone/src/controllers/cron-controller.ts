@@ -22,6 +22,8 @@ import CronJobLogTableModel from "../abstractions/models/cron-job-log-table-mode
 import * as common from "../services/common.service";
 import AttendanceTableModel from "../abstractions/models/attendance-table-model";
 import EmployeeLeaveModel from "../abstractions/models/employee-leave-model";
+import HolidayTableModel from "../abstractions/models/holiday-calender-table-model";
+import * as HolidayController from "./holiday-controller";
 
 const dailyAttendanceReport = async (req: AttendanceData, res: any,next:any) => {
  
@@ -550,8 +552,34 @@ const everyDayLeavesCronJobOfCompanies = async(req: any, res: any,next:any)=>{
   
   const tscn = await sequelize.transaction();
   try{
+
     // take the active company and not deleted company
-    let listOfCompany:any = await CompanyTableModel.findAll({ where:{is_deleted: false, is_active : true}, raw:true})
+    let listOfCompany:any = await CompanyTableModel.findAll({
+      where:
+      {
+        is_deleted: false, 
+        is_active : true
+      },
+      // include:[
+      //   {
+      //     model:HolidayTableModel,
+      //     where:{
+      //       is_deleted:false,
+      //       // is_active:true,
+      //       holiday_date:{
+      //         [Op.gte]:moment().startOf('year').utcOffset('+05:30').format('YYYY-MM-DD HH:mm:ssZ'),
+      //         [Op.lte]:moment().endOf('year').utcOffset('+05:30').format('YYYY-MM-DD HH:mm:ssZ')
+      //       },
+           
+      //     },
+      //     attributes:[["holiday_date","holidayDate"]],
+      //     required:false
+      //   }
+      // ],
+      raw:true
+    });
+
+
 
     if(listOfCompany.length == 0){
       throw new Error("No company found");
@@ -559,8 +587,8 @@ const everyDayLeavesCronJobOfCompanies = async(req: any, res: any,next:any)=>{
     let insertedCompanyIds = "success :";
     let failedCompanyIds = "failed :";
     //today's date 
-    // let today = moment().subtract(2, 'day').startOf('day').utcOffset('+05:30').format('YYYY-MM-DD 00:00:00Z');
-    let today = moment().startOf('day').utcOffset('+05:30').format('YYYY-MM-DD 00:00:00Z');
+    let today = moment().subtract(1, 'day').startOf('day').utcOffset('+05:30').format('YYYY-MM-DD 00:00:00Z');
+    // let today = moment().startOf('day').utcOffset('+05:30').format('YYYY-MM-DD 00:00:00Z');
     await CronJobLogTableModel.create({
       title: 'Compnay daily employee leaves missing entry',
       description: 'Cron job started',
@@ -569,9 +597,30 @@ const everyDayLeavesCronJobOfCompanies = async(req: any, res: any,next:any)=>{
  
     for(let company = 0; company < listOfCompany.length; company++){
 
-      // if(listOfCompany[company].id != 'bb269a10-0c45-11ee-af8e-fbdc6b6dd9aa'){
-      //   continue;
-      // }
+      if(listOfCompany[company].id != '5bfada30-3772-11ee-bf8f-d9e01d248025'){
+        continue;
+      }//5bfada30-3772-11ee-bf8f-d9e01d248025    |    bb269a10-0c45-11ee-af8e-fbdc6b6dd9aa
+
+      //provide global state for company
+      global.companyState = {
+        companyId: listOfCompany[company].id,
+      }
+      
+      let fetchWhere = {
+
+      }
+      //read holiday of the company and check the holiday is there or not
+      const allHolidayFetchData:any = await HolidayController.getAllHolidayData(fetchWhere);
+
+        if(typeof(allHolidayFetchData) == 'boolean'){
+           
+            throw new Error("No any holiday data found!");
+        }
+        else if(typeof(allHolidayFetchData) == 'string'){
+            //exception occured while reading the data.
+           
+            throw new Error("Server Unavailble, try again later!");
+        }
 
       if("weekend" in listOfCompany[company].configuration){
         //get the weekends
@@ -583,6 +632,8 @@ const everyDayLeavesCronJobOfCompanies = async(req: any, res: any,next:any)=>{
         if(isWeekend){
           continue;
         }
+
+        //read the holiday of the company
 
       }
       else{
@@ -728,6 +779,7 @@ const everyDayLeavesCronJobOfCompanies = async(req: any, res: any,next:any)=>{
     }, {transaction: tscn});
 
     await tscn.commit();
+    global.companyState = null;
 
 
     return res.status(200).json({
@@ -749,6 +801,7 @@ const everyDayLeavesCronJobOfCompanies = async(req: any, res: any,next:any)=>{
     }
 
     await tscn.rollback();
+    global.companyState = null;
     console.log(`step ${step} error: ${error}`);
     return res.status(500).json({
         status:"error",
@@ -780,6 +833,11 @@ const attendanceStatusReportCronJob = async(req: any, res: any,next:any)=>{
     let yesterdayDate = moment().subtract(1, 'day').startOf('day').utcOffset('+05:30').format('YYYY-MM-DD 00:00:00Z');
 
     for(let i = 0; i < listOfCompany.length; i++){
+
+      if(listOfCompany[i].id != '5bfada30-3772-11ee-bf8f-d9e01d248025'){
+        continue;
+      }//5bfada30-3772-11ee-bf8f-d9e01d248025    |    bb269a10-0c45-11ee-af8e-fbdc6b6dd9aa
+
 
       if("weekend" in listOfCompany[i].configuration){
         //get the weekends

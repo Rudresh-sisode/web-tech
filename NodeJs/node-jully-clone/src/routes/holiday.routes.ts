@@ -11,10 +11,14 @@ router.post('/bulk-insert',authMiddleware,HolidayController.holidayBulkInsert);
 
 router.post('/single-create',authMiddleware,HolidayController.createHoliday);
 
-router.put('/update/:holidayId',authMiddleware);
+router.put('/update-holiday-record',authMiddleware,HolidayController.updateHolidayRecord);
+
+router.delete('/delete-holiday-record',authMiddleware,HolidayController.deleteHolidayRecord);
 
 router.get('/get-single-holiday',authMiddleware);
 
 router.get('/get-all-holiday-calender',authMiddleware,HolidayController.getWholeHolidayData);
+
+
 
 export default router;

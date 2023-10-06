@@ -181,7 +181,8 @@ const holidayBulkInsert = async (req:UserRequest,res:any,next:any) =>{
             status:"success",
             message:"Bulk inseration done",
             duplicateRecords,
-            insertFailedRecord
+            insertFailedRecord,
+            insertedRecord
         })
 
     }
@@ -353,6 +354,205 @@ const getWholeHolidayData = async (req:UserRequest,res:any,next:any) =>{
     }
 }
 
+const updateHolidayRecord = async(req:UserRequest,res:any,next:any) =>{
+    let step = 1, status = 200;
+
+    const tscn = await sequelize.transaction();
+    try{
+        const recordId = req.query.recordId as string;
+        const holidayDate = req.body.holidayDate;
+        const holidayEventName = req.body.holidayEventName || "";
+
+        step = 1;
+        //check if recordId is valid uuid
+        if(!validator.isUUID(recordId)){
+            status = 404;
+            throw new Error("Holiday record not found!");
+        }
+
+        step = 2;
+        //check if holidayDate is valid date either YYYY or YYYY-MM or YYYY-MM-DD
+        if(!moment(holidayDate,'YYYY-MM-DD',true).isValid()){
+            status = 400;
+            throw new Error("Please provide date format correctly! (YYYY-MM-DD)");
+        }
+
+        step = 3;
+        //check if holidayEventName is empty
+        if(validator.isEmpty(holidayEventName)){
+            status = 400;
+            throw new Error("Holiday event name is required!");
+        }
+
+        let fetchWhere:any = {
+            id:recordId,
+            company_id:req.companyId,
+            is_deleted:false
+        }
+
+        step = 4;
+        //check if record is exist in database
+        const holidayRecord = await findHolidayRecordById(fetchWhere);
+
+        step = 5;
+        if(typeof(holidayRecord) == 'boolean'){
+            status = 404;
+            throw new Error("Holiday record not found!");
+        }
+        else if(typeof(holidayRecord) == 'string'){
+            //exception occured while reading the data.
+            status = 503;
+            throw new Error("Server Unavailble, try again later!");
+        }
+
+        step = 6;
+        //update the record
+        const updateResult = 
+        await updateHolidayById(fetchWhere,{
+            holiday_date:moment(holidayDate).startOf('day').utcOffset('+05:30').format('YYYY-MM-DD HH:mm:ssZ'),
+            holiday_event_name:holidayEventName,
+            updated_at:moment().format('YYYY-MM-DD HH:mm:ss'),
+            updated_by:req.keyId
+        },tscn);
+
+        step = 7;
+        if(typeof(updateResult) == 'boolean'){
+            await tscn.commit();
+            return res.status(status).json({
+                status:"success",
+                message:"Holiday record updated!"
+            })
+        }
+        else if(typeof(updateResult) == 'string'){
+            //exception occured while updating the data.
+            status = 503;
+            throw new Error(`Server Unavailble, try again later!\n${updateResult} `);
+        }
+
+
+    }
+    catch(error:any){
+        console.log(`step ${step} error: ${error}`);
+        await tscn.rollback();
+        return res.status(status === 200 ? 500 : status).json({
+            status:"error",
+            message:error.message
+        });
+    }
+}
+
+const deleteHolidayRecord = async(req:UserRequest,res:any,next:any) =>{
+    let step = 1, status = 200;
+
+    const tscn = await sequelize.transaction();
+    try{
+        const recordId = req.query.recordId as string;
+
+        step = 1;
+        //check if recordId is valid uuid
+        if(!validator.isUUID(recordId)){
+            status = 404;
+            throw new Error("Holiday record not found!");
+        }
+
+        let fetchWhere:any = {
+            id:recordId,
+            company_id:req.companyId,
+            is_deleted:false
+        }
+
+        step = 2;
+        //check if record is exist in database
+        const holidayRecord = await findHolidayRecordById(fetchWhere);
+
+        step = 3;
+        if(typeof(holidayRecord) == 'boolean'){
+            status = 404;
+            throw new Error("Holiday record not found!");
+        }
+        else if(typeof(holidayRecord) == 'string'){
+            //exception occured while reading the data.
+            status = 503;
+            throw new Error("Server Unavailble, try again later!");
+        }
+
+        step = 4;
+        //update the record
+        const updateResult = 
+        await updateHolidayById(fetchWhere,{
+            is_deleted:true,
+            deleted_at:moment().format('YYYY-MM-DD HH:mm:ss'),
+            deleted_by:req.keyId
+        },tscn);
+
+        step = 5;
+        if(typeof(updateResult) == 'boolean'){
+            await tscn.commit();
+            return res.status(status).json({
+                status:"success",
+                message:"Holiday record deleted!"
+            })
+        }
+        else if(typeof(updateResult) == 'string'){
+            //exception occured while updating the data.
+            status = 503;
+            throw new Error(`Server Unavailble, try again later!\n${updateResult} `);
+        }
+    }
+    catch(error:any){
+        console.log(`step ${step} error: ${error}`);
+        await tscn.rollback();
+        return res.status(status === 200 ? 500 : status).json({
+            status:"error",
+            message:error.message
+        });
+    }
+
+}
+
+const findHolidayRecordById = async(where:any) : Promise<boolean | Object | string> => {
+    try{
+        let holidayData:any = await HolidayTableModel.findOne({
+            where,
+            raw:true
+        })
+
+        if(holidayData == null || holidayData == undefined){
+            return false;
+        }
+
+        const storedHolidayData:any = {
+            holidayId:holidayData.id,
+            holidayDate : holidayData.holiday_date,
+            holidayEventName:holidayData.holiday_event_name,
+        }
+
+        return storedHolidayData;
+        
+    }
+    catch(error:any){
+        return error.message;
+    }
+}
+
+
+
+const updateHolidayById = async(where1:any,records:any,tsc:any) : Promise<boolean | string> => {
+    try{
+        let updateResult:any = await HolidayTableModel.update({...records},{where:{...where1},transaction:tsc});
+
+        if (!('0' in updateResult) || updateResult['0'] == null || updateResult['0'] == undefined || updateResult['0'] == 0) {
+           throw new Error("Holiday updation failed");
+        }
+
+        return true;
+
+    }
+    catch(error:any){
+        return error.message;
+    }
+}
+
 
 const getAllHolidayData =  async (where:any,offset:number = 0, limit:number = 0, pagination:boolean = false) : Promise<boolean | Object | string> => {
     try{
@@ -387,4 +587,6 @@ const getAllHolidayData =  async (where:any,offset:number = 0, limit:number = 0,
     }
 };
 
-export {holidayBulkInsert,createHoliday,getWholeHolidayData};
+
+
+export {getAllHolidayData,holidayBulkInsert,createHoliday,getWholeHolidayData,updateHolidayRecord,deleteHolidayRecord};
