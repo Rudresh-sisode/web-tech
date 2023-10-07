@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React ⚛️</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+      function Header(props){
+        console.log("your props ", props);
+        return (
+          <header>
+            <h1>
+              {props.name} Kitchen
+            </h1>
+          </header>
+        )
+      }
+
+      function Main(props){
+        return (
+          <section>
+            <img 
+            height = {400}
+            
+            src = "https://images.pexels.com/photos/2302809/pexels-photo-2302809.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+            alt = "Food dishes, sweet, yummy..."/>
+
+            <p>
+              We serve the most delicous food
+              around
+            </p>
+            <ul>
+              {
+                props.dishes.map((dish)=>(
+                  <li key={dish.indexKey}>
+                    {dish.title}
+                  </li>
+                ))
+              }
+            </ul>
+            </section>
+        )
+      }
+
+      function Footer(props){
+        return (
+          <footer>
+            <p>
+              copyright {props.years}
+            </p>
+          </footer>
+        )
+      }
+
+      const dishes = [
+        "Puran Poli",
+        "Patta gobi",
+        "Bhakhar Thecha"
+      ];
+
+      const polishedDished = dishes.map((dish,i)=>(
+        {title:dish, indexKey : i}
+      ))
+
+      function App(){
+        return (
+          <React.Fragment>
+            <Header name = "rudresh" />
+            <Main dishes = {polishedDished}/>
+            <Footer years = {new Date().getFullYear()}/>
+          </React.Fragment>
+        )
+      }
+
+      ReactDOM.render(
+        <App/>,
+        document.getElementById("root")
+      );
+    </script>
+  </body>
+</html>
