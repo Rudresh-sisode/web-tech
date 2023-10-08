@@ -8,37 +8,18 @@ const [firstCity, secondCity ] = ["Jamner","Jemuner","Jalgaon"];
 
 
 function App({state}) {
-  const [emotion,setEmotion] = useState("Helow ");
-
-  const [secondary,setSecondary]  = useState("tired");
-  useEffect(()=>{
-    console.log('your emotions  ',emotion)
-  },[emotion]);
-  
+  const [check, setChecked] = useState(false);
 
   return (
     <div className="App">
-      <h1>
-        Welcome to the {state } reactjs {emotion}
-      </h1>
-      <button onClick={()=>{
-        setEmotion("Sad");
-      }}>
-        Sad
-      </button>
-      <button onClick={()=>{
-        setEmotion("Excited");
-      }}>
-        Excited
-      </button>
-      <h2>
-        current secondary emotion is {secondary}
-      </h2>
-      <button onClick={()=>{
-        setSecondary("Greatful");
-      }}>
-        Greatfull
-      </button>
+      <input type='checkbox' value={check}
+      onChange={()=>{
+        setChecked(()=> !check
+        )
+      }}/>
+      <label>
+        {check ? 'checked' : 'not checked'}
+      </label>
     </div>
   );
 }
