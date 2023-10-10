@@ -10,4 +10,4 @@ function seriesPrint(startNum,endNum){
    //   return abc;
    }
    
-   seriesPrint(6,9);
+   console.log(seriesPrint(6,9))
