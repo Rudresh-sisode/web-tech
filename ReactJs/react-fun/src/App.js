@@ -16,22 +16,29 @@ function GithubUser({name}){
 function App({state}) {
  
   const [data,setData] = useState(null);
+  const [error,setError] = useState(null);
+  const [loading,setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     fetch('https://api.github.com/users/Rudresh-sisode')
     .then((response)=> response.json())
     .then(setData)
+    .then(() => setLoading(false))
+    .catch(setError)
   },[]);
 
-  if(data){
-    // return <pre> {JSON.stringify(data,null,2)}</pre>
+  if(loading){
+    return <h1>Loading...</h1>
+  }
+  if(error){
+    return <pre>{JSON.stringify(error,null,2)}</pre>
+  }
+  if(!data){
+    return null;
+  }
     return <GithubUser name={data.name} />
-  }
-  else{
-    return (
-      <h2>Hello, all</h2>
-    );
-  }
+  
 
 }
 
