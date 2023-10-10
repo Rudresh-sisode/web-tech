@@ -3,65 +3,36 @@ import './App.css';
 import { useState, useEffect, useReducer, useRef } from 'react';
 
 
-const [firstCity, secondCity ] = ["Jamner","Jemuner","Jalgaon"];
-
-function useInput(initialValue){
-  const  [value, setValue] = useState(initialValue);
-  return [
-    {
-      value,
-      onChange:(e) => setValue(e.target.value)
-    },
-    () => setValue(initialValue)
-  ];
-
+function GithubUser({name}){
+  return (
+    <div>
+      <h2>
+        {name} is learning React
+      </h2>
+    </div>
+  )
 }
 
 function App({state}) {
-  // const [check, setChecked] = useState(false);
-  // const [check, setChecked] = useReducer((checked)=> !checked, false)
+ 
+  const [data,setData] = useState(null);
 
-  // const txtTitle = useRef();
-  // const hexColor = useRef();
+  useEffect(() => {
+    fetch('https://api.github.com/users/Rudresh-sisode')
+    .then((response)=> response.json())
+    .then(setData)
+  },[]);
 
-  const [titleProps,resetTitle] = useInput("")
-  const [color,setColor] = useState("#000000");
+  if(data){
+    // return <pre> {JSON.stringify(data,null,2)}</pre>
+    return <GithubUser name={data.name} />
+  }
+  else{
+    return (
+      <h2>Hello, all</h2>
+    );
+  }
 
-
-
-  const submit = (e) =>{
-    e.preventDefault();
-    // const title = txtTitle.current.value;
-    // const color = txtTitle.current.value;
-
-    alert(`${titleProps.value},${color}`);
-    // setTitle("");
-    setColor("#000000")
-  };
-
-  return (
-    <div className="App">
-      <form onSubmit={submit}>
-        <input
-        // ref={txtTitle}
-        value={titleProps.value}
-       
-        type='text'
-        placeholder='color title...'
-        />
-        <input
-        {...titleProps}
-        // ref={hexColor }
-        value={color}
-        // onChange={(event)=>setColor(event.target.value)}
-        type='color'
-        />
-
-        <button>ADD</button>
-        
-      </form>
-    </div>
-  );
 }
 
 export default App;
