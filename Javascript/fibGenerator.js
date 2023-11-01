@@ -20,6 +20,6 @@ console.log(gen.next().value);
 console.log(gen.next().value);
 
 console.log(gen.next().value);
-console.log(gen.next().value);
+// console.log(gen.next().value);
 console.log(gen.next().value);
 console.log(gen.next().value);
