@@ -19,7 +19,7 @@ index = ql.Euribor6M(yts)
 for instrument, tenor, rate in instruments:
     print(instrument,tenor,rate)
     if instrument == 'depo':
-        helpers.append( ql.DepositRateHelper(rate, index) )
+        helpers.append( ql.DepositRateHelper(rate, index))
     if instrument == 'fra':
         monthsToStart = ql.Period(tenor).length()
         helpers.append( ql.FraRateHelper(rate, monthsToStart, index) )

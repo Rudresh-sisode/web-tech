@@ -1,0 +1,6 @@
+instrument,tenor,rate,FR,NPV
+depo,6M,0.025,0.03206338030688434,-342255.78187203105
+fra,3M,0.03,,
+swap,1Y,0.031,,
+swap,2Y,0.032,,
+swap,3Y,0.035,,

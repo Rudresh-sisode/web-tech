@@ -7,7 +7,7 @@ try:
 
     webpage = urlopen(html_text).read()
     soup = BeautifulSoup(webpage,'html.parser')
-    print(soup)
+    # print(soup)
 
     head = soup.find(attrs={'data-rh':"true"}).text
     print(head)

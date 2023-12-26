@@ -597,15 +597,12 @@ def save_data_to_excel(_2d_list_data):
     "CompanyDiversityInclusion","CompanyWorkLife","CompanySeniorManagement","CompanyCompensationBenefits",
     "CompanyCareerOppotunities"]
   
-    
     # df.columns = excel_columns
     writer = pd.ExcelWriter(file_name, engine="xlsxwriter")
     df.to_excel(writer, sheet_name="welcome", index=False)
     writer.save()
 
     print("Saved Excel File Name " + file_name)
-
-
 
 data = getCompanyReviewData()
 save_data_to_excel(data)

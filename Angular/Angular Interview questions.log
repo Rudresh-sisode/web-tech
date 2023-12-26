@@ -1,0 +1,160 @@
+what do you understood by angular?
+
+Angular is a popular open-source JavaScript framework used for 
+building dynamic web applications. It is maintained by Google 
+and provides a structured approach to building web applications
+ by using declarative templates, dependency injection, end-to-end
+  tooling, and integrated best practices. Angular is based on the
+   Model-View-Controller (MVC) architecture and allows developers
+    to build complex applications with ease.
+
+how do you compare angular with reactjs?
+
+Angular is a complete framework that provides a lot of 
+built-in features and tools, such as dependency injection, 
+routing, and form validation. It also uses a template-based 
+syntax for building user interfaces.
+
+ReactJS, on the other hand, is a library that focuses
+ on building user interfaces. It provides a lot of flexibility 
+ and allows developers to build custom solutions using a 
+ component-based architecture.
+
+In summary, Angular is a complete framework that provides 
+a lot of built-in features, while ReactJS is a library that 
+focuses on building user interfaces with a component-based 
+architecture.
+
+explain me the interpolation with an example 
+
+Interpolation is a one-way data binding technique in 
+Angular that allows us to display the value of a component 
+property in the template. We use double curly braces {{ }}
+ to bind the property value to the template.
+
+Here's an example of how to use interpolation in an Angular 
+component:
+
+<...............................................>
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-example',
+  template: `
+    <h1>{{ title }}</h1>
+    <p>{{ message }}</p>
+  `
+})
+export class ExampleComponent {
+  title = 'Example Component';
+  message = 'This is an example of interpolation';
+}
+<.................................................>
+
+In this example, we have a component called ExampleComponent 
+that has a title and message property. We use interpolation to 
+display the values of these properties in the template.
+
+The {{ }} syntax is used to bind the value of a property to 
+the template. In this case, we are binding the title and message 
+properties to the h1 and p elements, respectively.
+
+When the component is rendered, the title and message values 
+will be displayed in the template.
+
+What is property binding in Angular?
+
+Property binding is a one-way data binding technique in 
+Angular that allows us to set the value of an HTML element 
+property based on a component property. We use square
+ brackets [] to bind the property value to the element.
+
+Here's an example of how to use property binding in an 
+Angular component:
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-example',
+  template: `
+    <img [src]="imageUrl" [alt]="imageAlt">
+  `
+})
+export class ExampleComponent {
+  imageUrl = 'https://example.com/image.jpg';
+  imageAlt = 'Example Image';
+}
+
+In this example, we have a component called ExampleComponent 
+that has an imageUrl and imageAlt property. We use property
+ binding to set the src and alt attributes of an img element 
+ in the template.
+
+The [ ] syntax is used to bind the value of a property to an 
+element. In this case, we are binding the imageUrl and imageAlt 
+properties to the src and alt attributes of the img element, 
+respectively.
+
+When the component is rendered, the src and alt attributes of 
+the img element will be set to the values of the imageUrl and 
+imageAlt properties, respectively.
+
+What is event binding in Angular?
+
+Event binding is a one-way data binding technique in
+ Angular that allows us to respond to user events, such 
+ as clicks or keystrokes. We use parentheses () to bind the 
+ event to a method in the component class.
+
+Here's an example of how to use event binding in an Angular 
+component:
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-example',
+  template: `
+    <button (click)="onClick()">Click me</button>
+  `
+})
+export class ExampleComponent {
+  onClick() {
+    console.log('Button clicked');
+  }
+}
+
+In this example, we have a component called ExampleComponent
+ that has a onClick method. We use event binding to bind the 
+ click event of a button element to the onClick method.
+
+The ( ) syntax is used to bind an event to a method in the 
+component class. In this case, we are binding the click event 
+of the button element to the onClick method.
+
+When the button element is clicked, the onClick method will 
+be called and the message "Button clicked" will be logged to 
+the console.
+
+
+Q) Explain the life cycle of Angular?
+Q) What are the directives explain all with examples?
+Q) How do we creates the custom directives? and whare are the chances to 
+create the custom directives?
+Q) Agile methodology?
+Q) What is the difference between Agile and Waterfall?
+Q) What is the Pipes in angular? types?
+Q) What is the difference between pure and impure pipes?
+Q) what are the interceptors?
+Q) what are the error handling in centralised way?
+Q) Explain me the lazy loading with example?
+Q) Explain me the routing with example?
+Q) Explain me the routing guards with example?
+Q) Explain me the routing resolvers with example?
+Q) Explain me the Angular Structure?
+Q) How changedetection works in angular?
+Q) What is the subject in angular?
+Q) What is the difference between subject and behaviour subject?
+Q) What is the difference between subject and replay subject?
+Q) What is the difference between subject and async subject?
+Q) What is the difference between subject and publish subject?
+Q) What is Observables?
+Q) How can I manage the large data in the angular which i get from the backend?

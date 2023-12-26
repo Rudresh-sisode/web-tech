@@ -22,3 +22,26 @@
 SELECT score, DENSE_RANK() OVER (ORDER BY score DESC) AS score_rank
 FROM Scores
 ORDER BY score DESC;
+
+
+select tweet_id from Tweets where length(content) > 15
+
+select eu.unique_id, e.name from employees as e left join employeeuni as eu
+on e.id = eu.id
+
+
+
+-- selecting the result on comparing the
+-- previous date's record
+
+SELECT id, recordDate, temparature
+FROM(
+    SELECT id, recordDate, temperature,
+    LAG(temperature) OVER (ORDER BY recordDate)v_temperature
+)
+
+
+
+
+
+

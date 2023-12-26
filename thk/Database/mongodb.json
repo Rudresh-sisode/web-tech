@@ -1,0 +1,16 @@
+db.collection.insert({
+    name:"rudresh",
+    profile:"software engineer"
+});
+
+db.collection.update({
+    name:"rudresh"
+},{
+    $set:{age:32}
+})
+
+db.collection.find({name:"rudresh"});
+
+//create an index
+db.collection.createIndex({fieldName:1});
+
