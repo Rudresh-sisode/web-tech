@@ -7,4 +7,4 @@ function sqrt(x){
     return low - 1;
 }
 
-console.log(sqrt(14));
+console.log(sqrt(4));
