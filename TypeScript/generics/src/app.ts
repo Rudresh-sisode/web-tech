@@ -25,3 +25,18 @@
  }
 
  extractAndConvert({name:'rudresh'},'name')
+
+
+ interface CourseGoal{
+    title:string;
+    description:string;
+    completeuntil:Date;
+ }
+
+ function createCourseGoal(title:string,description:string,date:Date):CourseGoal{
+    let courseGoal: Partial<CourseGoal> = {};
+    courseGoal.title = title;
+    courseGoal.description = description;
+    courseGoal.completeuntil = date;
+    return courseGoal as CourseGoal;
+ }
