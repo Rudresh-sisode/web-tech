@@ -31,6 +31,9 @@ type Admin = {
     }
     return a + b;
   }
+
+  let userInput = undefined;
+  let storedDate = userInput ?? 'default';
   
   type UnknownEmployee = Employee | Admin;
   
