@@ -7,11 +7,17 @@ function Logger(logString:string){
 }
 
 function withTemplate(template:string,hookId:string){
-    return function(_:Function){
-        const hookEl = document.getElementById(hookId);
-        if(hookEl){
-            hookEl.innerHTML = template;
+    return function<T extends {new (...args:any[]):{name:string}}>(originalConstructor:T){
+        return class extends originalConstructor{
+            constructor(..._:any[]){
+                super();
+                const hookEl = document.getElementById(hookId);
+                if(hookEl){
+                    hookEl.innerHTML = template;
+                }
+            }
         }
+        
     }
 }
 
@@ -22,7 +28,6 @@ class Person{
 
     constructor(){
         console.log('Creating the person object');
-
     }
 }
 
@@ -33,7 +38,11 @@ function Log(target:any,propertyName:string | Symbol){
 
 //Accesor decorator
 function Log2(target:any, propertyName:string, descriptor:PropertyDescriptor){
-    
+
+}
+
+function Log3(target:any,name:string | Symbol, position:number){
+
 }
 
 class Product{
@@ -41,5 +50,9 @@ class Product{
     title:string;
     constructor(t:string){
         this.title = t;
+    }
+
+    display(@Log3 value:string){
+
     }
 }
