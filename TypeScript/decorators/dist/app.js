@@ -58,7 +58,7 @@ __decorate([
 __decorate([
     __param(0, Log3)
 ], Product.prototype, "display", null);
-function Autobind(target, methodName, descriptor) {
+function Autobind(_, _2, descriptor) {
     const originalMethod = descriptor.value;
     const adjDescriptor = {
         configurable: true,
@@ -84,4 +84,20 @@ __decorate([
 const pp = new Printer();
 const button = document.querySelector('button');
 button.addEventListener('click', pp.showMessage);
+class Course {
+    constructor(t, p) {
+        this.price = p;
+        this.title = t;
+    }
+}
+const courseForm = document.querySelector('form');
+courseForm === null || courseForm === void 0 ? void 0 : courseForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const titleEl = document.getElementById('title');
+    const priceEl = document.getElementById('price');
+    const price = +priceEl.value;
+    const title = titleEl.value;
+    const createdCourse = new Course(title, price);
+    console.log(createdCourse);
+});
 //# sourceMappingURL=app.js.map
