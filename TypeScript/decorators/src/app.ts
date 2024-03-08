@@ -83,9 +83,50 @@ const pp  = new Printer();
 const button = document.querySelector('button')!;
 button.addEventListener('click',pp.showMessage);
 
+interface ValidatorConfig{
+    [property:string]:{
+        [validatorProp:string]:string[] // ['required','positive']
+    }
+}
+
+const registerValidators: ValidatorConfig = {};
+
+function Required(target:any,propName:string){
+    registerValidators[target.constructor.name] = { //this line will take the class name, because target will have class's contrctor and that has class name, on what class it is.
+        [propName] : ['required']
+    }
+}
+
+function PositiveNumber(target:any,propName:string){
+    console.log("Positive Decorator Target",target, " prop name ",propName)
+    registerValidators[target.constructor.name] = { //this line will take the class name, because target will have class's contrctor and that has class name, on what class it is.
+        [propName] : ['positive']
+    }
+}
+
+function validate(obj:any){
+    const objValidatorConfig = registerValidators[obj.constructor.name];
+    console.log('object validator config ',objValidatorConfig)
+    if(!objValidatorConfig){
+        return true;
+    }
+    for(const prop  in objValidatorConfig ){
+        for(const validator of objValidatorConfig[prop]){
+            switch(validator){
+                case 'required':
+                    return !!obj[prop];
+                case 'positive':
+                    return obj[prop] > 0;
+            }
+        }
+    }
+    return true; 
+}
 
 class Course{
+    @Required
     title:string;
+    @PositiveNumber
     price:number;
 
     constructor(t:string,p:number){
@@ -104,6 +145,9 @@ courseForm?.addEventListener('submit',event =>{
     const title = titleEl.value;
 
     const createdCourse = new Course(title,price);
+    if(!validate(createdCourse)){
+        alert('Invalid input, Please try again');
+    }
     console.log(createdCourse);
 })
 

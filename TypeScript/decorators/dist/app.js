@@ -84,12 +84,48 @@ __decorate([
 const pp = new Printer();
 const button = document.querySelector('button');
 button.addEventListener('click', pp.showMessage);
+const registerValidators = {};
+function Required(target, propName) {
+    registerValidators[target.constructor.name] = {
+        [propName]: ['required']
+    };
+}
+function PositiveNumber(target, propName) {
+    console.log("Positive Decorator Target", target, " prop name ", propName);
+    registerValidators[target.constructor.name] = {
+        [propName]: ['positive']
+    };
+}
+function validate(obj) {
+    const objValidatorConfig = registerValidators[obj.constructor.name];
+    console.log('object validator config ', objValidatorConfig);
+    if (!objValidatorConfig) {
+        return true;
+    }
+    for (const prop in objValidatorConfig) {
+        for (const validator of objValidatorConfig[prop]) {
+            switch (validator) {
+                case 'required':
+                    return !!obj[prop];
+                case 'positive':
+                    return obj[prop] > 0;
+            }
+        }
+    }
+    return true;
+}
 class Course {
     constructor(t, p) {
         this.price = p;
         this.title = t;
     }
 }
+__decorate([
+    Required
+], Course.prototype, "title", void 0);
+__decorate([
+    PositiveNumber
+], Course.prototype, "price", void 0);
 const courseForm = document.querySelector('form');
 courseForm === null || courseForm === void 0 ? void 0 : courseForm.addEventListener('submit', event => {
     event.preventDefault();
@@ -98,6 +134,9 @@ courseForm === null || courseForm === void 0 ? void 0 : courseForm.addEventListe
     const price = +priceEl.value;
     const title = titleEl.value;
     const createdCourse = new Course(title, price);
+    if (!validate(createdCourse)) {
+        alert('Invalid input, Please try again');
+    }
     console.log(createdCourse);
 });
 //# sourceMappingURL=app.js.map
