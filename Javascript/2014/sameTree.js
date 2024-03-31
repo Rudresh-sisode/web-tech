@@ -31,3 +31,5 @@ q.right = new TreeNode( 5);
 
 let result = isSameTree(p,q);
 console.log(result);
+
+isSameTree()

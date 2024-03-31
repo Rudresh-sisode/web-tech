@@ -1,0 +1,108 @@
+//we gone through the oop's concept
+
+// today, I'll cover 
+// How System.out.println/print() works in Java?
+ 
+//  System.out.println("writes a story"+ variable); //prints on console
+
+// console.log("writes a story",)
+
+// java -> javascript -> python -> new programming (inherit few basic , new tools)
+
+// syntax ,loop, function -> indentation
+
+// // console.log("We are learning");
+
+
+// System.out.println() // java
+
+// console.log() //javascript
+
+// System.out.println("Sun and moon in the sky"); // work on javascript engine follow the specification of EcmaScript, in all ecmascript no-where System is define.
+
+//javascript engine is a program which is written in c/c++, which knows how the 
+//javascript behaviour
+
+// console.log("Welcome to the world"); //
+
+// Java programming
+
+
+
+//Memory optimization 
+
+//javascript code
+class System{
+  static out = new System(); //instance of the class 
+  // class's instance referencing
+  // object creation
+  
+  //javascript is weakly type language 
+   println(yourValue){
+    console.log(yourValue);
+//     cout<<
+  }
+  
+   print(){
+    
+  }
+  
+  //my custom method
+  rudresh(num1,num2){
+    console.log("addition of two ",num1+num2)
+  }
+  
+  //nth number of method
+ 
+}
+
+System.out.println("Welcome to the earth!");
+
+// System.out.rudresh(23,34);
+
+//JVM->JRE->interpreter of java is written in c/c++
+
+//in Oops programming static variables/methods are accesible with class name directly.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
