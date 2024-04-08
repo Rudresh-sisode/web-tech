@@ -18,7 +18,7 @@ function WithTemplate(template: string, hookId: string) {
   }
 }
 
-// @Logger('person decorator')
+@Logger('person decorator')
 @WithTemplate('<h1>hello and welcome to the site</h1>','app')
 class Person{
   name = 'Rudresh Sisodiya';
