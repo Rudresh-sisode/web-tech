@@ -9,19 +9,22 @@ function Logger(logString: string) {
 
 function WithTemplate(template: string, hookId: string) {
   console.log("template decorator")
-  return function (constructor: any) {
-    const hookEl = document.getElementById(hookId);
-    const p = new constructor();
-    if (hookEl) {
-      hookEl.innerHTML = template
-      // hookEl.querySelector('h1')?.textContent = p.name;
-      hookEl.querySelector('h1')!.textContent = p.name;
-
+  return function <T extends { new(...args: any[]): { name: string } }>(originalConstructor: T) {
+    return class extends originalConstructor {
+      constructor(..._: any[]) {
+        super();
+        console.log("Rendering template");
+        const hookEl = document.getElementById(hookId);
+        if (hookEl) {
+          hookEl.innerHTML = template;
+          hookEl.querySelector('h1')!.textContent = this.name;
+        }
+      }
     }
   }
 }
 
-@Logger('person decorator')
+@Logger('person decorator') 
 @WithTemplate('<h1>hello and welcome to the site</h1>','app')
 class Person{
   name = 'Rudresh Sisodiya';
@@ -44,7 +47,7 @@ function Log(target:any, propertyName: string | Symbol) {
 
 function Log2(target: any, propertyName: string, descriptor: PropertyDescriptor) {
   
-  console.log("Parameter Decorator ");
+  console.log("accessor Decorator ");
 
   console.log("Target ", target);
 
@@ -65,24 +68,16 @@ function Log3(target: any, propertyName: string | Symbol, descriptor: PropertyDe
   console.log("descriptor ", descriptor);
 }
 
-// function Log3(target: any, propertyName: string | Symbol, descriptor: PropertyDescriptor) {
-//   console.log("Method decorator");
 
-//   console.log("Target ", target);
-
-//   console.log("property  ", propertyName);
-
-//   console.log("descriptor ", descriptor);
-// }
 
 function Log4(target: any, name: string, position: number) {
-  console.log("Method decorator");
+  console.log(" *******************************Parameter decorator");
 
   console.log("Target ", target);
 
   console.log("property  ", name);
 
-  console.log("descriptor ", position);
+  console.log("position ", position);
 }
 
 class Product{
@@ -112,7 +107,7 @@ class Product{
 
 
   @Log3
-  getPriceWithTax(tax: number) {
+  getPriceWithTax(@Log4 tax: number) {
     return this._price * (1 + tax);
   }
 
