@@ -1,0 +1,15 @@
+What is Angular and why would you use it?
+Can you explain the difference between AngularJS and Angular?
+What are components in Angular?
+What are directives in Angular? Can you name some of the built-in directives?
+What is data binding in Angular? Can you explain the difference between one-way and two-way data binding?
+What is dependency injection in Angular and how does it work?
+What is the Angular CLI and what can you do with it?
+What are services in Angular and when would you use them?
+Can you explain how routing works in Angular?
+What is the difference between a template and a templateURL?
+How would you handle errors in Angular?
+What are pipes in Angular and when would you use them?
+Can you explain how change detection works in Angular?
+What is the difference between an observable and a promise?
+How would you optimize an Angular application for better performance
