@@ -5,3 +5,5 @@ import * as userController from '../controller/embedding';
 // import roleAuchCheck from '../middleware/role-access-middleware';
 
 router.post('/embedd-data', userController.doEmbeddingData);
+
+export default router;

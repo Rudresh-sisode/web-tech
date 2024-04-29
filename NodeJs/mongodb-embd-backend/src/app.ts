@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
+import embedRoutes from './routes/embed.routes';
+
 // import userRoutes from './routes/user.routes';
 
 
@@ -16,7 +18,7 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 
-// app.use('/admin/users', userRoutes);
+app.use('/embedding', embedRoutes);
 // app.use('/auth', userRoutes);
 
 // app.get('/testi-api', (req, res) => {
