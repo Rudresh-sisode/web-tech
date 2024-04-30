@@ -2,6 +2,8 @@ import { debug } from "util";
 import app from "./app";
 import http from "http";
 
+import connectDb from "./utils/connectDb";
+
 require('dotenv').config();
 
 
@@ -56,8 +58,20 @@ const server = http.createServer(app);
 server.on("error", onError);
 server.on("listening", onListening);
 
-console.log("\n***************************************");
-console.log(`***\tserver port ${port}\t*******`);
-server.listen(port);
-console.info("***\tserver successfully started! **");
-console.log("***************************************");
+
+connectDb()
+  .then(() => {
+    console.log("Connected to the database");
+    console.log("\n***************************************");
+    console.log(`***\tserver port ${port}\t*******`);
+    server.listen(port);
+    console.info("***\tserver successfully started! **");
+    console.log("***************************************");
+  })
+  .catch((error: any) => {
+    console.log("Error connecting to the database", error.message);
+  });
+
+
+
+

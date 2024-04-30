@@ -15,6 +15,10 @@ const doEmbeddingData = async (req: any, res: any, next: any) => { // post reque
 
   try {
     const text = req.body.text;
+
+    
+
+
     const response = await client.embedText({
       model: MODEL_NAME,
       text: text,

@@ -1,0 +1,2204 @@
+[
+  {
+    "Id": 0,
+    "TopicId": "fd54a3b0-6412-4c6e-9aa2-73b191a24b99",
+    "TopicName": "Exceed IT Services",
+    "Slug": "exceed-it-services"
+  },
+  {
+    "Id": 1,
+    "TopicId": "4ed53f20-dcaf-4556-b419-6b78cd89add7",
+    "TopicName": "Dynatrace",
+    "Slug": "dynatrace-1"
+  },
+  {
+    "Id": 2,
+    "TopicId": "1de098a2-91e0-4c91-9d66-0a2fc5bdb2ac",
+    "TopicName": "Quest",
+    "Slug": "quest"
+  },
+  {
+    "Id": 3,
+    "TopicId": "1289708e-ff1f-44c3-af12-d72e4e7be140",
+    "TopicName": "One Identity ",
+    "Slug": "one-identity-"
+  },
+  {
+    "Id": 4,
+    "TopicId": "9d519b44-ecdc-4aad-ae76-f5aed2451ed0",
+    "TopicName": "Delinea",
+    "Slug": "delinea-1"
+  },
+  {
+    "Id": 5,
+    "TopicId": "77631a6b-b339-4d86-bdf5-341db81bb87c",
+    "TopicName": "Nlyte",
+    "Slug": "nlyte-1"
+  },
+  {
+    "Id": 6,
+    "TopicId": "c73381aa-309b-4803-b0b9-3afb44201694",
+    "TopicName": "Safetech Innovations",
+    "Slug": "safetech-innovations"
+  },
+  {
+    "Id": 7,
+    "TopicId": "521347e1-365f-4fa4-b4ec-4126e0b5b422",
+    "TopicName": "Trend Micro",
+    "Slug": "trend-micro"
+  },
+  {
+    "Id": 8,
+    "TopicId": "0b67ee39-c494-40a7-871f-6e429eec6488",
+    "TopicName": "Qlik",
+    "Slug": "qlik"
+  },
+  {
+    "Id": 9,
+    "TopicId": "0f114a58-8543-4beb-be98-0e82a4221cca",
+    "TopicName": "Skyvia",
+    "Slug": "skyvia"
+  },
+  {
+    "Id": 10,
+    "TopicId": "fe8de8f9-7d29-4eb1-bbab-a7f31dde6227",
+    "TopicName": "Swivel Secure",
+    "Slug": "swivel-secure"
+  },
+  {
+    "Id": 11,
+    "TopicId": "1a781de1-1dc1-48b6-8b32-1e4a082b1b1c",
+    "TopicName": "Infosys",
+    "Slug": "infosys"
+  },
+  {
+    "Id": 12,
+    "TopicId": "e9053d4d-abaa-40fb-9212-ea68108e82b3",
+    "TopicName": "SAPient Technologies & Consulting Limited",
+    "Slug": "sapient-technologies-consulting-limited"
+  },
+  {
+    "Id": 13,
+    "TopicId": "9e663d8b-5b56-4fa5-908b-296fae2250cd",
+    "TopicName": "CDN Software Solutions Pvt. Ltd.",
+    "Slug": "cdn-software-solutions-pvt-ltd"
+  },
+  {
+    "Id": 14,
+    "TopicId": "d56bedd7-7930-4e7a-a7ee-e521d63c81c2",
+    "TopicName": "Soft Suave Technologies",
+    "Slug": "softsuave-technologies-private-limited"
+  },
+  {
+    "Id": 15,
+    "TopicId": "a831b0d4-b020-456d-b70e-d1bc0ccaa58f",
+    "TopicName": "Postis",
+    "Slug": "postis"
+  },
+  {
+    "Id": 16,
+    "TopicId": "eb83b894-7c85-4c65-bc0d-e7a53a060769",
+    "TopicName": "Keross",
+    "Slug": "keross"
+  },
+  {
+    "Id": 17,
+    "TopicId": "eb208c2f-d4e2-4858-a592-5dd7963a2914",
+    "TopicName": "Sysberries Technology",
+    "Slug": "syberries"
+  },
+  {
+    "Id": 18,
+    "TopicId": "2177be74-b288-4037-9562-0d4753d34981",
+    "TopicName": "Pentagram Technologies",
+    "Slug": "pentagram-technologies"
+  },
+  {
+    "Id": 19,
+    "TopicId": "5358e01e-ac79-48e6-a01d-d30f07e3cad9",
+    "TopicName": "Prologix",
+    "Slug": "prologix"
+  },
+  {
+    "Id": 20,
+    "TopicId": "7044140a-7b2a-4f85-ae7c-44ea958b29b9",
+    "TopicName": "CoalDev",
+    "Slug": "coaldev"
+  },
+  {
+    "Id": 21,
+    "TopicId": "9f849b05-7392-4bea-946b-8d53f5350465",
+    "TopicName": "Medas",
+    "Slug": "medas"
+  },
+  {
+    "Id": 22,
+    "TopicId": "2d271560-bb8c-419c-b305-6d9a38fadbc2",
+    "TopicName": "Vosco",
+    "Slug": "vosco"
+  },
+  {
+    "Id": 23,
+    "TopicId": "c7ffd1fd-754c-4cfb-ad28-c9d419a5b6c3",
+    "TopicName": "Diceus",
+    "Slug": "diceus"
+  },
+  {
+    "Id": 24,
+    "TopicId": "43ab4ac3-3053-468f-ae79-4745ee20ecd2",
+    "TopicName": "Digital Hub",
+    "Slug": "digital-hub"
+  },
+  {
+    "Id": 25,
+    "TopicId": "0f73ef18-8749-4c98-b6bd-f2eba66d71cf",
+    "TopicName": "Future Talent Technology",
+    "Slug": "future-talent-technology"
+  },
+  {
+    "Id": 26,
+    "TopicId": "3ced3100-1a8c-4955-887a-96d190127b03",
+    "TopicName": "Penta",
+    "Slug": "penta"
+  },
+  {
+    "Id": 27,
+    "TopicId": "64593d00-f4cb-490c-9269-b52f9b284ce2",
+    "TopicName": "Orixcom",
+    "Slug": "orixcom"
+  },
+  {
+    "Id": 28,
+    "TopicId": "4565ab28-c1d3-47e6-b22d-5a5ae9755d0e",
+    "TopicName": "Business Experts Gulf",
+    "Slug": "business-experts-gulf"
+  },
+  {
+    "Id": 29,
+    "TopicId": "121a1e13-ec33-45c0-88ad-5a8e9e50cec7",
+    "TopicName": "Lattice",
+    "Slug": "lattice"
+  },
+  {
+    "Id": 30,
+    "TopicId": "da7c5e41-cac8-4024-b3f3-90539f700c00",
+    "TopicName": "Tricent",
+    "Slug": "tricent"
+  },
+  {
+    "Id": 31,
+    "TopicId": "cb5c41f9-1983-44f6-90b1-241f8e5a36e4",
+    "TopicName": "Unlock Growth with Exceeders Tenders",
+    "Slug": "unlock-growth-with-exceeders-tenders"
+  },
+  {
+    "Id": 32,
+    "TopicId": "f5b3de02-8f3c-47ab-8dbd-ff69b9d788ca",
+    "TopicName": "AmiViz",
+    "Slug": "amiviz"
+  },
+  {
+    "Id": 33,
+    "TopicId": "cbd3c083-d105-4603-8f5c-92e81fbfef1e",
+    "TopicName": "Silverline Networks",
+    "Slug": "silverline-networks"
+  },
+  {
+    "Id": 34,
+    "TopicId": "b296ec6e-f4ea-44e3-b84d-ef85438a51bc",
+    "TopicName": "Netway Dubai",
+    "Slug": "netway-dubai"
+  },
+  {
+    "Id": 35,
+    "TopicId": "501fcfa3-9392-4507-89c9-666830fc9a7f",
+    "TopicName": "Codewave",
+    "Slug": "codewave"
+  },
+  {
+    "Id": 36,
+    "TopicId": "69893d95-4e93-4fee-9e82-c287549cfa00",
+    "TopicName": "Cloud Technologies",
+    "Slug": "cloud-technologies"
+  },
+  {
+    "Id": 37,
+    "TopicId": "9a541dbd-0307-4f96-91d1-6584a8e24012",
+    "TopicName": "Infotiz",
+    "Slug": "infotiz"
+  },
+  {
+    "Id": 38,
+    "TopicId": "cb5bae16-2581-42df-a49d-32f82969a76a",
+    "TopicName": "Tranetech",
+    "Slug": "tranetech"
+  },
+  {
+    "Id": 39,
+    "TopicId": "435a8e7e-4fa2-4a88-bb4d-eaab27fa248b",
+    "TopicName": "Azinova Technologies",
+    "Slug": "azinova-technologies"
+  },
+  {
+    "Id": 40,
+    "TopicId": "6e360966-c9df-43ab-9c2d-afd096fb0dc7",
+    "TopicName": "Intertec Systems",
+    "Slug": "intertec"
+  },
+  {
+    "Id": 41,
+    "TopicId": "66a6611e-f3c7-4b1c-b69b-baeb06277221",
+    "TopicName": "Swift IT",
+    "Slug": "swift-it"
+  },
+  {
+    "Id": 42,
+    "TopicId": "589b4fcf-5357-4a9e-83eb-732bee8f80a8",
+    "TopicName": "VAD Technologies",
+    "Slug": "vad-technologies"
+  },
+  {
+    "Id": 43,
+    "TopicId": "2852f8ac-1845-4ad2-b91e-f093cfca5e9f",
+    "TopicName": "Hyperlink InfoSystem",
+    "Slug": "hyperlink-infosystem"
+  },
+  {
+    "Id": 44,
+    "TopicId": "fa52268c-6ad8-4124-a675-91cbb92411f6",
+    "TopicName": "DataRobot",
+    "Slug": "datarobot"
+  },
+  {
+    "Id": 45,
+    "TopicId": "7d7667fd-37ae-45b4-bec8-3ac192fe861d",
+    "TopicName": "Datagram",
+    "Slug": "datagram"
+  },
+  {
+    "Id": 46,
+    "TopicId": "8f0a0c43-3efc-40bf-8f40-7d57cd8c5e05",
+    "TopicName": "Veritas Technologies",
+    "Slug": "veritas-technologies"
+  },
+  {
+    "Id": 47,
+    "TopicId": "82104562-fc04-40ff-b436-60aaa4fdf0ac",
+    "TopicName": "Vertiv",
+    "Slug": "vertiv"
+  },
+  {
+    "Id": 48,
+    "TopicId": "c8c3edfc-4cc7-4bd9-9126-32cdbd3c33d1",
+    "TopicName": "Xerox",
+    "Slug": "xerox"
+  },
+  {
+    "Id": 49,
+    "TopicId": "21d42639-5754-440e-8eda-fc33b3a7da3b",
+    "TopicName": "Powell Software",
+    "Slug": "powell-software"
+  },
+  {
+    "Id": 50,
+    "TopicId": "24ce05e4-16cf-4e5a-88d9-de9a165260ab",
+    "TopicName": "Lookout",
+    "Slug": "lookout"
+  },
+  {
+    "Id": 51,
+    "TopicId": "39b7376f-29d7-4c55-a6c8-0a0f2739927a",
+    "TopicName": "ZeroFox",
+    "Slug": "zerofox"
+  },
+  {
+    "Id": 52,
+    "TopicId": "ee42e64a-dc54-4b82-8b3f-52e949d94002",
+    "TopicName": "YesWeHack",
+    "Slug": "yeswehack"
+  },
+  {
+    "Id": 53,
+    "TopicId": "f16bbf1a-f283-4a28-90fc-3b903ecd2f2a",
+    "TopicName": "IBM",
+    "Slug": "ibm"
+  },
+  {
+    "Id": 54,
+    "TopicId": "1c9a6aeb-2efe-47ef-9e23-3b133d42e080",
+    "TopicName": "Meta",
+    "Slug": "meta"
+  },
+  {
+    "Id": 55,
+    "TopicId": "c91a442d-3322-49d3-980b-22d18ca11e82",
+    "TopicName": "SAP",
+    "Slug": "sap"
+  },
+  {
+    "Id": 56,
+    "TopicId": "e6e7cba6-b960-43b4-a06b-c9eec9fbbd29",
+    "TopicName": "Oracle",
+    "Slug": "oracle"
+  },
+  {
+    "Id": 57,
+    "TopicId": "c835cd05-84c0-46fa-b0cf-d50e92c1b18b",
+    "TopicName": "AWS",
+    "Slug": "aws"
+  },
+  {
+    "Id": 58,
+    "TopicId": "86a60140-2e87-439d-a4d9-5eada96de4e5",
+    "TopicName": "Swisscows",
+    "Slug": "swisscows"
+  },
+  {
+    "Id": 59,
+    "TopicId": "663160e8-0a34-4e85-85ee-2e93b9d5e81c",
+    "TopicName": "Nityo Infotech",
+    "Slug": "nityo-infotech"
+  },
+  {
+    "Id": 60,
+    "TopicId": "7665448f-2f53-4a5d-a950-0ec3f97bd87d",
+    "TopicName": "Brihteja, d.o.o.",
+    "Slug": "brihteja-doo"
+  },
+  {
+    "Id": 61,
+    "TopicId": "0eb002a1-e243-497f-b382-8f5325890986",
+    "TopicName": "Inovola",
+    "Slug": "inovola"
+  },
+  {
+    "Id": 62,
+    "TopicId": "45699a74-c5dd-4d97-b7f5-93b9e8c654a2",
+    "TopicName": "Axes Software",
+    "Slug": "axes-software"
+  },
+  {
+    "Id": 63,
+    "TopicId": "083984ca-dea0-471d-83a8-9f906e0631f5",
+    "TopicName": "UnderDefense",
+    "Slug": "underdefense"
+  },
+  {
+    "Id": 64,
+    "TopicId": "03bb7ce7-3666-45b8-9256-87aa24fffc1f",
+    "TopicName": "Apsolon",
+    "Slug": "apsolon"
+  },
+  {
+    "Id": 65,
+    "TopicId": "04450efc-60ec-44ef-b26f-6ab4712ea61a",
+    "TopicName": "Gramener",
+    "Slug": "gramener"
+  },
+  {
+    "Id": 66,
+    "TopicId": "f01e172a-1202-4331-a4f0-ad1fc18a586a",
+    "TopicName": "Secureworks",
+    "Slug": "secureworks-1"
+  },
+  {
+    "Id": 67,
+    "TopicId": "8987769b-57e8-4b29-b6c7-ce7c24261f3a",
+    "TopicName": "Panduit",
+    "Slug": "panduit"
+  },
+  {
+    "Id": 68,
+    "TopicId": "5d72951d-1c8a-4b90-b9fc-e58bba720562",
+    "TopicName": "Citrix",
+    "Slug": "citrix"
+  },
+  {
+    "Id": 69,
+    "TopicId": "73be89ce-925b-48a5-a0ac-7006c0b8e46c",
+    "TopicName": "XOPA",
+    "Slug": "xopa"
+  },
+  {
+    "Id": 70,
+    "TopicId": "f0bc1032-2d0a-44f6-83eb-cbc3cac46678",
+    "TopicName": "Liveperson",
+    "Slug": "liveperson"
+  },
+  {
+    "Id": 71,
+    "TopicId": "6ea9d232-5e1e-4fd0-a53e-91cdb0b48060",
+    "TopicName": "Veeam",
+    "Slug": "veeam"
+  },
+  {
+    "Id": 72,
+    "TopicId": "066f9d36-a42c-481a-87c0-02259fa161df",
+    "TopicName": "Nexthink",
+    "Slug": "nexthink"
+  },
+  {
+    "Id": 73,
+    "TopicId": "4d1ffb54-70b5-424b-ab4b-3a0fd8d3084e",
+    "TopicName": "Darktrace",
+    "Slug": "darktrace"
+  },
+  {
+    "Id": 74,
+    "TopicId": "b4ebba04-cb88-49f2-92af-f845b39be5bd",
+    "TopicName": "ClearSwift",
+    "Slug": "clearswift"
+  },
+  {
+    "Id": 75,
+    "TopicId": "ac80259b-57ce-4e57-b091-f0916be7d359",
+    "TopicName": "Dataiku",
+    "Slug": "dataiku"
+  },
+  {
+    "Id": 76,
+    "TopicId": "f9a5c68e-d493-4266-8bad-e894fc5c94cd",
+    "TopicName": "Databricks",
+    "Slug": "databricks"
+  },
+  {
+    "Id": 77,
+    "TopicId": "fb8d0761-3f55-4d4d-a0c6-e83dd1a4c471",
+    "TopicName": "Cloudgate Consulting",
+    "Slug": "cloudgate-consulting"
+  },
+  {
+    "Id": 78,
+    "TopicId": "ea6ab20d-dbf6-464e-b339-4464c5c5ac55",
+    "TopicName": "Broadcom",
+    "Slug": "broadcom"
+  },
+  {
+    "Id": 79,
+    "TopicId": "4698bcdc-26ca-41f1-b34f-0122aaeef110",
+    "TopicName": "Cloudera ",
+    "Slug": "cloudera-"
+  },
+  {
+    "Id": 80,
+    "TopicId": "f861e879-d34c-4c85-af90-fcdcc08b9539",
+    "TopicName": "F5 Networks",
+    "Slug": "f5-networks"
+  },
+  {
+    "Id": 81,
+    "TopicId": "e8d70c24-7dde-4bdc-8bea-028e4288b7d7",
+    "TopicName": "Informatica",
+    "Slug": "informatica-"
+  },
+  {
+    "Id": 82,
+    "TopicId": "662461f5-f80d-41e8-8c3d-553d678f8893",
+    "TopicName": "Red Hat Software",
+    "Slug": "red-hat-software"
+  },
+  {
+    "Id": 83,
+    "TopicId": "6fb1568a-fd2c-4873-a761-50cd5c7da7c4",
+    "TopicName": "Atlassian",
+    "Slug": "atlassian"
+  },
+  {
+    "Id": 84,
+    "TopicId": "1a2a257d-9fbd-4e19-93ed-2116e652b5f3",
+    "TopicName": "Kofax",
+    "Slug": "kofax"
+  },
+  {
+    "Id": 85,
+    "TopicId": "ff2be1fe-77d7-4435-ae0d-6d9c5cff350c",
+    "TopicName": "Automation Anywhere",
+    "Slug": "automation-anywhere-1"
+  },
+  {
+    "Id": 86,
+    "TopicId": "9f9509b5-861d-4389-bf08-04124f134207",
+    "TopicName": "Microsoft",
+    "Slug": "microsoft"
+  },
+  {
+    "Id": 87,
+    "TopicId": "19012ab4-943d-4094-90d8-de23391e8b36",
+    "TopicName": "Contact Us",
+    "Slug": "contact-us"
+  },
+  {
+    "Id": 88,
+    "TopicId": "1c626e76-f9e1-4c3e-9f88-4e9d17857320",
+    "TopicName": "ITEC",
+    "Slug": "itec"
+  },
+  {
+    "Id": 89,
+    "TopicId": "79880fd7-f713-4d72-ad34-6b6c9712bee6",
+    "TopicName": "TestingXperts",
+    "Slug": "testingxperts"
+  },
+  {
+    "Id": 90,
+    "TopicId": "bcedfb30-46ad-45ac-8ace-fc17a522f001",
+    "TopicName": "SailPoint",
+    "Slug": "sailpoint-1"
+  },
+  {
+    "Id": 91,
+    "TopicId": "5c36f19b-3501-491f-a2c4-3b7bb6c3005b",
+    "TopicName": "ERAM HR Solutions",
+    "Slug": "eram-hr-solutions"
+  },
+  {
+    "Id": 92,
+    "TopicId": "f173364d-a15e-4ac6-a2ef-0f1887499e03",
+    "TopicName": "Fleet Management Systems International (FMSi)",
+    "Slug": "fleet-management-systems-international-fmsi"
+  },
+  {
+    "Id": 93,
+    "TopicId": "c128639b-ee37-4bdb-b82f-0f6c0e068989",
+    "TopicName": "SoftwareONE",
+    "Slug": "softwareone-1"
+  },
+  {
+    "Id": 94,
+    "TopicId": "359c406f-da51-40c4-98db-92365d90214f",
+    "TopicName": "The Virtulab",
+    "Slug": "the-virtulab"
+  },
+  {
+    "Id": 95,
+    "TopicId": "9d771b85-6514-4854-8829-19b2462d42dd",
+    "TopicName": "Datwyler IT Infra",
+    "Slug": "datwyler-it-infra"
+  },
+  {
+    "Id": 96,
+    "TopicId": "bec92058-fb74-4c58-9e0c-644f0ef812a1",
+    "TopicName": "Fumo Communications Middle East",
+    "Slug": "fumo-communications-middle-east"
+  },
+  {
+    "Id": 97,
+    "TopicId": "451a6958-64f9-4f36-8c15-611c8325a2b4",
+    "TopicName": "STAR SERVICES LLC.",
+    "Slug": "star-services-llc"
+  },
+  {
+    "Id": 98,
+    "TopicId": "82a00783-d34a-478f-8e34-622927cf4f85",
+    "TopicName": "Qbit Technologies Inc",
+    "Slug": "qbit-technologies-inc"
+  },
+  {
+    "Id": 99,
+    "TopicId": "4857a06c-7498-4cae-a959-b52e1f973fbd",
+    "TopicName": "TecBrix Cloud DMCC",
+    "Slug": "tecbrix-cloud-dmcc"
+  },
+  {
+    "Id": 100,
+    "TopicId": "d650b53b-328f-4a96-87e0-88892bbfdad3",
+    "TopicName": "EEC Services",
+    "Slug": "eec-services"
+  },
+  {
+    "Id": 101,
+    "TopicId": "6deba561-0bc9-41c4-84dc-8b4c60fe7b9f",
+    "TopicName": "Data Capture Systems",
+    "Slug": "data-capture-systems"
+  },
+  {
+    "Id": 102,
+    "TopicId": "512dc98f-59c7-4460-aff0-4ce28bdc2bbc",
+    "TopicName": "United MakGroup Technologies",
+    "Slug": "united-makgroup-technologies"
+  },
+  {
+    "Id": 103,
+    "TopicId": "e89195ee-6956-41b1-96ca-4cf0bbdc1e53",
+    "TopicName": "CODE Technologies",
+    "Slug": "code-technologies"
+  },
+  {
+    "Id": 104,
+    "TopicId": "1258c7ff-9d64-4cb3-a573-c2a6af044436",
+    "TopicName": "Creole Studios",
+    "Slug": "creole-studios"
+  },
+  {
+    "Id": 105,
+    "TopicId": "b12834ef-c856-4ea2-9fe5-c2e0a0c5996c",
+    "TopicName": "Dexiconn",
+    "Slug": "dexiconn"
+  },
+  {
+    "Id": 106,
+    "TopicId": "0c43d2d2-c752-4579-b8b0-c36d697082bf",
+    "TopicName": "Focus Softnet ",
+    "Slug": "focus-softnet-"
+  },
+  {
+    "Id": 107,
+    "TopicId": "ac743be7-b0fd-4614-a268-8fb67a28f4d6",
+    "TopicName": "IT Solutions in Saudi Arabia",
+    "Slug": "it-solutions-in-saudi-arabia"
+  },
+  {
+    "Id": 108,
+    "TopicId": "03832e25-1042-414d-942d-e2f7bd7ff649",
+    "TopicName": "Dahua Technology Co. LTD",
+    "Slug": "dahua-technology-co-ltd"
+  },
+  {
+    "Id": 109,
+    "TopicId": "989fff44-d15e-46a2-a7db-e31d14e5f363",
+    "TopicName": "Hitachi Solutions America",
+    "Slug": "hitachi-solutions-america"
+  },
+  {
+    "Id": 110,
+    "TopicId": "492de3a3-7d6e-4235-83d4-e3391dbf038a",
+    "TopicName": "Recruiters",
+    "Slug": "recruiters-2"
+  },
+  {
+    "Id": 111,
+    "TopicId": "d45f7d54-5419-4e0a-b9d4-e3e70fb060c8",
+    "TopicName": "HD Infotech",
+    "Slug": "hd-infotech"
+  },
+  {
+    "Id": 112,
+    "TopicId": "3b1498fb-9d13-4b8f-bef0-e43488c536d1",
+    "TopicName": "ITGLOBAL.COM ",
+    "Slug": "itglobalcom-"
+  },
+  {
+    "Id": 113,
+    "TopicId": "555e933d-2eaf-4981-b8fa-e1273d675f58",
+    "TopicName": "Crozaint Technologies Pvt Ltd",
+    "Slug": "crozaint-technologies-pvt-ltd"
+  },
+  {
+    "Id": 114,
+    "TopicId": "6ad93513-4053-4417-a5fc-e2055bdf519e",
+    "TopicName": "nybl",
+    "Slug": "nybl"
+  },
+  {
+    "Id": 115,
+    "TopicId": "035bac02-9fcb-4107-97f9-ada982936d0b",
+    "TopicName": "Intelligent Professional Network Solutions",
+    "Slug": "intelligent-professional-network-solutions"
+  },
+  {
+    "Id": 116,
+    "TopicId": "31cc6909-b3be-451e-b907-79cbd697b82c",
+    "TopicName": "Resemble Systems",
+    "Slug": "resemble-systems"
+  },
+  {
+    "Id": 117,
+    "TopicId": "77f744be-68c2-4609-b379-f105294cf701",
+    "TopicName": "CubeZix",
+    "Slug": "cubezix"
+  },
+  {
+    "Id": 118,
+    "TopicId": "c7426a1c-9c47-4750-bb6c-f2033b8e9fde",
+    "TopicName": "Hytera",
+    "Slug": "hytera"
+  },
+  {
+    "Id": 119,
+    "TopicId": "76029ab5-dfcf-4ebd-9a2f-3274a20b954e",
+    "TopicName": "Tamdeed Projects",
+    "Slug": "tamdeed-projects"
+  },
+  {
+    "Id": 120,
+    "TopicId": "150924fb-c329-4d01-9fd2-327a307aa3fd",
+    "TopicName": "Black Box",
+    "Slug": "black-box"
+  },
+  {
+    "Id": 121,
+    "TopicId": "6f1963ba-efd6-4bfc-9a24-bb63e7066981",
+    "TopicName": "Crestan",
+    "Slug": "crestan"
+  },
+  {
+    "Id": 122,
+    "TopicId": "bc2ea420-7845-43c9-a09f-c20a365a9e52",
+    "TopicName": "Exquitech",
+    "Slug": "exquitech"
+  },
+  {
+    "Id": 123,
+    "TopicId": "c8770710-40dd-4a7c-aa21-c2389db605b1",
+    "TopicName": "Alibaba Cloud Global",
+    "Slug": "alibaba-cloud-global"
+  },
+  {
+    "Id": 124,
+    "TopicId": "48492ac1-6207-4f40-b0b9-baaf470b0654",
+    "TopicName": "Wannago Cloud",
+    "Slug": "wannago-cloud"
+  },
+  {
+    "Id": 125,
+    "TopicId": "b085c8ce-8d14-4551-850e-bff9c2593e56",
+    "TopicName": "Speartek Manpower Services",
+    "Slug": "speartek-manpower-services"
+  },
+  {
+    "Id": 126,
+    "TopicId": "2b2e958b-799c-417a-87a0-84b2b9bb3bd7",
+    "TopicName": "HN BrainWorks | HN Global Services (Dubai)",
+    "Slug": "hn-brainworks-hn-global-services-dubai"
+  },
+  {
+    "Id": 127,
+    "TopicId": "14b50f6a-0c51-48c1-937b-692a6a1553da",
+    "TopicName": "Elitser Recruitment Services",
+    "Slug": "elitser-recruitment-services"
+  },
+  {
+    "Id": 128,
+    "TopicId": "d12e597f-8501-49b1-9bd7-b360d7b05136",
+    "TopicName": "DVCOM Technology",
+    "Slug": "dvcom-technology"
+  },
+  {
+    "Id": 129,
+    "TopicId": "ca38e88e-b0a1-46a3-b6aa-b419653fb260",
+    "TopicName": "Futurism Technologies ",
+    "Slug": "futurism-technologies-"
+  },
+  {
+    "Id": 130,
+    "TopicId": "b1320263-f6a0-4e83-9b2e-dbafd0049e1a",
+    "TopicName": "Al Zubair Group",
+    "Slug": "al-zubair-group"
+  },
+  {
+    "Id": 131,
+    "TopicId": "da2ea8ad-8ae3-4a13-802e-dbd07149d015",
+    "TopicName": "EPAM Systems",
+    "Slug": "epam-systems"
+  },
+  {
+    "Id": 132,
+    "TopicId": "7f88a9d5-993e-4720-ab86-dc128056ac40",
+    "TopicName": "e&",
+    "Slug": "e"
+  },
+  {
+    "Id": 133,
+    "TopicId": "7ace70bf-2950-4af0-a915-1c6f79d0fbf7",
+    "TopicName": "Orion Digital Solutions",
+    "Slug": "orion-digital-solutions"
+  },
+  {
+    "Id": 134,
+    "TopicId": "65964e51-754e-4bba-a05a-1d02512fc09d",
+    "TopicName": "Nintex",
+    "Slug": "nintex"
+  },
+  {
+    "Id": 135,
+    "TopicId": "1bfd751a-9e9d-4ee4-8b79-1daaa18c4622",
+    "TopicName": "Commvault",
+    "Slug": "commscope"
+  },
+  {
+    "Id": 136,
+    "TopicId": "1e180725-3788-42e1-a2f6-1e40c993c4fd",
+    "TopicName": "Support Services",
+    "Slug": "support-services"
+  },
+  {
+    "Id": 137,
+    "TopicId": "494e2879-b69f-40d9-acf0-67446c8d0225",
+    "TopicName": "Meridian IT Solutions",
+    "Slug": "meridian-it-solutions"
+  },
+  {
+    "Id": 138,
+    "TopicId": "387070fb-8c25-435e-9cfb-68037089b20e",
+    "TopicName": "INCUBE FZCO",
+    "Slug": "incube-fzco"
+  },
+  {
+    "Id": 139,
+    "TopicId": "6df7522a-c46b-4eec-bdaf-720792782826",
+    "TopicName": "Emirates Real Estate Solutions",
+    "Slug": "emirates-real-estate-solutions"
+  },
+  {
+    "Id": 140,
+    "TopicId": "6b1e64ed-dfe9-48de-b7bd-5e5e2bada686",
+    "TopicName": "Kloudspot",
+    "Slug": "kloudspot"
+  },
+  {
+    "Id": 141,
+    "TopicId": "e778a211-72bd-4ba1-a380-b2e0f3a4b6e4",
+    "TopicName": "Pronix Inc",
+    "Slug": "pronix-inc"
+  },
+  {
+    "Id": 142,
+    "TopicId": "fe328ff5-e92a-4882-a560-07ee1ed06879",
+    "TopicName": "Extron ",
+    "Slug": "extron-"
+  },
+  {
+    "Id": 143,
+    "TopicId": "7560147a-7433-4c48-ad66-dd139e351a27",
+    "TopicName": "INSIGHT Business Solutions",
+    "Slug": "insight-business-solutions"
+  },
+  {
+    "Id": 144,
+    "TopicId": "4183bc7b-6806-4432-95f3-dd6810c3e642",
+    "TopicName": "Baarez Technology Solutions",
+    "Slug": "baarez-technology-solutions"
+  },
+  {
+    "Id": 145,
+    "TopicId": "ab4641e9-d433-42e0-9c80-44bb6a6f4dee",
+    "TopicName": "INNOX TECHNOLOGIES LLC",
+    "Slug": "innox-technologies-llc"
+  },
+  {
+    "Id": 146,
+    "TopicId": "07d4a16e-ff56-4f62-80a0-6f9179abb8c1",
+    "TopicName": "LITS SERVICES",
+    "Slug": "lits-services"
+  },
+  {
+    "Id": 147,
+    "TopicId": "e3220528-665a-41b4-b0d2-eecab672199a",
+    "TopicName": "Gulf Infotech",
+    "Slug": "gulf-infotech"
+  },
+  {
+    "Id": 148,
+    "TopicId": "007564f6-f273-4f8b-ac7c-5bf3562c66e4",
+    "TopicName": "BlueRidge IT FZE",
+    "Slug": "blueridge-it-fze"
+  },
+  {
+    "Id": 149,
+    "TopicId": "2fb3fe54-733b-4c2f-a8d4-9855e8297ec8",
+    "TopicName": "Neusol - Global IT Services",
+    "Slug": "neusol-global-it-services"
+  },
+  {
+    "Id": 150,
+    "TopicId": "3a54706a-0e1a-4bf6-abd5-c7d867a5c578",
+    "TopicName": "Pingala A/S",
+    "Slug": "pingala-as"
+  },
+  {
+    "Id": 151,
+    "TopicId": "a1011cde-5eb6-4baa-bce4-c8ea31e89008",
+    "TopicName": "BMC Software",
+    "Slug": "bmc-software"
+  },
+  {
+    "Id": 152,
+    "TopicId": "d64c3fa7-9804-4ac6-b451-10e523843f5d",
+    "TopicName": "SAYG W.L.L",
+    "Slug": "sayg-wll"
+  },
+  {
+    "Id": 153,
+    "TopicId": "5fc112fe-2d5e-4e28-b6da-09722879ba12",
+    "TopicName": "Pioneers Technology",
+    "Slug": "pioneers-technology"
+  },
+  {
+    "Id": 154,
+    "TopicId": "c8b3397b-149e-4b87-9fb6-021dfeb16166",
+    "TopicName": "EZELINK ",
+    "Slug": "ezelink-"
+  },
+  {
+    "Id": 155,
+    "TopicId": "ea1e7453-b843-4261-a157-02737e012f9f",
+    "TopicName": "Cygnet Digital ",
+    "Slug": "cygnet-digital-"
+  },
+  {
+    "Id": 156,
+    "TopicId": "f672f026-7a9f-4382-9cb1-e9ee5e74dbb8",
+    "TopicName": "Course5i",
+    "Slug": "course5i"
+  },
+  {
+    "Id": 157,
+    "TopicId": "90d5c8c8-05a6-4004-b868-ea2590fb061f",
+    "TopicName": "CMARIX",
+    "Slug": "cmarix"
+  },
+  {
+    "Id": 158,
+    "TopicId": "0d9bd526-af1a-4176-8344-48fb808790ff",
+    "TopicName": "Infosysta",
+    "Slug": "infosysta"
+  },
+  {
+    "Id": 159,
+    "TopicId": "2427fbc8-ea50-46f8-90f0-d99d0900852c",
+    "TopicName": "Horizontal Digital",
+    "Slug": "horizontal-digital"
+  },
+  {
+    "Id": 160,
+    "TopicId": "3534ea92-ce99-4409-b4c5-b1bc0be30942",
+    "TopicName": "NASCONCEPTION",
+    "Slug": "nasconception"
+  },
+  {
+    "Id": 161,
+    "TopicId": "94f17873-8dfc-44fc-907a-d3dea8888cb1",
+    "TopicName": "OVES Enterprise",
+    "Slug": "oves-enterprise"
+  },
+  {
+    "Id": 162,
+    "TopicId": "58d36131-191c-4945-bf2c-29a6d00d5d2a",
+    "TopicName": "BEN INFOTECH",
+    "Slug": "ben-infotech"
+  },
+  {
+    "Id": 163,
+    "TopicId": "9f74230f-ede7-4958-8666-0577c073f6a1",
+    "TopicName": "New Era Technology ",
+    "Slug": "new-era-technology-"
+  },
+  {
+    "Id": 164,
+    "TopicId": "32e3ac51-755c-47fe-bb5d-7a6d787fa84b",
+    "TopicName": "Sceel.io GmbH",
+    "Slug": "sceelio-gmbh"
+  },
+  {
+    "Id": 165,
+    "TopicId": "1f01f8b5-c3d5-48ff-a197-7a7afa84f18c",
+    "TopicName": "TechLabs London",
+    "Slug": "techlabs-london"
+  },
+  {
+    "Id": 166,
+    "TopicId": "f33a881d-8afd-4734-b967-f62861eef484",
+    "TopicName": "MBG Corporate Services UAE",
+    "Slug": "mbg-corporate-services-uae"
+  },
+  {
+    "Id": 167,
+    "TopicId": "ffc4f1a5-33a6-4bf1-bc78-f677721abf9f",
+    "TopicName": "Jacky's Business Solutions",
+    "Slug": "jackys-business-solutions"
+  },
+  {
+    "Id": 168,
+    "TopicId": "9f0e9f26-648b-4d74-ad8a-f763e503b4fa",
+    "TopicName": "Rackspace Technology",
+    "Slug": "rackspace-technology"
+  },
+  {
+    "Id": 169,
+    "TopicId": "87e9f16a-42d7-4bc5-abea-f79b0b12e08c",
+    "TopicName": "AlfaPeople ",
+    "Slug": "alfapeople-"
+  },
+  {
+    "Id": 170,
+    "TopicId": "10d31038-9d22-4d4e-9fab-363fd04d1850",
+    "TopicName": "TDM Group Ltd",
+    "Slug": "tdm-group-ltd"
+  },
+  {
+    "Id": 171,
+    "TopicId": "dbababa3-d33e-4782-b420-3659c8c38281",
+    "TopicName": "Mindfire Technologies LLC",
+    "Slug": "mindfire-technologies-llc"
+  },
+  {
+    "Id": 172,
+    "TopicId": "373f6359-437f-4afd-a205-4f97d3712f93",
+    "TopicName": "APPIT Software Solutions LLC",
+    "Slug": "appit-software-solutions-llc"
+  },
+  {
+    "Id": 173,
+    "TopicId": "f7f7000e-8a71-4aa9-ac0b-4f985e279e0e",
+    "TopicName": "GameIn ",
+    "Slug": "gamein-"
+  },
+  {
+    "Id": 174,
+    "TopicId": "2112d856-42b8-4a77-bd60-c090ade0c13f",
+    "TopicName": "oOrjit",
+    "Slug": "oorjit"
+  },
+  {
+    "Id": 175,
+    "TopicId": "efe31a1b-0900-4151-a3b3-d7a46a76cf3b",
+    "TopicName": "SquareOne Technologies",
+    "Slug": "squareone-technologies"
+  },
+  {
+    "Id": 176,
+    "TopicId": "6d7ff29b-57f2-45ff-8da4-15d8b38e6bb9",
+    "TopicName": "Infinigate Cloud",
+    "Slug": "infinigate-cloud"
+  },
+  {
+    "Id": 177,
+    "TopicId": "f30cd9f8-9cd6-4c22-b1fd-160434f9d4ff",
+    "TopicName": "Cetas Information Technology pvt Ltd",
+    "Slug": "cetas-information-technology-pvt-ltd"
+  },
+  {
+    "Id": 178,
+    "TopicId": "ba2e09fd-453e-4aab-99f0-1657fc19d891",
+    "TopicName": "Executive Solutions",
+    "Slug": "executive-solutions"
+  },
+  {
+    "Id": 179,
+    "TopicId": "30421f79-7419-4073-802b-169557041003",
+    "TopicName": "Naficon",
+    "Slug": "naficon"
+  },
+  {
+    "Id": 180,
+    "TopicId": "34905068-7371-4e8e-9cab-5835aa61b234",
+    "TopicName": "Ensure Services",
+    "Slug": "ensure-services"
+  },
+  {
+    "Id": 181,
+    "TopicId": "a1497a30-19b0-4b50-b198-abe1f27cb8bc",
+    "TopicName": "Dynamic Staffing Services",
+    "Slug": "dynamic-staffing-services"
+  },
+  {
+    "Id": 182,
+    "TopicId": "3c61e175-2451-481f-ba84-abe6a2873c1e",
+    "TopicName": "Trident Technology Services",
+    "Slug": "trident-technology-services"
+  },
+  {
+    "Id": 183,
+    "TopicId": "294c2783-1a5b-4087-95c5-ac532a517cbc",
+    "TopicName": "GulfIT Network Distribution",
+    "Slug": "gulfit-network-distribution"
+  },
+  {
+    "Id": 184,
+    "TopicId": "95c4130f-d180-4203-9768-acf726f5067d",
+    "TopicName": "Naizak Distribution Services",
+    "Slug": "naizak-distribution-services"
+  },
+  {
+    "Id": 185,
+    "TopicId": "d74cf285-f166-4875-bb8d-9cee91419e76",
+    "TopicName": "ORBITE SOFT - FZCO",
+    "Slug": "orbite-soft-fzco"
+  },
+  {
+    "Id": 186,
+    "TopicId": "5d9fede5-a02b-4d8f-88f0-9e8d7d459d8d",
+    "TopicName": "ABG",
+    "Slug": "abg"
+  },
+  {
+    "Id": 187,
+    "TopicId": "ec8c1da1-7c28-4520-8e77-5a7abd5f4697",
+    "TopicName": "Inspirisys Solutions Limited",
+    "Slug": "inspirisys-solutions-limited"
+  },
+  {
+    "Id": 188,
+    "TopicId": "39dca64a-e3dc-45ec-ae18-221e596b4954",
+    "TopicName": "byPeople Technologies",
+    "Slug": "bypeople-technologies"
+  },
+  {
+    "Id": 189,
+    "TopicId": "bb3130d3-b424-471f-bf3c-e85b08be7331",
+    "TopicName": "Fortinet",
+    "Slug": "fortinet"
+  },
+  {
+    "Id": 190,
+    "TopicId": "dc5a55aa-f73f-4b48-bc32-e11d7f74c243",
+    "TopicName": "Digital Factors ",
+    "Slug": "digital-factors-"
+  },
+  {
+    "Id": 191,
+    "TopicId": "bdf4eb31-73a4-41ae-a27d-e11fb2a01418",
+    "TopicName": "Dell Technologies",
+    "Slug": "dell-technologies"
+  },
+  {
+    "Id": 192,
+    "TopicId": "52e9314b-3b18-4c64-ad51-b654fe079254",
+    "TopicName": "In2Networks Pty Ltd",
+    "Slug": "in2networks-pty-ltd"
+  },
+  {
+    "Id": 193,
+    "TopicId": "fabe7c44-dc22-4ec5-8ffb-66ebf559269a",
+    "TopicName": "Odoo",
+    "Slug": "odoo"
+  },
+  {
+    "Id": 194,
+    "TopicId": "15017351-da0b-4717-a928-67378bbfd06f",
+    "TopicName": "OnePlan",
+    "Slug": "oneplan"
+  },
+  {
+    "Id": 195,
+    "TopicId": "071c06bf-eef7-4c06-a6a2-16d38b9aba92",
+    "TopicName": "Mackenzie Jones Middle East",
+    "Slug": "mackenzie-jones-middle-east"
+  },
+  {
+    "Id": 196,
+    "TopicId": "56592210-c09c-4d9e-8edf-1767d6073665",
+    "TopicName": "AMY Softech Pvt Ltd",
+    "Slug": "amy-softech-pvt-ltd"
+  },
+  {
+    "Id": 197,
+    "TopicId": "43f3b3ba-2412-488a-bda7-358a7beb4cd2",
+    "TopicName": "The Talent Hub - Your Gateway to Gulf's Top IT Jobs",
+    "Slug": "the-talent-hub-your-gateway-to-gulfs-top-it-jobs"
+  },
+  {
+    "Id": 198,
+    "TopicId": "d76d4e25-2070-49ee-aaaf-35dc5001c6c6",
+    "TopicName": "CyberKnight",
+    "Slug": "cyberknight"
+  },
+  {
+    "Id": 199,
+    "TopicId": "307d890c-0579-40db-8b73-4ee22fcf94ed",
+    "TopicName": "Impulse Technologies",
+    "Slug": "impulse-technologies"
+  },
+  {
+    "Id": 200,
+    "TopicId": "0b63afca-b17c-462d-9b94-134caed7928a",
+    "TopicName": "Evanssion",
+    "Slug": "evanssion"
+  },
+  {
+    "Id": 201,
+    "TopicId": "16ee1e7f-8a52-4d4b-86ba-139be2de4a7c",
+    "TopicName": "CM.com",
+    "Slug": "cmcom"
+  },
+  {
+    "Id": 202,
+    "TopicId": "30b070a7-38d3-4960-9223-13e517f56ae8",
+    "TopicName": "LWCOM",
+    "Slug": "lwcom"
+  },
+  {
+    "Id": 203,
+    "TopicId": "b96dd00c-2fef-44e3-8fd2-837639ac4406",
+    "TopicName": "Evento Solutions ",
+    "Slug": "evento-solutions-"
+  },
+  {
+    "Id": 204,
+    "TopicId": "da3813bb-bb2a-4f08-838c-8437c7057096",
+    "TopicName": "Navori Labs",
+    "Slug": "navori-labs"
+  },
+  {
+    "Id": 205,
+    "TopicId": "e715cdb9-2377-4615-b24f-a3accc773d58",
+    "TopicName": "Aratech",
+    "Slug": "aratech"
+  },
+  {
+    "Id": 206,
+    "TopicId": "97341d4e-75b6-44ab-b6c9-6ad8640a5c44",
+    "TopicName": "Dimension Data",
+    "Slug": "dimension-data"
+  },
+  {
+    "Id": 207,
+    "TopicId": "5273e5b5-1970-4df7-8fd1-6ad89d6b0d74",
+    "TopicName": "Gravity ilabs ",
+    "Slug": "gravity-ilabs-"
+  },
+  {
+    "Id": 208,
+    "TopicId": "127e4155-23eb-4eef-8936-1c46f777d6b9",
+    "TopicName": "Celebal Technologies",
+    "Slug": "celebal-technologies"
+  },
+  {
+    "Id": 209,
+    "TopicId": "e64f3b4f-ab23-4ba2-92db-da4f74acaad6",
+    "TopicName": "Magnus Infotech",
+    "Slug": "magnus-infotech"
+  },
+  {
+    "Id": 210,
+    "TopicId": "fc8eb79e-81eb-4f0a-b0bd-daa9963cce71",
+    "TopicName": "New Horizons Apex For Training and Consultation",
+    "Slug": "new-horizons-apex-for-training-and-consultation"
+  },
+  {
+    "Id": 211,
+    "TopicId": "9383a1e4-8c6b-466e-a76b-3a75d6371dc0",
+    "TopicName": "Novigo Solutions",
+    "Slug": "novigo-solutions"
+  },
+  {
+    "Id": 212,
+    "TopicId": "76c9482c-7522-4dd6-a7ec-3a9b1c99d32f",
+    "TopicName": "MOURI Tech",
+    "Slug": "mouri-tech"
+  },
+  {
+    "Id": 213,
+    "TopicId": "eef34e55-2771-413d-81ff-553e2503c3d0",
+    "TopicName": "myCloudDoor",
+    "Slug": "myclouddoor"
+  },
+  {
+    "Id": 214,
+    "TopicId": "a35cdf4c-cd41-424e-8a36-f8c23f7e424f",
+    "TopicName": "Dynamic Netsoft Technologies Private Limited",
+    "Slug": "dynamic-netsoft-technologies-private-limited"
+  },
+  {
+    "Id": 215,
+    "TopicId": "611a88bd-c6b9-45dc-a516-5656378d2780",
+    "TopicName": "Epicor",
+    "Slug": "epicor"
+  },
+  {
+    "Id": 216,
+    "TopicId": "eca40c30-007a-403f-a002-5687f9fda1e8",
+    "TopicName": "ClearPeaks",
+    "Slug": "clearpeaks"
+  },
+  {
+    "Id": 217,
+    "TopicId": "4a118cf2-79c9-4f18-b84a-779e33cbd00f",
+    "TopicName": "ilger.com S.r.l.",
+    "Slug": "ilgercom-srl"
+  },
+  {
+    "Id": 218,
+    "TopicId": "ea06f9e8-6d18-4339-a285-385f3158792d",
+    "TopicName": "Nutanix ",
+    "Slug": "nutanix-"
+  },
+  {
+    "Id": 219,
+    "TopicId": "2caca0e3-bd3d-4a98-8f59-39d1d3ed6d08",
+    "TopicName": "Bdtask",
+    "Slug": "bdtask"
+  },
+  {
+    "Id": 220,
+    "TopicId": "630c956c-2c79-421d-b809-5ef9508046b7",
+    "TopicName": "Folio3 NetSuite",
+    "Slug": "folio3-netsuite"
+  },
+  {
+    "Id": 221,
+    "TopicId": "40732b01-db38-4ac1-bc87-eb72c5f685a0",
+    "TopicName": "Liferay",
+    "Slug": "liferay"
+  },
+  {
+    "Id": 222,
+    "TopicId": "878d2741-716b-44a2-a0dd-eb7616feb25e",
+    "TopicName": "Broadnet Technologies",
+    "Slug": "broadnet-technologies"
+  },
+  {
+    "Id": 223,
+    "TopicId": "d7f7eed9-6022-4090-b562-b03d8c1def4b",
+    "TopicName": "Paramount Computer Systems",
+    "Slug": "paramount-computer-systems"
+  },
+  {
+    "Id": 224,
+    "TopicId": "d567b25c-3c0c-4946-920e-b07ca479f669",
+    "TopicName": "Link Development",
+    "Slug": "link-development"
+  },
+  {
+    "Id": 225,
+    "TopicId": "780d7ed6-e109-4ac0-a65b-b157e92a5b4a",
+    "TopicName": "Tech Unicorn",
+    "Slug": "tech-unicorn"
+  },
+  {
+    "Id": 226,
+    "TopicId": "10cd1dfd-e3de-4208-a792-3bdc833837dc",
+    "TopicName": "IFS assyst",
+    "Slug": "ifs-assyst"
+  },
+  {
+    "Id": 227,
+    "TopicId": "643ae6d4-29da-4ae5-b6be-3bee9bdcf94d",
+    "TopicName": "Profit.co",
+    "Slug": "profitco"
+  },
+  {
+    "Id": 228,
+    "TopicId": "4366f58a-8a92-45d6-ae13-6af1d2be86c1",
+    "TopicName": "Kaspersky",
+    "Slug": "kaspersky"
+  },
+  {
+    "Id": 229,
+    "TopicId": "ec0c3ffc-8e8f-4ad7-b7b1-dde5ad1b6a2a",
+    "TopicName": "Dynamics Stream - Microsoft Solutions Partner, Business Applications",
+    "Slug": "dynamics-stream-microsoft-solutions-partner-business-applications"
+  },
+  {
+    "Id": 230,
+    "TopicId": "e8d0ad87-78f3-4dda-af69-65ad5d96d612",
+    "TopicName": "Pro web ",
+    "Slug": "pro-web-"
+  },
+  {
+    "Id": 231,
+    "TopicId": "d2e7feea-82dd-4a09-bdaa-cff091c84463",
+    "TopicName": "Dolphin Connect",
+    "Slug": "dolphin-connect"
+  },
+  {
+    "Id": 232,
+    "TopicId": "53500974-1a82-46d1-ab67-4a5c268f94c7",
+    "TopicName": "SecureTech",
+    "Slug": "securetech"
+  },
+  {
+    "Id": 233,
+    "TopicId": "91be2729-b7c7-4f71-a7b8-4acf57a8ca86",
+    "TopicName": "Octaware Technologies | Microsoft Partner",
+    "Slug": "octaware-technologies-microsoft-partner"
+  },
+  {
+    "Id": 234,
+    "TopicId": "61e365e4-ee2b-48e8-ae9c-9c15549643f3",
+    "TopicName": "Happiest Minds Technologies",
+    "Slug": "happiest-minds-technologies"
+  },
+  {
+    "Id": 235,
+    "TopicId": "e4efbae4-594a-48ce-a50e-e4a4d14cede9",
+    "TopicName": "EliteVAD",
+    "Slug": "elitevad"
+  },
+  {
+    "Id": 236,
+    "TopicId": "328ee227-e679-4589-ae92-2353b786791a",
+    "TopicName": "A3Cloud Solutions",
+    "Slug": "a3cloud-solutions"
+  },
+  {
+    "Id": 237,
+    "TopicId": "ccc521fa-4951-48dd-b2ed-d4615043a281",
+    "TopicName": "FVC",
+    "Slug": "fvc"
+  },
+  {
+    "Id": 238,
+    "TopicId": "df18accc-d302-4229-b063-7b9bff7bf477",
+    "TopicName": "IFI Techsolutions",
+    "Slug": "ifi-techsolutions"
+  },
+  {
+    "Id": 239,
+    "TopicId": "d294688f-88ce-4dd8-8eb5-c16118a76d1c",
+    "TopicName": "TechMantra Global",
+    "Slug": "techmantra-global"
+  },
+  {
+    "Id": 240,
+    "TopicId": "41716984-0d1d-459b-8b08-ece8c1a278ee",
+    "TopicName": "Cegal",
+    "Slug": "cegal"
+  },
+  {
+    "Id": 241,
+    "TopicId": "b9027c42-91c6-4612-915b-ee6422789105",
+    "TopicName": "EfficientVision",
+    "Slug": "efficientvision"
+  },
+  {
+    "Id": 242,
+    "TopicId": "c575cfb0-8fd3-4996-9173-4f885f90062f",
+    "TopicName": "Daisytek Computers LLC",
+    "Slug": "daisytek-computers-llc"
+  },
+  {
+    "Id": 243,
+    "TopicId": "3a969f3f-32e5-46e1-974f-cd1cbcd260b0",
+    "TopicName": "Disrupt-X",
+    "Slug": "disruptx"
+  },
+  {
+    "Id": 244,
+    "TopicId": "8a98dd82-f878-4157-86a6-cd80e7e93a1b",
+    "TopicName": "LITS Distribution & Services",
+    "Slug": "lits-distribution-services"
+  },
+  {
+    "Id": 245,
+    "TopicId": "75c840a3-5cde-43d4-9438-b1d5d4a5ae3c",
+    "TopicName": "Ingram Micro Gulf",
+    "Slug": "ingram-micro-gulf"
+  },
+  {
+    "Id": 246,
+    "TopicId": "e19863bf-8bce-4061-b265-b1e0ee998b23",
+    "TopicName": "ROUNAK COMPUTERS LLC",
+    "Slug": "rounak-computers-llc"
+  },
+  {
+    "Id": 247,
+    "TopicId": "ef80b38b-e306-4cfc-86c6-41dbdefbc47a",
+    "TopicName": "Tycoon IT Services",
+    "Slug": "tycoon-it-services"
+  },
+  {
+    "Id": 248,
+    "TopicId": "af1faf5a-125e-44fc-91b7-e2a4b4684810",
+    "TopicName": "Altavant",
+    "Slug": "altavant"
+  },
+  {
+    "Id": 249,
+    "TopicId": "7a4cb02a-eff9-4048-9ad5-8b5cd16a528a",
+    "TopicName": "Seven Seas Technology",
+    "Slug": "seven-seas-technology"
+  },
+  {
+    "Id": 250,
+    "TopicId": "08f0c3f3-8782-4ce2-82c3-11d67e3f44ae",
+    "TopicName": "Resolution IT",
+    "Slug": "resolution-it"
+  },
+  {
+    "Id": 251,
+    "TopicId": "117bf81a-16da-4a5b-8a28-124e9a5e608b",
+    "TopicName": "Digital Lab",
+    "Slug": "digital-lab"
+  },
+  {
+    "Id": 252,
+    "TopicId": "64dc3372-5c7b-4c2d-a3cc-12d5dd05068d",
+    "TopicName": "ePm",
+    "Slug": "epm"
+  },
+  {
+    "Id": 253,
+    "TopicId": "29329c75-c91c-43fc-a466-aa2f1e1b792f",
+    "TopicName": "SentientGeeks",
+    "Slug": "sentientgeeks"
+  },
+  {
+    "Id": 254,
+    "TopicId": "a1b988f2-9328-4c5a-be57-aa9ba16b5389",
+    "TopicName": "Gulf IT Recruitment & Talent",
+    "Slug": "gulf-it-recruitment-talent"
+  },
+  {
+    "Id": 255,
+    "TopicId": "a128a03c-e4ed-4c35-8ea3-bbf063836b54",
+    "TopicName": "ProntoSys",
+    "Slug": "prontosys"
+  },
+  {
+    "Id": 256,
+    "TopicId": "9c029480-b751-49ee-ae63-bcf464cb0e49",
+    "TopicName": "Project Deployment",
+    "Slug": "project-deployment"
+  },
+  {
+    "Id": 257,
+    "TopicId": "76387229-11ac-434d-83a5-8b93d506f61f",
+    "TopicName": "Nous",
+    "Slug": "nous"
+  },
+  {
+    "Id": 258,
+    "TopicId": "69585583-6aa4-45d2-9a26-33c4e03b481a",
+    "TopicName": "Company Record",
+    "Slug": "company-record"
+  },
+  {
+    "Id": 259,
+    "TopicId": "ba048db4-6edc-4392-847f-5245818d012a",
+    "TopicName": "VTEST Software",
+    "Slug": "vtest-software"
+  },
+  {
+    "Id": 260,
+    "TopicId": "94e8c535-3c4f-4f6f-aa16-52e927a65ebe",
+    "TopicName": "IT Sector",
+    "Slug": "it-sector"
+  },
+  {
+    "Id": 261,
+    "TopicId": "86813615-1492-4d6f-89ca-f429a372813b",
+    "TopicName": "GBM",
+    "Slug": "gbm"
+  },
+  {
+    "Id": 262,
+    "TopicId": "ecf83d8f-0a26-4c23-bcbe-56b47aedf7b7",
+    "TopicName": "Cleverence Middle East",
+    "Slug": "cleverence-middle-east"
+  },
+  {
+    "Id": 263,
+    "TopicId": "c12b0b64-0acc-4105-a7b2-56cee24d0077",
+    "TopicName": "GISEC Global ",
+    "Slug": "gisec-global-"
+  },
+  {
+    "Id": 264,
+    "TopicId": "d542e76b-d079-43c9-925f-d6a8ad40ea52",
+    "TopicName": "Elitmind",
+    "Slug": "elitmind"
+  },
+  {
+    "Id": 265,
+    "TopicId": "b472923b-a292-4b20-a616-e7f9f6700289",
+    "TopicName": "Alfazance Consulting ",
+    "Slug": "alfazance-consulting-"
+  },
+  {
+    "Id": 266,
+    "TopicId": "6d40bc63-c3e5-455a-ba78-14f59d9f14d5",
+    "TopicName": "NVSSoft",
+    "Slug": "nvssoft"
+  },
+  {
+    "Id": 267,
+    "TopicId": "5989d511-d3a8-4bbd-9d32-2cd91e818a0f",
+    "TopicName": "Maaloumatiya IT Network Services",
+    "Slug": "maaloumatiya-it-network-services"
+  },
+  {
+    "Id": 268,
+    "TopicId": "b942376d-8867-4282-9c9d-2d0d54529161",
+    "TopicName": "Oregon Systems",
+    "Slug": "oregon-systems"
+  },
+  {
+    "Id": 269,
+    "TopicId": "18ebf94d-aa1d-4ce1-ad02-0e82c06bb4f7",
+    "TopicName": "Sutherland",
+    "Slug": "sutherland"
+  },
+  {
+    "Id": 270,
+    "TopicId": "5c93151a-b2cf-496f-899c-09fe0cdd7a1e",
+    "TopicName": "Winspire Solutions",
+    "Slug": "winspire-solutions"
+  },
+  {
+    "Id": 271,
+    "TopicId": "50096d3c-b337-4910-b687-6c75eb111a64",
+    "TopicName": "Halian",
+    "Slug": "halian"
+  },
+  {
+    "Id": 272,
+    "TopicId": "3cdff603-2786-402b-9c91-963dc99c360a",
+    "TopicName": "ESET Middle East",
+    "Slug": "eset-middle-east"
+  },
+  {
+    "Id": 273,
+    "TopicId": "91da5379-902b-4bb5-a749-ccbba0b3211e",
+    "TopicName": "Taashee Linux Services",
+    "Slug": "taashee-linux-services"
+  },
+  {
+    "Id": 274,
+    "TopicId": "8df61d26-ce65-4f50-9da2-02c3d4193698",
+    "TopicName": "Anomali ",
+    "Slug": "anomali-"
+  },
+  {
+    "Id": 275,
+    "TopicId": "3115c369-b4ff-4553-bb17-03132bc4882b",
+    "TopicName": "GEC MEDIA GROUP",
+    "Slug": "gec-media-group"
+  },
+  {
+    "Id": 276,
+    "TopicId": "d5de53c5-db9b-4ec5-9b60-43d512e185b5",
+    "TopicName": "Epson Middle East ",
+    "Slug": "epson-middle-east-"
+  },
+  {
+    "Id": 277,
+    "TopicId": "9de7faf9-16eb-444f-9119-c5755683da52",
+    "TopicName": "Tata Consultancy Services",
+    "Slug": "tata-consultancy-services"
+  },
+  {
+    "Id": 278,
+    "TopicId": "6951f73a-8378-4d53-89bf-d1cd6aee04e6",
+    "TopicName": "Avaya ",
+    "Slug": "avaya-"
+  },
+  {
+    "Id": 279,
+    "TopicId": "ae43f89b-7c59-47ae-80b3-81614f303756",
+    "TopicName": "Partner Portal ",
+    "Slug": "partner-portal-"
+  },
+  {
+    "Id": 280,
+    "TopicId": "146cc85b-1de8-465e-a066-2f2b7e9e7474",
+    "TopicName": "Exponent",
+    "Slug": "exponent"
+  },
+  {
+    "Id": 281,
+    "TopicId": "8650a5c3-784d-4e9b-bb01-2fbf4c057f74",
+    "TopicName": "EPI-USE Labs",
+    "Slug": "epiuse-labs"
+  },
+  {
+    "Id": 282,
+    "TopicId": "80decd26-5680-4bb9-94f1-2fd1082872e2",
+    "TopicName": "MetaDialog",
+    "Slug": "metadialog"
+  },
+  {
+    "Id": 283,
+    "TopicId": "752e10ee-4837-44f6-9a20-bfbe23fa4820",
+    "TopicName": "Imperva",
+    "Slug": "imperva"
+  },
+  {
+    "Id": 284,
+    "TopicId": "69aa4d02-2a30-46b2-92ce-15ae6eba9873",
+    "TopicName": "Muller & Phipps Middle East ",
+    "Slug": "muller-phipps-middle-east-"
+  },
+  {
+    "Id": 285,
+    "TopicId": "83551ff5-2ce8-4805-9fed-70bd194b938c",
+    "TopicName": "Mappable",
+    "Slug": "mappable"
+  },
+  {
+    "Id": 286,
+    "TopicId": "61534b70-a585-4111-ae12-70e7908ca011",
+    "TopicName": "Confiz Solutions DMCC",
+    "Slug": "confiz-solutions-dmcc"
+  },
+  {
+    "Id": 287,
+    "TopicId": "efe50920-8737-490a-a21f-dec60644c569",
+    "TopicName": "Gracias IT",
+    "Slug": "gracias-it"
+  },
+  {
+    "Id": 288,
+    "TopicId": "efafc893-63be-427c-bbfe-7dbee04775f2",
+    "TopicName": "Splunk",
+    "Slug": "splunk"
+  },
+  {
+    "Id": 289,
+    "TopicId": "7fe00e33-dadf-4d09-a3e9-7ddbcfac7d5e",
+    "TopicName": "Core42",
+    "Slug": "core42"
+  },
+  {
+    "Id": 290,
+    "TopicId": "a80a8859-c4e6-45c2-a0ab-7eb1d0503249",
+    "TopicName": "OPSWAT",
+    "Slug": "opswat"
+  },
+  {
+    "Id": 291,
+    "TopicId": "0904f599-b9b7-449d-bdd3-4bb47847d73d",
+    "TopicName": "ASBIS ",
+    "Slug": "asbis-"
+  },
+  {
+    "Id": 292,
+    "TopicId": "da8b1abc-d498-4f3f-b978-4bfee17a2fb1",
+    "TopicName": "ITQAN Al Khaleej Computers",
+    "Slug": "itqan-al-khaleej-computers"
+  },
+  {
+    "Id": 293,
+    "TopicId": "af1b58bf-2ce0-44c8-adff-066905dd8390",
+    "TopicName": "Cloud Solutions",
+    "Slug": "cloud-solutions-1"
+  },
+  {
+    "Id": 294,
+    "TopicId": "4302d467-240c-4b8f-a3bf-06b2df8c562c",
+    "TopicName": "CADD Emirates",
+    "Slug": "cadd-emirates"
+  },
+  {
+    "Id": 295,
+    "TopicId": "e314f371-0974-4c19-ab51-06eca7ede870",
+    "TopicName": "Edutech",
+    "Slug": "edutech"
+  },
+  {
+    "Id": 296,
+    "TopicId": "6cbe0c78-24dc-40da-a26e-9ed7b4e19a62",
+    "TopicName": "ePROMIS Solutions ",
+    "Slug": "epromis-solutions-"
+  },
+  {
+    "Id": 297,
+    "TopicId": "e2274a15-4767-4b19-91f9-9ef25ee77756",
+    "TopicName": "Cobweb MENA",
+    "Slug": "cobweb-mena"
+  },
+  {
+    "Id": 298,
+    "TopicId": "01b3861c-ede7-4166-8289-8ed985eb4f38",
+    "TopicName": "Flexsin Inc",
+    "Slug": "flexsin-inc"
+  },
+  {
+    "Id": 299,
+    "TopicId": "d9b74e25-6e07-462d-bb39-8f38821bb50d",
+    "TopicName": "GET Group Holdings Ltd",
+    "Slug": "get-group-holdings-ltd"
+  },
+  {
+    "Id": 300,
+    "TopicId": "59404165-292e-4f3e-ad9d-3f3e137d144a",
+    "TopicName": "Mindware",
+    "Slug": "mindware"
+  },
+  {
+    "Id": 301,
+    "TopicId": "1afef926-d59e-4072-b2ae-3fa1ed23be36",
+    "TopicName": "ANTlabs",
+    "Slug": "antlabs"
+  },
+  {
+    "Id": 302,
+    "TopicId": "0d84a18b-4380-446c-a813-b82d9a9f8a91",
+    "TopicName": "Coforage ",
+    "Slug": "coforage-"
+  },
+  {
+    "Id": 303,
+    "TopicId": "bd6beabb-f344-4711-8993-ba01db2ead72",
+    "TopicName": "SysTecx",
+    "Slug": "systecx"
+  },
+  {
+    "Id": 304,
+    "TopicId": "ae5a2d92-53ed-4c53-a2c7-ba6a0dd5d908",
+    "TopicName": "Emtech",
+    "Slug": "emtech"
+  },
+  {
+    "Id": 305,
+    "TopicId": "ec04bdbc-3335-45ef-98d0-ba6fd798ec7d",
+    "TopicName": "StorexWeb",
+    "Slug": "storexweb"
+  },
+  {
+    "Id": 306,
+    "TopicId": "d9b87cd0-80dc-4dbf-91b5-1fee9b20d1a3",
+    "TopicName": "Entrust ",
+    "Slug": "entrust-"
+  },
+  {
+    "Id": 307,
+    "TopicId": "98714088-58f0-48d8-9783-2004d3ea8165",
+    "TopicName": "Raya International Services",
+    "Slug": "raya-international-services"
+  },
+  {
+    "Id": 308,
+    "TopicId": "88a12883-3d74-4ce2-8d48-26fd2387242e",
+    "TopicName": "Burhani Managed IT Services",
+    "Slug": "burhani-managed-it-services"
+  },
+  {
+    "Id": 309,
+    "TopicId": "616e7bb3-946e-4314-b9cb-2770b0432c98",
+    "TopicName": "ABBYY",
+    "Slug": "abbyy"
+  },
+  {
+    "Id": 310,
+    "TopicId": "1fe516e7-1177-4e57-9f9f-28290dd20bec",
+    "TopicName": "Fastline Projects",
+    "Slug": "fastline-projects"
+  },
+  {
+    "Id": 311,
+    "TopicId": "dfc46cdb-c4f0-47c7-94d6-46566bc253c6",
+    "TopicName": "GlobalSign Middle East",
+    "Slug": "globalsign-middle-east"
+  },
+  {
+    "Id": 312,
+    "TopicId": "8993f181-452e-4837-afe8-4687a1cdcd09",
+    "TopicName": "GetMax.Ae Global System Integrator",
+    "Slug": "getmaxae-global-system-integrator"
+  },
+  {
+    "Id": 313,
+    "TopicId": "ed87db8c-4388-403b-b973-539a5e300d04",
+    "TopicName": "ADP",
+    "Slug": "adp"
+  },
+  {
+    "Id": 314,
+    "TopicId": "bcf1a090-aa0c-4601-b2ae-540c46251b7f",
+    "TopicName": "Fractal31",
+    "Slug": "fractal31"
+  },
+  {
+    "Id": 315,
+    "TopicId": "e8bbce1f-50fd-48d1-9e24-545a3af747ca",
+    "TopicName": "IDVISION",
+    "Slug": "idvision"
+  },
+  {
+    "Id": 316,
+    "TopicId": "5c7787a2-f9d9-45e9-b7ee-45c286658a2d",
+    "TopicName": "IDP Global ",
+    "Slug": "idp-global-"
+  },
+  {
+    "Id": 317,
+    "TopicId": "cd218ccb-d17a-41e1-a396-6ce6d39369fc",
+    "TopicName": "Experts Computer LLC",
+    "Slug": "experts-computer-llc"
+  },
+  {
+    "Id": 318,
+    "TopicId": "b70de252-56c1-4a90-b50a-6d3275605b66",
+    "TopicName": "DynaPro",
+    "Slug": "dynapro"
+  },
+  {
+    "Id": 319,
+    "TopicId": "152bf259-fcef-49e6-a551-6d65da8a333f",
+    "TopicName": " IT Staffing in UAE",
+    "Slug": "-it-staffing-in-uae"
+  },
+  {
+    "Id": 320,
+    "TopicId": "ac35b00d-303a-4764-9c39-fce016d4d675",
+    "TopicName": "Crayon ",
+    "Slug": "crayon-"
+  },
+  {
+    "Id": 321,
+    "TopicId": "b8882339-a663-44d5-b5d1-fdf1be64797a",
+    "TopicName": "Oplee",
+    "Slug": "oplee"
+  },
+  {
+    "Id": 322,
+    "TopicId": "6ccb6dc6-0cde-4b65-8ead-b19041536e58",
+    "TopicName": "EBT Middle East LLC",
+    "Slug": "ebt-middle-east-llc"
+  },
+  {
+    "Id": 323,
+    "TopicId": "64e89749-b09a-4850-bb32-733bc1bf93f4",
+    "TopicName": "ITWorx",
+    "Slug": "itworx"
+  },
+  {
+    "Id": 324,
+    "TopicId": "337efca2-8344-4155-9f37-4e25d332d0e2",
+    "TopicName": "Vectra AI",
+    "Slug": "vectra-ai"
+  },
+  {
+    "Id": 325,
+    "TopicId": "e1c5b5b9-5c56-43d7-b180-4e7e4c70fdca",
+    "TopicName": "Logicom",
+    "Slug": "logicom"
+  },
+  {
+    "Id": 326,
+    "TopicId": "03a7d4d9-fbb4-44bc-ab75-fc85c21e5446",
+    "TopicName": "TecTree",
+    "Slug": "tectree"
+  },
+  {
+    "Id": 327,
+    "TopicId": "18c126a8-6651-48b6-9e4a-cb12c7571986",
+    "TopicName": "ITQUBATE",
+    "Slug": "itqubate"
+  },
+  {
+    "Id": 328,
+    "TopicId": "34bcc76e-06ee-47e8-aa54-248e072a22fb",
+    "TopicName": "Business Values Services \"BVS-MEA\"",
+    "Slug": "business-values-services-bvsmea"
+  },
+  {
+    "Id": 329,
+    "TopicId": "b2fb9306-9d22-475b-9de1-24fa44220204",
+    "TopicName": "Hyvision technology LLC",
+    "Slug": "hyvision-technology-llc"
+  },
+  {
+    "Id": 330,
+    "TopicId": "9ee7a175-59b6-4507-83b5-5ac63be0f5b1",
+    "TopicName": "Achiever Computers",
+    "Slug": "achiever-computers"
+  },
+  {
+    "Id": 331,
+    "TopicId": "4ee747d2-a355-40f0-b5a5-5ac6f54fd57a",
+    "TopicName": "G42",
+    "Slug": "g42"
+  },
+  {
+    "Id": 332,
+    "TopicId": "71cf8c62-1a73-40bf-aeaa-1809a956567c",
+    "TopicName": "Bespin Global MEA",
+    "Slug": "bespin-global-mea"
+  },
+  {
+    "Id": 333,
+    "TopicId": "4a3d19ce-dadd-482d-9627-1814e79f66fa",
+    "TopicName": "Digital Techworks Interactive Solutions",
+    "Slug": "digital-techworks-interactive-solutions"
+  },
+  {
+    "Id": 334,
+    "TopicId": "3f636a1f-61fc-4b3f-81e3-eff7ed04b901",
+    "TopicName": "Redington",
+    "Slug": "redington"
+  },
+  {
+    "Id": 335,
+    "TopicId": "ef1ec1e6-c39f-4f08-9bfc-f031335044e8",
+    "TopicName": "Eutomatics Inc",
+    "Slug": "eutomatics-inc"
+  },
+  {
+    "Id": 336,
+    "TopicId": "d20ca06d-e26e-4527-abc7-5c41df2b40f7",
+    "TopicName": "Cloud4C Services",
+    "Slug": "cloud4c-services"
+  },
+  {
+    "Id": 337,
+    "TopicId": "ab3773da-874b-438f-9668-5c4d961b55c1",
+    "TopicName": "Nedaa",
+    "Slug": "nedaa"
+  },
+  {
+    "Id": 338,
+    "TopicId": "fa44651a-ab19-49a4-8aab-5cccc39210f2",
+    "TopicName": "QTek Digital",
+    "Slug": "qtek-digital"
+  },
+  {
+    "Id": 339,
+    "TopicId": "e9fcfe5d-32e1-4b16-a6d0-5d6a569e40f9",
+    "TopicName": "Finesse Global ",
+    "Slug": "finesse-global-"
+  },
+  {
+    "Id": 340,
+    "TopicId": "6a1f99d9-0848-4efe-b257-72a0357550fa",
+    "TopicName": "emt Distribution META",
+    "Slug": "emt-distribution-meta"
+  },
+  {
+    "Id": 341,
+    "TopicId": "f87b120a-d882-4b49-86a8-731efea1afec",
+    "TopicName": "Nortal",
+    "Slug": "nortal"
+  },
+  {
+    "Id": 342,
+    "TopicId": "0cb13388-41b9-4e12-a1b6-c09730be89d1",
+    "TopicName": "Delphi Consulting Middle East",
+    "Slug": "delphi-consulting-middle-east"
+  },
+  {
+    "Id": 343,
+    "TopicId": "79fac71e-a5f4-4d4a-b1c7-c100814ec421",
+    "TopicName": "Emircom ",
+    "Slug": "emircom-"
+  },
+  {
+    "Id": 344,
+    "TopicId": "6580a439-567e-42eb-8859-c1183ae5178d",
+    "TopicName": "SwiftAnt",
+    "Slug": "swiftant"
+  },
+  {
+    "Id": 345,
+    "TopicId": "42104e0f-3158-4182-9b18-8001a8178423",
+    "TopicName": "Integra Technologies",
+    "Slug": "integra-technologies"
+  },
+  {
+    "Id": 346,
+    "TopicId": "63002976-db02-430a-8ba1-d257c7b255a3",
+    "TopicName": "OpenText",
+    "Slug": "opentext"
+  },
+  {
+    "Id": 347,
+    "TopicId": "f2e6ff4e-17cd-4e14-87e1-d25d5851c246",
+    "TopicName": "Optimizely",
+    "Slug": "optimizely"
+  },
+  {
+    "Id": 348,
+    "TopicId": "0a96d96b-7b3c-4d66-b91f-a5a798b2da20",
+    "TopicName": "BrandeXe",
+    "Slug": "brandexe"
+  },
+  {
+    "Id": 349,
+    "TopicId": "8400aba8-4bfa-4051-9254-a6f23ab79620",
+    "TopicName": "Builder.ai",
+    "Slug": "builderai"
+  },
+  {
+    "Id": 350,
+    "TopicId": "9551814e-6a89-41c5-9208-a707a0db85b5",
+    "TopicName": "Evolvice",
+    "Slug": "evolvice"
+  },
+  {
+    "Id": 351,
+    "TopicId": "6d84ae11-c0ee-4db7-ac19-a75e8c48790b",
+    "TopicName": "Altron Karabina",
+    "Slug": "altron-karabina"
+  },
+  {
+    "Id": 352,
+    "TopicId": "9e256a08-e448-4b94-ad7c-a76eaf33dd64",
+    "TopicName": "Fortify Training LLC",
+    "Slug": "fortify-training-llc"
+  },
+  {
+    "Id": 353,
+    "TopicId": "f6c99ca6-00ff-4a4d-b475-634603bef8d4",
+    "TopicName": "UiPath",
+    "Slug": "ui-path"
+  },
+  {
+    "Id": 354,
+    "TopicId": "78424c42-25ca-4750-a0c4-735a0361d671",
+    "TopicName": "TMR Consulting Private Limited",
+    "Slug": "tmr-consulting-private-limited"
+  },
+  {
+    "Id": 355,
+    "TopicId": "d4c784d3-c43b-4453-b794-735e328bef07",
+    "TopicName": "ASSIMIL8 IT",
+    "Slug": "assimil8-it"
+  },
+  {
+    "Id": 356,
+    "TopicId": "cc29ea7c-228f-487b-a2b9-73cb3fc1c669",
+    "TopicName": "NIM",
+    "Slug": "nim"
+  },
+  {
+    "Id": 357,
+    "TopicId": "499ba94a-3f45-4e05-9868-82219210a9af",
+    "TopicName": "DRAGONFLY TESTING SOLUTIONS PRIVATE LIMITED",
+    "Slug": "dragonfly-testing-solutions-private-limited"
+  },
+  {
+    "Id": 358,
+    "TopicId": "b276b150-b8c9-445c-ab12-828409d24a06",
+    "TopicName": "Tenneo",
+    "Slug": "tenneo"
+  },
+  {
+    "Id": 359,
+    "TopicId": "21891080-1d76-40f7-a692-cbdafedea6bd",
+    "TopicName": "Mh service ",
+    "Slug": "mh-service-"
+  },
+  {
+    "Id": 360,
+    "TopicId": "8c4bf927-3b55-4985-b989-12eb0530dcb1",
+    "TopicName": "Axidian ",
+    "Slug": "axidian-"
+  },
+  {
+    "Id": 361,
+    "TopicId": "21283828-3a03-4d6c-94b1-13039ffc0952",
+    "TopicName": "MBUZZ",
+    "Slug": "mbuzz"
+  },
+  {
+    "Id": 362,
+    "TopicId": "6640c803-7d54-43f6-806a-9ff9b9ada26c",
+    "TopicName": "BenQ Middle East",
+    "Slug": "benq-middle-east"
+  },
+  {
+    "Id": 363,
+    "TopicId": "ef2ae167-a49e-4dc0-a027-a1426f3dd9a4",
+    "TopicName": "Whitelotus Corporation Pvt Ltd",
+    "Slug": "whitelotus-corporation-pvt-ltd"
+  },
+  {
+    "Id": 364,
+    "TopicId": "68f62f8c-1f1a-416e-87fb-a224f7d9322f",
+    "TopicName": "ONPASSIVE",
+    "Slug": "onpassive"
+  },
+  {
+    "Id": 365,
+    "TopicId": "0e9013fb-e11d-461c-8768-929780472824",
+    "TopicName": "emaratech ",
+    "Slug": "emaratech-"
+  },
+  {
+    "Id": 366,
+    "TopicId": "406908a1-20fc-4385-ab6f-92c9505d3947",
+    "TopicName": "HRsource",
+    "Slug": "hrsource"
+  }
+]
