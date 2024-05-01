@@ -2,7 +2,7 @@ import { debug } from "util";
 import app from "./app";
 import http from "http";
 
-import connectDb from "./utils/connectDb";
+import {connectDb} from "./utils/connectDb";
 
 require('dotenv').config();
 
@@ -71,6 +71,12 @@ connectDb()
   .catch((error: any) => {
     console.log("Error connecting to the database", error.message);
   });
+
+//handle unhandled exceptions
+process.on("unhandledRejection", (err: any) => {
+  console.log("Unhandled Rejection", err);
+  process.exit(1);
+});
 
 
 
