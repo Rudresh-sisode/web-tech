@@ -4,6 +4,9 @@ import { GoogleAuth } from "google-auth-library";
 
 import jsonData from '../seeds/feedData.json';
 
+import { Request } from "express";
+import { Response } from "express";
+import { NextFunction } from "express";
 import { getDB } from "../utils/connectDb";
 
 require('dotenv').config();
@@ -16,7 +19,7 @@ const client = new TextServiceClient({
   authClient: new GoogleAuth().fromAPIKey(API_KEY as string),
 });
 
-const doEmbeddingData = async (req: any, res: any, next: any) => { // post request
+const doEmbeddingData = async (req: Request, res: Response, next: NextFunction) => { // post request
 
   try {
     const text = req.body.text;

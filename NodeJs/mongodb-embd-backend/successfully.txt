@@ -1,0 +1,4 @@
+[{\"Id\":0,\"TopicId\":\"fd54a3b0-6412-4c6e-9aa2-73b191a24b99\", ynatrace-1\"}
+
+
+abbove prompt retrive successfully response from vector db

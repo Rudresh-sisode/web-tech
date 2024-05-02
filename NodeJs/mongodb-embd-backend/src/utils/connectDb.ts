@@ -23,7 +23,7 @@ const getDB = () => {
   if (_db) {
     return _db;
   }
-  throw new Error("No database found");
+  // throw new Error("No database found");
 }
 
 export { connectDb, getDB };
