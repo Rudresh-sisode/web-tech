@@ -6,6 +6,7 @@ import { NextFunction } from "express";
 import { getDB } from "../utils/connectDb";
 import { Collection } from "mongodb";
 import { Document } from "mongodb";
+import { runChat } from "./services/gemini-LLM";
 
 require('dotenv').config(); // Load environment variables from .env file
 
@@ -56,9 +57,17 @@ const retrivalAugumentGenerate = async (req: any, res: any) => {
     // Run the pipeline and convert the result to an array
     const result: Document[] = await agg.toArray();
 
+    let chunkData = result.map((doc: any) => {
+      return doc.chunk;
+    }).join(" ");
+
+
+
+
+
     // Return the result
     return res.status(200).json({
-      result: result
+      result: chunkData
     });
 
   }
