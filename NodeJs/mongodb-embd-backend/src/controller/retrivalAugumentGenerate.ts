@@ -3,10 +3,10 @@ import { GoogleAuth } from "google-auth-library";
 import { Request } from "express";
 import { Response } from "express";
 import { NextFunction } from "express";
-import { getDB } from "../utils/connectDb";
 import { Collection } from "mongodb";
 import { Document } from "mongodb";
 import { runChat } from "./services/gemini-LLM";
+import { getDB } from "../utils/connectDb";
 
 require('dotenv').config(); // Load environment variables from .env file
 
@@ -62,12 +62,18 @@ const retrivalAugumentGenerate = async (req: any, res: any) => {
     }).join(" ");
 
 
-
+    //called the gemini model's function
+    const geminiResponse = await runChat([], chunkData, userQuery);
+    
+    if (geminiResponse.error) {
+      throw new Error(geminiResponse.errorMessage);
+    }
 
 
     // Return the result
     return res.status(200).json({
-      result: chunkData
+      result: geminiResponse, 
+      chunkData: chunkData
     });
 
   }
