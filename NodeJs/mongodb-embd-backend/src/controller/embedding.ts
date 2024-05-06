@@ -1,5 +1,4 @@
 import { TextServiceClient } from "@google-ai/generativelanguage";
-
 import { GoogleAuth } from "google-auth-library";
 
 import jsonData from '../seeds/feedData.json';
@@ -27,7 +26,7 @@ const doEmbeddingData = async (req: Request, res: Response, next: NextFunction) 
     // convert json to string
     const convertedData = JSON.stringify(jsonData);
 
-    const batchSize = 210;
+    const batchSize = 210; // 250 is the maximum limit
 
     let embeddingArra: any[] = [];
 
