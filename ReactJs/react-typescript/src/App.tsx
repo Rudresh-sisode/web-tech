@@ -10,7 +10,7 @@ function App() {
 
   return (
     <main>
-      <CourseGoal/>
+      <CourseGoal title="React + typescript" description="Improvising TS"/>
     </main>
   )
 }
