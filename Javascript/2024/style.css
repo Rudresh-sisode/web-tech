@@ -5,3 +5,22 @@
     margin: 10px;
     text-align: center;
 }
+
+.btn-style{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.second-div{
+  text-align: center;
+  padding:5%;
+  width: 50%;
+  margin: 30px auto;
+  height: fit-content;
+  background-color: powderblue
+}
