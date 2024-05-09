@@ -12,14 +12,14 @@
   <div class="first-div">
     <label for="name">Your Array values</label>
 
-    <input type="text" id="name" name="name" value="1,2,3,4,5,6,7,8,9,10">
+    <input type="text" id="array-input" name="name" value="1,2,3,4,5,6,7,8,9,10">
 
-    <select name="cars" id="cars">
-      <option value="asc">Ascending</option>
-      <option value="desc">Descending</option>
+    <select name="cars" id="array-select">
+      <!-- <option value="asc">Ascending</option>
+      <option value="desc">Descending</option> -->
     </select>
 
-    <button class="btn-style">Apply</button>
+    <button class="btn-style" type="button" onclick="clickEventAction()">Apply</button>
   </div>
   <!-- </div> -->
 
@@ -27,9 +27,13 @@
     <h3>OUTPUT</h3>
 
     <div class="output">
-      <p>Output will be displayed here</p>
+      <p id="result-output">Output will be displayed here</p>
+      <p id="result-info">Additional Information</p>
     </div>
 
   </div>
+
+  <script src="domMani.js"></script>
+  <!-- <script src="array-methods.js"></script> -->
 </body>
 </html>
