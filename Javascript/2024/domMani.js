@@ -1,5 +1,5 @@
 // import ArrayFunctionChoosen from "./array-methods";
-let arrayMethod = ['from', 'fromAsync', 'isArray', 'Array.of','iterator','push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse'];
+let arrayMethod = ['from', 'fromAsync', 'isArray','some', 'Array.of','iterator','push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse'];
 //set the array method to select element
 let select = document.getElementById('array-select');
 
@@ -129,6 +129,31 @@ function ArrayFunctionChoosen(f_name, inputArray) {
       }
         </code></pre>
       `)
+      break;
+    case 'indexOf':
+      {
+        let beasts = ['ant', 'bison', 'camel', 'duck', 'bison'];
+        
+
+      }
+      break;
+    case 'some':
+      {
+        const array1 = inputArray;
+        const even = (element) => element % 2 === 0;
+        let result = array1.some(even);
+        console.clear();
+        console.log("Some log");
+        setTheContentOverDom(` ${result}`, `
+        <pre><code>
+        const array1 = inputArray;
+        const even = (element) => element % 2 === 0;
+        let result = array1.some(even);
+        console.clear();
+        console.log(even);
+        </code></pre>
+        `)
+      }
 
   }
 }
@@ -139,7 +164,3 @@ function setTheContentOverDom(result, info) {
   resultDiv.innerHTML = result;
   infoDiv.innerHTML = info;
 }
-
-
-
-
