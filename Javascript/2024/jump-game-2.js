@@ -12,5 +12,5 @@ let minJumps = (num) => {
   return jump[n - 1];
 }
 
-let nums = [2, 3, 1, 1, 4];
+let nums = [5, 3, 1, 1, 4];
 console.log(minJumps(nums));
