@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "General-Sans-Reg";
+  src: url("./GeneralSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "General-Sans-Med";
+  src: url("./GeneralSans-Medium.ttf") format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "General-Sans-Semibold";
+  src: url("./GeneralSans-Semibold.ttf") format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "General-Sans-Bold";
+  src: url("./GeneralSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Acme-Reg";
+  src: url("./Acme-Regular.ttf") format("truetype");
+  font-weight: 400;
+}

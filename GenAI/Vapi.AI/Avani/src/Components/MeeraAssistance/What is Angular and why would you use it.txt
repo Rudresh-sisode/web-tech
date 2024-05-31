@@ -1,0 +1,328 @@
+What is Angular and why would you use it?
+Can you explain the difference between AngularJS and Angular?
+[
+AngularJS and Angular are both web application frameworks developed by Google, but they have significant differences:
+Versioning: AngularJS refers to the 1.X versions of Angular, while Angular refers to the 2.X versions and above. AngularJS was the first version of the framework, while Angular is a complete rewrite of AngularJS.
+Architecture: AngularJS uses an MVC (Model-View-Controller) architecture, while Angular uses a component-based architecture. In Angular, everything is a component which makes building complex applications more manageable.
+Language: AngularJS is written in JavaScript, while Angular is written in TypeScript, a statically typed superset of JavaScript
+Expression Syntax: In AngularJS, you use the scope to bind data between JavaScript and HTML. In Angular, you use "()" for event binding and "[ ]" for property binding.
+Performance: Angular is generally faster and more efficient than AngularJS because it takes advantage of hierarchical dependency injection and unidirectional data flow.
+Mobile Support: AngularJS was not built with mobile support in mind, while Angular has better mobile performance and is more suited to mobile app development.
+Routing: AngularJS uses $routeprovider.when() for routing configuration while Angular uses Routes array for routing configuration.
+Remember, despite the name, AngularJS and Angular are essentially different frameworks and learning one doesnt automatically mean you know the other.
+]
+
+What are components in Angular?
+[
+Components are fundamental building blocks of Angular applications. They control a patch of screen called a view.
+A component is made up of three things:
+Template: This is the HTML that needs to be rendered in the view.
+Class: This is like a blueprint which provides the behavior for the component. It can have properties (which can be accessed from the template) and methods.
+Decorator: This is a function that provides metadata for the component, allowing it to interact with the rest of the system. The decorator is applied to the class using the @Component() decorator function.
+style for template: This is the CSS that needs to be applied to the template.
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'profile-photo',
+  template: `<img src="profile-photo.jpg" alt="Your profile photo">`,
+  styles: `img { border-radius: 50%; }`,
+})
+export class ProfilePhoto { 
+
+}
+
+Components are typically arranged hierarchically,
+with one root component and then several layers of child components. 
+This allows you to build complex applications out of simple building blocks.
+]
+
+What are directives? Can you explain the different types of directives in Angular?
+[
+  Directives are a unique and powerful feature of Angular that allows you to create new, custom HTML syntax, specific to your application.
+There are three types of directives in Angular:
+Component Directives: These are directives with a template. This is the most common type of directive and one you will use most often. Components are essentially directive that are always associated with a template. They are the most common of the three directive types.
+Attribute Directives: These directives change the appearance or behavior of an element, component, or another directive. For example, the built-in NgStyle directive can change several element styles at the same time.
+Structural Directives: These directives change the DOM layout by adding and removing DOM elements. They do this by following the structure of the HTML. For example, built-in directives like *ngFor and *ngIf are structural directives.
+
+  Heres an example of how you might use these directives in a template:
+
+<!-- Component Directive -->
+<app-my-component></app-my-component>
+
+<!-- Attribute Directive -->
+<div [ngStyle]="{'color': 'red'}">This text is red.</div>
+
+<!-- Structural Directive -->
+<div *ngIf="showText">This text is conditionally displayed.</div>
+
+]
+
+
+What is dependency injection in Angular?
+
+[
+Dependency Injection (DI) is a design pattern in which a 
+class receives its dependencies from external sources 
+  rather than creating them itself. In Angular, the DI framework provides 
+  declared dependencies to a class upon instantiation.
+  Heres how it works in Angular:
+
+Declare Dependencies: You declare a dependency by using a constructor parameter 
+with the dependency type. Heres an example where MyService is a dependency for 
+MyComponent:
+
+import { MyService } from './my.service';
+
+export class MyComponent {
+  constructor(private myService: MyService) { }
+}
+
+Provide Dependencies: Angular can only inject dependencies that are provided. 
+Providers tell Angular how to create the dependency. Providers can be added 
+in the providers array in the @NgModule or @Component decorator:
+import { MyService } from './my.service';
+
+@Component({
+  providers: [MyService]
+})
+export class MyComponent {
+  constructor(private myService: MyService) { }
+}
+
+Inject Dependencies: When Angular creates a new instance of MyComponent, it looks at
+ the constructor, sees that MyService is a dependency, and provides an instance 
+ of MyService.
+The benefits of Dependency Injection are:
+
+Decoupling: Classes are not responsible for finding their own dependencies. 
+This makes the system more decoupled and modular.
+Ease of Testing: You can easily replace dependencies with mock versions when testing.
+Single Responsibility: Classes are not responsible for creating their own 
+dependencies, so they adhere more closely to the Single Responsibility Principle.
+
+]
+
+How does change detection work in Angular?
+[
+  Change detection is a core functionality in Angular that allows the 
+  framework to update the view whenever the model changes and vice versa.
+  It ensures that the user interface always reflects the current state of the model.
+Heres a simplified explanation of how it works:
+Model Update: When an event occurs like a button click, a form submission, 
+or an HTTP response, 
+the model data gets updated.
+Change Detection Run: Angular runs the change detection mechanism to update the DOM.
+ It does this by checking the current value of properties and comparing 
+ them with their previous values. 
+This process is also known as dirty checking.
+View Update: If Angular detects that a property value has changed, 
+it updates the corresponding element in the DOM.
+Angulars change detection is hierarchical and unidirectional. 
+This means it starts from the top (the root component) and progresses down through 
+child components. This ensures that change detection is predictable and efficient.
+Angular also provides strategies to control how change detection is run:
+
+Default: This strategy checks for changes in every component tree whenever 
+something changes (like events, HTTP responses, timers etc.). 
+This is the most common strategy.
+
+OnPush: This strategy tells Angular to run change detection only when the 
+reference of the object changes. This is a more performance-optimized strategy
+and is useful for components that rely on inputs and dont have internal state.
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+
+@Component({
+  selector: 'app-my-component',
+  template: `...`,
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class MyComponent {
+  @Input() data: any;
+}
+
+In this example, change detection will only run for MyComponent when the data 
+input changes.
+
+]
+
+What is the difference between constructor and ngOnInit in a components lifecycle?
+[
+  In an Angular components lifecycle, both the constructor and ngOnInit methods are 
+  called when a component is created, but they have different purposes and are called 
+  at different times.
+
+Constructor:
+
+The constructor method is a default method of the class that is automatically 
+called when a class is instantiated. Its primarily used for dependency injection 
+and initializing class fields. Its called before ngOnInit.
+
+Heres an example:
+export class MyComponent {
+  constructor(private myService: MyService) {
+    // This is where you inject dependencies
+  }
+}
+
+ngOnInit:
+
+The ngOnInit method is a lifecycle hook method provided by Angular. Its called after 
+Angular has finished creating and presenting the component, including setting up the 
+first bindings. This is where you should put complex initialization logic for 
+your component.
+export class MyComponent implements OnInit {
+  constructor(private myService: MyService) { }
+
+  ngOnInit() {
+    // This is where you put initialization logic
+  }
+}
+
+In summary, use the constructor for simple initializations and dependency injection, 
+and use ngOnInit for any additional setup or initialization tasks.
+
+]
+
+What is a template in Angular?
+[
+  In Angular, a template is a form of HTML that tells Angular how to render the component. Its essentially the view layer in the Angular application.
+
+A template can include:
+
+HTML elements: These are standard HTML elements like <div>, <p>, <input>, etc.
+
+Angular Directives: These are custom attributes that Angular provides to add behavior to HTML elements. Examples include *ngIf, *ngFor, [ngModel], etc.
+
+Angular Components: These are custom HTML elements that you define. Each component in Angular has its own template.
+
+Data Bindings: These are expressions that bind your component data to the DOM, making it interactive. Examples include {{expression}}, [property]="value", (event)="handler", etc.
+
+Heres an example of a simple Angular template:
+<div *ngFor="let item of items">
+  <app-item-detail [item]="item" (delete)="onDelete(item)"></app-item-detail>
+</div>
+
+In this example, <div *ngFor="let item of items"> is using the *ngFor directive to loop over a list of items, <app-item-detail [item]="item"> is a component with an input binding, and (delete)="onDelete(item)" is an event binding.
+
+]
+
+
+Explain Data binding in Angular
+[
+  Data binding in Angular is a technique to synchronize data between the model (component) and the view (template). It allows you to define communication between the component and the view. There are four forms of data binding in Angular:
+Interpolation ({{ }}): This is one-way data binding from the component to the view. Its used to display variable values from the component in the view.
+<p>{{ name }}</p>
+Property Binding ([property]="value"): This is also one-way data binding from the component to the view. It's used to bind a DOM property to a component property.
+<img [src]="imageUrl">
+Event Binding ((event)="handler"): This is one-way data binding from the view to the component. It's used to respond to user events like clicks, key presses, etc.
+<button (click)="handleClick()">Click me</button>
+Two-Way Binding ([(ngModel)]="property"): This is two-way data binding, allowing data to flow both from the component to the view and from the view to the component. Its used for form inputs and other interactive elements.
+<input [(ngModel)]="name">
+In this example, any changes to the input field will update the name property in the component, and any changes to the name property in the component will update the input field in the view.
+]
+
+
+What is a service, and when would you use one?
+
+Can you explain how routing works in Angular?
+[
+  Routing in Angular allows you to navigate from one part of your application to another as users perform tasks. It's implemented with the RouterModule and a set of routes that define the navigation paths.
+
+Here's a step-by-step explanation of how routing works in Angular:
+
+Define Routes: You define a set of routes in your application. Each route is a mapping of a URL path to a component.
+const routes: Routes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  // ...
+];
+Import RouterModule: You import the RouterModule and add it to your application module with the .forRoot() method, passing in your routes.
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+Router Outlet: In your template, you use the <router-outlet> directive. Angular will dynamically insert the component for the active route here.
+<router-outlet></router-outlet>
+
+RouterLink: To create links in your application, you use the routerLink directive.
+<a routerLink="/home">Home</a>
+<a routerLink="/about">About</a>
+
+Navigation: When a user clicks a link, the routerLink directive tells the Router to navigate based on the links URL. The Router finds the route that matches the URL, and then it renders the associated component in the <router-outlet>.
+
+Route Parameters: Routes can also have parameters. For example, you might have a route to display a user profile like { path: 'user/:id', component: UserProfileComponent }. The :id is a route parameter that you can access in your component.
+
+Route Guards: Angular provides route guards to control access to routes. For example, you might use a guard to redirect unauthenticated users to a login page.
+]
+
+What are pipes in Angular? Can you give an example of a built-in pipe?
+[
+Pipes in Angular are a way to write display-value transformations that you can declare in your HTML. A pipe takes in data as input and transforms it to a desired output.
+
+Here are a few key points about pipes:
+Built-in Pipes: Angular comes with a stock of pipes such as DatePipe, UpperCasePipe, LowerCasePipe, CurrencyPipe, and PercentPipe. They are all available for use in any template.
+
+Custom Pipes: You can also define your own custom pipes. You create a custom pipe by implementing the PipeTransform interface and applying the @Pipe decorator.
+
+Chaining Pipes: You can chain pipes together in potentially useful combinations. In the following example, chained pipes first transform the birthday to a date type and then to a string in the format of April 15, 1988.
+<p>The hero's birthday is {{ birthday | date:'fullDate' | uppercase}}</p>
+Parameterizing a Pipe: A pipe can accept any number of optional parameters to fine-tune its output. In the following example, the format parameter is passed to the date pipe.
+<p>The hero's birthday is {{ birthday | date:'fullDate' }}</p>
+In summary, pipes in Angular help you transform output in your templates. They are simple functions that can accept an input value and return a transformed value.
+
+]
+
+What is the difference between ReactiveForms and TemplateDriven forms? When would you use one over the other?
+How would you handle errors in Angular?
+What is HttpClient and how would you use it to make API calls?
+
+Can you explain how Observables and RxJS are used in Angular?
+[
+  Observables are a key part of Angular's ecosystem, primarily used for handling asynchronous operations and events. They come from the RxJS library, which is a library for reactive programming using Observables.
+
+Here's how Observables and RxJS are used in Angular:
+
+Creating Observables: You can create an Observable using the new Observable() constructor from RxJS. An Observable is a function that sets up observation of some data source, such as a stream of events like button clicks or HTTP requests.
+import { Observable } from 'rxjs';
+
+const myObservable = new Observable(subscriber => {
+  subscriber.next('Hello');
+  subscriber.complete();
+});
+Subscribing to Observables: To start receiving values from an Observable, you subscribe to it. The subscription takes three arguments: one for handling data, one for handling errors, and one for handling completion.
+myObservable.subscribe({
+  next: data => console.log(data),
+  error: err => console.error(err),
+  complete: () => console.log('Completed'),
+});
+Operators: RxJS provides a wide range of operators like map(), filter(), concat(), mergeMap(), etc. These operators allow you to manipulate, transform, and combine Observables.
+import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+of(1, 2, 3)
+  .pipe(map(x => x * 2))
+  .subscribe(console.log);  // Outputs 2, 4, 6
+  HTTP Requests: Angular's HttpClient returns Observables for HTTP requests. This allows you to handle HTTP responses asynchronously and use RxJS operators to transform the response.
+  this.http.get('/api/data').subscribe(data => console.log(data));
+
+  Forms: Angular's Reactive Forms also use Observables to watch form control values.
+  this.myForm.get('name').valueChanges.subscribe(value => console.log(value));
+  this.route.params.subscribe(params => console.log(params.id));
+  Routing: The Angular Router uses Observables to handle route parameters.
+  this.route.params.subscribe(params => console.log(params.id));
+
+  In summary, Observables and RxJS are used in Angular to handle asynchronous data streams in a consistent, powerful way.
+]
+
+What is lazy loading and why is it useful in Angular applications?
+
+How would you implement authentication in an Angular application?
+
+What are decorators in Angular? Can you give an example?
+
+How would you optimize an Angular application for better performance?
+
+What is AOT (Ahead-of-Time) Compilation and how does it help in Angular?

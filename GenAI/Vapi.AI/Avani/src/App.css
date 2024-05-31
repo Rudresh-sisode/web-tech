@@ -1,0 +1,217 @@
+ #root {
+  /* max-width: 1280px; */
+  margin: 0 auto;
+  /* padding: 2rem; */
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+}
+body{
+  background: linear-gradient(163.7deg, #F7EAF7 7.97%, #D4EDFF 88.68%);
+}
+.App{
+  width: 100%;
+  height: 100%;
+}
+/*
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+
+.listening {
+  background-color: green;
+  color: white;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.not-listening {
+  background-color: red;
+  color: white;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+} */
+
+.assistance-Wrapper .ellipse{
+  position: fixed;
+  top: 25%;
+  right: 5%;
+}
+.assistance-Wrapper .polygone1{
+  position: fixed;
+  top: 25%;
+  left: 5%;
+  width: 40px;
+  height: auto;
+}
+.assistance-Wrapper .polygone2{
+  position: fixed;
+  top: 15%;
+  left: 30%;
+  width: 25px;
+  height: auto;
+}
+.assistance-Wrapper .star1{
+  position: fixed;
+  top: 10%;
+  right: 25%;
+  width: 35px;
+  height: auto;
+}
+.assistance-Wrapper .star2{
+  position: fixed;
+  top: 21%;
+  right: 35%;
+  width: 40px;
+  height: auto;
+}
+.assistance-Wrapper .header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  padding: 0 40px;
+}
+.assistance-Wrapper .header .logo{
+  color: #5E26FE;
+  font-size: 24px;
+   font-family: 'Acme-Reg';
+   font-weight: 400;
+}
+
+.assistance-Wrapper button{
+  padding: 8px 24px;
+  border-radius: 12px;
+  height: 40px;
+  background: #5E26FE;
+  color: #fff;
+  font-size: 16px;
+  line-height: calc(16px * 1.4);
+   font-family: "General-Sans-Med";
+   font-weight: 400;
+}
+.assistance-Wrapper .assistance-content{
+  padding: 20px 0;
+}
+.assistance-Wrapper .assistance-content .assistance-container{
+  max-width: 1150px;
+  width: 100%;
+  margin: 0 auto;
+  padding:  0 15px;
+}
+.assistance-Wrapper .assistance-content .title-header h2{
+  font-size: 48px;
+  line-height: calc(48px * 1.4);
+  font-weight: 600;
+  color: #141416;
+  text-transform: capitalize;
+  margin: 0;
+  text-align: left;
+  font-family: "Acme-Reg";
+  font-weight: 400;
+}
+.assistance-Wrapper .assistance-content .assistance-controler{
+ background: rgb(255 255 255 / 25%);
+  border: 1px solid #FFFFFF;
+  border-radius: 24px;
+  max-width: 900px;
+  width: 100%;
+  height: calc(100vh - 312px);
+  min-height: 400px;
+  margin: 50px auto 0;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.assistance-Wrapper .assistance-content .assistance-controler h2 {
+  font-size: 48px;
+  line-height: calc(48px * 1.3);
+  color: #141416;
+  margin: 0 0 30px;
+  font-family: 'Acme-Reg';
+  font-weight: 400;
+}
+
+.assistance-Wrapper .assistance-content .assistance-controler .assistance-img{
+  margin-bottom: 20px;
+}
+
+.assistance-Wrapper .assistance-content .assistance-controler .assistance-img img{
+  /* width: 225px; */
+  width: 350px;
+  height: auto;
+}
+
+.lottie-wrapper{
+  width: 350px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.assistance-Wrapper .assistance-content .assistance-controler .btn-wrapper{
+  max-width: 600px;
+  width: 100%;
+  margin: auto auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;  
+}
+
+.assistance-Wrapper .assistance-content .assistance-controler .btn-wrapper button{
+  padding: 12px 24px;
+  height: 48px;
+  border-radius: 40px;
+  background: #fff;
+  color: #381798;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  font-family: "General-Sans-Med";
+  /* font-weight: 500; */
+}
+.assistance-Wrapper .assistance-content .assistance-controler .btn-wrapper button img{
+  margin-right: 10px;
+}
