@@ -13,6 +13,7 @@ import Lottie from "lottie-react";
 
 import siriAnim from '../../lotties/siri-anim.json';
 
+let i = 0;
 
 const vapi = new Vapi(import.meta.env.VITE_REACT_APP_VAPI_PUBLIC_API as string); // Vapi public key
 
@@ -35,8 +36,16 @@ export default function MeeraAssistance() {
  
   
   const startCall = () => {
-    vapi.start(import.meta.env.VITE_REACT_APP_VAPI_ASSISTANCE_ID as string); // assistance ID
+    debugger;
+    try {
+         vapi.start(import.meta.env.VITE_REACT_APP_VAPI_ASSISTANCE_ID as string); // assistance ID
     setIsListening(CALLSTATUS.CONNECTING);
+    }
+    catch (e: any) {
+      debugger;
+      alert("Error: " + e.message);
+    }
+ 
   };
 
 
@@ -49,9 +58,14 @@ export default function MeeraAssistance() {
 
 
   vapi.on("error", (e) => {
-    console.error(e);
+    i++;
+    console.error('error count\t',i);
+    console.error('your error\t',e);
+
+   
     vapi.stop();
     setIsListening(CALLSTATUS.CALLSTOP);
+    throw new Error(e);
   });
 
   vapi.on("call-end", () => {
@@ -71,7 +85,9 @@ export default function MeeraAssistance() {
   });
 
   vapi.on("call-start", () => {
+
     setIsListening(CALLSTATUS.CONNECTING);
+
     console.log("Call has started.");
   });
 
@@ -84,7 +100,9 @@ export default function MeeraAssistance() {
       <img src={star2} alt='star' className='star2' width={20} height={20} />
       <div className='header'>
         <div className='logo'>Creole's Assistant</div>
-        {/* <button>Talk to Meera</button> */}
+        <button onClick={() => {
+          throw new Error('This is a test error');
+        }}>Profile</button>
       </div>
       <div className='assistance-content'>
         <div className='assistance-container'>
