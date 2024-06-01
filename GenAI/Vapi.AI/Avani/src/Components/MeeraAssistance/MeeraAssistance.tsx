@@ -24,6 +24,8 @@ enum CALLSTATUS {
   CALLSTOP
 }
 
+const AssistanceName = "Aavani";
+
 export default function MeeraAssistance() {
 
   const [isListening, setIsListening] = useState(CALLSTATUS.VOID);
@@ -104,10 +106,10 @@ export default function MeeraAssistance() {
             </div>
             <h2>
               {
-                isListening == CALLSTATUS.VOID ? "I'm Meera, you can call me!" : 
-                  isListening == CALLSTATUS.CONNECTING ? "Calling to Meera..." :
-                    isListening == CALLSTATUS.SPEAKING ? "Meera is speaking..." :
-                      isListening == CALLSTATUS.LISTENING ? "Meera is listening..." :
+                isListening == CALLSTATUS.VOID ? `I'm ${AssistanceName}, you can call me!` : 
+                  isListening == CALLSTATUS.CONNECTING ?  `Calling to ${AssistanceName}...` :
+                    isListening == CALLSTATUS.SPEAKING ? `${AssistanceName} is speaking...` :
+                      isListening == CALLSTATUS.LISTENING ? `${AssistanceName} is listening...` :
                         isListening == CALLSTATUS.CALLSTOP ? "Call Ended!" : ""
               }
            
