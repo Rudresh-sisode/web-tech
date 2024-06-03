@@ -93,11 +93,11 @@ export default function MeeraAssistance() {
 
   return (
     <div className='assistance-Wrapper'>
-      <img src={ellipse} alt='ellipse' className='ellipse' width={20} height={20} />
+      {/* <img src={ellipse} alt='ellipse' className='ellipse' width={20} height={20} />
       <img src={polygone1} alt='polygone' className='polygone1' width={20} height={20} />
       <img src={polygone2} alt='polygone' className='polygone2' width={20} height={20} />
       <img src={star1} alt='star' className='star1' width={20} height={20} />
-      <img src={star2} alt='star' className='star2' width={20} height={20} />
+      <img src={star2} alt='star' className='star2' width={20} height={20} /> */}
       <div className='header'>
         <div className='logo'>Creole's Assistant</div>
         <button onClick={() => {
