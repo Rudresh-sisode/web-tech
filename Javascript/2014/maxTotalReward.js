@@ -1,22 +1,16 @@
-const maxTotalReward = (totalRewards)=>{
-
-  //sort the totalRewards array in ascending order
-  totalRewards.sort((a, b) => a - b);
-
-  //initialize the maxTotalReward to 0
-  let maxTotalReward = 0;
-
-  //loop through the totalRewards array
-  for(let i = 0; i < totalRewards.length; i++){
-
-    //if the current totalReward is greater than or equal to the maxTotalReward
-    if(totalRewards[i] >= maxTotalReward){
-
-      //increment the maxTotalReward by 1
-      maxTotalReward += totalRewards[i];
+function maxTotalReward(rewardValues) {
+  rewardValues.sort((a, b) => a - b);
+  const sum = new Set();
+  for (let num of rewardValues) {
+    for (let pre of [...sum]) {
+      if (pre < num) sum.add(pre + num);
     }
+    sum.add(num);
   }
-
-  //return the maxTotalReward
-  return maxTotalReward;
+  return Math.max(...sum);
 }
+
+// const rewardValues = [5, 3, 10, 1, 2];
+// console.log(maxTotalReward(rewardValues));
+console.log(maxTotalReward([1, 1, 3, 3])); // Output: 4
+console.log(maxTotalReward([1, 6, 4, 3, 2]));
