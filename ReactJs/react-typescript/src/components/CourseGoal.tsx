@@ -4,7 +4,7 @@ import { type FC, type PropsWithChildren ,type ReactNode } from "react";
 //   children:ReactNode
 // }
 
-type CourseGoalDefination = PropsWithChildren<{ title: string }>;
+type CourseGoalDefination = PropsWithChildren<{ id: number; title: string; onDelete: (id: number) => void; }>;
 
 
 /**
@@ -17,14 +17,14 @@ type CourseGoalDefination = PropsWithChildren<{ title: string }>;
  */
 
 // const CourseGoal:FC<CourseGoalDefination> = ({title,children})=>{
-export default function CourseGoal({ title, children }: CourseGoalDefination) {
+export default function CourseGoal({ title,id, children , onDelete}: CourseGoalDefination) {
   return <article>
     <div>
       <h2>{title}</h2>
       {children}
       {/* <p>{description}</p> */}
     </div>
-    <button>DELETE</button>
+    <button onClick={()=> onDelete(id)}>DELETE</button>
   </article>
 }
 

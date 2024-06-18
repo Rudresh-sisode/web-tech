@@ -45,7 +45,7 @@ function App() {
         Add Goal
       </button>
 
-      <CourseGoalList goals={goals }/>
+      <CourseGoalList goals={goals } onDeleteGoal={handleDeleteGoal}/>
 
 
     </main>
