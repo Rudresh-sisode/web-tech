@@ -1,12 +1,20 @@
-function* gexEx(bc) {
-  yield bc;
-  yield bc++;
-  yield bc;
-}
+// function* gexEx(bc) {
+//   yield bc;
+//   yield bc++;
+//   yield bc;
+// }
 
-const g = gexEx(90);
+// let its  = {}
+// its[Symbol.iterator] = gexEx(99);
+// console.log([...its]);
+const iterable1 = {};
 
-console.log(g.next());
-console.log(g.next());
-console.log(g.next());
+function* bb() {
+  yield 1;
+  yield 2;
+  yield 3;
+};
 
+iterable1[Symbol.iterator] = bb;
+
+console.log([...iterable1]);
