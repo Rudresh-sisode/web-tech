@@ -1,10 +1,10 @@
 
 import sound from '../../assets/sound.svg';
-import ellipse from '../../assets/Ellipse 5.svg';
-import polygone1 from '../../assets/Polygon 1.svg';
-import polygone2 from '../../assets/Polygon 2.svg';
-import star1 from '../../assets/Star 1.svg';
-import star2 from '../../assets/Star 2.svg';
+// import ellipse from '../../assets/Ellipse 5.svg';
+// import polygone1 from '../../assets/Polygon 1.svg';
+// import polygone2 from '../../assets/Polygon 2.svg';
+// import star1 from '../../assets/Star 1.svg';
+// import star2 from '../../assets/Star 2.svg';
 
 import Vapi from '@vapi-ai/web';
 
@@ -25,7 +25,7 @@ enum CALLSTATUS {
   CALLSTOP
 }
 
-const AssistanceName = "Aavani";
+const AssistanceName = "Avani";
 
 export default function MeeraAssistance() {
 
@@ -36,13 +36,14 @@ export default function MeeraAssistance() {
  
   
   const startCall = () => {
-    debugger;
+  
     try {
          vapi.start(import.meta.env.VITE_REACT_APP_VAPI_ASSISTANCE_ID as string); // assistance ID
     setIsListening(CALLSTATUS.CONNECTING);
     }
     catch (e: any) {
-      debugger;
+      vapi.stop();
+      setIsListening(CALLSTATUS.CALLSTOP);
       alert("Error: " + e.message);
     }
  
@@ -107,7 +108,7 @@ export default function MeeraAssistance() {
       <div className='assistance-content'>
         <div className='assistance-container'>
           <div className='title-header'>
-            <h2>Aavani AI</h2>
+            <h2>Avani AI</h2>
           </div>
           <div className='assistance-controler'>
             <div className='assistance-img'>

@@ -1,0 +1,185 @@
+                       Murli Narkhede 
+            9, Second floor, Trimurti Prasad CHS 
+             Rambaug Lane 9, Kalyan West 421301 
+ ----------------------------------------------------------
+                      yeSMatch Horoscope 
+ ----------------------------------------------------------
+                 :  girl                    boy             
+ ----------------------------------------------------------
+ Name            : Ketan 		 Ketan  
+ Date of Birth   : 10.10.1982 		 10.10.1982
+ Day of Birth    : Sunday
+ Time of Birth   : 01:22 IST 		 01:22 IST
+ Place of Birth  : Thane 		 Thane
+ Latitude        : 019:14 N 		 019:14 N
+ Longitude       : 073:02 E 		 073:02 E
+ Std time zone   : 05:30 		 05:30 
+ Local time dif  : -00:37
+ Local time      : 00:45
+ lagna rasi      : Karka 
+ Lagna swami     : Moon
+ Rasi Name       : Mithun
+ Rasi swami      : Mercury
+ Nakshatra       : Punarvasu - 1
+ Nakshatra swami : Jupiter
+ Tithi paksh     : Krishn
+ Tithi Name      : Ashtami
+ Yoga Name       : Parigha
+ Shak savant     : 1903-1904
+ Vikram savant   : 2038-2039
+ sunrise (local) : 05:53
+ sunset (local)  : 17:42
+ sunrise (std)   : 06:30
+ sunset  (std)   : 18:19
+ lagna        : 100.287633
+ mangal       : 230.222524
+ mangalik        : No
+ sex     girl       |  boy          gun    max
+ varn    shudra     |  kshatriya    1.0    1.0
+ vaishya manav      |  kitak        0.0    2.0
+ tara    vipatti    |  janma        3.0    3.0
+ yoni    marjar     |  vanar        3.0    4.0 
+ grah    budh       |  shukra       5.0    5.0
+ gan     dev        |  rakshas      1.0    6.0
+ kut     mithun     |  dhanu        7.0    7.0 
+ nadi    aadya      |  madhya       8.0    8.0
+                                    ___   ____
+                         total gun  28.0   36.0
+  Ayanamsa        :  23.62
+ Obliquity       :  23.44
+ Sideral time    :   1.95
+            Bhav position
+ ----------------------------------
+ Bhav No    Bhav begin     Mid bhav
+ ----------------------------------
+   1          84.86        100.29  
+   2         114.86        129.44  
+   3         144.02        158.59  
+   4         173.17        187.75  
+   5         203.17        218.59  
+   6         234.02        249.44  
+   7         264.86        280.29  
+   8         295.71        311.13  
+   9         326.56        341.98  
+  10         354.86          7.75  
+  11          23.17         38.59  
+  12          54.02         69.44  
+ ----------------------------------
+ Ketan                                     page: 2
+
+
+                    Planetary Position 
+ ----------------------------------------------------------
+ Planet   Rasi     Longitude  Nakshatra  Charan Direct/Ret 
+ ----------------------------------------------------------
+   Sun   Kanya       22.59    Hasta         4      Dir
+  Merc   Kanya        8.99    Uttara        4      Ret
+  Venu   Kanya       16.09    Hasta         2      Dir
+  Mars   Vruchik     20.22    Jeshtha       2      Dir
+  Jupt   Tula        19.75    Swati         4      Dir
+  Satn   Tula         0.47    Chitra        3      Dir
+  Moon   Mithun      20.62    Punarvasu     1      Dir
+  Rahu   Mithun      14.65    Adra          3      Ret
+  Ketu   Dhanu       14.65    Purvashada    1      Ret
+  Uran   Vruchik      8.55    Anuradha      2      Dir
+  Nept   Dhanu        0.95    Mula          1      Dir
+  Plut   Tula         2.81    Chitra        3      Dir
+ ----------------------------------------------------------
+
+                  Saptavargas Table (in rashi)              
+ ----------------------------------------------------------------------
+ Planet      Div1     Div3      Div7    Div9    Div10    Div12    Div16
+ ----------------------------------------------------------------------
+ Lagna         4        8       12        7        3        8        6
+ Sun           6        2        5        4        9        3        9
+ Mercury       6        6        2       12        4        9        1
+ Venus         6       10        3        2        7       12        5
+ Mars          8        4        6       10       10        4        3
+ Jupiter       7       11       11       12        1        2       11
+ Saturn        7        7        7        7        7        7        1
+ Moon          3       11        7        1        9       11        7
+ Rahu          3        7        6       11        7        8        4
+ Ketu          9        1       12        5        1        2        4
+ Uranus        8        8        3        6        6       11        9
+ Neptune       9        9        9        1        9        9        9
+ Pluto         7        7        7        7        7        8        2
+ ----------------------------------------------------------------------
+
+
+                   Ashtavarga Table                   
+ -------------------------------------------------------
+ Rasi      1   2   3   4   5   6   7   8   9  10  11  12
+ -------------------------------------------------------
+ Sun       4   5   6   4   6   3   3   4   3   2   4   4
+ Moon      6   3   4   5   4   4   1   4   6   4   2   6
+ Mars      4   3   3   6   5   3   1   4   2   3   4   1
+ Mercury   4   7   3   8   6   5   3   5   3   5   4   2
+ Jupiter   4   6   4   6   3   4   6   5   7   4   5   3
+ Venus     4   6   4   8   5   4   4   3   2   5   5   2
+ Saturn    5   2   2   4   6   4   3   1   3   1   4   4
+ -------------------------------------------------------
+ Total    31  32  26  41  35  27  21  26  26  24  28  22
+ -------------------------------------------------------
+^L
+Ketan                                   Page :  3
+           Vimsottari Dasa          
+ -----------------------------------
+ Dasa     Bhukti    Date Month Year 
+ -----------------------------------
+ JUPITER  JUPITER     2    3   1984
+ JUPITER  SATURN     14    9   1986
+ JUPITER  MERCURY    20   12   1988
+ JUPITER  KETU       26   11   1989
+ JUPITER  VENUS      26    7   1992
+ JUPITER  SUN        14    5   1993
+ JUPITER  MOON       14    9   1994
+ JUPITER  MARS       20    8   1995
+ JUPITER  RAHU       14    1   1998
+ -----   JUPITER   Dasa Ends ------ 
+ -----   SATURN    Dasa Starts ---- 
+ SATURN   SATURN     17    1   2001
+ SATURN   MERCURY    26    9   2003
+ SATURN   KETU        5   11   2004
+ SATURN   VENUS       5    1   2008
+ SATURN   SUN        17   12   2008
+ SATURN   MOON       17    7   2010
+ SATURN   MARS       26    8   2011
+ SATURN   RAHU        2    7   2014
+ SATURN   JUPITER    14    1   2017
+ -----   SATURN    Dasa Ends ------ 
+ -----   MERCURY   Dasa Starts ---- 
+ MERCURY  MERCURY    11    6   2019
+ MERCURY  KETU        8    6   2020
+ MERCURY  VENUS       8    4   2023
+ MERCURY  SUN        14    2   2024
+ MERCURY  MOON       14    7   2025
+ MERCURY  MARS       11    7   2026
+ MERCURY  RAHU       29    1   2029
+ MERCURY  JUPITER     5    5   2031
+ MERCURY  SATURN     14    1   2034
+ -----   MERCURY   Dasa Ends ------ 
+ -----   KETU      Dasa Starts ---- 
+ KETU     KETU       11    6   2034
+ KETU     VENUS      11    8   2035
+ KETU     SUN        17   12   2035
+ KETU     MOON       17    7   2036
+ KETU     MARS       14   12   2036
+ KETU     RAHU        2    1   2038
+ KETU     JUPITER     8   12   2038
+ KETU     SATURN     17    1   2040
+ KETU     MERCURY    14    1   2041
+ -----   KETU      Dasa Ends ------ 
+ -----   VENUS     Dasa Starts ---- 
+ VENUS    VENUS      14    5   2044
+ VENUS    SUN        14    5   2045
+ VENUS    MOON       14    1   2047
+ VENUS    MARS       14    3   2048
+ VENUS    RAHU       14    3   2051
+ VENUS    JUPITER    14   11   2053
+ VENUS    SATURN     14    1   2057
+ VENUS    MERCURY    14   11   2059
+ VENUS    KETU       14    1   2061
+ -----   VENUS     Dasa Ends ------ 
+ ----------------------------------
+ Note:    The dates given are for DASA ending dates.  
+ Note:    The dates given are nothing to do with the longevity of native.  
