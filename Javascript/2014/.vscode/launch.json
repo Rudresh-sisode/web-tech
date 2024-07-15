@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\removedDubplicate.js"
+            "program": "${workspaceFolder}\\findDistance-Tree.js"
         }
     ]
 }
