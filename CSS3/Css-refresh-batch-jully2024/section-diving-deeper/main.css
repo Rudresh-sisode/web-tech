@@ -1,0 +1,35 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+#product-overview {
+    background: #ff1b68;
+    height: 998px;
+    width: 528px;
+    margin: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    /* height: 10px; */
+}
+
+.section-title {
+    color: #2ddf5c;
+}
+
+#product-overview h1 {
+    color: white;
+    font-family: 'Anton', sans-serif;
+}
+
+.main-header{
+    width: 100%;
+    background: green;
+    padding: 8px 16px;
+}
+
+.main-nav__item{
+    display: inline-block;
+}
+/* h1 {
+    font-family: sans-serif;
+} */
