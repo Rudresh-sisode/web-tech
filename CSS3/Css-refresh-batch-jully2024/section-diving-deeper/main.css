@@ -5,7 +5,7 @@ body {
 
 #product-overview {
     background: #ff1b68;
-    height: 998px;
+    height: 400px;
     width: 528px;
     margin: 20px;
     padding: 10px;
@@ -63,6 +63,24 @@ body {
     text-decoration: none;
     margin: 0 16px;
     color:#0e4f1f;
+}
+
+.main-nav__item a::after{
+    content:" (link)";
+    color:tomato;
+}
+
+.main-nav__item a:hover{
+    color:whitesmoke;
+}
+
+.main-nav__item a:active{
+    color: #ff1b68;
+}
+
+p::first-letter{
+    color: #ff1b68;
+    font-size: 20px;
 }
 
 
