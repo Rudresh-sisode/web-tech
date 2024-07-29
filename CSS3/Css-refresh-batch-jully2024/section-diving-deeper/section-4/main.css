@@ -1,0 +1,28 @@
+body{
+  font-family: sans-serif;
+}
+
+nav{
+  margin-bottom: 16px;
+  background: #fa923f;
+  padding: 8px 0;
+}
+
+a{
+  text-decoration: none;
+  color: whitesmoke;
+  margin: 10px;
+}
+a.active{
+  color: #521751;
+}
+
+a:not(.active){
+  color: blue;
+}
+
+.main-section{
+  height: 800px;
+  border: 1px solid #ccc;
+  padding:16px;
+}

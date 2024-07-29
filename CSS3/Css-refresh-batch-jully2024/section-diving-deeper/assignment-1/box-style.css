@@ -1,0 +1,26 @@
+
+html,body{
+  height: 100%;
+}
+
+.box-style{
+  border: 4px solid black;
+  height: 300px;
+  width: 50%;
+  display: inline-block;
+  width: 300px;
+}
+
+.box-style:first-child{
+  display: none;
+}
+
+.box-style h3:hover{
+  color: aqua;
+  font-weight: bold;
+  font-style: italic;
+}
+
+h3{
+      margin: 12px 93px;
+}

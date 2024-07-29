@@ -4,7 +4,7 @@ body {
 }
 
 #product-overview {
-    background: #ff1b68;
+    background: url("freedom.jpg");
     height: 400px;
     width: 528px;
     margin: 20px;
@@ -26,7 +26,6 @@ body {
     width: 100%;
     background: #0eff1f;
     padding: 8px 0;
-
 }
 
 .main-header > div{
@@ -63,19 +62,19 @@ body {
     text-decoration: none;
     margin: 0 16px;
     color:#0e4f1f;
+    font-weight: bold;
+    padding: 3px 0;
 }
 
-.main-nav__item a::after{
+.main-nav__item a:hover::after{
     content:" (link)";
-    color:tomato;
-}
-
-.main-nav__item a:hover{
     color:whitesmoke;
 }
 
+.main-nav__item a:hover,
 .main-nav__item a:active{
-    color: #ff1b68;
+    color:whitesmoke;
+    border-bottom: 5px solid whitesmoke;
 }
 
 p::first-letter{
@@ -83,6 +82,40 @@ p::first-letter{
     font-size: 20px;
 }
 
+.main-nav__item--cta a{
+    color: whitesmoke;
+    background: #ff1b68;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+.main-nav__item--cta a:hover,
+.main-nav__item--cta a:active{  
+    color: #ff1b68;
+    background: whitesmoke;
+    border:none;
+}
+
+ .main-nav__item--cta a:hover::after{
+    color: #ff1b68;
+    background: whitesmoke;
+    font-size: smaller;
+    font-weight: lighter;
+    /* content:" (link)"; */
+    /* color: whitesmoke; */
+    /* background-color: #ff1b68 ; */
+} 
+
+.second{
+    color: #ff1b68;
+}
+
+.first{
+    color: #0e4f1f;
+}
+
+
+/* .main-nav__item--cta  */
 
 /* h1 {
     font-family: sans-serif;
