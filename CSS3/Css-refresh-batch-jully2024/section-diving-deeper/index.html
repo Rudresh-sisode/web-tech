@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="shared.css">
 </head>
 
 <body>
@@ -48,11 +49,11 @@
             <div>
                 <article class="plan">
 
-                    <h1>
+                    <h1 class="plan_title">
                         Free
                     </h1>
                  
-                    <h2>
+                    <h2 class="plan_price">
                         $10 month  
                     </h2>
 
@@ -60,24 +61,24 @@
                         For hobby project or Small team
                     </h3>
 
-                    <ul>
-                        <li>WorkSpace</li>
-                        <li>Unlimited Traffic</li>
-                        <li>10GB Storage</li>
-                        <li>Basic Support</li>
+                    <ul class="plan__features">
+                        <li class="plan__feature">WorkSpace</li>
+                        <li class="plan__feature">Unlimited Traffic</li>
+                        <li class="plan__feature">10GB Storage</li>
+                        <li class="plan__feature">Basic Support</li>
 
                     </ul>
                     <div>
-                        <button>CHOOSE PLAN</button>
+                        <button class="button">CHOOSE PLAN</button>
                     </div>
                 </article>
-                <article class="plan">
-                    <h1>RECOMMENDED</h1>
-                    <h1>
+                <article class="plan plan--highlighted">
+                    <h1 class="plan__annotation">RECOMMENDED</h1>
+                    <h1 class="plan_title">
                         PLUS
                     </h1>
                 
-                    <h2>
+                    <h2 class="plan_price">
                         $29 month
                     </h2>
                 
@@ -85,23 +86,23 @@
                         For Ambitious Project
                     </h3>
                 
-                    <ul>
-                        <li>5 WorkSpace</li>
-                        <li>Unlimited Traffic</li>
-                        <li>100 GB Storage</li>
-                        <li>Plus Support</li>
+                    <ul class="plan__features">
+                        <li class="plan__feature">5 WorkSpace</li>
+                        <li class="plan__feature">Unlimited Traffic</li>
+                        <li class="plan__feature">100 GB Storage</li>
+                        <li class="plan__feature">Plus Support</li>
                 
                     </ul>
                     <div>
-                        <button>CHOOSE PLAN</button>
+                        <button class="button">CHOOSE PLAN</button>
                     </div>
                 </article>
                 <article class="plan">
-                    <h1>
+                    <h1 class="plan_title">
                         Primium
                     </h1>
                 
-                    <h2>
+                    <h2 class="plan_price">
                         $99 month
                     </h2>
                 
@@ -109,21 +110,59 @@
                         Your enterprices solution
                     </h3>
                 
-                    <ul>
-                        <li>10 WorkSpace</li>
-                        <li>Unlimited Traffic</li>
-                        <li>Unlimited Storage</li>
-                        <li>Priority Support</li>
+                    <ul class="plan__features">
+                        <li class="plan__feature">10 WorkSpace</li>
+                        <li class="plan__feature">Unlimited Traffic</li>
+                        <li class="plan__feature">Unlimited Storage</li>
+                        <li class="plan__feature">Priority Support</li>
                 
                     </ul>
                     <div>
-                        <button>CHOOSE PLAN</button>
+                        <button class="button">CHOOSE PLAN</button>
                     </div>
                 </article>
             </div>
-            <p>Make sure you get the most for your money!</p>
+            <!-- <p>Make sure you get the most for your money!</p> -->
+        </section>
+
+        <section id="key-features">
+            <h1 class="section-title">Many Good reason to stick around</h1>
+            <ul class="key-feature__list">
+                <li class="key-feature">
+                    <div class="key-feature__image">
+
+                    </div>
+                    <p class="key-feature_description">38,57,000 Trusting Customer</p>
+                </li>
+
+                <li class="key-feature">
+                    <div class="key-feature__image">
+
+                    </div>
+                    <p class="key-feature_description">99.999% Uptime Guarantee</p>
+                </li>
+
+                <li class="key-feature">
+                    <div class="key-feature__image">
+
+                    </div>
+                    <p class="key-feature_description">Lighting Fast CDN</p>
+                </li>
+            </ul>
         </section>
     </main>
+    <footer class="main-footer">
+        <nav>
+            <ul class="main-footer__links">
+                <li class="main-footer__link">
+                    <a href="#">Support</a>
+                </li>
+                <li class="main-footer__link">
+                    <a href="#">Term of use...</a>
+                </li>
+            </ul>
+        </nav>
+    </footer>
 </body>
 
 </html>
