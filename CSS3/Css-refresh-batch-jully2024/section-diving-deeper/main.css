@@ -24,8 +24,14 @@
     padding: 16px;
     margin: 8px;
     display: inline-block;
-    width: 30%;
+    width: 20%;
     vertical-align: middle ;
+}
+
+.plan__list{
+    width: 80%;
+    margin: auto;
+    text-align: center;
 }
 
 .plan--highlighted{

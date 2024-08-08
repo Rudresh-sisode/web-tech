@@ -33,13 +33,32 @@ main{
   background: whitesmoke;
 } 
 
+.package:hover,
+.package:active{
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  border-color: #e8a3a3;
+}
+
 #plus-plan{
   background: rgba(213, 255, 220, 0.95);
 }
 
+.clearfix{
+  clear:both;
+}
+
 #free-plan{
   background: rgba(234, 252, 231, 0.95);
+  float: right;
+  border-right: none;
+  border-left: 4px solid #0e4f1f;
+  text-align: right;
 
+}
+
+#free-plan:hover,
+#free-plan:active{
+  border-left-color: #e8a3a3;
 }
 
 #premium-plan{

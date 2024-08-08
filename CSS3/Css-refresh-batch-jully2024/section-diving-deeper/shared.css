@@ -23,7 +23,7 @@ body {
   font-family: 'Anton', sans-serif;
 }
 
-.plan {
+/* .plan {
   background: #d5ffdc;
   text-align: center;
   padding: 16px;
@@ -31,7 +31,7 @@ body {
   display: inline-block;
   width: 30%;
   vertical-align: middle;
-}
+} */
 
 .plan--highlighted {
   background: #19b84c;
