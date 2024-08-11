@@ -1,12 +1,12 @@
-#product-overview {
+/* #product-overview {
     background: url("freedom.jpg");
     height: 400px;
-    width: 528px;
+    width: 100%;
     margin: 20px;
     padding: 10px;
     box-sizing: border-box;
-    /* height: 10px; */
-}
+    height: 10px;
+} */
 
 .section-title {
     color: #2ddf5c;

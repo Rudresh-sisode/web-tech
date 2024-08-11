@@ -5,11 +5,18 @@ body {
 
 #product-overview {
   background: url("freedom.jpg");
-  height: 400px;
-  width: 528px;
-  margin: 20px;
+  height: 528px;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* margin: 20px; */
   padding: 10px;
   box-sizing: border-box;
+  background-origin: border-box;
+  border: 6px dashed red;
+  background-clip: border-box;
+  background-attachment: local;
   /* height: 10px; */
 }
 
@@ -64,6 +71,15 @@ body {
   text-decoration: none;
   font-weight: bold;
   font-size: 22px;
+      display: inline-block;
+        /* width: 24px; */
+        height: 28px;
+}
+
+.main-header__brand img{
+  /* width: 30px;
+   */
+   height:100%;
 }
 
 .main-nav {
