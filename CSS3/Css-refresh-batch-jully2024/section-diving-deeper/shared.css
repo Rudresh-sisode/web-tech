@@ -4,7 +4,9 @@ body {
 }
 
 #product-overview {
-  background: url("freedom.jpg");
+  /* background: url("freedom.jpg");
+   */
+   background-image: linear-gradient(to left bottom,blue,red );
   height: 528px;
   width: 100%;
   background-size: cover;
