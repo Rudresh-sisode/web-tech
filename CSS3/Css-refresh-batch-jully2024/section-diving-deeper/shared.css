@@ -5,7 +5,7 @@ body {
 
 .backdrop{
       position: fixed;
-      display: none;
+      /* display: none; */
         top: 0;
         left: 0;
         z-index: 100;
@@ -15,10 +15,10 @@ body {
 }
 
 #product-overview {
-  /* background: url("freedom.jpg");
-   */
+  background: url("freedom.jpg");
+  
    /* background-image: linear-gradient(180deg,blue,red ,pink,violet,yellow); */
-   background-image: radial-gradient(circle,red,violet);
+   /* background-image: radial-gradient(circle,red,violet); */
   height: 528px;
   width: 100%;
   background-size: cover;
