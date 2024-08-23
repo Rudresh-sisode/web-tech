@@ -5,7 +5,7 @@ body {
 
 .backdrop{
       position: fixed;
-      /* display: none; */
+      display: none;
         top: 0;
         left: 0;
         z-index: 100;
