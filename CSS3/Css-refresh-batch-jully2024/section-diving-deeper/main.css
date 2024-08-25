@@ -1,6 +1,6 @@
 #product-overview {
   background: linear-gradient(to top, rgba(80, 68, 18, 0.6) 10%, transparent),
-    url("/freedom.jpg") left 10% bottom 70%/cover no-repeat border-box,
+    url("/freedom.jpg") center/cover no-repeat border-box,
     #ff1b68;
   /* background-image: url("freedom.jpg");
     background-size: cover;
@@ -55,19 +55,26 @@
   text-align: center;
 }
 
+#plans{
+  width: 100vw;
+}
+
+
 .plan__list {
-  width: 80%;
+  /* width: 80%; */
   margin: auto;
   text-align: center;
 }
+
+
 
 .plan {
   background: #d5ffdc;
   text-align: center;
   padding: 1rem;
-  margin: 0.5rem;
+  margin: 0.5rem 0;
   display: inline-block;
-  width: 30%;
+  width: 100%;
   vertical-align: middle;
 }
 
