@@ -28,9 +28,18 @@ body {
   z-index: 1;
 }
 
+
+
 .main-header > div {
   display: inline-block;
   vertical-align: middle;
+}
+
+@media (min-width:40rem) {
+  .main-header>div {
+      display: none;
+      /* vertical-align: middle; */
+    }
 }
 
 .toggle-button {
@@ -76,6 +85,12 @@ body {
   text-align: right;
   width: calc(100% - 122px);
   vertical-align: middle;
+}
+
+@media (max-width:40rem){
+  .main-nav{
+    display: none;
+  }
 }
 
 .main-nav__items {
