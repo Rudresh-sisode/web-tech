@@ -91,6 +91,13 @@ body {
   .main-nav{
     display: none;
   }
+
+    .main-footer__links{
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: auto;
+    }
 }
 
 .main-nav__items {

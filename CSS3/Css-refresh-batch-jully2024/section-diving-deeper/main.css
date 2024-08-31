@@ -28,7 +28,7 @@
   font-size: 1.5rem;
 }
 
-@media (min-width:40rem) {
+@media (min-width:40rem) and (orientation:portrait){
   #product-overview {
     height: 40vh;
     background-position: 50% 25%;
@@ -118,13 +118,13 @@
   margin: 0.5rem 0;
 }
 
-@media (min-width:40rem){
+@media (min-width:40rem) and (orientation: landscape){
 
   #plans{
     width: 100vw;
   }
 
-.plan__list {
+  .plan__list {
     width: 80%;
     margin: auto;
     text-align: center;
@@ -139,7 +139,6 @@
     width: 25vw;
     vertical-align: middle;
   }
-
 }
 
 #key-features {
