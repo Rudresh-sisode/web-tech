@@ -7,6 +7,10 @@ body {
   margin: 0;
 }
 
+main{
+  min-height: calc(100vh - 2.5rem - 8rem);
+}
+
 .backdrop {
   position: fixed;
   display: none;
