@@ -1,3 +1,8 @@
+@font-face{
+  font-family: "AnonymousPro";
+  src: url("anonymousPro-Regular.ttf") format("truetype");
+}
+
 main{
   margin-top: 44px;
   padding-top: 1rem;
@@ -59,6 +64,13 @@ main{
 .signup-form input[type="checkbox"]:checked{
   background: #2ddf5c;
   border: #0e4f1f;
+}
+
+.signup-form input.invalid,
+.signup-form select.invalid,
+.signup-form :invalid{
+  border-color:  red;
+  background: #faacac;
 }
 
 .signup-form button[type="submit"]{
