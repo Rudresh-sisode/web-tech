@@ -1,4 +1,4 @@
-* {
+* {http://127.0.0.1:3000/flex-box/index.html
     box-sizing: border-box;
     font-size: 1.5rem;
 }
@@ -21,6 +21,11 @@ body {
     display: inline-flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    height: 1300px;
+
 }
 
 .item-1 {
