@@ -22,8 +22,8 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
-    align-content: center;
+    /* justify-content: center;
+    align-content: center; */
     height: 1300px;
 
 }
@@ -53,6 +53,7 @@ body {
     border: 5px solid black;
     margin: 10px;
     height: 250px;
+    /* order: -1; */
 }
 
 .item-4 {
