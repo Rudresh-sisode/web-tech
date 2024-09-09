@@ -18,12 +18,13 @@ body {
     background: white;
     padding: 10px;
     border: 5px solid black;
-    display: inline-flex;
+    display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
-    /* justify-content: center;
-    align-content: center; */
+    /* flex-shr; */
+    justify-content: center;
+    align-content: center;
     height: 1300px;
 
 }
@@ -73,6 +74,7 @@ body {
     border: 5px solid black;
     margin: 10px;
     width: 350px;
+    flex-shrink: 1;
 }
 
 .item-6 {
@@ -82,4 +84,5 @@ body {
     border: 5px solid black;
     margin: 10px;
     width: 350px;
+    flex-shrink: 4;
 }
