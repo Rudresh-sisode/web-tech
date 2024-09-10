@@ -1,0 +1,20 @@
+/* Define the grid container */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 columns of equal width */
+  grid-template-rows: 100px 100px; /* 2 rows of 100px height */
+  gap: 10px; /* Gap between grid items */
+}
+
+/* Grid item spanning 2 columns */
+.item1 {
+  background-color: aliceblue;
+  grid-column: span 2; 
+  /* Spans across 2 columns */
+}
+
+/* Grid item spanning 2 rows */
+.item2 {
+  background-color: lightcoral;
+  grid-row: span 2; /* Spans across 2 rows */
+}

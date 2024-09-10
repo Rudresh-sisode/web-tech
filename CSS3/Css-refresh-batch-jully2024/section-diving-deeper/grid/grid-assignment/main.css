@@ -1,0 +1,34 @@
+.grid-container{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 100px 1fr 100px;
+}
+
+.header{
+  background-color: #333;
+    color: white;
+    padding: 20px;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+}
+
+.sidebar{
+  width: 100%;
+  height: 200%;
+  background: rgb(130, 238, 213);
+}
+
+.main-content{
+  width: 100%;
+  height: 200%;
+  background: rgb(92, 214, 121);
+}
+
+.footer{
+  width: 100%;
+  height: 200%;
+  background: rgb(133, 32, 210);
+}
