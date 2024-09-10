@@ -1,0 +1,27 @@
+.container {
+    margin: 20px;
+    display: grid;
+    /* grid-template-columns: 200px 2fr 20% 1fr ;
+     */
+    grid-template-columns: repeat(4,25%);
+    /* grid-template-rows: 5rem 2.5rem; */
+    grid-template-rows: 5rem minmax(10px,200px);
+}
+
+.el1 {
+    background: rgba(255, 154, 72, 0.5);
+}
+
+.el2 {
+    background: rgba(255, 0, 0, 0.5);
+}
+
+.el3 {
+    background: rgba(0, 128, 0, 0.5);
+    grid-column-start: 3;
+    grid-column-end: 5;
+}
+
+.el4 {
+    background: rgba(0, 4, 255, 0.5);
+}
