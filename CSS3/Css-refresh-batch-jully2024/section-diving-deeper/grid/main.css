@@ -3,10 +3,11 @@
     display: grid;
     /* grid-template-columns: 200px 2fr 20% 1fr ;
      */
-    grid-template-columns: repeat(4,25%);
+    grid-template-columns: [hd-start] repeat(4,[col-start] 25% [col-end]) [hd-end];
     /* grid-template-rows: 5rem 2.5rem; */
-    grid-gap: 10%;
-    grid-template-rows: [row-1-start] 5rem [row-1-end row-2-start] minmax(10px,200px);
+    gap: 10%;
+    /* grid-template-rows: [row-1-start] 5rem [row-1-end row-2-start] minmax(10px,200px); */
+    grid-template-rows: [hd-start] 5rem [hd-end row-2-start] minmax(10px, 200px);
     grid-template-areas: "header header header header"
                          "main0 main0 main main"
                          "footer footer footer footer";
@@ -14,7 +15,7 @@
 
 .el1 {
     background: rgba(255, 154, 72, 0.5);
-    grid-area: header;
+    grid-area: hd;
 }
 
 .el2 {
