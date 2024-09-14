@@ -36,8 +36,9 @@ function closeModal() {
 }
 
 toggleButton.addEventListener("click", function () {
-  // mobileNav.style.display = 'block';
+  mobileNav.style.display = 'block';
   // backdrop.style.display = 'block';
+
   mobileNav.classList.add("open");
   backdrop.classList.add("open");
 });
