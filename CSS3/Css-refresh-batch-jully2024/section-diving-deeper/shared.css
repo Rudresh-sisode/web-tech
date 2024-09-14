@@ -137,7 +137,7 @@ main{
 }
 
 .main-nav__item--cta{
-  animation: wiggle 300ms 3s 8 alternate-reverse running;
+  animation: wiggle 400ms 3s 8;
 }
 
 .main-nav__item--cta a,
@@ -250,11 +250,24 @@ main{
     transform: translateY(0) !important;
 }
 
-@keyframes wiggle{
+/* @keyframes wiggle{
   from{
     transform: rotateZ(0deg);
   }
   to{
     transform: rotateZ(10deg);
   }
-}
+} */
+ @keyframes wiggle {
+   0% {
+     transform: rotateZ(0deg);
+   }
+
+   10% {
+     transform: rotateZ(-10deg);
+   }
+
+   100%{
+    transform: rotateZ(10deg);
+   }
+ }

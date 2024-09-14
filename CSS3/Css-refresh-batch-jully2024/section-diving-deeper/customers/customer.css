@@ -24,6 +24,11 @@ main{
   overflow: hidden;
 }
 
+#customer-1:hover .testimonial__image-container{
+  animation: flip-customer 1s ease-out;
+
+}
+
 .testimonial__image{
   width: 100%;
   vertical-align: top;
@@ -89,4 +94,17 @@ main{
     width: 30%;
   }
 
+}
+
+@keyframes flip-customer{
+  0%{
+    transform: rotateY(0deg) skew(20deg);
+
+  }
+  50%{
+    transform: rotateY(160deg) skew(20deg);
+  }
+  100%{
+    transform: rotateY(360deg) skew(20deg);
+  }
 }
