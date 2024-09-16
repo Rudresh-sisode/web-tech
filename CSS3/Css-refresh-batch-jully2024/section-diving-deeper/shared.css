@@ -10,6 +10,12 @@ body {
   font-family: "Montserrat", sans-serif;
   margin: 0;
 }
+/* if the browser support grid only and only then apply the following property */
+@supports (display: grid){ 
+    body{
+
+    }
+}
 
 main{
   min-height: calc(100vh - 2.5rem - 8rem);
@@ -36,6 +42,9 @@ main{
   background: #2ddf5c;
   padding: 0.5rem 1rem;
   z-index: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   align-items: center;
   justify-content: space-between;
