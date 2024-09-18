@@ -1,6 +1,5 @@
 // $main-color: #521751;
-$colors:(main:#521751,secondary:#fa923f);
-$border-default:0.05rem solid map-get($colors,main);
+@import "_variables.scss";
 @import "typography.css";
 
 html {
@@ -28,8 +27,8 @@ body {
 
 .sass-introduction {
   border: 0.05rem solid #521751;
-  background: #fae5ff;
-  padding: 2rem;
+  background: lighten(map-get($colors,main),72%);
+  padding: map-get($space, mediam);
   text-align: center;
   box-shadow: 0.2rem 0.2rem 0.1rem #ccc;
   width: 90%;
