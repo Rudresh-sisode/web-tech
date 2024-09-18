@@ -1,5 +1,6 @@
-$main-color: #521751;
-$border-default:0.05rem solid $main-color;
+// $main-color: #521751;
+$colors:(main:#521751,secondary:#fa923f);
+$border-default:0.05rem solid map-get($colors,main);
 @import "typography.css";
 
 html {
