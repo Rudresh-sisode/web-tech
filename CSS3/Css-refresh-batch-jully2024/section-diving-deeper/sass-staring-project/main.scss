@@ -2,6 +2,13 @@
 @import "_variables.scss";
 @import "typography.css";
 
+
+@mixin media-min-width($width){
+  @media (min-width:$width){
+    @content
+  }
+}
+
 html {
   font-size: 94.75%;
 }
