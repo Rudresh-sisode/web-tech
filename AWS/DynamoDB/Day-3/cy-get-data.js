@@ -14,20 +14,18 @@ exports.handler = async (event) => {
     let resultData = await client.send(new ScanCommand(params));
 
     return resultData;
-    // client.scan(params,function(err,data){
-    //   if(err){
-    //     console.log(err);
-    //     callback(err);
-
-    //   }
-    //   else{
-    //     console.log(' your data ',data);
-    //     callback(data);
-    //   }
-    // })
+ 
   }
   else if(type === 'single'){
-    return "single"
+    const userId = "";
+    const params = {
+      TableName:'compare-yourself',
+      Key:{
+        "UserId": {S: userId}
+      }
+    }
+    let resultData = await client.send(new GetItemCommand(params));
+    return resultData;
   }
   else{
     return "nothing"
