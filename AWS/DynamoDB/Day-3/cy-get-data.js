@@ -1,6 +1,6 @@
 
 const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
-const { ScanCommand } = require("@aws-sdk/client-dynamodb");
+const { ScanCommand,GetItemCommand,DeleteItemCommand } = require("@aws-sdk/client-dynamodb");
 const config = { region: "us-east-1", apiVersion: "2012-08-10" };
 const client = new DynamoDBClient(config);
 
@@ -26,6 +26,17 @@ exports.handler = async (event) => {
     }
     let resultData = await client.send(new GetItemCommand(params));
     return resultData;
+  }
+  else if (type === 'delete') {
+    const userId = event.userId;
+    const params = {
+      TableName: 'compare-yourself',
+      Key: {
+        'UserId': { S: userId }
+      }
+    };
+    await client.send(new DeleteItemCommand(params));
+    return `User with ID ${userId} deleted successfully`;
   }
   else{
     return "nothing"
