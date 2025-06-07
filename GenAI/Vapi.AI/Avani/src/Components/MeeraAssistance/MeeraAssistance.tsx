@@ -25,7 +25,9 @@ enum CALLSTATUS {
   CALLSTOP
 }
 
-const AssistanceName = "Avani";
+// const AssistanceName = "Avani";
+const AssistanceName = "Anika";
+
 
 export default function MeeraAssistance() {
 
@@ -108,7 +110,7 @@ export default function MeeraAssistance() {
       <div className='assistance-content'>
         <div className='assistance-container'>
           <div className='title-header'>
-            <h2>Avani AI</h2>
+            <h2>{AssistanceName} AI</h2>
           </div>
           <div className='assistance-controler'>
             <div className='assistance-img'>
