@@ -1,0 +1,5 @@
+{
+  "key": "score",
+  "score": false,
+  "comment": "The response begins with unnecessary pleasantries (“Hello there! I'm glad you're interested in learning more about Torri.ai.”) which violates the rubric's guidelines on conciseness. It also includes a sales-oriented tone (“innovative platform,” “game-changer”), and uses explanatory language and persuasive wording that provide more than the direct answer requested. The information about features like “emotionally-aware bots” and “embedded on various platforms” adds excessive context, and it mentions brand voice and sales enablement, elongating the description. This is more verbose than needed and goes beyond the concise, direct answer required. Thus, the score should be: false."
+}
