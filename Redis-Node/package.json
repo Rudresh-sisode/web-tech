@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "start": "node string.js"
+  },
+  "dependencies": {
+    "ioredis": "^5.6.1"
+  }
+}
