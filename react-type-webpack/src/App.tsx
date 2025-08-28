@@ -4,7 +4,8 @@ import She from "./she-profile.svg";
 import { ClickCounter } from "./ClickCounter";
 
 
-export const App = ()=>{
+export const App = () => {
+  const naem = "rudresh";
   return <>
     <h1>Reacts Typescript Webpack Starter { process.env.name}</h1>
     <img src={IMAGE} alt="Nature" width="300" height="200" />
