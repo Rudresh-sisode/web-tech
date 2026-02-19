@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@langchain/anthropic": "^0.3.23",
-    "@langchain/core": "^0.3.61",
+    "@langchain/core": "^0.3.80",
     "@langchain/google-genai": "^0.2.14",
     "dotenv": "^17.0.0",
     "openevals": "^0.1.0"
