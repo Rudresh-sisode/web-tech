@@ -13,7 +13,7 @@
     "@angular/animations": "^14.0.0-rc.2",
     "@angular/common": "^14.0.0-rc.2",
     "@angular/compiler": "^14.0.0-rc.2",
-    "@angular/core": "^14.0.0-rc.2",
+    "@angular/core": "^19.2.19",
     "@angular/forms": "^14.0.0-rc.2",
     "@angular/platform-browser": "^14.0.0-rc.2",
     "@angular/platform-browser-dynamic": "^14.0.0-rc.2",
@@ -23,8 +23,8 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^14.0.0-rc.2",
-    "@angular/cli": "~14.0.0-rc.2",
+    "@angular-devkit/build-angular": "^21.2.1",
+    "@angular/cli": "~21.2.1",
     "@angular/compiler-cli": "^14.0.0-rc.2",
     "@types/jasmine": "~4.0.0",
     "jasmine-core": "~4.1.0",
